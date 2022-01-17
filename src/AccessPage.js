@@ -3,6 +3,7 @@ import log from './img/log.svg';
 import { Nav } from 'react-bootstrap';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import './AccessPage.css';
 
 function AccessPage() {
   // let [signType, setSignType] =useState("signIn");
@@ -102,7 +103,7 @@ function AccessPage() {
 
               <div className="input-field">
                 <i className="fas fa-lock"></i>
-                <input onChange={(e) => { setStdID(e.target.value) }} name="stdID" value={stdID} type="text" maxLength="9" placeholder="학번" />
+                <input onChange={(e) => { setStdID(e.target.value) }} name="stdID" value={stdID} type="number" maxLength="9" placeholder="학번" />
               </div>
               <div className="input-field">
                 <i className="fas fa-key"></i>
