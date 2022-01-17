@@ -96,15 +96,9 @@
     font-weight: 600;
     font-size: 1.1rem;
     color: var(--color-dark-gray);
-    width: 80%;
-  }
-  
-  .input-field input[placeholder="학교 이메일 @pukyong.ac.kr"]{
     width: 70%;
   }
-  .input-field input[placeholder="학생증"]{
-    width: 70%;
-  }
+
   
   .input-field button {
     background-color: var( --color-middle-gray);

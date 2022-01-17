@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import log from './img/log.svg';
 import { Nav } from 'react-bootstrap';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
@@ -18,6 +18,15 @@ function AccessPage() {
   let [certFile, setCertFile] = useState("");
   let [phoneNumber, setPhoneNumber] = useState("");
   const history = useHistory();
+
+  useEffect(() => {
+    if (phoneNumber.length === 10) {
+      setPhoneNumber(phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3'));
+    }
+    if (phoneNumber.length === 13) {
+      setPhoneNumber(phoneNumber.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
+    }
+  }, [phoneNumber]);
 
   function reset() {
     setStdID("");
@@ -58,7 +67,6 @@ function AccessPage() {
     }
     else {
       let payload = { "email": email, "stdID": stdID, "name": name };
-      debugger;
       axios.post('/newpwd', payload)
         .then((result) => {
           console.log(payload);
@@ -69,6 +77,8 @@ function AccessPage() {
 
     }
   }
+
+
 
 
   return (
@@ -103,7 +113,7 @@ function AccessPage() {
 
               <div className="input-field">
                 <i className="fas fa-lock"></i>
-                <input onChange={(e) => { setStdID(e.target.value) }} name="stdID" value={stdID} type="number" maxLength="9" placeholder="학번" />
+                <input onChange={(e) => { setStdID(e.target.value.replace(/[^0-9]/g, '')) }} name="stdID" value={stdID} maxLength="9" placeholder="학번" type="text" />
               </div>
               <div className="input-field">
                 <i className="fas fa-key"></i>
@@ -142,9 +152,11 @@ function AccessPage() {
               <div className="input-field filebox">
                 <i className="fas fa-user-graduate"></i>
                 <input className='uploadName' placeholder='학생증을 첨부해주세요' value={certFile} readOnly />
-                <label htmlFor="file">찾기</label>
-                <input type="file" id='file' accept='image/*' onChange={(e) => { setCertFile(e.target.value.split('/').pop().split('\\').pop()) }} />
+                <label htmlFor="certFile">찾기</label>
+                <input type="file" id='certFile' name="certFile" accept='image/*' onChange={(e) => { setCertFile(e.target.value.split('/').pop().split('\\').pop()) }} />
               </div>
+
+              <input type="file" name="certFile" />
 
 
               <div className="submitbox" >
@@ -225,51 +237,5 @@ function AccessPage() {
 
   )
 }
-
-
-
-// let [stdID, setStdID] = useState("");
-// let [name, setName] = useState("");
-// let [major, setMajor] = useState("");
-// let [password, setPassword] = useState("");
-// let [checkPassword, setCheckPassword] = useState("");
-// let [email, setEmail] = useState("");
-
-// function signUp(stdID, name, major, password, checkPassword, email, position) {
-//   let [emailState, setEmailState] = useState(false);
-
-//   if (stdID === "" || name === "" || major === "" || password === "" || checkPassword === "" || email === "") {
-//     return (
-//       alert("빈칸을 모두 입력해주세요 :)")
-//     )
-//   } else if (password !== checkPassword) {
-//     return (
-//       alert("비밀번호를 확인해주세요 :)")
-//     )
-//   } else if (emailState === false) {
-//     alert("이메일 인증을 완료해주세요 :)")
-//   } else {
-//     let payload = {
-//       "stdID": stdID,
-//       "name": name,
-//       "major": major,
-//       "password": password,
-//       "email": email,
-//     };
-
-//     if (position === "")
-//       debugger;
-//     axios.post('https://pk-cog.url/signup/' + position, payload)
-//       .then((result) => {
-//         console.log(payload);
-//       })
-//       .catch((error) => {
-//         console.log(payload);
-//       });
-
-//   }
-// }
-
-
 
 export default AccessPage;
