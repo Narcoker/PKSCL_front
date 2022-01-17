@@ -127,14 +127,14 @@ body{
   font-weight: 600;
   font-size: 1.1rem;
   color: var(--color-dark-gray);
-  width: 80%;
+  width: 70%;
 }
 
 .input-field input[placeholder="학교 이메일 @pukyong.ac.kr"]{
   width: 70%;
 }
 .input-field input[placeholder="학생증"]{
-  width: 65%;
+  width: 70%;
 }
 
 .input-field button {
@@ -146,6 +146,7 @@ body{
   cursor: pointer;
   font-size: 15px;
 }
+
 
 .SignInBtn {
   width: 150px;
@@ -214,4 +215,36 @@ body{
   margin: 15px 15px 0 15px;
   cursor: pointer;
   transition: 0.5s;
+}
+
+.filebox .upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 70%;
+    color: #999999;
+}
+
+.filebox label {
+  background-color: var( --color-middle-gray);
+  border: none;
+  outline: none;
+  border-radius: 49px;
+  color: var(--color-white);
+  cursor: pointer;
+  font-size: 15px;
+  width: 42px;
+  height: 24.5px;
+  text-align: center;
+  padding: 1px 6px;
+}
+
+.filebox input[type="file"] {
+    position: absolute;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
 }
