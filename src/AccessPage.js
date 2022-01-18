@@ -156,10 +156,6 @@ function AccessPage() {
                 <input type="file" id='certFile' name="certFile" accept='image/*' onChange={(e) => { setCertFile(e.target.value.split('/').pop().split('\\').pop()) }} />
               </div>
 
-<<<<<<< HEAD
-=======
-              <input type="file" name="certFile" />
->>>>>>> cab90272012aff90a5e4f7bac3ae20eb07a3b0ed
 
 
               <div className="submitbox" >
