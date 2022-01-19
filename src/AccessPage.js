@@ -4,7 +4,7 @@ import { Nav } from 'react-bootstrap';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './AccessPage.css';
-import { flushSync } from 'react-dom';
+
 
 function AccessPage() {
   // let [signType, setSignType] =useState("signIn");
@@ -194,7 +194,7 @@ function AccessPage() {
                   <option>학과를 선택하세요</option>
                   {
                     majorList.map((major, i) => {
-                      return (<option value={i} key={i} >{major}</option>)
+                      return (<option value={i + 1} key={i} >{major}</option>)
                     })
                   }
 
