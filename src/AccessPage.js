@@ -77,9 +77,14 @@ function AccessPage() {
       let payload = { "email": email, "password": password };
       // debugger;
       axios.post('/login/' + position, payload)
-        .then((result) => {
+        .then((payload) => {
           console.log(payload);
-          history.push('/main/major');
+          if (payload.position === "student") {
+            history.push('/main/' + payload.major);
+          }
+          else if (payload.position === "president") {
+            history.push('/manage/' + payload.major);
+          }
 
         })
         .catch((result) => {
