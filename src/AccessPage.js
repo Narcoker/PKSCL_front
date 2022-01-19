@@ -49,7 +49,7 @@ function AccessPage() {
   useEffect(() => {
     axios.get('/major-list')
       .then((payload) => {
-        setMajorList(payload.majorList);
+        setMajorList(payload.data.majorList);
 
       })
       .catch((error) => {
