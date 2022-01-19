@@ -5,18 +5,21 @@
     display: flex;
     z-index: 10;
   }
-  .container:before {
-    content: "";
-    position: absolute;
-    height: 2000px;
-    width: 2000px;
-    top: -10%;
-    right: 48%;
-    transform: translateY(-50%);
-    background-color: var(--color-spring);
-    border-radius: 50%;
-    z-index: 4;
-  }
+.container:before {
+  content: "";
+  position: absolute;
+  height: 2000px;
+  width: 2000px;
+  top: -10%;
+  right: 48%;
+  transform: translateY(-50%);
+  background: linear-gradient(0deg, rgba(200,144,52,1) 0%, rgba(213,178,121,1) 67%);
+  /* background: linear-gradient(0deg, rgba(87,142,90,1) 0%, rgba(126,199,130,1) 67%); */
+  /* background: linear-gradient(0deg, rgba(155,67,70,1) 0%, rgba(231,140,145,1) 67%); */
+  /* background: linear-gradient(0deg, rgba(89,112,130,1) 0%, rgba(145,186,217,1) 67%); */
+  border-radius: 50%;
+  z-index: 4;
+}
   
   .left-panel{
     position: relative;
@@ -53,21 +56,33 @@
     align-items: center;
     border-radius: 30px;
   }
-  #nav{
-    width: 100%;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    background-color: var(--color-bright-gray);
-  }
-  #nav .nav-item ,#nav .nav, #nav .nav-tabs, #nav .nav-fill,#nav a.nav-link.active,#nav .nav-link{
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    border-color: none;
-  }
-  #nav .nav-link{
-    color : var(--color-dark-gray);
-  }
-  
+  #nav {
+  width: 100%;
+  border-top-left-radius: 27px;
+  border-top-right-radius: 27px;
+  background-color: var(--color-bright-gray);
+}
+
+#nav .nav-item,
+#nav .nav,
+#nav .nav-tabs,
+#nav .nav-fill,
+#nav a.nav-link.active,
+#nav .nav-link.active,
+#nav .nav-link {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border: none;
+}
+
+#nav .nav-link {
+  color: var(--color-dark-gray);
+}
+
+#nav .nav-tabs, 
+#nav .nav-lin{
+  border: none;
+}
   .input-field{
     max-width: 380px;
     width: 100%;
@@ -168,3 +183,14 @@ padding: 1px 6px;
   overflow: hidden;
   border: 0;
 }
+
+div .checkbox{
+  display: flex;
+  position: relative;
+  align-items: baseline;
+  left: 20px;
+  
+}
+
+
+

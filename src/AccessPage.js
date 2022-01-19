@@ -4,6 +4,7 @@ import { Nav } from 'react-bootstrap';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './AccessPage.css';
+import { flushSync } from 'react-dom';
 
 function AccessPage() {
   // let [signType, setSignType] =useState("signIn");
@@ -17,7 +18,16 @@ function AccessPage() {
   let [email, setEmail] = useState("");
   let [certFile, setCertFile] = useState("");
   let [phoneNumber, setPhoneNumber] = useState("");
+
+  let [checkState, setCheckState] = useState(false);
+
+  let [atIsContain, setAtIsContains] = useState(false);
+
+
   const history = useHistory();
+
+
+
 
   useEffect(() => {
     if (phoneNumber.length === 10) {
@@ -28,6 +38,24 @@ function AccessPage() {
     }
   }, [phoneNumber]);
 
+  useEffect(() => {
+    console.log(email.lastIndexOf("@"));
+    if (email.indexOf("@") !== -1) setAtIsContains(true);
+    else setAtIsContains(false);
+
+
+    if (email[email.length - 1] === "@" && atIsContain === false) {
+      setEmail(email + "pukyong.ac.kr")
+    }
+
+
+
+  }, [email]);
+
+
+
+
+
   function reset() {
     setStdID("");
     setName("");
@@ -36,7 +64,7 @@ function AccessPage() {
     setCheckPassword("");
     setEmail("");
     setCertFile("");
-  }
+  };
 
 
   function login() {
@@ -46,18 +74,22 @@ function AccessPage() {
       )
     }
     else {
-      let payload = { "email": email, "password": password, "position": position };
+      let payload = { "email": email, "password": password };
       // debugger;
       axios.post('/login/' + position, payload)
         .then((result) => {
           console.log(payload);
+          history.push('/main/major');
+
         })
-        .catch((error) => {
-          console.log(payload);
+        .catch((result) => {
+          console.log(result.status);
+          alert("로그인에 실패했습니다.")
+
         });
 
     }
-  }
+  };
 
   function findPassword() {
     if (email === "" || stdID === "" || name === "") {
@@ -67,16 +99,30 @@ function AccessPage() {
     }
     else {
       let payload = { "email": email, "stdID": stdID, "name": name };
-      axios.post('/newpwd', payload)
+      axios.post('/newpwd/' + position, payload)
         .then((result) => {
           console.log(payload);
         })
         .catch((error) => {
           console.log(payload);
+
         });
 
     }
-  }
+  };
+
+  function checkHandler() {
+    setCheckState(!checkState); // 왜 함수가 다 실행되고 값이 바뀌는건지??
+    if (checkState === false) {
+      setPosition("president");
+      console.log(position); // 기능은 정상적으로 수행되는데 log시 이전값 출력함;;;
+    } else {
+      setPosition("student");
+      console.log(position); // 기능은 정상적으로 수행되는데 log시 이전값 출력함;;;
+    }
+  };
+
+
 
 
 
@@ -136,7 +182,7 @@ function AccessPage() {
                   ?
                   (<div className="input-field">
                     <i className="fas fa-phone-alt"></i>
-                    <input onChange={(e) => { setPhoneNumber(e.target.value) }} name="phoneNumber" value={phoneNumber} type="text" placeholder="전화번호" />
+                    <input onChange={(e) => { setPhoneNumber(e.target.value) }} maxLength="13" name="phoneNumber" value={phoneNumber} type="text" placeholder="전화번호" />
                   </div>
                   )
                   :
@@ -206,8 +252,13 @@ function AccessPage() {
         <Route exact path="/newpwd">
           <div className="right-panel">
             <form className="userForm">
+
+
               <h2 style={{ padding: "20px 0 0 0" }}>비밀번호 찾기</h2>
+              <div className='checkbox'><input type="checkbox" checked={checkState} onClick={() => { checkHandler() }} /><p>학생회장</p></div>
+
               <div >비밀번호를 찾고자 하는 아이디의 정보를 입력해 주세요.</div>
+
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input onChange={(e) => { setEmail(e.target.value) }} value={email} type="text" placeholder="학교 이메일 @pukyong.ac.kr" />
@@ -228,9 +279,9 @@ function AccessPage() {
               <button onClick={() => { reset(); history.push('/') }}>로그인</button><button onClick={() => { reset(); history.push('/signUp') }}>회원가입</button>
             </div>
           </div>
-        </Route>
-      </Switch>
-    </div>
+        </Route >
+      </Switch >
+    </div >
 
 
 
