@@ -190,8 +190,7 @@ function AccessPage() {
               </div>
               <div className="input-field" style={{ fontSize: "80%" }}>
                 <i className="fas fa-book-open"></i>
-                {/* <input onChange={(e) => { setMajor(e.target.value) }} name="major" value={major} type="text" placeholder="학과" /> */}
-                <select name="major">
+                <select name="major" style={{ border: "0px", background: "#f0f0f0" }} >
                   <option value={-1} selected>학과를 선택하세요</option>
                   {
                     majorList.map((major, i) => {
@@ -244,7 +243,7 @@ function AccessPage() {
             </div>
           </div>
 
-        </Route>
+        </Route >
 
         <Route exact path="/">
           <div className="right-panel">
