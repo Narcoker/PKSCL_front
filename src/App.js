@@ -4,8 +4,9 @@ import './App.css';
 import { useState } from 'react';
 import AccessPage from './AccessPage';
 import MainPage from './MainPage';
-
+import ManagementPage from './ManagementPage';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
+
 
 
 function App() {
@@ -13,6 +14,11 @@ function App() {
   return (
     <div>
       <Switch>
+        <Route path='/manage/:major'>
+          <ManagementPage></ManagementPage>
+
+        </Route>
+
         <Route path='/main/:major'>
           <MainPage></MainPage>
         </Route>

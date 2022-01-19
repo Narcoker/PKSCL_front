@@ -189,8 +189,11 @@ div .checkbox{
   position: relative;
   align-items: baseline;
   left: 20px;
+  border-radius: 0.25em;
   
 }
+
+
 
 
 
