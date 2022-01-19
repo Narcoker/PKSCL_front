@@ -20,7 +20,7 @@ function AccessPage() {
   let [phoneNumber, setPhoneNumber] = useState("");
   let [checkState, setCheckState] = useState(false);
   let [atIsContain, setAtIsContains] = useState(false);
-  let [majorList, setMajorList] = useState();
+  let [majorList, setMajorList] = useState(["학과정보를 불러올 수 없습니다."]);
 
 
   const history = useHistory();
@@ -47,14 +47,16 @@ function AccessPage() {
   }, [email]);
 
   useEffect(() => {
-    axios.get('/major-list')
+    // https://pkscl.kro.kr/major-list
+    //'/major-list'
+    axios.get('https://pkscl.kro.kr/major-list')
       .then((payload) => {
-        setMajorList(payload.data.majorList);
-
+        setMajorList([...payload.data.majorList]);
       })
       .catch((error) => {
         alert("학과리스트를 불러올 수 없습니다.");
       })
+
   }, []);
 
 
@@ -187,7 +189,19 @@ function AccessPage() {
               </div>
               <div className="input-field">
                 <i className="fas fa-book-open"></i>
-                <input onChange={(e) => { setMajor(e.target.value) }} name="major" value={major} type="text" placeholder="학과" />
+                {/* <input onChange={(e) => { setMajor(e.target.value) }} name="major" value={major} type="text" placeholder="학과" /> */}
+                <select name="major">
+                  <option>학과를 선택하세요</option>
+                  {
+                    majorList.map((major, i) => {
+                      return (<option value={i} key={i} >{major}</option>)
+                    })
+                  }
+
+
+
+
+                </select>
               </div>
               <div className="input-field">
                 <i className="fas fa-user"></i>
