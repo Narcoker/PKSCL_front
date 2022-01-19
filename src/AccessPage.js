@@ -18,15 +18,12 @@ function AccessPage() {
   let [email, setEmail] = useState("");
   let [certFile, setCertFile] = useState("");
   let [phoneNumber, setPhoneNumber] = useState("");
-
   let [checkState, setCheckState] = useState(false);
-
   let [atIsContain, setAtIsContains] = useState(false);
+  let [majorList, setMajorList] = useState();
 
 
   const history = useHistory();
-
-
 
 
   useEffect(() => {
@@ -47,13 +44,18 @@ function AccessPage() {
     if (email[email.length - 1] === "@" && atIsContain === false) {
       setEmail(email + "pukyong.ac.kr")
     }
-
-
-
   }, [email]);
 
+  useEffect(() => {
+    axios.get('/major-list')
+      .then((payload) => {
+        setMajorList(payload.majorList);
 
-
+      })
+      .catch((error) => {
+        alert("학과리스트를 불러올 수 없습니다.");
+      })
+  }, []);
 
 
   function reset() {
@@ -79,10 +81,10 @@ function AccessPage() {
       axios.post('/login/' + position, payload)
         .then((payload) => {
           console.log(payload);
-          if (payload.position === "student") {
+          if (payload.data.position === "student") {
             history.push('/main/' + payload.major);
           }
-          else if (payload.position === "president") {
+          else if (payload.data.position === "president") {
             history.push('/manage/' + payload.major);
           }
 
@@ -90,6 +92,7 @@ function AccessPage() {
         .catch((result) => {
           console.log(result.status);
           alert("로그인에 실패했습니다.")
+
 
         });
 
@@ -107,9 +110,17 @@ function AccessPage() {
       axios.post('/newpwd/' + position, payload)
         .then((result) => {
           console.log(payload);
+          if (window.confirm('입력하신 이메일로 임시 비밀번호를 발급하였습니다.')) {
+            history.push('/');
+          }
+          else {
+            history.push('/newpwd');
+          }
+
         })
         .catch((error) => {
           console.log(payload);
+          alert("입력하신 정보를 찾을 수 없습니다.");
 
         });
 
