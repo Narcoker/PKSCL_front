@@ -82,10 +82,10 @@ function AccessPage() {
         .then((payload) => {
           console.log(payload);
           if (payload.data.position === "student") {
-            history.push('/main/' + payload.major);
+            history.push('/main/' + payload.data.major);
           }
           else if (payload.data.position === "president") {
-            history.push('/manage/' + payload.major);
+            history.push('/manage/' + payload.data.major);
           }
 
         })
