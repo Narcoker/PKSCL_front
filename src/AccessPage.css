@@ -162,7 +162,8 @@
   color: #999999;
 }
 
-.filebox label {
+.filebox label,
+.input-field label {
 background-color: var( --color-middle-gray);
 border: none;
 outline: none;

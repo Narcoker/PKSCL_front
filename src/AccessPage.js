@@ -235,7 +235,7 @@ function AccessPage() {
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input onChange={(e) => { setEmail(e.target.value) }} name="email" value={email} type="text" placeholder="학교 이메일 @pukyong.ac.kr" />
-                <button type='button' onClick={certEmail}>인증</button>
+                <label onClick={certEmail}>인증</label>
               </div>
               <div className="input-field filebox">
                 <i className="fas fa-user-graduate"></i>
