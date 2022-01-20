@@ -102,7 +102,7 @@ function AccessPage() {
     }
   };
 
-  function findPassword() {
+  function findPassword() { //수정하기
     if (email === "" || stdID === "" || name === "") {
       return (
         alert("빈칸을 모두 입력해주세요")
@@ -140,6 +140,18 @@ function AccessPage() {
       console.log(position); // 기능은 정상적으로 수행되는데 log시 이전값 출력함;;;
     }
   };
+
+  function certEmail() {
+    let payload = { "email": email };
+    axios.post('/email/' + position, payload)
+      .then((result) => {
+        alert("입력하신 이메일로 메일을 발솔했습니다.");
+      })
+      .catch((error) => {
+        console.log(payload);
+        alert(error.data.errorMessage);
+      });
+  }
 
 
 
@@ -223,7 +235,7 @@ function AccessPage() {
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input onChange={(e) => { setEmail(e.target.value) }} name="email" value={email} type="text" placeholder="학교 이메일 @pukyong.ac.kr" />
-                <button>인증</button>
+                <button type='button' onClick={certEmail}>인증</button>
               </div>
               <div className="input-field filebox">
                 <i className="fas fa-user-graduate"></i>

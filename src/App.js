@@ -7,7 +7,7 @@ import MainPage from './MainPage';
 import ManagementPage from './ManagementPage';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
-
+//스테이트
 
 function App() {
 
@@ -16,7 +16,6 @@ function App() {
       <Switch>
         <Route path='/manage/:major'>
           <ManagementPage></ManagementPage>
-
         </Route>
 
         <Route path='/main/:major'>
@@ -28,7 +27,7 @@ function App() {
         </Route>
 
       </Switch>
-      {/* <학생관리></학생관리> */}
+
 
 
 
