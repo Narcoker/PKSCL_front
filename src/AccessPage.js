@@ -102,7 +102,7 @@ function AccessPage() {
     }
   };
 
-  function findPassword() { //수정하기
+  function findPassword() {
     if (email === "" || stdID === "" || name === "") {
       return (
         alert("빈칸을 모두 입력해주세요")
@@ -144,12 +144,12 @@ function AccessPage() {
   function certEmail() {
     let payload = { "email": email };
     axios.post('/email/' + position, payload)
-      .then((result) => {
-        alert("입력하신 이메일로 메일을 발솔했습니다.");
+      .then((payload) => {
+        alert("입력하신 이메일로 메일을 발송했습니다.");
       })
-      .catch((error) => {
+      .catch((payload) => {
         console.log(payload);
-        alert(error.data.errorMessage);
+        alert(payload.data.errorMessage);
       });
   }
 
