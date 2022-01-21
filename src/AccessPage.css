@@ -89,7 +89,7 @@
     background-color: var( --color-bright-gray);
     margin: 15px 0 0 0;
     height: 55px;
-    border-radius: 55px;
+    border-radius: 30px;
     padding: 0 0.4rem;
     position: relative;
   
@@ -191,7 +191,6 @@ div .checkbox-form{
   align-items: baseline;
   left: 20px;
   border-radius: 0.25em;
-  
 }
 
 
