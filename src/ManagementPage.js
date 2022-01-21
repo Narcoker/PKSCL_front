@@ -1,130 +1,214 @@
-import { useState } from 'react';
-import { Navbar, Container, Form, FormControl, NavDropdown, Pagination } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Navbar, Container } from 'react-bootstrap';
 import './ManagementPage.css';
+import axios from 'axios';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 function ManagementPage() {
-
+    const history = useHistory();
     const [waiting, setWaiting] = useState([
         {
-            "studentID": "1111111111",
-            "name": "대기1"
+            "stdID": "a111111111",
+            "name": "이름1"
         },
         {
-            "studentID": "222222222",
-            "name": "대기2"
+            "stdID": "a22222222",
+            "name": "이름2"
         },
         {
-            "studentID": "333333333",
-            "name": "대기3"
+            "stdID": "a33333333",
+            "name": "이름3"
+        },
+        {
+            "stdID": "a111111111",
+            "name": "이름1"
+        },
+        {
+            "stdID": "a22222222",
+            "name": "이름2"
+        },
+        {
+            "stdID": "a33333333",
+            "name": "이름3"
+        },
+        {
+            "stdID": "a111111111",
+            "name": "이름1"
+        },
+        {
+            "stdID": "a22222222",
+            "name": "이름2"
+        },
+        {
+            "stdID": "a33333333",
+            "name": "이름3"
+        },
+        {
+            "stdID": "a111111111",
+            "name": "이름1"
+        },
+        {
+            "stdID": "a22222222",
+            "name": "이름2"
+        },
+        {
+            "stdID": "a33333333",
+            "name": "이름3"
         }
     ]);
 
     const [refusal, setRefusal] = useState([]);
     const [approval, setApproval] = useState([{
-        "studentID": "111111111",
-        "name": "승인1"
+        "stdID": "b11111111",
+        "name": "1이름"
     },
     {
-        "studentID": "222222222",
-        "name": "승인2"
+        "stdID": "b22222222",
+        "name": "2이름"
     },
     {
-        "studentID": "222222222",
-        "name": "승인3"
+        "stdID": "b33333333",
+        "name": "3이름"
     },
     {
-        "studentID": "222222222",
-        "name": "승인4"
+        "stdID": "b44444444",
+        "name": "4이름"
     },
     {
-        "studentID": "222222222",
-        "name": "승인5"
+        "stdID": "b5555555",
+        "name": "5이름"
+    },
+    {
+        "stdID": "b11111111",
+        "name": "1이름"
+    },
+    {
+        "stdID": "b22222222",
+        "name": "2이름"
+    },
+    {
+        "stdID": "b33333333",
+        "name": "3이름"
+    },
+    {
+        "stdID": "b44444444",
+        "name": "4이름"
+    },
+    {
+        "stdID": "b5555555",
+        "name": "5이름"
+    },
+    {
+        "stdID": "b11111111",
+        "name": "1이름"
+    },
+    {
+        "stdID": "b22222222",
+        "name": "2이름"
+    },
+    {
+        "stdID": "b33333333",
+        "name": "3이름"
+    },
+    {
+        "stdID": "b44444444",
+        "name": "4이름"
+    },
+    {
+        "stdID": "b5555555",
+        "name": "5이름"
     }]);
-
     const [leftTable, setLeftTable] = useState([...waiting]);
     const [rightTable, setRightTable] = useState([...approval]);
 
     const [leftCheckedList, setLeftCheckedList] = useState([]);
     const [rightCheckedList, setRightCheckedList] = useState([]);
 
-    const changeHandler = (checked, id, setPlace, place) => {
+    const changeHandler = (checked, studentInfo, setCheckedList, checkedList) => {
         if (checked) {
-            setPlace([...place, id]);
+            setCheckedList([...checkedList, studentInfo]);
         } else {
-            // 체크 해제
-            setPlace(place.filter((e) => e !== id));
+            setCheckedList(checkedList.filter((e) => e !== studentInfo));
         }
         console.log(checked)
     };
 
     const [searchStudent, setSearchStudent] = useState("");
-    const [searchKinds, setSearchKinds] = useState("");
-    const [searchstudentList, setSearchStudentList] = useState([]);
     const [searchButton, setSearchButton] = useState("search");
 
-    return (
 
+    function postStudent(studentStatus) {
+        let payload;
+        if (studentStatus === "approval" || studentStatus === "refusal") {
+            payload = leftCheckedList;
+        } else if (studentStatus === "delegating" || studentStatus === "waiting") {
+            payload = rightCheckedList;
+        } else {
+            alert("error!");
+        }
+        axios.post('/student-list/' + studentStatus, payload)
+            .then((payload) => {
+                setWaiting([...payload.data.studentPresidentList.waiting]);
+                setRefusal([...payload.data.studentPresidentList.refusal]);
+                setApproval([...payload.data.studentPresidentList.approval]);
+            })
+            .catch((error) => {
+                alert("학생 전송에 실패했습니다 :)")
+            });
+    }
+
+    useEffect(() => {
+
+        axios.get('/student-list')
+            .then((payload) => {
+                setWaiting([...payload.data.studentPresidentList.waiting]);
+                setRefusal([...payload.data.studentPresidentList.refusal]);
+                setApproval([...payload.data.studentPresidentList.approval]);
+            })
+            .catch((error) => {
+                alert("학과리스트를 불러올 수 없습니다.");
+            })
+    }, []);
+
+
+    return (
         <div className="ManagementPageContainer">
             <Navbar expand="lg" style={{ padding: "30px 0" }}>
                 <Container fluid style={{ justifyContent: "center", backgroundColor: "none" }}>
-                    <h2>학생승인 현황</h2>
-                    <Form className="d-flex" >
-                        <NavDropdown id="nav-dropdown" >
-                            <NavDropdown.Item eventKey="name" onClick={(e) => {
-                                setSearchKinds("이름");
-                            }}>이름</NavDropdown.Item>
-                            <NavDropdown.Item eventKey="number" onClick={(e) => {
-                                setSearchKinds("학번");
-                            }}>학번</NavDropdown.Item>
-                        </NavDropdown>
-                        <input className="searchBar" onChange={(e) => { setSearchStudent(e.target.value); setSearchButton("search"); }}
+                    <h2 style={{ margin: "0" }}>학생승인 현황</h2>
+                    <div className="searchBar" >
+                        <input onChange={(e) => {
+                            setSearchStudent(e.target.value);
+                            setSearchButton("search");
+                            if (e.target.value === "") {
+                                setSearchButton("search");
+                                setLeftTable([...waiting]);
+                                setRightTable([...approval]);
+                            }
+                        }}
                             name="q" value={searchStudent} type="search" placeholder="Search" ></input>
 
                         <button onClick={(e) => {
                             if (searchButton === "x") {
                                 setSearchStudent("");
                                 setSearchButton("search");
-                                console.log(leftTable);
                                 setLeftTable([...waiting]);
                                 setRightTable([...approval]);
                             } else {
-                                if (searchKinds === "" || searchStudent === "") {
-                                    alert("검색 카테고리를 정하고, 검색명을 입력해주세요 :)");
-                                } else if (searchKinds === "이름") {
+                                if (searchStudent === "") {
+                                    alert("검색명을 입력해주세요 :)");
+                                } else {
                                     setSearchButton("x");
 
-                                    console.log(waiting);
+                                    let left = waiting.filter((item) => (item.name.includes(searchStudent) || item.stdID.includes(searchStudent)));
+                                    let right = approval.filter((item) => (item.name.includes(searchStudent) || item.stdID.includes(searchStudent)));
 
-                                    let left = waiting.filter((item) => item.name === searchStudent);
-                                    let right = approval.filter((item) => item.name === searchStudent);
-
-                                    console.log(left);
                                     setLeftTable(left);
                                     setRightTable(right);
-                                } else if (searchKinds === "학번") {
-                                    // setSearchButton("x");
-                                    // console.log("학번 찾기")
-
-                                    // let left = waiting.filter((item) => item.stID === String(searchStudent));
-                                    // let right = approval.filter((item) => item.stID === String(searchStudent));
-
-                                    // console.log(left);
-                                    // setLeftTable(left);
-                                    // setRightTable(right);
                                 }
 
                             }
                         }}
-                            // var ob = [{
-                            //     name: 'john',
-                            //     surname: 'fox'
-                            //   }
-                            // ];
-                            // var searchText = 'fox';
-                            // var res = ob.filter((item)=>{
-                            //   return Object.keys(item).some((key)=>item[key].includes(searchText));
-                            // });
-                            // console.log(res);
 
                             className='searchButton' type='button'>
                             {
@@ -133,123 +217,146 @@ function ManagementPage() {
                                     : <i className="fas fa-times"></i>
                             }
                         </button>
-                    </Form>
+                    </div>
                 </Container>
             </Navbar>
             <div className='tables'>
                 <div className='tableSet'>
                     <div className="buttons">
                         <button className='submitButton' onClick={() => {
-                            console.log("승인")
-                            leftCheckedList.map((leftCheckedList) => {
-                                console.log(leftCheckedList)
-                            })
+                            if (leftCheckedList.length === 0) {
+                                alert("승인할 학생을 1명 이상 선택하세요 :)")
+                            } else {
+                                postStudent("approval");
+                            }
                             setLeftCheckedList([]);
                         }}>승인</button>
                         <button className='submitButton' onClick={() => {
                             console.log("거절")
-                            leftCheckedList.map((leftCheckedList) => {
-                                console.log(leftCheckedList)
-                            })
                             setLeftCheckedList([]);
+                            if (leftCheckedList.length > 0) {
+                                postStudent("refusal");
+                            } else {
+                                alert("거절할 학생을 1명 이상 선택하세요 :)")
+                            }
                         }}>거절</button>
                     </div>
-                    <table>
+                    <table >
                         <thead>
-                            <tr>
-                                <th colSpan={"3"}>승인대기</th>
+                            <tr >
+                                <th colSpan={"3"} style={{ borderTopRightRadius: "20px", borderTopLeftRadius: "20px" }}>승인대기</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius: "20px" }}>
                             {
-                                leftTable.map((student, i) => {
-                                    return (
-                                        <tr key={i}>
-                                            <td>{student.studentID}</td>
-                                            <td>{student.name}</td>
-                                            <td><input
-                                                id={student}
-                                                type="checkbox"
-                                                onChange={(e) => {
-                                                    changeHandler(e.currentTarget.checked, student, setLeftCheckedList, leftCheckedList)
-                                                }}
-                                                checked={leftCheckedList.includes(student) ? true : false}
-                                            /></td>
-                                        </tr>
-                                    )
-                                })
+                                leftTable.length === 0
+                                    ? <tr>
+                                        <td colSpan={"3"} style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius: "20px" }}>승인대기 학생이 없습니다.</td>
+                                    </tr>
+                                    : leftTable.map((student, i) => {
+                                        return (
+                                            i === leftTable.length - 1
+                                                ? (
+                                                    <tr key={i}>
+                                                        <td style={{ borderBottomLeftRadius: "20px" }}>{student.stdID}</td>
+                                                        <td>{student.name}</td>
+                                                        <td style={{ borderBottomRightRadius: "20px" }}><input
+                                                            id={student}
+                                                            type="checkbox"
+                                                            onChange={(e) => {
+                                                                changeHandler(e.target.checked, student, setLeftCheckedList, leftCheckedList)
+                                                            }}
+                                                            checked={leftCheckedList.includes(student) ? true : false}
+                                                        /></td>
+                                                    </tr>
+                                                )
+                                                : (
+                                                    <tr key={i}>
+                                                        <td >{student.stdID}</td>
+                                                        <td>{student.name}</td>
+                                                        <td ><input
+                                                            id={student}
+                                                            type="checkbox"
+                                                            onChange={(e) => {
+                                                                changeHandler(e.target.checked, student, setLeftCheckedList, leftCheckedList)
+                                                            }}
+                                                            checked={leftCheckedList.includes(student) ? true : false}
+                                                        /></td>
+                                                    </tr>
+                                                )
+                                        )
+                                    })
                             }
                         </tbody>
                     </table>
-                    <div className="pagenation">
-                        <button><i className="fas fa-chevron-left"></i></button>
-                        <button className="pagenationItem">{2}</button>
-                        <button className="pagenationItem">{3}</button>
-                        <button className="pagenationItem" style={{ color: "black" }}>{4}</button>
-                        <button className="pagenationItem">{5}</button>
-                        <button className="pagenationItem">{6}</button>
-                        <button><i className="fas fa-chevron-right"></i></button>
-                    </div>
                 </div>
 
                 <div className='tableSet'>
                     <div className="buttons">
                         <button className='submitButton' style={{ width: "110px" }} onClick={() => {
-                            console.log("회장권한위임")
-                            rightCheckedList.map((rightCheckedList) => {
-                                console.log(rightCheckedList)
-                            })
                             if (rightCheckedList.length === 1) {
                                 setRightCheckedList([]);
+                                postStudent("delegating");
                             } else {
                                 alert("학생회장 위임은 한명만 가능합니다.");
                             }
                         }}>회장권한위임</button>
                         <button className='submitButton' onClick={() => {
-                            console.log("대기")
-                            rightCheckedList.map((rightCheckedList) => {
-                                console.log(rightCheckedList)
-                            })
                             setRightCheckedList([]);
+                            if (rightCheckedList.length > 0) {
+                                postStudent("waiting");
+                            }
                         }}
                         >대기</button>
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <th colSpan={"3"}>승인완료</th>
+                                <th colSpan={"3"} style={{ borderTopRightRadius: "20px", borderTopLeftRadius: "20px" }}>승인완료</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius: "20px" }}>
                             {
-                                rightTable.map((student, i) => {
-                                    return (
-                                        <tr key={i}>
-                                            <td>{student.studentID}</td>
-                                            <td>{student.name}</td>
-                                            <td><input
-                                                id={student}
-                                                type="checkbox"
-                                                onChange={(e) => {
-                                                    changeHandler(e.currentTarget.checked, student, setRightCheckedList, rightCheckedList)
-                                                }}
-                                                checked={rightCheckedList.includes(student) ? true : false}
-                                            /></td>
-                                        </tr>
-                                    )
-                                })
+                                rightTable.length === 0
+                                    ? <tr>
+                                        <td colSpan={"3"}>승인완료 학생이 없습니다.</td>
+                                    </tr>
+                                    : rightTable.map((student, i) => {
+                                        return (
+                                            i === rightTable.length - 1
+                                                ? (
+                                                    <tr key={i}>
+                                                        <td style={{ borderBottomLeftRadius: "20px" }}>{student.stdID}</td>
+                                                        <td>{student.name}</td>
+                                                        <td style={{ borderBottomRightRadius: "20px" }}><input
+                                                            id={student}
+                                                            type="checkbox"
+                                                            onChange={(e) => {
+                                                                changeHandler(e.currentTarget.checked, student, setRightCheckedList, rightCheckedList)
+                                                            }}
+                                                            checked={rightCheckedList.includes(student) ? true : false}
+                                                        /></td>
+                                                    </tr>
+                                                )
+                                                : (
+                                                    <tr key={i}>
+                                                        <td>{student.stdID}</td>
+                                                        <td>{student.name}</td>
+                                                        <td><input
+                                                            id={student}
+                                                            type="checkbox"
+                                                            onChange={(e) => {
+                                                                changeHandler(e.currentTarget.checked, student, setRightCheckedList, rightCheckedList)
+                                                            }}
+                                                            checked={rightCheckedList.includes(student) ? true : false}
+                                                        /></td>
+                                                    </tr>
+                                                )
+                                        )
+                                    })
                             }
                         </tbody>
                     </table>
-                    <div className="pagenation">
-                        <button><i className="fas fa-chevron-left"></i></button>
-                        <button className="pagenationItem">{4}</button>
-                        <button className="pagenationItem">{5}</button>
-                        <button className="pagenationItem" style={{ color: "black" }}>{6}</button>
-                        <button className="pagenationItem">{7}</button>
-                        <button className="pagenationItem">{8}</button>
-                        <button><i className="fas fa-chevron-right"></i></button>
-                    </div>
                 </div>
             </div>
         </div>
