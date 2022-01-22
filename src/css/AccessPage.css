@@ -136,6 +136,10 @@
     width: 70%;
 }
 
+.input-field input[type=password] {font-family:'Malgun gothic', dotum, sans-serif;}
+
+
+
 .input-field button {
     background-color: var(--color-middle-gray);
     border: none;

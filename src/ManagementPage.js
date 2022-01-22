@@ -4,7 +4,7 @@ import './css/ManagementPage.css';
 import axios from 'axios';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
-function ManagementPage() {
+function ManagementPage(props) {
     const history = useHistory();
     const [waiting, setWaiting] = useState([
         {

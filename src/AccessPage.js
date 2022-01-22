@@ -6,7 +6,7 @@ import axios from 'axios';
 import './css/AccessPage.css';
 import logo from './img/logo.png';
 
-function AccessPage() {
+function AccessPage(props) {
   // let [signType, setSignType] =useState("signIn");
   const [position, setPosition] = useState("student");
 
@@ -111,13 +111,15 @@ function AccessPage() {
       // debugger;
       axios.post('/login/' + position, payload)
         .then((payload) => {
-          console.log(payload);
+          props.setLoginPosition(payload.data.position);
+          props.setSCLData(payload.data.sclData);
           if (payload.data.position === "student") {
             history.push('/main/' + payload.data.sclData.studentPresident.major);
           }
           else if (payload.data.position === "president") {
-            history.push('/manage/' + payload.data.sclData.studentPresident.major); // 수정 필요
+            history.push('/manage/' + payload.data.sclData.studentPresident.major);
           }
+
 
         })
         .catch((error) => {
