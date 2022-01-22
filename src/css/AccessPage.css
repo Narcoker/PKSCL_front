@@ -1,8 +1,16 @@
+@font-face {
+    font-family: 'OTWelcomeBA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeBA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .container {
     width: 100%;
     height: 100vh;
     display: flex;
     z-index: 10;
+    font-family: 'OTWelcomeBA';
 }
 
 .container:before {
@@ -24,7 +32,7 @@
     margin: 0;
     z-index: 9;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
 }
@@ -82,11 +90,23 @@
     border: none;
 }
 
+.accessTitle {
+    display: flex;
+    align-content: center;
+    align-items: flex-end;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.accessTitle img {
+    margin-right: 10px;
+}
+
 .input-field {
     max-width: 380px;
     width: 100%;
     background-color: var(--color-bright-gray);
-    margin: 15px 0 0 0;
+    margin: 0 0 15px 0;
     height: 55px;
     border-radius: 30px;
     padding: 0 0.4rem;
@@ -136,7 +156,7 @@
     color: var(--color-white);
     text-transform: uppercase;
     font-weight: 600;
-    margin: 15px 0;
+    margin: 0 0 15px 0;
     cursor: pointer;
     z-index: 11;
 }

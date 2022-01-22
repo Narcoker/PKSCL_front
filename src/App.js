@@ -1,11 +1,12 @@
 // import log from './img/log.svg';
 // import {Nav} from 'react-bootstrap';
-import './App.css';
+import './css/App.css';
 import { useEffect, useState } from 'react';
 import AccessPage from './AccessPage';
 import MainPage from './MainPage';
 import ManagementPage from './ManagementPage';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
+
 
 function loadmonth() {
   let now = new Date();

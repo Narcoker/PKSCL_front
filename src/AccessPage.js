@@ -3,8 +3,8 @@ import log from './img/log.svg';
 import { Nav } from 'react-bootstrap';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import './AccessPage.css';
-
+import './css/AccessPage.css';
+import logo from './img/logo.png';
 
 function AccessPage() {
   // let [signType, setSignType] =useState("signIn");
@@ -205,11 +205,11 @@ function AccessPage() {
                 </Nav>
               </div>
 
-              <h2 style={{ padding: "20px 0 0 0" }}>가입을 시작합니다!</h2>
+              <h3 className="accessTitle" style={{ margin: "10px 0 0 0" }}><img src={logo} alt="logo" width={"40px"} height={"40px"} />가입을 시작합니다!</h3>
               {
                 position === "student"
-                  ? <div>PKSCL로 편리하고 투명하게 장부를 이용하세요:) </div>
-                  : <div>PKSCL로 편리하고 투명하게 장부를 관리하세요:) </div>
+                  ? <div style={{ marginBottom: "10px" }}>PKSCL로 편리하고 투명하게 장부를 이용하세요:) </div>
+                  : <div style={{ marginBottom: "10px" }}>PKSCL로 편리하고 투명하게 장부를 관리하세요:) </div>
               }
 
               <div className="input-field">
@@ -391,7 +391,7 @@ function AccessPage() {
                   </Nav.Item>
                 </Nav>
               </div>
-              <h2 style={{ padding: "20px 0 0 0" }}>PKSCL</h2>
+              <h3 className="accessTitle"><img src={logo} alt="logo" width={"40px"} height={"40px"} />PKSCL</h3>
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input id="inputEmail" onChange={(e) => { setEmail(e.target.value) }} value={email} type="text" placeholder="학교 이메일 @pukyong.ac.kr" />
@@ -427,8 +427,8 @@ function AccessPage() {
                   </Nav.Item>
                 </Nav>
               </div>
-              <h2 style={{ padding: "20px 0 0 0" }}>비밀번호 찾기</h2>
-              <div >비밀번호를 찾고자 하는 아이디의 정보를 입력해 주세요.</div>
+              <h3 className="accessTitle" ><img src={logo} alt="logo" width={"40px"} height={"40px"} />비밀번호 찾기</h3>
+
 
               <div className="input-field">
                 <i className="fas fa-envelope" style={isCorrect[5] === true ? { color: "var(--color-quarter)" } : null}></i>
@@ -493,7 +493,7 @@ function AccessPage() {
         <Route exact path="/giraffe-admin">
           <div className="right-panel">
             <form className="userForm">
-              <h2 style={{ padding: "20px 0 0 0" }}>관리자 로그인</h2>
+              <h3 className="accessTitle" ><img src={logo} alt="logo" width={"40px"} height={"40px"} />관리자 로그인</h3>
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input id="inputEmail" onChange={(e) => { setEmail(e.target.value) }} value={email} type="text" placeholder="학교 이메일 @pukyong.ac.kr" />
