@@ -12,7 +12,7 @@ function AccessPage(props) {
 
   const [stdID, setStdID] = useState("");
   const [name, setName] = useState("");
-  // const [major, setMajor] = useState(""); 없어도될듯?
+  const [major, setMajor] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -86,8 +86,7 @@ function AccessPage(props) {
   function reset() {
     setStdID("");
     setName("");
-    // setMajor(""); 없어도될듯?
-
+    setMajor("");
     setPassword("");
     setCheckPassword("");
     setEmail("");
@@ -106,6 +105,52 @@ function AccessPage(props) {
 
 
   };
+
+  function signUp() {
+    if (signUpButtonState) {
+
+      let payload = new FormData();
+
+      payload.append("stdID", stdID);
+      payload.append("password", password);
+      payload.append("checkPassword", checkPassword);
+      payload.append("major", major)
+      payload.append("name", name);
+      payload.append("email", email);
+      payload.append("certFile", certFile);
+
+      for (let value of payload.values()) {
+        console.log(value);
+      }
+
+      axios.post("/signup/" + position, payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then((payload) => {
+          switch (payload.status) {
+            case 200:
+              if (window.confirm("회원가입에 성공하였습니다.")) {
+                history.push('/');
+              }
+              else {
+                history.push('/signUp');
+              }
+            default: alert("success: " + payload.status);
+          }
+        })
+        .catch((error) => {
+          switch (error.status) {
+            case 400: alert("이미 존재하는 회장ID(이메일)입니다."); return;
+            default: alert("error: " + error.status); return;
+          }
+        })
+    }
+    else {
+      alert("빈칸을 모두 입력해주세요 :(");
+    }
+  }
 
 
   function login() {
@@ -208,10 +253,7 @@ function AccessPage(props) {
       <Switch>
         <Route exact path="/signUp">
           <div className="right-panel" id="signup" style={{ marginTop: "20px", justifyContent: "flex-start" }}>
-            <form className="userForm" action={"/signup/" + position} method="post" encType="multipart/form-data"
-              onSubmit={(e) => {
-                e.target.major.value = majorList.indexOf(e.target.major.value) + 1;
-              }}>
+            <form className="userForm" >
               <div id="nav" >
                 <Nav fill variant="tabs" defaultActiveKey="link-1">
                   <Nav.Item>
@@ -380,7 +422,7 @@ function AccessPage(props) {
                       <label htmlFor="majorList"></label>
                       <input type="text" list="majorList-options" id='major' name="major" placeholder="학과를 입력하세요."
                         onChange={(e) => {
-                          // setMajor(e.target.value); 없어도될듯?
+                          setMajor(majorList.indexOf(e.target.value) + 1);
                           if (majorList.includes(e.target.value)) {
                             changeIsCorrect(3, true);
                           } else {
@@ -474,11 +516,11 @@ function AccessPage(props) {
 
                     <div className="input-field filebox">
                       <i className="fas fa-user-graduate" style={isCorrect[7] === true ? { color: "var(--color-quarter)" } : null}></i>
-                      <input className='uploadName' placeholder='학생증을 첨부해주세요' value={certFile} readOnly />
+                      <input className='uploadName' placeholder='학생증을 첨부해주세요' value={certFile.name} readOnly />
                       <label htmlFor="certFile">찾기</label>
                       <input type="file" id='certFile' name="certFile" accept='image/*'
                         onChange={(e) => {
-                          setCertFile(e.target.value.split('/').pop().split('\\').pop());
+                          setCertFile(e.target.files[0]);
                           if (e.target.value === "") {
                             changeIsCorrect(7, false);
                           } else {
@@ -488,13 +530,10 @@ function AccessPage(props) {
                     </div>
 
                     <div className="submitbox" >
-                      {signUpButtonState === true
-                        ?
-                        <button type="submit" className="SignInBtn" >회원가입</button>
-                        :
-                        <button type="button" style={{ backgroundColor: '#ACACAC' }} className="SignInBtn" onClick={() => { alert("빈칸을 모두 입력해주세요 :(") }}  >회원가입</button>
-                      }
-                    </div></>
+                      <button type="button" style={signUpButtonState ? null : { backgroundColor: '#ACACAC' }}
+                        className="SignInBtn" onClick={() => { signUp() }}  >회원가입</button>
+                    </div>
+                  </>
                   )
               }
 
