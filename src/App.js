@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import AccessPage from './AccessPage';
 import MainPage from './MainPage';
 import ManagementPage from './ManagementPage';
+import AlertBox from './AlertBox';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 function loadmonth() {
@@ -33,7 +34,7 @@ function setColorProperty(colorQuarter, colorQuarterCircle, colorLeftPanel, colo
   document.documentElement.style.setProperty("--color-card", colorCard);
 }
 function defineColor(quarter) {
-  quarter = "quarter4"
+
   if (quarter === "quarter1") {
     setColorProperty("#c89034", "linear-gradient(0deg, rgba(200, 144, 52, 1) 0%, rgba(213, 178, 121, 1) 67%", "#f2e3d7", "#fff5ed");
   } else if (quarter === "quarter2") {
@@ -61,12 +62,16 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path='/manage/:major'>
+        <Route path='/manage'>
           <ManagementPage loginPosition={loginPosition}></ManagementPage>
         </Route>
 
-        <Route path='/main/:major'>
+        <Route path='/main'>
           <MainPage></MainPage>
+        </Route>
+
+        <Route path='/error'>
+          <AlertBox></AlertBox>
         </Route>
 
         <Route path='/' >
