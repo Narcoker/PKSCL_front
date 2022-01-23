@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import AccessPage from './AccessPage';
 import MainPage from './MainPage';
 import ManagementPage from './ManagementPage';
-import AlertBox from './AlertBox';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 function loadmonth() {
@@ -34,7 +33,6 @@ function setColorProperty(colorQuarter, colorQuarterCircle, colorLeftPanel, colo
   document.documentElement.style.setProperty("--color-card", colorCard);
 }
 function defineColor(quarter) {
-
   if (quarter === "quarter1") {
     setColorProperty("#c89034", "linear-gradient(0deg, rgba(200, 144, 52, 1) 0%, rgba(213, 178, 121, 1) 67%", "#f2e3d7", "#fff5ed");
   } else if (quarter === "quarter2") {
@@ -47,17 +45,16 @@ function defineColor(quarter) {
 }
 
 
-
 function App() {
 
   const [loginPosition, setLoginPosition] = useState("student");
   const [SCLData, setSCLData] = useState({});
+  const [todayQuarter, setTodatQuarter] = useState(selectseason);
 
   useEffect(() => {
     let quarter = selectseason();
     defineColor(quarter);
   }, [])
-
 
   return (
     <div>
@@ -67,17 +64,12 @@ function App() {
         </Route>
 
         <Route path='/main'>
-          <MainPage></MainPage>
-        </Route>
-
-        <Route path='/error'>
-          <AlertBox></AlertBox>
+          <MainPage loginPosition={loginPosition} todayQuarter={todayQuarter}></MainPage>
         </Route>
 
         <Route path='/' >
           <AccessPage setLoginPosition={setLoginPosition} setSCLData={setSCLData}> </AccessPage>
         </Route>
-
       </Switch>
 
 
