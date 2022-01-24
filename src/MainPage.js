@@ -519,7 +519,7 @@ function MainPage(props) {
 
     const [currentQuarter, setCurrentQuarter] = useState(props.todayQuarter);
     const [showAllReceiptButton, setShowAllReceiptButton] = useState([]);
-
+    const [EditProfile, setEditProfile] = useState(false);
     function resetShowAllReceiptButton() {
         let resetArray = [];
         for (let i = 0; i < quarter[currentQuarter]["eventList"].length; i++) {
@@ -636,6 +636,8 @@ function MainPage(props) {
 
     return (
         <div className="MainPageContainer">
+
+            <EditProfile></EditProfile>
             <div className="leftPanel">
                 <div className="majorCard">
                     <div className="presidentCard">
