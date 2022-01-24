@@ -73,7 +73,7 @@ function EditProfile(props) {
                 })
                 .catch((error) => {
                     switch (error.response.status) {
-                        case 400: console.log("정보를 로드하는데 실패했습니다."); return;
+                        case 400: alert("정보를 로드하는데 실패했습니다."); return;
                         default: console.log("error: " + error.response.status); return;
                     }
 
@@ -81,6 +81,16 @@ function EditProfile(props) {
 
         }
         //get 요청해서 학과리스트 가져오기
+        axios.get('/major-list')
+            .then((payload) => {
+                setMajorList([...payload.data.majorList]);
+            })
+            .catch((error) => {
+                switch (error.response.status) {
+                    case 400: lert("학과리스트를 불러올 수 없습니다."); return;
+                    default: console.log("error: " + error.response.status); return;
+                }
+            })
     }, [])
 
     useEffect(() => {
