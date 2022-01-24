@@ -108,7 +108,6 @@ function AccessPage(props) {
 
   function signUp() {
     if (signUpButtonState) {
-
       let payload = new FormData();
 
       payload.append("stdID", stdID);
@@ -164,20 +163,29 @@ function AccessPage(props) {
       // debugger;
       axios.post('/login/' + position, payload)
         .then((payload) => {
-          props.setLoginPosition(payload.data.position);
-          props.setSCLData(payload.data.sclData);
-          if (payload.data.position === "student") {
-            history.push('/main');
+          switch (payload.status) {
+            case 200:
+              if (position === "student") {
+                history.push('/main');
+              }
+              else if (position === "president") {
+                history.push('/manage');
+              }
+              props.setLoginPosition(position);
+              return;
+            default: alert("Success: " + payload.status);
           }
-          else if (payload.data.position === "president") {
-            history.push('/manage');
-          }
+
 
         })
         .catch((error) => {
-          alert("로그인에 실패했습니다 :)")
-
-
+          switch (error.status) {
+            case 400:
+              alert("로그인에 실패했습니다.");
+              return;
+            default:
+              alert("서버에 에러가 발생했습니다.")
+          }
         });
 
     }

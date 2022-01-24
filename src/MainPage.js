@@ -351,46 +351,46 @@ function MainPage(props) {
             ]
         },
         "quarter3": {
-            "openDate": "4분기 공개 일자",
+            "openDate": "3분기 공개 일자",
             "eventList": [
                 {
-                    "eventTitle": "4벚꽃축제",
+                    "eventTitle": "3벚꽃축제",
                     "eventContext": "행사 비고고고",
                     "receiptList": [
                         {
-                            "receiptTitle": "4부경마트",
-                            "receiptImg": "4이미지경로",
+                            "receiptTitle": "3부경마트",
+                            "receiptImg": "3이미지경로",
                             "receiptContext": "영수증 비고고고",
                             "receiptContextList": [
                                 {
-                                    "context": "4진로",
+                                    "context": "3진로",
                                     "price": "4000",
                                     "amount": "4"
                                 },
                                 {
-                                    "context": "4참이슬",
+                                    "context": "3참이슬",
                                     "price": "4000",
                                     "amount": "5"
                                 },
                                 {
-                                    "context": "4양파",
+                                    "context": "3양파",
                                     "price": "4000",
                                     "amount": "4"
                                 },
                                 {
-                                    "context": "4돼지고기",
+                                    "context": "3돼지고기",
                                     "price": "4000",
                                     "amount": "1"
                                 }
                             ]
                         },
                         {
-                            "receiptContext": "4사진인화이벤트재료구매",
-                            "receiptImg": "4이미지경로",
+                            "receiptContext": "3사진인화이벤트재료구매",
+                            "receiptImg": "3이미지경로",
                             "receiptContext": "영수증 비고고고",
                             "receiptContextList": [
                                 {
-                                    "context": "4필름",
+                                    "context": "3필름",
                                     "price": "4000",
                                     "amount": "5"
                                 }
@@ -399,70 +399,37 @@ function MainPage(props) {
                     ]
                 },
                 {
-                    "eventTitle": "4중간고사응원",
+                    "eventTitle": "3중간고사응원",
                     "eventContext": "행사 비고고고",
                     "receiptList": [
                         {
-                            "receiptContext": "4카카오톡기프티콘",
-                            "receiptImg": "4이미지경로",
+                            "receiptContext": "3카카오톡기프티콘",
+                            "receiptImg": "3이미지경로",
                             "receiptContext": "영수증 비고고고",
                             "receiptContextList": [
                                 {
-                                    "context": "4폴라로이드(1등)",
+                                    "context": "3폴라로이드(1등)",
                                     "price": "4000",
                                     "amount": "1"
                                 },
                                 {
-                                    "context": "4치킨(2등)",
+                                    "context": "3치킨(2등)",
                                     "price": "4000",
                                     "amount": "3"
                                 },
                                 {
-                                    "context": "4베스킨라빈스(3등)",
+                                    "context": "3베스킨라빈스(3등)",
                                     "price": "4000",
                                     "amount": "4"
                                 }, {
-                                    "context": "4폴라로이드(1등)",
+                                    "context": "3폴라로이드(1등)",
                                     "price": "4000",
                                     "amount": "1"
                                 },
                                 {
-                                    "context": "4치킨(2등)",
-                                    "price": "4000",
-                                    "amount": "3"
-                                },
-                                {
-                                    "context": "4베스킨라빈스(3등)",
-                                    "price": "4000",
-                                    "amount": "4"
-                                }, {
-                                    "context": "4폴라로이드(1등)",
+                                    "context": "3폴라로이드(1등)",
                                     "price": "4000",
                                     "amount": "1"
-                                },
-                                {
-                                    "context": "4치킨(2등)",
-                                    "price": "4000",
-                                    "amount": "3"
-                                },
-                                {
-                                    "context": "4베스킨라빈스(3등)",
-                                    "price": "4000",
-                                    "amount": "4"
-                                }, {
-                                    "context": "4폴라로이드(1등)",
-                                    "price": "4000",
-                                    "amount": "1"
-                                },
-                                {
-                                    "context": "4치킨(2등)",
-                                    "price": "4000",
-                                    "amount": "3"
-                                },
-                                {
-                                    "context": "4베스킨라빈스(3등)",
-                                    "price": "4000",
-                                    "amount": "4"
                                 }
                             ]
                         }
@@ -565,9 +532,9 @@ function MainPage(props) {
     useEffect(() => {
         // axios.get('/main')
         //   .then((payload) => {
-        //     setStudentPresident({...payload["sclData"]["studentPresident"]});
-        //     setQuarterStatus({...payload["sclData"]["quarterStatus"]});
-        //     setQuarter({...payload["sclData"]["quarter"]});
+        // setStudentPresident({...payload["sclData"]["studentPresident"]});
+        // setQuarterStatus({...payload["sclData"]["quarterStatus"]});
+        // setQuarter({...payload["sclData"]["quarter"]});
         //   })
         //   .catch((error) => {
         //     alert("학과 장부를 불러올 수 없습니다.");
@@ -575,14 +542,19 @@ function MainPage(props) {
         reset();
     }, []);
 
+    useEffect(() => {
+        reset();
+    }, [currentQuarter]);
+
+
     function reset() {
+        console.log(quarter[currentQuarter]["eventList"])
         CalculateCurrentQuarterReceiptSumList(quarter[currentQuarter]["eventList"]);
         resetShowAllReceiptButton();
     }
 
     function showQuarter(quarter) {
         if (quarterStatus[quarter]) {
-            reset();
             setCurrentQuarter(quarter);
             defineColor(quarter)
         } else {
@@ -630,6 +602,7 @@ function MainPage(props) {
 
     function CalculateCurrentQuarterReceiptSumList(eventList) {
         let eventSum = [];
+        console.log(eventList)
         for (let i = 0; i < eventList.length; i++) {
             eventSum.push(sumEvent(eventList[i]["receiptList"]));
         }

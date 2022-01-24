@@ -48,7 +48,6 @@ function defineColor(quarter) {
 function App() {
 
   const [loginPosition, setLoginPosition] = useState("student");
-  const [SCLData, setSCLData] = useState({});
   const [todayQuarter, setTodatQuarter] = useState(selectseason);
 
   useEffect(() => {
@@ -68,7 +67,7 @@ function App() {
         </Route>
 
         <Route path='/' >
-          <AccessPage setLoginPosition={setLoginPosition} setSCLData={setSCLData}> </AccessPage>
+          <AccessPage setLoginPosition={setLoginPosition}> </AccessPage>
         </Route>
       </Switch>
 
