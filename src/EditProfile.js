@@ -2,12 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 function EditProfile(props) {
-    const [stdID, setStdID] = useState("123456789");
-    const [major, setMajor] = useState("컴퓨터공학과");
-    const [name, setName] = useState("홍길동");
-    const [phoneNumber, setPhoneNumber] = useState("010-0000-0000");
-    const [email, setEmail] = useState("userID@pukyong.ac.kr");
+    const [stdID, setStdID] = useState("");
+    const [major, setMajor] = useState("");
+    const [name, setName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [email, setEmail] = useState("");
     const [certFile, setCertFile] = useState("");
+    const [logo, setLogo] = useState("");
     const [isCorrect, setIsCorrect] = useState(
         {
             stdID: false,
@@ -18,23 +19,56 @@ function EditProfile(props) {
         }
     );
 
-    const [majorList, setMajorList] = useState(["국어국문학과", "영어영문학부", "일어일문학부", "사학과", "경제학부", "법학과", "행정학과", "국제지역학부", "중국학과", "신문방송학과", "정치외교학과", "유아교육과", "시각디자인학과", "공업디자인학과", "패션디자인학과", "경영학부", "국제통상학부", "응용수학과", "통계학과", "물리학과", "화학과", "미생물학과", "해양스포츠학과", "간호학과", "과학시스템시뮬레이션학과", "건축공학과", "건축학과", "소방공학과", "시스템경영공학부", "IT융합응용공학과", "안전공학과", "융합디스플레이공학과", "의공학과", "전기공학과", "전자공학과", "정보통신공학과", "제어계측공학과", "조선해양시스템공학과", "컴퓨터공학과", "토목공학과", "고분자공학과", "공업화학과", "금속공학과", "기계공학과", "기계설계공학과", "기계시스템공학과", "냉동공조공학과", "신소재시스템공학과", "인쇄정보공학과", "재료공학과", "화학공학과", "지속가능공학부", "식품공학과", "해양바이오신소재학과", "해양생산시스템관리학부", "해양수산경영학과", "수해양산업교육과", "자원생물학과", "식품영양학과", "생물공학과", "수산생명의학과", "환경공학과", "해양공학과", "해양학과", "지구환경과학과", "환경대기과학과", "에너지자원공학과", "공간정보시스템공학과", "생태공학과", "데이터정보과학부(빅데이터융합전공)", "데이터정보과학부(통계·데이터사이언스전공)", "미디어커뮤니케이션학부(언론정보전공)", "미디어커뮤니케이션학부(휴먼ICT융합전공)", "스마트헬스케어학부(의공학전공)", "스마트헬스케어학부(해양스포츠전공)", "스마트헬스케어학부(휴먼바이오융합전공)", "전자정보통신공학부(전자공학전공)", "전자정보통신공학부(정보통신공학전공)", "조형학부(건축학전공)", "조형학부(공업디자인전공)", "조형학부(시각디자인전공)", "컴퓨터공학부(소프트웨어·인공지능전공)", "컴퓨터공학부(컴퓨터공학전공)", "평생교육·상담학과", "기계조선융합공학과", "전기전자소프트웨어공학과", "공공안전경찰학과"]);
+    const [editButtonState, setEditButtonState] = useState(false);
 
+    const [majorList, setMajorList] = useState(
+        [
+            "국어국문학과", "영어영문학부", "일어일문학부", "사학과", "경제학부", "법학과", "행정학과", "국제지역학부", "중국학과", "신문방송학과", "정치외교학과", "유아교육과", "시각디자인학과", "공업디자인학과", "패션디자인학과", "경영학부", "국제통상학부", "응용수학과", "통계학과", "물리학과", "화학과", "미생물학과", "해양스포츠학과", "간호학과", "과학시스템시뮬레이션학과", "건축공학과", "건축학과", "소방공학과", "시스템경영공학부", "IT융합응용공학과", "안전공학과", "융합디스플레이공학과", "의공학과", "전기공학과", "전자공학과", "정보통신공학과", "제어계측공학과", "조선해양시스템공학과", "컴퓨터공학과", "토목공학과", "고분자공학과", "공업화학과", "금속공학과", "기계공학과", "기계설계공학과", "기계시스템공학과", "냉동공조공학과", "신소재시스템공학과", "인쇄정보공학과", "재료공학과", "화학공학과", "지속가능공학부", "식품공학과", "해양바이오신소재학과", "해양생산시스템관리학부", "해양수산경영학과", "수해양산업교육과", "자원생물학과", "식품영양학과", "생물공학과", "수산생명의학과", "환경공학과", "해양공학과", "해양학과", "지구환경과학과", "환경대기과학과", "에너지자원공학과", "공간정보시스템공학과", "생태공학과", "데이터정보과학부(빅데이터융합전공)", "데이터정보과학부(통계·데이터사이언스전공)", "미디어커뮤니케이션학부(언론정보전공)", "미디어커뮤니케이션학부(휴먼ICT융합전공)", "스마트헬스케어학부(의공학전공)", "스마트헬스케어학부(해양스포츠전공)", "스마트헬스케어학부(휴먼바이오융합전공)", "전자정보통신공학부(전자공학전공)", "전자정보통신공학부(정보통신공학전공)", "조형학부(건축학전공)", "조형학부(공업디자인전공)", "조형학부(시각디자인전공)", "컴퓨터공학부(소프트웨어·인공지능전공)", "컴퓨터공학부(컴퓨터공학전공)", "평생교육·상담학과", "기계조선융합공학과", "전기전자소프트웨어공학과", "공공안전경찰학과"
+        ]);
 
     function changeIsCorrect(key, type) {
         var temp = { ...isCorrect };
-        switch (key) {
-            case "stdID": temp.stdID = type; return;
-            case "major": temp.major = type; return;
-            case "name": temp.name = type; return;
-            case "phoneNumber": temp.phoneNumber = type; return;
-            case "email": temp.email = type; return;
-            default: console.log("default");
+        if (key === "stdID") temp.stdID = type;
+        else if (key === "major") temp.major = type;
+        else if (key === "name") temp.name = type;
+        else if (key === "phoneNumber") temp.phoneNumber = type;
+        else if (key === "email") temp.email = type;
+        else console.log("function changeIsCorrect() error ");
 
-        }
+        setIsCorrect(temp);
+
     };
 
     useEffect(() => {
+        if (props.loginPosition === "president") {
+            if (isCorrect.stdID && isCorrect.name && isCorrect.phoneNumber) {
+                setEditButtonState(true);
+            } else {
+                setEditButtonState(false);
+            }
+            console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.phoneNumber: " + isCorrect.phoneNumber);
+        } else if (props.loginPosition === "student") {
+            if (isCorrect.stdID && isCorrect.name && isCorrect.major) {
+                setEditButtonState(true);
+            } else {
+                setEditButtonState(false);
+                console.log(major);
+            }
+            console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.major: " + isCorrect.major);
+        }
+
+    }, [isCorrect])
+
+    useEffect(() => {
+        //debug
+        setStdID("123456789");
+        setMajor("컴퓨터공학과");
+        setName("홍길동");
+        setPhoneNumber("010-0000-0000");
+        setEmail("userID@pukyong.ac.kr");
+
+
+
         console.log(props.loginPosition);
         //get 요청해서 로그인된 정보 가져오기
         if (props.loginPosition === "prsident") {
@@ -87,7 +121,7 @@ function EditProfile(props) {
             })
             .catch((error) => {
                 switch (error.response.status) {
-                    case 400: lert("학과리스트를 불러올 수 없습니다."); return;
+                    case 400: alert("학과리스트를 불러올 수 없습니다."); return;
                     default: console.log("error: " + error.response.status); return;
                 }
             })
@@ -101,6 +135,7 @@ function EditProfile(props) {
             setPhoneNumber(phoneNumber.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
         }
     }, [phoneNumber]);
+
 
     return (
         <div className='black-bg'>
@@ -122,10 +157,10 @@ function EditProfile(props) {
                                 setStdID(e.target.value.replace(/[^0-9]/g, ''));
                                 if (e.target.value.length === 9) {
                                     changeIsCorrect("stdID", true);
+
                                 } else {
                                     changeIsCorrect("stdID", false);
                                 }
-                                console.log(isCorrect[0]);
                             }
                             } name="stdID" value={stdID} maxLength="9" placeholder="내용을 입력해주세요" type="text" />
 
@@ -150,7 +185,7 @@ function EditProfile(props) {
                                                     changeIsCorrect("major", false);
                                                 }
                                             }
-                                            } value={major}></input>
+                                            } ></input>
                                         <datalist id="majorList-options" >
                                             {
                                                 majorList.map((majorName, i) => {
@@ -267,8 +302,8 @@ function EditProfile(props) {
 
 
                     <div className="errorBtns">
-                        <button className="errorBtn">저장하기</button>
-                        <button type="button" className="errorBtn" onClick={() => { props.setEditProfileState(false) }}>나가기</button>
+                        <button className="errorBtn" type="button" onClick={() => { editButtonState ? alert("전송") : alert("실패") }}>저장하기</button>
+                        <button className="errorBtn" type="button" onClick={() => { props.setEditProfileState(false) }}>나가기</button>
 
                     </div>
                 </div>
