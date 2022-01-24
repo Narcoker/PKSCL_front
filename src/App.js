@@ -1,5 +1,3 @@
-// import log from './img/log.svg';
-// import {Nav} from 'react-bootstrap';
 import './css/App.css';
 import { useEffect, useState } from 'react';
 import AccessPage from './AccessPage';
@@ -32,6 +30,7 @@ function setColorProperty(colorQuarter, colorQuarterCircle, colorLeftPanel, colo
   document.documentElement.style.setProperty("--color-leftPanel", colorLeftPanel);
   document.documentElement.style.setProperty("--color-card", colorCard);
 }
+
 function defineColor(quarter) {
   if (quarter === "quarter1") {
     setColorProperty("#c89034", "linear-gradient(0deg, rgba(200, 144, 52, 1) 0%, rgba(213, 178, 121, 1) 67%", "#f2e3d7", "#fff5ed");
@@ -47,7 +46,7 @@ function defineColor(quarter) {
 
 function App() {
 
-  const [loginPosition, setLoginPosition] = useState("student");
+  const [loginPosition, setLoginPosition] = useState("president");
   const [todayQuarter, setTodatQuarter] = useState(selectseason);
 
   useEffect(() => {
@@ -67,7 +66,7 @@ function App() {
         </Route>
 
         <Route path='/' >
-          <AccessPage setLoginPosition={setLoginPosition}> </AccessPage>
+          <AccessPage setLoginPosition={setLoginPosition} todayQuarter={todayQuarter}> </AccessPage>
         </Route>
       </Switch>
 

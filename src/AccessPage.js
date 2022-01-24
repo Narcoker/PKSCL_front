@@ -4,7 +4,6 @@ import { Nav } from 'react-bootstrap';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './css/AccessPage.css';
-import logo from './img/logo.png';
 
 function AccessPage(props) {
   // let [signType, setSignType] =useState("signIn");
@@ -24,9 +23,10 @@ function AccessPage(props) {
   const [resendEmail, setResendEmail] = useState(0);
   const [signUpButtonState, setSignUpButtonState] = useState(false);
 
-  //   추가
   const [personalInformationButton, setPersonalInformationButton] = useState(false);
   const [personalInformation, setPersonalInformation] = useState([false, false, false]);
+
+  let logoImgPath = `./img/${props.todayQuarter}.png`
 
   const history = useHistory();
 
@@ -108,6 +108,7 @@ function AccessPage(props) {
 
   function signUp() {
     if (signUpButtonState) {
+
       let payload = new FormData();
 
       payload.append("stdID", stdID);
@@ -163,29 +164,18 @@ function AccessPage(props) {
       // debugger;
       axios.post('/login/' + position, payload)
         .then((payload) => {
-          switch (payload.status) {
-            case 200:
-              if (position === "student") {
-                history.push('/main');
-              }
-              else if (position === "president") {
-                history.push('/manage');
-              }
-              props.setLoginPosition(position);
-              return;
-            default: alert("Success: " + payload.status);
+          props.setLoginPosition();
+          if (position === "student") {
+            history.push('/main');
           }
-
+          else if (position === "president") {
+            history.push('/manage');
+          }
 
         })
         .catch((error) => {
-          switch (error.status) {
-            case 400:
-              alert("로그인에 실패했습니다.");
-              return;
-            default:
-              alert("서버에 에러가 발생했습니다.")
-          }
+          alert("로그인에 실패했습니다 :)")
+
         });
 
     }
@@ -251,7 +241,7 @@ function AccessPage(props) {
 
       <div className="left-panel">
         <div className="content">
-          <button type="button" onClick={() => { reset(); history.push('/') }}><h3>PKNU 온라인 장부</h3></button>
+          <button type="button" style={{ boxShadow: "0 0 0 0 white", fontFamily: 'YUniverse-B' }} onClick={() => { reset(); history.push('/') }}><h3>PKNU 온라인 장부</h3></button>
           <p>
             우리 학과의 장부를 분기 별로 확인할 수 있습니다.
           </p>
@@ -260,7 +250,7 @@ function AccessPage(props) {
       </div>
       <Switch>
         <Route exact path="/signUp">
-          <div className="right-panel" id="signup" style={{ marginTop: "20px", justifyContent: "flex-start" }}>
+          <div className="right-panel" id="signup" style={{ marginTop: "20px" }}>
             <form className="userForm" >
               <div id="nav" >
                 <Nav fill variant="tabs" defaultActiveKey="link-1">
@@ -272,8 +262,7 @@ function AccessPage(props) {
                   </Nav.Item>
                 </Nav>
               </div>
-
-              <h3 className="accessTitle" style={{ margin: "10px 0 0 0" }}><img src={logo} alt="logo" width={"40px"} height={"40px"} />가입을 시작합니다!</h3>
+              <h3 className="accessTitle" style={{ margin: "10px 0 0 0" }}><img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />가입을 시작합니다!</h3>
               {
                 position === "student"
                   ? <div style={{ marginBottom: "10px" }}>PKSCL로 편리하고 투명하게 장부를 이용하세요:) </div>
@@ -547,7 +536,7 @@ function AccessPage(props) {
 
             </form>
             <div className='moveSignPage'>
-              <button onClick={() => { reset(); history.push('/newpwd') }}>비밀번호 찾기</button><button onClick={() => { reset(); history.push('/'); }}>로그인</button>
+              <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/newpwd') }}>비밀번호 찾기</button><button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/'); }}>로그인</button>
             </div>
           </div>
 
@@ -566,7 +555,7 @@ function AccessPage(props) {
                   </Nav.Item>
                 </Nav>
               </div>
-              <h3 className="accessTitle"><img src={logo} alt="logo" width={"40px"} height={"40px"} />PKSCL</h3>
+              <h3 className="accessTitle" ><img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />PKSCL</h3>
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input id="inputEmail" onChange={(e) => { setEmail(e.target.value) }} value={email} type="text" placeholder="학교 이메일 @pukyong.ac.kr" />
@@ -581,7 +570,7 @@ function AccessPage(props) {
               </div>
             </form>
             <div className='moveSignPage'>
-              <button onClick={() => { reset(); history.push('/newpwd') }}>비밀번호 찾기</button><button onClick={() => { reset(); history.push('/signUp'); }}>회원가입</button>
+              <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/newpwd') }}>비밀번호 찾기</button><button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/signUp'); }}>회원가입</button>
             </div>
           </div>
 
@@ -602,7 +591,7 @@ function AccessPage(props) {
                   </Nav.Item>
                 </Nav>
               </div>
-              <h3 className="accessTitle" ><img src={logo} alt="logo" width={"40px"} height={"40px"} />비밀번호 찾기</h3>
+              <h3 className="accessTitle" ><img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />비밀번호 찾기</h3>
 
 
               <div className="input-field">
@@ -660,7 +649,7 @@ function AccessPage(props) {
               </div>
             </form>
             <div className='moveSignPage'>
-              <button onClick={() => { reset(); history.push('/') }}>로그인</button><button onClick={() => { reset(); history.push('/signUp') }}>회원가입</button>
+              <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/') }}>로그인</button><button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/signUp') }}>회원가입</button>
             </div>
           </div>
         </Route >
@@ -668,7 +657,7 @@ function AccessPage(props) {
         <Route exact path="/giraffe-admin">
           <div className="right-panel">
             <form className="userForm">
-              <h3 className="accessTitle" ><img src={logo} alt="logo" width={"40px"} height={"40px"} />관리자 로그인</h3>
+              <h3 className="accessTitle" ><img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />관리자 로그인</h3>
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input id="inputEmail" onChange={(e) => { setEmail(e.target.value) }} value={email} type="text" placeholder="학교 이메일 @pukyong.ac.kr" />

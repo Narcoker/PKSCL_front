@@ -137,29 +137,46 @@ function ManagementPage(props) {
     const [searchButton, setSearchButton] = useState("search");
 
 
-    function postStudent(studentStatus) {
+    function patchStudent(studentStatus) {
         let payload;
         if (studentStatus === "approval" || studentStatus === "refusal") {
-            payload = leftCheckedList;
+            payload = {
+                "studentStatus": studentStatus,
+                "studentIdApproval": leftCheckedList
+            };
         } else if (studentStatus === "delegating" || studentStatus === "waiting") {
-            payload = rightCheckedList;
+            payload = {
+                "studentStatus": studentStatus,
+                "studentIdApproval": rightCheckedList
+            };
         } else {
             alert("error!");
         }
-        axios.post('/student-list/' + studentStatus, payload)
-            .then((payload) => {
-                setWaiting([...payload.data.studentPresidentList.waiting]);
-                setRefusal([...payload.data.studentPresidentList.refusal]);
-                setApproval([...payload.data.studentPresidentList.approval]);
-            })
-            .catch((error) => {
-                alert("학생 전송에 실패했습니다 :)")
-            });
+        if (props.loginPosition === "president") {
+            axios.patch('/student-list/', payload)
+                .then((payload) => {
+                    setWaiting([...payload.data.studentPresidentList.waiting]);
+                    setRefusal([...payload.data.studentPresidentList.refusal]);
+                    setApproval([...payload.data.studentPresidentList.approval]);
+                })
+                .catch((error) => {
+                    alert("학생 전송에 실패했습니다 :)")
+                });
+        } else if (props.loginPosition === "admin") {
+            axios.patch('/student-president-list/', payload)
+                .then((payload) => {
+                    setWaiting([...payload.data.studentPresidentList.waiting]);
+                    setRefusal([...payload.data.studentPresidentList.refusal]);
+                    setApproval([...payload.data.studentPresidentList.approval]);
+                })
+                .catch((error) => {
+                    alert("학생 전송에 실패했습니다 :)")
+                });
+        }
     }
 
     useEffect(() => {
-
-        axios.get('/student-list')
+        axios.get('/manage')
             .then((payload) => {
                 setWaiting([...payload.data.studentPresidentList.waiting]);
                 setRefusal([...payload.data.studentPresidentList.refusal]);
@@ -227,7 +244,8 @@ function ManagementPage(props) {
                             if (leftCheckedList.length === 0) {
                                 alert("승인할 학생을 1명 이상 선택하세요 :)")
                             } else {
-                                postStudent("approval");
+                                console.log("approval")
+                                patchStudent("approval");
                             }
                             setLeftCheckedList([]);
                         }}>승인</button>
@@ -235,7 +253,8 @@ function ManagementPage(props) {
                             console.log("거절")
                             setLeftCheckedList([]);
                             if (leftCheckedList.length > 0) {
-                                postStudent("refusal");
+                                console.log("refusal")
+                                patchStudent("refusal");
                             } else {
                                 alert("거절할 학생을 1명 이상 선택하세요 :)")
                             }
@@ -247,47 +266,32 @@ function ManagementPage(props) {
                                 <th colSpan={"3"} style={{ borderTopRightRadius: "20px", borderTopLeftRadius: "20px" }}>승인대기</th>
                             </tr>
                         </thead>
-                        <tbody style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius: "20px" }}>
-                            {
-                                leftTable.length === 0
-                                    ? <tr>
-                                        <td colSpan={"3"} style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius: "20px" }}>승인대기 학생이 없습니다.</td>
-                                    </tr>
-                                    : leftTable.map((student, i) => {
-                                        return (
-                                            i === leftTable.length - 1
-                                                ? (
-                                                    <tr key={i}>
-                                                        <td style={{ borderBottomLeftRadius: "20px" }}>{student.stdID}</td>
-                                                        <td>{student.name}</td>
-                                                        <td style={{ borderBottomRightRadius: "20px" }}><input
-                                                            id={student}
-                                                            type="checkbox"
-                                                            onChange={(e) => {
-                                                                changeHandler(e.target.checked, student, setLeftCheckedList, leftCheckedList)
-                                                            }}
-                                                            checked={leftCheckedList.includes(student) ? true : false}
-                                                        /></td>
-                                                    </tr>
-                                                )
-                                                : (
-                                                    <tr key={i}>
-                                                        <td >{student.stdID}</td>
-                                                        <td>{student.name}</td>
-                                                        <td ><input
-                                                            id={student}
-                                                            type="checkbox"
-                                                            onChange={(e) => {
-                                                                changeHandler(e.target.checked, student, setLeftCheckedList, leftCheckedList)
-                                                            }}
-                                                            checked={leftCheckedList.includes(student) ? true : false}
-                                                        /></td>
-                                                    </tr>
-                                                )
-                                        )
-                                    })
-                            }
-                        </tbody>
+                        <div className="tableRadius" style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius: "20px" }}>
+                            <tbody className="tableList" style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius: "20px" }}>
+                                {
+                                    leftTable.length === 0
+                                        ? <tr>
+                                            <td colSpan={"3"}>승인대기 학생이 없습니다.</td>
+                                        </tr>
+                                        : leftTable.map((student, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                    <td >{student.stdID}</td>
+                                                    <td>{student.name}</td>
+                                                    <td ><input
+                                                        id={student}
+                                                        type="checkbox"
+                                                        onChange={(e) => {
+                                                            changeHandler(e.target.checked, student, setLeftCheckedList, leftCheckedList)
+                                                        }}
+                                                        checked={leftCheckedList.includes(student) ? true : false}
+                                                    /></td>
+                                                </tr>
+                                            )
+                                        })
+                                }
+                            </tbody>
+                        </div>
                     </table>
                 </div>
 
@@ -296,7 +300,7 @@ function ManagementPage(props) {
                         <button className='submitButton' style={{ width: "110px" }} onClick={() => {
                             if (rightCheckedList.length === 1) {
                                 setRightCheckedList([]);
-                                postStudent("delegating");
+                                patchStudent("delegating");
                             } else {
                                 alert("학생회장 위임은 한명만 가능합니다.");
                             }
@@ -304,7 +308,7 @@ function ManagementPage(props) {
                         <button className='submitButton' onClick={() => {
                             setRightCheckedList([]);
                             if (rightCheckedList.length > 0) {
-                                postStudent("waiting");
+                                patchStudent("waiting");
                             }
                         }}
                         >대기</button>
@@ -315,47 +319,33 @@ function ManagementPage(props) {
                                 <th colSpan={"3"} style={{ borderTopRightRadius: "20px", borderTopLeftRadius: "20px" }}>승인완료</th>
                             </tr>
                         </thead>
-                        <tbody style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius: "20px" }}>
-                            {
-                                rightTable.length === 0
-                                    ? <tr>
-                                        <td colSpan={"3"}>승인완료 학생이 없습니다.</td>
-                                    </tr>
-                                    : rightTable.map((student, i) => {
-                                        return (
-                                            i === rightTable.length - 1
-                                                ? (
-                                                    <tr key={i}>
-                                                        <td style={{ borderBottomLeftRadius: "20px" }}>{student.stdID}</td>
-                                                        <td>{student.name}</td>
-                                                        <td style={{ borderBottomRightRadius: "20px" }}><input
-                                                            id={student}
-                                                            type="checkbox"
-                                                            onChange={(e) => {
-                                                                changeHandler(e.currentTarget.checked, student, setRightCheckedList, rightCheckedList)
-                                                            }}
-                                                            checked={rightCheckedList.includes(student) ? true : false}
-                                                        /></td>
-                                                    </tr>
-                                                )
-                                                : (
-                                                    <tr key={i}>
-                                                        <td>{student.stdID}</td>
-                                                        <td>{student.name}</td>
-                                                        <td><input
-                                                            id={student}
-                                                            type="checkbox"
-                                                            onChange={(e) => {
-                                                                changeHandler(e.currentTarget.checked, student, setRightCheckedList, rightCheckedList)
-                                                            }}
-                                                            checked={rightCheckedList.includes(student) ? true : false}
-                                                        /></td>
-                                                    </tr>
-                                                )
-                                        )
-                                    })
-                            }
-                        </tbody>
+                        <div className="tableRadius" style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius: "20px" }}>
+                            <tbody className="tableList" style={{ borderBottomRightRadius: "20px", borderBottomLeftRadius: "20px" }}>
+                                {
+                                    rightTable.length === 0
+                                        ? <tr>
+                                            <td colSpan={"3"}>승인완료 학생이 없습니다.</td>
+                                        </tr>
+                                        : rightTable.map((student, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                    <td>{student.stdID}</td>
+                                                    <td>{student.name}</td>
+                                                    <td><input
+                                                        id={student}
+                                                        type="checkbox"
+                                                        onChange={(e) => {
+                                                            changeHandler(e.currentTarget.checked, student, setRightCheckedList, rightCheckedList)
+                                                        }}
+                                                        checked={rightCheckedList.includes(student) ? true : false}
+                                                    /></td>
+                                                </tr>
+
+                                            )
+                                        })
+                                }
+                            </tbody>
+                        </div>
                     </table>
                 </div>
             </div>

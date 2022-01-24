@@ -4,8 +4,9 @@ import quarter2 from './img/quarter2.png';
 import quarter3 from './img/quarter3.png';
 import quarter4 from './img/quarter4.png';
 import receiptImg from './img/receipt.png';
-
+import EditProfile from './EditProfile';
 import './css/MainPage.css';
+import './css/EditProfile.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -517,9 +518,12 @@ function MainPage(props) {
 
     })
 
+    const [eventAmount, setEventAmount] = useState([]);
+    const [quarterAmount, setQuarterAmount] = useState(0);
     const [currentQuarter, setCurrentQuarter] = useState(props.todayQuarter);
     const [showAllReceiptButton, setShowAllReceiptButton] = useState([]);
-    const [EditProfile, setEditProfile] = useState(false);
+    const [editProfileState, setEditProfileState] = useState(false);
+
     function resetShowAllReceiptButton() {
         let resetArray = [];
         for (let i = 0; i < quarter[currentQuarter]["eventList"].length; i++) {
@@ -528,27 +532,8 @@ function MainPage(props) {
         setShowAllReceiptButton(resetArray)
     }
 
-
-    useEffect(() => {
-        // axios.get('/main')
-        //   .then((payload) => {
-        // setStudentPresident({...payload["sclData"]["studentPresident"]});
-        // setQuarterStatus({...payload["sclData"]["quarterStatus"]});
-        // setQuarter({...payload["sclData"]["quarter"]});
-        //   })
-        //   .catch((error) => {
-        //     alert("학과 장부를 불러올 수 없습니다.");
-        //   })
-        reset();
-    }, []);
-
-    useEffect(() => {
-        reset();
-    }, [currentQuarter]);
-
-
     function reset() {
-        console.log(quarter[currentQuarter]["eventList"])
+        // console.log(quarter[currentQuarter]["eventList"])
         CalculateCurrentQuarterReceiptSumList(quarter[currentQuarter]["eventList"]);
         resetShowAllReceiptButton();
     }
@@ -596,13 +581,10 @@ function MainPage(props) {
         }
         return sumEventValue
     }
-    const [eventAmount, setEventAmount] = useState([]);
-    const [quarterAmount, setQuarterAmount] = useState(0);
-
 
     function CalculateCurrentQuarterReceiptSumList(eventList) {
         let eventSum = [];
-        console.log(eventList)
+        // console.log(eventList)
         for (let i = 0; i < eventList.length; i++) {
             eventSum.push(sumEvent(eventList[i]["receiptList"]));
         }
@@ -622,6 +604,7 @@ function MainPage(props) {
         document.documentElement.style.setProperty("--color-leftPanel", colorLeftPanel);
         document.documentElement.style.setProperty("--color-card", colorCard);
     }
+
     function defineColor(quarter) {
         if (quarter === "quarter1") {
             setColorProperty("#c89034", "linear-gradient(0deg, rgba(200, 144, 52, 1) 0%, rgba(213, 178, 121, 1) 67%", "#f2e3d7", "#fff5ed");
@@ -634,11 +617,43 @@ function MainPage(props) {
         }
     }
 
+    useEffect(() => {
+        // axios.get('/main')
+        //   .then((payload) => {
+        // setStudentPresident({...payload["sclData"]["studentPresident"]});
+        // setQuarterStatus({...payload["sclData"]["quarterStatus"]});
+        // setQuarter({...payload["sclData"]["quarter"]});
+        //   })
+        //   .catch((error) => {
+        //     alert("학과 장부를 불러올 수 없습니다.");
+        //   })
+        reset();
+    }, []);
+
+    useEffect(() => {
+        reset();
+    }, [currentQuarter]);
+
+    useEffect(() => {
+        // // console.log(document.getElementById("leftPanel")[0].style.position);
+        // if (editProfileState) {
+        //     document.getElementsByClassName("leftPanel")[0].setProperty("position", "none");
+        // } else {
+
+        // }
+    }, [editProfileState])
+
+
     return (
         <div className="MainPageContainer">
-
-            <EditProfile></EditProfile>
-            <div className="leftPanel">
+            {
+                editProfileState
+                    ?
+                    // <EditProfile loginPosition={props.loginPosition} setEditProfileState={setEditProfileState}></EditProfile>
+                    <EditProfile loginPosition={"student"} setEditProfileState={setEditProfileState}></EditProfile>
+                    : null
+            }
+            <div className="leftPanel" id='leftPanel'>
                 <div className="majorCard">
                     <div className="presidentCard">
                         <h2>{studentPresident["major"]}</h2>
@@ -655,10 +670,10 @@ function MainPage(props) {
                     </div>
                 </div>
                 <div className="quarter">
-                    <img src={quarter1} alt="quarter1" onClick={() => { showQuarter("quarter1") }} />
-                    <img src={quarter2} alt="quarter2" onClick={() => { showQuarter("quarter2") }} />
-                    <img src={quarter3} alt="quarter3" onClick={() => { showQuarter("quarter3") }} />
-                    <img src={quarter4} alt="quarter4" onClick={() => { showQuarter("quarter4") }} />
+                    <div className="quarterButton" onClick={() => { showQuarter("quarter1") }}><div>1분기</div><img src={quarter1} alt="quarter1" ></img></div>
+                    <div className="quarterButton" onClick={() => { showQuarter("quarter2") }}><div>2분기</div><img src={quarter2} alt="quarter2" ></img></div>
+                    <div className="quarterButton" onClick={() => { showQuarter("quarter3") }}><div>3분기</div><img src={quarter3} alt="quarter3" ></img></div>
+                    <div className="quarterButton" onClick={() => { showQuarter("quarter4") }}><div>4분기</div><img src={quarter4} alt="quarter4" ></img></div>
                 </div>
                 <div className="managementPageBar">
                     <i className="fas fa-chevron-right"></i>
@@ -666,6 +681,8 @@ function MainPage(props) {
             </div>
 
             <div className="rightPanel">
+
+
                 <div className="nav">
                     <div className="buttons">
                         {
@@ -673,7 +690,7 @@ function MainPage(props) {
                                 ? <button className='submitButton' onClick={() => { pksclSubmitButton(); }}> 장부 수정 완료</button>
                                 : null
                         }
-                        <button className='submitButton'>프로필 편집</button>
+                        <button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
                         <button className='submitButton'>로그아웃</button>
                     </div>
                 </div>

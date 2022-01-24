@@ -1,0 +1,119 @@
+.errorContainer {
+    /* position: absolute; */
+    display: flex;
+    height: 100%;
+    width: 100%;
+    z-index: 19;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    top: 25%;
+    left: 0;
+   
+}
+
+.errorBox {
+    background-color: white;
+    width: 600px;
+    z-index: 20;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    display: flex;
+    border-radius: 20px;
+    padding: 20px;
+    
+}
+
+.errorBox i {
+    color: var(--color-quarter);
+    font-size: 50px;
+    margin-right: 15px;
+}
+
+
+
+.editField{
+    border: 7px solid var(--color-quarter);
+    border-radius: 20px;
+    color: black;
+    width: 80%;
+    padding: 20px;
+    /* height: 500px; */
+    align-items: center;
+    text-align: center;
+    
+}
+
+.inputField {
+    background-color: #e4e4e4;
+    padding: 5px;
+    border-radius: 20px;
+    display: flex;
+    margin-bottom: 10px;
+
+}
+
+.inputField i{
+    font-size: 1.1rem;
+    color:gray;
+    margin-right: 12px;
+    margin-left: 12px;
+    
+
+}
+
+.inputField label{
+    margin-right: 10px;
+    width: 60px;
+    text-align: left;
+}
+
+.inputField button,
+.fileButton{
+    display: flex;
+    border-radius: 20px;
+    background-color: white;
+    justify-content: space-around;
+    box-shadow: 1px 1px 5px 0px grey;
+    align-items: flex-end;
+    cursor: pointer;
+}
+
+.inputField input{
+    background-color: #e4e4e4;
+    border: none;
+    text-align: center;
+    border-radius: 0px;  
+    width: 70%;
+}
+
+input:required {
+    outline: red;
+}
+
+.errorBtn {
+    width: 150px;
+    background-color: var(--color-quarter);
+    border: none;
+    outline: none;
+    height: 49px;
+    border-radius: 49px;
+    color: var(--color-white);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 15px 15px 0 15px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.black-bg {
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  position: fixed; 
+  z-index: 22;
+  align-items: center;
+}
+
+
