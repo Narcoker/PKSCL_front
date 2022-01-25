@@ -8,14 +8,16 @@ function EditProfile(props) {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
     const [certFile, setCertFile] = useState("");
-    const [logo, setLogo] = useState("");
+    const [majorLogo, setmajorLogo] = useState("");
     const [isCorrect, setIsCorrect] = useState(
         {
             stdID: false,
             major: false,
             name: false,
             phoneNumber: false,
-            email: false
+            email: false,
+            certFile: false,
+            majorLogo: false
         }
     );
 
@@ -41,20 +43,20 @@ function EditProfile(props) {
 
     useEffect(() => {
         if (props.loginPosition === "president") {
-            if (isCorrect.stdID && isCorrect.name && isCorrect.phoneNumber) {
+            if (isCorrect.stdID && isCorrect.name && isCorrect.phoneNumber && isCorrect.majorLogo) {
                 setEditButtonState(true);
             } else {
                 setEditButtonState(false);
             }
-            console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.phoneNumber: " + isCorrect.phoneNumber);
+            console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.phoneNumber: " + isCorrect.phoneNumber + "  isCorrect.majorLogo: " + isCorrect.majorLogo);
         } else if (props.loginPosition === "student") {
-            if (isCorrect.stdID && isCorrect.name && isCorrect.major) {
+            if (isCorrect.stdID && isCorrect.name && isCorrect.major && isCorrect.certFile) {
                 setEditButtonState(true);
             } else {
                 setEditButtonState(false);
                 console.log(major);
             }
-            console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.major: " + isCorrect.major);
+            console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.major: " + isCorrect.major + "isCorrect.certFile: " + isCorrect.certFile);
         }
 
     }, [isCorrect])
@@ -66,54 +68,32 @@ function EditProfile(props) {
         setName("홍길동");
         setPhoneNumber("010-0000-0000");
         setEmail("userID@pukyong.ac.kr");
-
-
-
         console.log(props.loginPosition);
+
         //get 요청해서 로그인된 정보 가져오기
-        if (props.loginPosition === "prsident") {
-            axios.get('/profile/student_president') //url 수정하기
-                .then((payload) => {
-                    switch (payload.status) {
-                        case 200:
-                            setStdID(...payload.data.stdID);
-                            setMajor(...payload.data.major);
-                            setName(...payload.data.name);
+        axios.get('/profile')
+            .then((payload) => {
+                switch (payload.status) {
+                    case 200:
+                        setStdID(...payload.data.stdID);
+                        setMajor(...payload.data.major);
+                        setName(...payload.data.name);
+                        setEmail(...payload.data.email);
+
+                        if (props.loginPosition === "prsident") {
                             setPhoneNumber(...payload.data.phoneNumber);
-                            setEmail(...payload.data.email);
-                            return;
-                    }
+                        }
+                        return;
+                }
 
-                })
-                .catch((error) => {
-                    switch (error.response.status) {
-                        case 400: console.log("정보를 로드하는데 실패했습니다."); return;
-                        default: console.log("error: " + error.response.status); return;
-                    }
+            })
+            .catch((error) => {
+                switch (error.response.status) {
+                    case 400: console.log("정보를 로드하는데 실패했습니다."); return;
+                    default: console.log("error: " + error.response.status); return;
+                }
 
-                })
-        } else if (props.loginPosition === "student") {
-            axios.get('/profile/student')
-                .then((payload) => {
-                    switch (payload.status) {
-                        case 200:
-                            setStdID(...payload.data.stdID);
-                            setMajor(...payload.data.major);
-                            setName(...payload.data.name);
-                            setEmail(...payload.data.email);
-                            return;
-                    }
-
-                })
-                .catch((error) => {
-                    switch (error.response.status) {
-                        case 400: alert("정보를 로드하는데 실패했습니다."); return;
-                        default: console.log("error: " + error.response.status); return;
-                    }
-
-                })
-
-        }
+            })
         //get 요청해서 학과리스트 가져오기
         axios.get('/major-list')
             .then((payload) => {
@@ -135,7 +115,6 @@ function EditProfile(props) {
             setPhoneNumber(phoneNumber.replace(/-/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
         }
     }, [phoneNumber]);
-
 
     return (
         <div className='black-bg'>
@@ -281,25 +260,9 @@ function EditProfile(props) {
                                             // }
 
                                         }}></input>
-
-
-
-
                                 </div>
                         }
-
-
-
-
-
-
-
-
                     </div>
-
-
-
-
 
                     <div className="errorBtns">
                         <button className="errorBtn" type="button" onClick={() => { editButtonState ? alert("전송") : alert("실패") }}>저장하기</button>
