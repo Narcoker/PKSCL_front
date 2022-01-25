@@ -8,7 +8,7 @@ function EditProfile(props) {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
     const [certFile, setCertFile] = useState("");
-    const [majorLogo, setmajorLogo] = useState("");
+    const [majorLogo, setMajorLogo] = useState("");
     const [isCorrect, setIsCorrect] = useState(
         {
             stdID: false,
@@ -35,6 +35,8 @@ function EditProfile(props) {
         else if (key === "name") temp.name = type;
         else if (key === "phoneNumber") temp.phoneNumber = type;
         else if (key === "email") temp.email = type;
+        else if (key === "certFile") temp.certFile = type;
+        else if (key === "majorLogo") temp.majorLogo = type;
         else console.log("function changeIsCorrect() error ");
 
         setIsCorrect(temp);
@@ -54,9 +56,8 @@ function EditProfile(props) {
                 setEditButtonState(true);
             } else {
                 setEditButtonState(false);
-                console.log(major);
             }
-            console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.major: " + isCorrect.major + "isCorrect.certFile: " + isCorrect.certFile);
+            console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.major: " + isCorrect.major + " isCorrect.certFile: " + isCorrect.certFile);
         }
 
     }, [isCorrect])
@@ -64,11 +65,12 @@ function EditProfile(props) {
     useEffect(() => {
         //debug
         setStdID("123456789");
-        setMajor("컴퓨터공학과");
+        setMajor("0");
         setName("홍길동");
         setPhoneNumber("010-0000-0000");
         setEmail("userID@pukyong.ac.kr");
-        console.log(props.loginPosition);
+        setCertFile({ name: "학생증.jpg" })
+        setMajorLogo({ name: "학과로고.jpg" })
 
         //get 요청해서 로그인된 정보 가져오기
         axios.get('/profile')
@@ -82,6 +84,9 @@ function EditProfile(props) {
 
                         if (props.loginPosition === "prsident") {
                             setPhoneNumber(...payload.data.phoneNumber);
+                            setMajorLogo(...payload.data.majorLogo)
+                        } else if (props.loginPosition === "student") {
+                            setCertFile(...payload.data.certFile);
                         }
                         return;
                 }
@@ -105,6 +110,8 @@ function EditProfile(props) {
                     default: console.log("error: " + error.response.status); return;
                 }
             })
+
+
     }, [])
 
     useEffect(() => {
@@ -126,7 +133,7 @@ function EditProfile(props) {
                             <i className="fas fa-key"></i>
                             <label>비밀번호</label>
                             <empty style={{ width: "200px" }}></empty>
-                            <button type='button'>변경하기</button>
+                            <button type='button'>변경</button>
                         </div>
 
                         <div className="inputField">
@@ -155,9 +162,11 @@ function EditProfile(props) {
                                     :
                                     <>
 
-                                        <input type="text" list="majorList-options" id='major' name="major" placeholder="학과를 입력하세요."
+                                        <input type="text" list="majorList-options" id='major' name="major" placeholder={majorList[major]}
+                                            style={{ textColor: "black" }}
                                             onChange={(e) => {
                                                 setMajor(majorList.indexOf(e.target.value) + 1);
+
                                                 if (majorList.includes(e.target.value)) {
                                                     changeIsCorrect("major", true);
                                                 } else {
@@ -230,15 +239,15 @@ function EditProfile(props) {
                                     <i className="fas fa-key"></i>
                                     <label>학과로고</label>
                                     {/* <empty style={{ width: "200px" }}></empty> */}
-                                    <input className='uploadName' placeholder='학생증을 첨부해주세요' value={certFile.name} readOnly />
-                                    <label htmlFor="certFile">찾기</label>
-                                    <input type="file" id='certFile' name="certFile" accept='image/*'
+                                    <input className='uploadName' placeholder='학과로고를 첨부해주세요' value={majorLogo.name} readOnly />
+                                    <label htmlFor="majorLogo">찾기</label>
+                                    <input type="file" id='majorLogo' name="majorLogo" accept='image/*'
                                         onChange={(e) => {
-                                            setCertFile(e.target.files[0]);
+                                            majorLogo(e.target.files[0]);
                                             if (e.target.value === "") {
-                                                changeIsCorrect(7, false);
+                                                changeIsCorrect("majorLogo", false);
                                             } else {
-                                                changeIsCorrect(7, true);
+                                                changeIsCorrect("majorLogo", true);
                                             }
                                         }} />
                                     <button type='button'>변경하기</button>
@@ -251,13 +260,12 @@ function EditProfile(props) {
                                     <label className='fileButton' htmlFor="file">찾기</label>
                                     <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
                                         onChange={(e) => {
-                                            console.log(e.target.files[0]);
                                             setCertFile(e.target.files[0]);
-                                            // if (e.target.value === "") {
-                                            //     changeIsCorrect(7, false);
-                                            // } else {
-                                            //     changeIsCorrect(7, true);
-                                            // }
+                                            if (e.target.value === "") {
+                                                changeIsCorrect("certFile", false);
+                                            } else {
+                                                changeIsCorrect("certFile", true);
+                                            }
 
                                         }}></input>
                                 </div>
