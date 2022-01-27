@@ -539,7 +539,6 @@ function MainPage(props) {
     }
 
     function reset() {
-        // console.log(quarter[currentQuarter]["eventList"])
         CalculateCurrentQuarterReceiptSumList(quarter[currentQuarter]["eventList"]);
         resetShowAllReceiptButton();
     }
@@ -650,7 +649,17 @@ function MainPage(props) {
                         })
                     }
                 </datalist>
-                <button style={{ boxShadow: "0 0 0 white" }} onClick={() => { console.log(major) }}><i className="fas fa-search"></i></button>
+                <button style={{ boxShadow: "0 0 0 white" }} onClick={() => {
+                    axios.get(`/main/${major}`)
+                        .then((payload) => {
+                            setStudentPresident({ ...payload.data["sclData"]["studentPresident"] });
+                            setQuarterStatus({ ...payload.data["sclData"]["quarterStatus"] });
+                            setQuarter({ ...payload.data["sclData"]["quarter"] });
+                        })
+                        .catch((error) => {
+                            alert("학과리스트를 불러올 수 없습니다.");
+                        })
+                }}><i className="fas fa-search"></i></button>
             </div>
         </>
         )
@@ -666,13 +675,15 @@ function MainPage(props) {
             .catch((error) => {
                 alert("학과 장부를 불러올 수 없습니다.");
             })
-        axios.get('/major-list')
-            .then((payload) => {
-                setMajorList([...payload.data.majorList]);
-            })
-            .catch((error) => {
-                alert("학과리스트를 불러올 수 없습니다.");
-            })
+        if (props.loginPosition === "admin") {
+            axios.get('/major-list')
+                .then((payload) => {
+                    setMajorList([...payload.data.majorList]);
+                })
+                .catch((error) => {
+                    alert("학과리스트를 불러올 수 없습니다.");
+                })
+        }
         reset();
     }, []);
 
@@ -725,13 +736,12 @@ function MainPage(props) {
                     props.loginPosition === "student"
                         ? null
                         : (<div className="managementPageBar">
-                            <i className="fas fa-chevron-right" onClick={() => { history.push('/manage') }}></i>
+                            <i className="fas fa-chevron-right" onClick={() => { defineColor(props.todayQuarter); history.push('/manage') }}></i>
                         </div>)
                 }
             </div>
 
             <div className="rightPanel">
-
 
                 <div className="nav">
                     <div className="buttons">
