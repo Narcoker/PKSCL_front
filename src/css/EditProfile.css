@@ -32,7 +32,12 @@
     margin-right: 15px;
 }
 
-
+.boxTitle{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
 
 .editField{
     border: 7px solid var(--color-quarter);
@@ -59,8 +64,11 @@
     color:gray;
     margin-right: 12px;
     margin-left: 12px;
-    
 
+}
+
+.inputField [type=password]{
+    font-family: 'Malgun gothic', dotum, sans-serif;
 }
 
 .inputField label{
