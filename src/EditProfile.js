@@ -23,6 +23,8 @@ function EditProfile(props) {
             majorLogo: false,
             inputEmail: false,
             inputPassword: false,
+            inputNewPassword: false,
+            inputCheckNewPassword: false,
         }
     );
 
@@ -36,6 +38,12 @@ function EditProfile(props) {
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
 
+    const [inputNewPassword, setInputNewPassword] = useState("");
+    const [inputCheckNewPassword, setInputCheckNewPassword] = useState("");
+
+    const [newPasswordButton, setNewPasswordButton] = useState(false);
+
+
     function changeIsCorrect(key, type) {
         var temp = { ...isCorrect };
         if (key === "stdID") temp.stdID = type;
@@ -47,6 +55,8 @@ function EditProfile(props) {
         else if (key === "majorLogo") temp.majorLogo = type;
         else if (key === "inputEmail") temp.inputEmail = type;
         else if (key === "inputPassword") temp.inputPassword = type;
+        else if (key === "inputNewPassword") temp.inputNewPassword = type;
+        else if (key === "inputCheckNewPassword") temp.inputCheckNewPassword = type;
         else console.log("function changeIsCorrect() error ");
 
         setIsCorrect(temp);
@@ -86,9 +96,30 @@ function EditProfile(props) {
         }
     }
 
+    function newPassword() {
+        const payload = { "inputPassword": inputPassword, "inputNewPassword": inputNewPassword, "inputCheckNewPassword": inputCheckNewPassword }
+        axios.patch('/password', payload)
+            .then((payload) => {
+                switch (payload.status) {
+                    case 200:
+                        alert("비밀번호가 수정되었습니다.");
+                        setBoxState("profile");
+                        break;
+                    default:
+                        alert(payload.status);
+                }
+
+            })
+            .catch((error) => {
+                alert(error.response.status); // 수정필요
+            })
+    }
+
     function reset() {
         setInputEmail("");
         setInputPassword("");
+        setInputNewPassword("");
+        setInputCheckNewPassword("");
     }
 
     useEffect(() => {
@@ -106,6 +137,16 @@ function EditProfile(props) {
                 setEditButtonState(false);
             }
             console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.major: " + isCorrect.major + " isCorrect.certFile: " + isCorrect.certFile);
+        }
+
+        if (isCorrect.inputPassword && isCorrect.inputNewPassword && isCorrect.inputCheckNewPassword) {
+            if (inputNewPassword === inputCheckNewPassword)
+                setNewPasswordButton(true);
+            else {
+                setNewPasswordButton(false);
+            }
+        } else {
+            setNewPasswordButton(false);
         }
 
     }, [isCorrect])
@@ -131,6 +172,8 @@ function EditProfile(props) {
                 majorLogo: true,
                 inputEmail: false,
                 inputPassword: false,
+                inputNewPassword: false,
+                inputCheckNewPassword: false
             }
         );
 
@@ -161,6 +204,8 @@ function EditProfile(props) {
                                     majorLogo: true,
                                     inputEmail: false,
                                     inputPassword: false,
+                                    inputNewPassword: false,
+                                    inputCheckNewPassword: false,
                                 }
                             );
                         } else if (props.loginPosition === "student") {
@@ -176,6 +221,8 @@ function EditProfile(props) {
                                     majorLogo: false,
                                     inputEmail: false,
                                     inputPassword: false,
+                                    inputNewPassword: false,
+                                    inputCheckNewPassword: false,
                                 }
                             );
                         }
@@ -232,7 +279,7 @@ function EditProfile(props) {
                                         <i className="fas fa-key"></i>
                                         <label>비밀번호</label>
                                         <empty style={{ width: "200px" }}></empty>
-                                        <button type='button'>변경</button>
+                                        <button type='button' onClick={() => { setBoxState("newPassword") }}>변경</button>
                                     </div>
 
                                     <div className="inputField">
@@ -375,7 +422,7 @@ function EditProfile(props) {
                                     <button className="errorBtn" type="button" onClick={() => {
                                         editButtonState ? alert("전송") : console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.phoneNumber: " + isCorrect.phoneNumber + "  isCorrect.majorLogo: " + isCorrect.majorLogo);
                                     }}>저장하기</button>
-                                    <button className="errorBtn" type="button" onClick={() => { props.setEditProfileState(false); reset(); }}>취소</button>
+                                    <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { props.setEditProfileState(false); reset(); }}>취소</button>
 
                                 </div>
                             </>
@@ -423,7 +470,70 @@ function EditProfile(props) {
                                     </div>
                                 </>
                                 : boxState === "newPassword"
-                                    ? null
+                                    ? <>
+                                        <div className='boxTitle' >
+                                            <h2 ><i className="fas fa-users" />비밀번호 변경</h2>
+                                        </div>
+
+                                        <div className='editField' >
+                                            <div className="inputField">
+                                                <i className="fas fa-key"></i>
+                                                <label style={{ width: "80px" }}>비밀번호</label>
+                                                {/* <empty style={{ width: "200px" }}></empty> */}
+                                                <input type="password" onChange={(e) => {
+                                                    setInputPassword(e.target.value)
+                                                    if (e.target.value === "") {
+                                                        changeIsCorrect("inputPassword", false);
+                                                    } else {
+                                                        changeIsCorrect("inputPassword", true);
+                                                    }
+                                                }} value={inputPassword} placeholder='현재 비밀번호를 입력하세요.' />
+                                            </div>
+
+                                            <div className="inputField">
+                                                <i className="fas fa-key"></i>
+                                                <label style={{ width: "80px" }}>새 비밀번호</label>
+                                                {/* <empty style={{ width: "200px" }}></empty> */}
+                                                <input type="password" onChange={(e) => {
+                                                    setInputNewPassword(e.target.value)
+                                                    if (e.target.value === "") {
+                                                        changeIsCorrect("inputNewPassword", false);
+                                                    } else {
+                                                        changeIsCorrect("inputNewPassword", true);
+                                                    }
+                                                }} value={inputNewPassword} placeholder='새 비밀번호를 입력하세요.' />
+                                            </div>
+
+                                            <div className="inputField">
+                                                <i className="fas fa-key"></i>
+                                                <label style={{ width: "80px" }} >새 비밀번호 확인</label>
+                                                {/* <empty style={{ width: "200px" }}></empty> */}
+                                                <input type="password" onChange={(e) => {
+                                                    setInputCheckNewPassword(e.target.value)
+                                                    if (e.target.value === "") {
+                                                        changeIsCorrect("inputCheckNewPassword", false);
+                                                    } else {
+                                                        changeIsCorrect("inputCheckNewPassword", true);
+                                                    }
+                                                }} value={inputCheckNewPassword} placeholder='새 비밀번호를 다시 입력하세요.' />
+                                            </div>
+                                        </div>
+
+                                        <div className="errorBtns">
+                                            {
+                                                newPasswordButton
+                                                    ?
+                                                    <button className="errorBtn" type="button" onClick={() => { newPassword(); }}>변경</button>
+                                                    :
+                                                    <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }}
+                                                        onClick={() => { console.log(isCorrect.inputPassword + " " + isCorrect.inputNewPassword + " " + isCorrect.inputCheckNewPassword); }}>변경</button>
+
+                                            }
+
+                                            <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { setBoxState("profile"); reset(); }}>취소</button>
+
+                                        </div>
+                                    </>
                                     : null
                     }
 
