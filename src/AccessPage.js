@@ -1,3 +1,4 @@
+//복사잘된거임
 import { useState, useEffect } from 'react';
 import log from './img/log.svg';
 import { Nav } from 'react-bootstrap';
@@ -96,7 +97,6 @@ function AccessPage(props) {
     setPersonalInformationButton(false);
     setPersonalInformation([false, false, false]);
 
-
     document.querySelectorAll(".InfoCheckedList").forEach(function (v) { v.checked = false });
 
     if (document.getElementById("major") !== null) {
@@ -132,6 +132,7 @@ function AccessPage(props) {
           switch (payload.status) {
             case 200:
               if (window.confirm("회원가입에 성공하였습니다.")) {
+                reset();
                 history.push('/');
               }
               else {
@@ -161,17 +162,12 @@ function AccessPage(props) {
     }
     else {
       let payload = { "email": email, "password": password };
-      // debugger;
+      console.log("sdsd")
+      console.log(position)
       axios.post('/login/' + position, payload)
         .then((payload) => {
           props.setLoginPosition(position);
-          if (position === "student") {
-            history.push('/main');
-          }
-          else if (position === "president") {
-            history.push('/manage');
-          }
-
+          history.push('/main');
         })
         .catch((error) => {
           alert("로그인에 실패했습니다 :)")
@@ -198,7 +194,6 @@ function AccessPage(props) {
           else {
             history.push('/newpwd');
           }
-
         })
         .catch((error) => {
           console.log(error);
@@ -241,13 +236,13 @@ function AccessPage(props) {
 
       <div className="left-panel">
         <div className="content">
-          <button type="button" style={{ boxShadow: "0 0 0 0 white", fontFamily: 'YUniverse-B' }} onClick={() => { reset(); history.push('/') }}><h3>PKNU 온라인 장부</h3></button>
+          <button type="button" style={{ boxShadow: "0 0 0 0 white", fontFamily: 'YUniverse-B' }} onClick={() => { setPosition("student"); reset(); history.push('/') }}><h3>PKNU 온라인 장부</h3></button>
           <p>
             우리 학과의 장부를 분기 별로 확인할 수 있습니다.
           </p>
         </div>
         <img src={log} className="image" alt="" />
-        <button type="button" onClick={() => { history.push('/giraffe-admin') }} style={{ height: "10px", width: "20px", backgroundColor: "red" }}></button>
+        <button type="button" onClick={() => { setPosition("admin"); reset(); history.push('/giraffe-admin') }} style={{ height: "10px", width: "20px", backgroundColor: "red" }}></button>
       </div>
       <Switch>
         <Route exact path="/signUp">
@@ -658,6 +653,12 @@ function AccessPage(props) {
         </Route >
 
         <Route exact path="/giraffe-admin">
+          {
+            console.log("ko")
+          }
+          {
+            console.log(position)
+          }
           <div className="right-panel">
             <form className="userForm">
               <h3 className="accessTitle" ><img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />관리자 로그인</h3>
@@ -671,11 +672,11 @@ function AccessPage(props) {
               </div>
 
               <div className="submitbox" >
-                <button type="button" onClick={() => { setPosition(position => "admin"); login(); }} value="Login" className="SignInBtn">로그인</button>
+                <button type="button" onClick={() => { setPosition("admin"); login(); }} value="Login" className="SignInBtn">로그인</button>
               </div>
             </form>
             <div className='moveSignPage'>
-              <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/') }}>메인페이지</button>
+              <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { setPosition("student"); reset(); history.push('/') }}>메인페이지</button>
             </div>
           </div>
         </Route>
