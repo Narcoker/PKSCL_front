@@ -7,13 +7,15 @@ import receiptImg from './img/receipt.png';
 import EditProfile from './EditProfile';
 import './css/MainPage.css';
 import './css/EditProfile.css'
-import { useEffect, useState, } from 'react';
-import { Link, Route, Switch, useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 
 function MainPage(props) {
+
     const history = useHistory();
+
     const [studentPresident, setStudentPresident] = useState({
         "major": "컴퓨터공학과",
         "name": "홍길동",
@@ -686,7 +688,7 @@ function MainPage(props) {
                     <div className="quarterButton" onClick={() => { showQuarter("quarter4") }}><div>4분기</div><img src={quarter4} alt="quarter4" ></img></div>
                 </div>
                 <div className="managementPageBar">
-                    <i className="fas fa-chevron-right"></i>
+                    <i className="fas fa-chevron-right" onClick={() => { history.push('/manage') }}></i>
                 </div>
             </div>
 
@@ -822,17 +824,6 @@ function MainPage(props) {
 
                                     </div>
                                     <div className="cardImg">
-
-
-                                        {/* <div className = "pagenation">
-                                        <button><i className="fas fa-chevron-left"></i></button>
-                                            <button className= "pagenationItem">{4}</button>
-                                            <button className= "pagenationItem">{5}</button>
-                                            <button className= "pagenationItem" style={{color : "black"}}>{6}</button>
-                                            <button className= "pagenationItem">{7}</button>
-                                            <button className= "pagenationItem">{8}</button>
-                                        <button><i className="fas fa-chevron-right"></i></button>
-                                    </div> */}
                                     </div>
                                 </div>
                             )

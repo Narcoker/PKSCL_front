@@ -86,18 +86,19 @@ function EditProfile(props) {
 
                         if (props.loginPosition === "prsident") {
                             setPhoneNumber(...payload.data.phoneNumber);
-                            setMajorLogo(...payload.data.majorLogo)
+                            setMajorLogo(...payload.data.majorLogo);
                         } else if (props.loginPosition === "student") {
                             setCertFile(...payload.data.certFile);
                         }
-                        return;
+                        break;
+                    default: break;
                 }
 
             })
             .catch((error) => {
                 switch (error.response.status) {
-                    case 400: console.log("정보를 로드하는데 실패했습니다."); return;
-                    default: console.log("error: " + error.response.status); return;
+                    case 400: console.log("정보를 로드하는데 실패했습니다."); break;
+                    default: console.log("error: " + error.response.status); break;
                 }
 
             })
