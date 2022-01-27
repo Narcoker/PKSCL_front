@@ -3,150 +3,13 @@ import { Navbar, Container } from 'react-bootstrap';
 import './css/ManagementPage.css';
 import axios from 'axios';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
+import CertFile from './CertFile';
 
 function ManagementPage(props) {
     const history = useHistory();
-    const [waiting, setWaiting] = useState([
-        {
-            "stdID": "11111",
-            "name": "이름",
-            "email": "1@gmail.com",
-            "studentImgPath": "20220121010016994.png"
-        },
-        {
-            "stdID": "31321312",
-            "name": "이름",
-            "email": "2@gmail.com",
-            "studentImgPath": "20220121010016994.png"
-        },
-        {
-            "stdID": "123442",
-            "name": "이름",
-            "email": "3@gmail.com",
-            "studentImgPath": "20220121010016994.png"
-        },
-        {
-            "stdID": "32442423",
-            "name": "이름",
-            "email": "4@gmail.com",
-            "studentImgPath": "20220121010016994.png"
-        },
-        {
-            "stdID": "123442",
-            "name": "이름",
-            "email": "5@gmail.com",
-            "studentImgPath": "20220121010016994.png"
-        },
-        {
-            "stdID": "123442",
-            "name": "이름",
-            "email": "6@gmail.com",
-            "studentImgPath": "20220121010016994.png"
-        },
-        {
-            "stdID": "32423423",
-            "name": "이름",
-            "email": "7@gmail.com",
-            "studentImgPath": "20220121010016994.png"
-        },
-        {
-            "stdID": "123442",
-            "name": "이름",
-            "email": "8@gmail.com",
-            "studentImgPath": "20220121010016994.png"
-        }
-    ]);
+    const [waiting, setWaiting] = useState([{ "stdId": "201715555", "name": "문지환", "email": "4567@naver.com", "studentImgPath": "zxc/asd4.png" }, { "stdId": "201716666", "name": "김명준", "email": "5678@naver.com", "studentImgPath": "zxc/asd5.png" }, { "stdId": "201717715", "name": "김민수", "email": "6767@naver.com", "studentImgPath": "zxc/asd11.png" }, { "stdId": "201717723", "name": "김민수", "email": "6789@naver.com", "studentImgPath": "zxc/asd6.png" }]);
     const [refusal, setRefusal] = useState([]);
-    const [approval, setApproval] = useState([{
-        "stdID": "123442",
-        "name": "이름",
-        "email": "11@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "32423423",
-        "name": "이름",
-        "email": "12@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "32423423",
-        "name": "이름",
-        "email": "13@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "14@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "15@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "16@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "17@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "18@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "19@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "20@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "21@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "22@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "23@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "24@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    },
-    {
-        "stdID": "123442",
-        "name": "이름",
-        "email": "25@gmail.com",
-        "studentImgPath": "20220121010016994.png"
-    }]);
+    const [approval, setApproval] = useState([]);
 
     const [leftTable, setLeftTable] = useState([...waiting]);
     const [rightTable, setRightTable] = useState([...approval]);
@@ -187,49 +50,30 @@ function ManagementPage(props) {
         if (props.loginPosition === "president") {
             axios.patch('/student-list', payload)
                 .then((payload) => {
-                    console.log("then시작");
-                    console.log(payload);
-
-                    setWaiting([...payload.data["waiting"]]);
-                    console.log("setWaiting");
-                    console.log(waiting);
-
-                    setRefusal([...payload.data["refusal"]]);
-                    console.log("setRefusal");
-                    console.log(refusal);
-
-                    setApproval([...payload.data["approval"]]);
-                    console.log("setApproval");
-                    console.log(approval);
-
-                    setLeftTable([...payload.data["waiting"]]);
-                    console.log("setLeftTable");
-                    console.log(leftTable);
-
-                    setRightTable([...payload.data["approval"]]);
-                    console.log("setRightTable");
-                    console.log(rightTable);
+                    getList();
                 })
                 .catch((error) => {
+                    getList();
                     alert("학생 전송에 실패했습니다 :)")
                 });
         } else if (props.loginPosition === "admin") {
             axios.patch('/president-list', payload)
                 .then((payload) => {
-                    setWaiting([...payload.data["waiting"]]);
-                    setRefusal([...payload.data["refusal"]]);
-                    setApproval([...payload.data["approval"]]);
-                    setLeftTable([...payload.data["waiting"]]);
-                    setRightTable([...payload.data["approval"]]);
+                    getList();
                 })
                 .catch((error) => {
-                    alert("학생 전송에 실패했습니다 :)")
+                    getList();
+                    alert("학과 전송에 실패했습니다 :)")
                 });
         }
     }
 
 
     useEffect(() => {
+        getList();
+    }, []);
+
+    function getList() {
         if (props.loginPosition === "president") {
             axios.get('/student-list')
                 .then((payload) => {
@@ -241,7 +85,7 @@ function ManagementPage(props) {
                     setRightTable([...payload.data["approval"]]);
                 })
                 .catch((error) => {
-                    alert("학과리스트를 불러올 수 없습니다.");
+                    alert("학생리스트를 불러올 수 없습니다.");
                 });
         } else if (props.loginPosition === "admin") {
             axios.get('/president-list')
@@ -257,17 +101,15 @@ function ManagementPage(props) {
                     alert("학과리스트를 불러올 수 없습니다.");
                 });
         }
-    }, []);
-
-
+    }
 
     return (
         <div className="ManagementPageContainer">
-            {/* {
+            {
                 certFile === true
-                ?<CertFile></CertFile>
-                : null
-            } */}
+                    ? <CertFile></CertFile>
+                    : null
+            }
             <div className="pageContainer">
                 <Navbar expand="lg" style={{ padding: "30px 0" }}>
                     <Container fluid style={{ justifyContent: "center", backgroundColor: "none" }}>
