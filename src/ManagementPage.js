@@ -194,6 +194,7 @@ function ManagementPage(props) {
                     setApproval([...payload.data["studentPresidentList"]["approval"]]);
                 })
                 .catch((error) => {
+                    console.log(error.response.status);
                     alert("학생 전송에 실패했습니다 :)")
                 });
         } else if (props.loginPosition === "admin") {

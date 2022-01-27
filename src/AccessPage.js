@@ -141,9 +141,9 @@ function AccessPage(props) {
           }
         })
         .catch((error) => {
-          switch (error.status) {
+          switch (error.response.status) {
             case 400: alert("이미 존재하는 회장ID(이메일)입니다."); return;
-            default: alert("error: " + error.status); return;
+            default: alert("error: " + error.response.status); return;
           }
         })
     }
@@ -174,10 +174,10 @@ function AccessPage(props) {
             history.push('/manage');
 
           }
-
         })
         .catch((error) => {
           alert("로그인에 실패했습니다 :)")
+          console.log(error.response.status);
 
         });
 
@@ -204,7 +204,7 @@ function AccessPage(props) {
 
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response.status);
           alert("입력하신 정보를 찾을 수 없습니다.");
 
         });
@@ -218,9 +218,10 @@ function AccessPage(props) {
       .then((payload) => {
         alert("입력하신 이메일로 메일을 발송했습니다.");
       })
-      .catch((payload) => {
+      .catch((error) => {
         console.log(payload);
-        alert(payload.data.errorMessage);
+        console.log(error.response.status);
+        alert(error.response.status);
       });
   };
 
