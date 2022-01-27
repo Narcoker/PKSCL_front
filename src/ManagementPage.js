@@ -187,28 +187,8 @@ function ManagementPage(props) {
         if (props.loginPosition === "president") {
             axios.patch('/student-list', payload)
                 .then((payload) => {
-                    console.log("then시작");
-                    console.log(payload);
-
-                    setWaiting([...payload.data["waiting"]]);
-                    console.log("setWaiting");
-                    console.log(waiting);
-
-                    setRefusal([...payload.data["refusal"]]);
-                    console.log("setRefusal");
-                    console.log(refusal);
-
-                    setApproval([...payload.data["approval"]]);
-                    console.log("setApproval");
-                    console.log(approval);
-
-                    setLeftTable([...payload.data["waiting"]]);
-                    console.log("setLeftTable");
-                    console.log(leftTable);
-
-                    setRightTable([...payload.data["approval"]]);
-                    console.log("setRightTable");
-                    console.log(rightTable);
+                    alert("요청을 처리했습니다.");
+                    location.reload();
                 })
                 .catch((error) => {
                     alert("학생 전송에 실패했습니다 :)")
