@@ -7,12 +7,13 @@ import receiptImg from './img/receipt.png';
 import EditProfile from './EditProfile';
 import './css/MainPage.css';
 import './css/EditProfile.css'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, } from 'react';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
 function MainPage(props) {
-
+    const history = useHistory();
     const [studentPresident, setStudentPresident] = useState({
         "major": "컴퓨터공학과",
         "name": "홍길동",
@@ -617,6 +618,15 @@ function MainPage(props) {
         }
     }
 
+    function logout() {
+        axios.post('/logout')
+            .then((payload) => {
+                history.push('/');
+            }).catch((error) => {
+                console.log("error: " + error.response.status);
+            })
+    }
+
     useEffect(() => {
         // axios.get('/main')
         //   .then((payload) => {
@@ -691,7 +701,7 @@ function MainPage(props) {
                                 : null
                         }
                         <button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
-                        <button className='submitButton'>로그아웃</button>
+                        <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
                     </div>
                 </div>
                 <div className="quarterData">

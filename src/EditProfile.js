@@ -64,13 +64,15 @@ function EditProfile(props) {
 
     useEffect(() => {
         //debug
-        setStdID("123456789");
-        setMajor("0");
-        setName("홍길동");
-        setPhoneNumber("010-0000-0000");
-        setEmail("userID@pukyong.ac.kr");
-        setCertFile({ name: "학생증.jpg" })
-        setMajorLogo({ name: "학과로고.jpg" })
+        setStdID(() => "123456789");
+        setMajor(() => "0");
+        setName(() => "홍길동");
+        setPhoneNumber(() => "010-0000-0000");
+        setEmail(() => "userID@pukyong.ac.kr");
+        setCertFile({ name: "학생증.jpg" });
+        setMajorLogo({ name: "학과로고.jpg" });
+
+
 
         //get 요청해서 로그인된 정보 가져오기
         axios.get('/profile')
@@ -273,7 +275,9 @@ function EditProfile(props) {
                     </div>
 
                     <div className="errorBtns">
-                        <button className="errorBtn" type="button" onClick={() => { editButtonState ? alert("전송") : alert("실패") }}>저장하기</button>
+                        <button className="errorBtn" type="button" onClick={() => {
+                            editButtonState ? alert("전송") : console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.phoneNumber: " + isCorrect.phoneNumber + "  isCorrect.majorLogo: " + isCorrect.majorLogo);
+                        }}>저장하기</button>
                         <button className="errorBtn" type="button" onClick={() => { props.setEditProfileState(false) }}>나가기</button>
 
                     </div>
