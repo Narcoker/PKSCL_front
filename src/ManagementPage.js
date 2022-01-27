@@ -56,7 +56,6 @@ function ManagementPage(props) {
             "studentImgPath": "20220121010016994.png"
         }
     ]);
-
     const [refusal, setRefusal] = useState([]);
     const [approval, setApproval] = useState([{
         "stdID": "123442",
@@ -148,6 +147,7 @@ function ManagementPage(props) {
         "email": "25@gmail.com",
         "studentImgPath": "20220121010016994.png"
     }]);
+
     const [leftTable, setLeftTable] = useState([...waiting]);
     const [rightTable, setRightTable] = useState([...approval]);
 
@@ -165,6 +165,7 @@ function ManagementPage(props) {
 
     const [searchStudent, setSearchStudent] = useState("");
     const [searchButton, setSearchButton] = useState("search");
+    const [certFile, setCertFile] = useState(false);
 
     function patchStudent(studentStatus) {
         let payload;
@@ -182,15 +183,32 @@ function ManagementPage(props) {
             alert("error!");
         }
         console.log("patch")
-        console.log(props.loginPosition)
+        console.log(rightCheckedList)
         if (props.loginPosition === "president") {
             axios.patch('/student-list', payload)
                 .then((payload) => {
+                    console.log("then시작");
+                    console.log(payload);
+
                     setWaiting([...payload.data["waiting"]]);
+                    console.log("setWaiting");
+                    console.log(waiting);
+
                     setRefusal([...payload.data["refusal"]]);
+                    console.log("setRefusal");
+                    console.log(refusal);
+
                     setApproval([...payload.data["approval"]]);
+                    console.log("setApproval");
+                    console.log(approval);
+
                     setLeftTable([...payload.data["waiting"]]);
+                    console.log("setLeftTable");
+                    console.log(leftTable);
+
                     setRightTable([...payload.data["approval"]]);
+                    console.log("setRightTable");
+                    console.log(rightTable);
                 })
                 .catch((error) => {
                     alert("학생 전송에 실패했습니다 :)")
@@ -245,6 +263,11 @@ function ManagementPage(props) {
 
     return (
         <div className="ManagementPageContainer">
+            {/* {
+                certFile === true
+                ?<CertFile></CertFile>
+                : null
+            } */}
             <div className="pageContainer">
                 <Navbar expand="lg" style={{ padding: "30px 0" }}>
                     <Container fluid style={{ justifyContent: "center", backgroundColor: "none" }}>
@@ -328,11 +351,13 @@ function ManagementPage(props) {
                                                 <td colSpan={"3"}>승인대기 학생이 없습니다.</td>
                                             </tr>
                                             : leftTable.map((student, i) => {
-                                                console.log(student["email"])
                                                 return (
                                                     <tr key={i}>
                                                         <td >{student.stdID}</td>
                                                         <td>{student.name}</td>
+                                                        <td><button className="certFileButton" type='button' onClick={() => {
+                                                            setCertFile(true);
+                                                        }}>학생증</button></td>
                                                         <td ><input
                                                             id={student}
                                                             type="checkbox"
@@ -390,9 +415,9 @@ function ManagementPage(props) {
                                                             id={student}
                                                             type="checkbox"
                                                             onChange={(e) => {
-                                                                changeHandler(e.currentTarget.checked, student, setRightCheckedList, rightCheckedList)
+                                                                changeHandler(e.currentTarget.checked, student["email"], setRightCheckedList, rightCheckedList)
                                                             }}
-                                                            checked={rightCheckedList.includes(student) ? true : false}
+                                                            checked={rightCheckedList.includes(student["email"]) ? true : false}
                                                         /></td>
                                                     </tr>
 
