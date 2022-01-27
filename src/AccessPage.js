@@ -219,7 +219,6 @@ function AccessPage(props) {
         alert("입력하신 이메일로 메일을 발송했습니다.");
       })
       .catch((error) => {
-        console.log(payload);
         console.log(error.response.status);
         alert(error.response.status);
       });
