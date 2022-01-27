@@ -3,7 +3,7 @@ import { Navbar, Container } from 'react-bootstrap';
 import './css/ManagementPage.css';
 import axios from 'axios';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
-import CertFile from './CertFile';
+// import CertFile from './CertFile';
 
 function ManagementPage(props) {
     const history = useHistory();
@@ -105,11 +105,11 @@ function ManagementPage(props) {
 
     return (
         <div className="ManagementPageContainer">
-            {
+            {/* {
                 certFile === true
-                    ? <CertFile></CertFile>
-                    : null
-            }
+                ?<CertFile></CertFile>
+                : null
+            } */}
             <div className="pageContainer">
                 <Navbar expand="lg" style={{ padding: "30px 0" }}>
                     <Container fluid style={{ justifyContent: "center", backgroundColor: "none" }}>
