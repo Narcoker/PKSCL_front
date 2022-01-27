@@ -128,7 +128,7 @@ function EditProfile(props) {
 
     return (
         <div className='black-bg'>
-            <div className="errorContainer">
+            <div className="errorContainer" onClick={() => { }}>
                 <div className="errorBox">
                     <h2 ><i className="fas fa-users" />프로필 편집</h2>
                     <div className='editField'>
