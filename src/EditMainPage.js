@@ -5,13 +5,13 @@ import quarter3 from './img/quarter3.png';
 import quarter4 from './img/quarter4.png';
 import receiptImg from './img/receipt.png';
 import EditProfile from './EditProfile';
-import './css/MainPage.css';
+import './css/EditMainPage.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 
-function MainPage(props) {
+function EditMainPage(props) {
 
     const history = useHistory();
 
@@ -677,29 +677,7 @@ function MainPage(props) {
     }
 
     useEffect(() => {
-        if (props.loginPosition === "admin") {
-            axios.get('/ledger')
-                .then((payload) => {
-                    setStudentPresident({ ...payload.data["studentPresident"] });
-                    setQuarterStatus({ ...payload.data["quarterStatus"] });
-                    setQuarter({ ...payload.data["quarter"] });
-                    reset(props.todayQuarter);
-                })
-                .catch((error) => {
-                    alert("학과 장부를 불러올 수 없습니다.");
-                    setStudentPresident({ ...answer["studentPresident"] });
-                    setQuarterStatus({ ...answer["quarterStatus"] });
-                    setQuarter({ ...answer["quarter"] });
-                    reset(props.todayQuarter);
-                })
-            axios.get('/ledger/admin')
-                .then((payload) => {
-                    setMajorList([...payload.data.majorList]);
-                })
-                .catch((error) => {
-                    alert("학과리스트를 불러올 수 없습니다.");
-                })
-        } else if (props.loginPosition === "student") {
+        if (props.loginPosition === "president") {
             axios.get('/ledger')
                 .then((payload) => {
                     setStudentPresident({ ...payload.data["studentPresident"] });
@@ -786,6 +764,13 @@ function MainPage(props) {
                                             ? adminButton()
                                             : null
                                     }
+                                    {
+                                        props.loginPosition === "president"
+                                            ? (<><input className="dateInput" type={"date"} value={openQuarterDate}
+                                                onChange={(e) => { setOpenQuarterDate(e.target.value) }}
+                                            ></input></>)
+                                            : null
+                                    }
                                     <button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
                                     <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
                                 </div>
@@ -798,12 +783,13 @@ function MainPage(props) {
 
                                     quarter[currentQuarter]["eventList"].map((event, i) => {
                                         return (
-                                            <div className="eventCard" style={{ backgroundColor: "yellow" }}>
+                                            <div className="eventCard">
                                                 <div className="cardContent">
                                                     <div className="eventTitle">
                                                         <div><h4 >{event["eventTitle"]} </h4>
                                                             <div> 행사 총 금액 : {eventAmount[i]}</div></div>
                                                         <div className="eventButtons">
+                                                            <button className='submitButton' onClick={() => { pksclSubmitButton(); }} style={{ marginRight: "15px" }}> 장부 수정 완료</button>
                                                             {
                                                                 event.receiptList.length === 1
                                                                     ? null
@@ -935,4 +921,4 @@ function MainPage(props) {
     )
 }
 
-export default MainPage;
+export default EditMainPage;

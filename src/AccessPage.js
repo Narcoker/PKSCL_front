@@ -1,4 +1,3 @@
-//복사잘된거임
 import { useState, useEffect } from 'react';
 import log from './img/log.svg';
 import { Nav } from 'react-bootstrap';
@@ -18,7 +17,7 @@ function AccessPage(props) {
   const [email, setEmail] = useState("");
   const [certFile, setCertFile] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [majorList, setMajorList] = useState(["국어국문학과", "영어영문학부", "일어일문학부", "사학과", "경제학부", "법학과", "행정학과", "국제지역학부", "중국학과", "신문방송학과", "정치외교학과", "유아교육과", "시각디자인학과", "공업디자인학과", "패션디자인학과", "경영학부", "국제통상학부", "응용수학과", "통계학과", "물리학과", "화학과", "미생물학과", "해양스포츠학과", "간호학과", "과학시스템시뮬레이션학과", "건축공학과", "건축학과", "소방공학과", "시스템경영공학부", "IT융합응용공학과", "안전공학과", "융합디스플레이공학과", "의공학과", "전기공학과", "전자공학과", "정보통신공학과", "제어계측공학과", "조선해양시스템공학과", "컴퓨터공학과", "토목공학과", "고분자공학과", "공업화학과", "금속공학과", "기계공학과", "기계설계공학과", "기계시스템공학과", "냉동공조공학과", "신소재시스템공학과", "인쇄정보공학과", "재료공학과", "화학공학과", "지속가능공학부", "식품공학과", "해양바이오신소재학과", "해양생산시스템관리학부", "해양수산경영학과", "수해양산업교육과", "자원생물학과", "식품영양학과", "생물공학과", "수산생명의학과", "환경공학과", "해양공학과", "해양학과", "지구환경과학과", "환경대기과학과", "에너지자원공학과", "공간정보시스템공학과", "생태공학과", "데이터정보과학부(빅데이터융합전공)", "데이터정보과학부(통계·데이터사이언스전공)", "미디어커뮤니케이션학부(언론정보전공)", "미디어커뮤니케이션학부(휴먼ICT융합전공)", "스마트헬스케어학부(의공학전공)", "스마트헬스케어학부(해양스포츠전공)", "스마트헬스케어학부(휴먼바이오융합전공)", "전자정보통신공학부(전자공학전공)", "전자정보통신공학부(정보통신공학전공)", "조형학부(건축학전공)", "조형학부(공업디자인전공)", "조형학부(시각디자인전공)", "컴퓨터공학부(소프트웨어·인공지능전공)", "컴퓨터공학부(컴퓨터공학전공)", "평생교육·상담학과", "기계조선융합공학과", "전기전자소프트웨어공학과", "공공안전경찰학과"]);
+  const [majorList, setMajorList] = useState([]);
   const [isCorrect, setIsCorrect] = useState([false, false, false, false, false, false, false, false])
   const [emailTypeState, setEmailTypeState] = useState(false);
   const [resendEmail, setResendEmail] = useState(0);
@@ -118,8 +117,6 @@ function AccessPage(props) {
       payload.append("name", name);
       payload.append("email", email);
       payload.append("certFile", certFile);
-      if (position === "president")
-        payload.append("phoneNumber", phoneNumber);
 
       for (let value of payload.values()) {
         console.log(value);
@@ -169,7 +166,11 @@ function AccessPage(props) {
       axios.post('/login/' + position, payload)
         .then((payload) => {
           props.setLoginPosition(position);
-          history.push('/main');
+          if (position === "president") {
+            history.push('/edit-main');
+          } else if (position === "admin" || position === "student") {
+            history.push('/main');
+          }
         })
         .catch((error) => {
           alert("로그인에 실패했습니다 :)")
@@ -542,41 +543,6 @@ function AccessPage(props) {
 
         </Route >
 
-        <Route exact path="/">
-          <div className="right-panel">
-            <form className="userForm">
-              <div id="nav" >
-                <Nav fill variant="tabs" defaultActiveKey="link-1">
-                  <Nav.Item>
-                    <Nav.Link eventKey="link-1" onClick={() => { setPosition("student"); reset(); }}>학생</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link eventKey="link-2" onClick={() => { setPosition("president"); reset(); }}>학생회장</Nav.Link>
-                  </Nav.Item>
-                </Nav>
-              </div>
-              <h3 className="accessTitle" ><img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />PKSCL</h3>
-              <div className="input-field">
-                <i className="fas fa-envelope"></i>
-                <input id="inputEmail" onChange={(e) => { setEmail(e.target.value) }} value={email} type="text" placeholder="학교 이메일 @pukyong.ac.kr" />
-              </div>
-              <div className="input-field">
-                <i className="fas fa-key"></i>
-                <input onChange={(e) => { setPassword(e.target.value) }} value={password} type="password" placeholder="비밀번호" />
-              </div>
-
-              <div className="submitbox" >
-                <button type="button" onClick={() => { login() }} value="Login" className="SignInBtn">로그인</button>
-              </div>
-            </form>
-            <div className='moveSignPage'>
-              <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/newpwd') }}>비밀번호 찾기</button><button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/signUp'); }}>회원가입</button>
-            </div>
-          </div>
-
-        </Route>
-
-
         <Route exact path="/newpwd">
           <div className="right-panel">
             <form className="userForm">
@@ -682,6 +648,41 @@ function AccessPage(props) {
             </div>
           </div>
         </Route>
+
+        <Route path="/">
+          <div className="right-panel">
+            <form className="userForm">
+              <div id="nav" >
+                <Nav fill variant="tabs" defaultActiveKey="link-1">
+                  <Nav.Item>
+                    <Nav.Link eventKey="link-1" onClick={() => { setPosition("student"); reset(); }}>학생</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="link-2" onClick={() => { setPosition("president"); reset(); }}>학생회장</Nav.Link>
+                  </Nav.Item>
+                </Nav>
+              </div>
+              <h3 className="accessTitle" ><img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />PKSCL</h3>
+              <div className="input-field">
+                <i className="fas fa-envelope"></i>
+                <input id="inputEmail" onChange={(e) => { setEmail(e.target.value) }} value={email} type="text" placeholder="학교 이메일 @pukyong.ac.kr" />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-key"></i>
+                <input onChange={(e) => { setPassword(e.target.value) }} value={password} type="password" placeholder="비밀번호" />
+              </div>
+
+              <div className="submitbox" >
+                <button type="button" onClick={() => { login() }} value="Login" className="SignInBtn">로그인</button>
+              </div>
+            </form>
+            <div className='moveSignPage'>
+              <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/newpwd') }}>비밀번호 찾기</button><button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/signUp'); }}>회원가입</button>
+            </div>
+          </div>
+
+        </Route>
+
       </Switch >
     </div >
 

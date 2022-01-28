@@ -116,6 +116,96 @@ function EditProfile(props) {
             })
     }
 
+    function patchProfile() {
+        let payload = new FormData();
+
+        payload.append("stdID", stdID);
+        payload.append("name", name);
+
+        if (props.loginPosition === "student") { //학생
+            payload.append("major", major);
+            payload.append("certFile", certFile);
+        }
+        else if (props.loginPosition === "student") { //학생회장
+            payload.append("phoneNumber", phoneNumber);
+            payload.append("majorLogo", majorLogo);
+        }
+
+        axios.patch("/profile", payload, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then((payload) => {
+            switch (payload.status) {
+                case 200:
+                    alert("정보가 변경되었습니다.");
+                    break;
+                default: alert("success: " + payload.status); break;
+            }
+        })
+            .catch((error) => {
+                switch (error.response.status) {
+                    case 400:
+                        alert(error.response.data.errorMessage);
+                        break;
+                    default:
+                        alert("error: " + error.status);
+                        break;
+                }
+            })
+
+
+    }
+
+    // function signUp() {
+    //     if (signUpButtonState) {
+
+    //         let payload = new FormData();
+
+    //         payload.append("stdID", stdID);
+    //         payload.append("password", password);
+    //         payload.append("checkPassword", checkPassword);
+    //         payload.append("major", major)
+    //         payload.append("name", name);
+    //         payload.append("email", email);
+    //         payload.append("certFile", certFile);
+    //         if (position === "president")
+    //             payload.append("phoneNumber", phoneNumber);
+
+    //         for (let value of payload.values()) {
+    //             console.log(value);
+    //         }
+
+    //         axios.post("/signup/" + position, payload, {
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data'
+    //             }
+    //         })
+    //             .then((payload) => {
+    //                 switch (payload.status) {
+    //                     case 200:
+    //                         if (window.confirm("회원가입에 성공하였습니다.")) {
+    //                             reset();
+    //                             history.push('/');
+    //                         }
+    //                         else {
+    //                             history.push('/signUp');
+    //                         }
+    //                     default: alert("success: " + payload.status);
+    //                 }
+    //             })
+    //             .catch((error) => {
+    //                 switch (error.status) {
+    //                     case 400: alert("이미 존재하는 회장ID(이메일)입니다."); return;
+    //                     default: alert("error: " + error.status); return;
+    //                 }
+    //             })
+    //     }
+    //     else {
+    //         alert("빈칸을 모두 입력해주세요 :(");
+    //     }
+    // }
+
     function reset() {
         setInputEmail("");
         setInputPassword("");
@@ -155,7 +245,7 @@ function EditProfile(props) {
     useEffect(() => {
         //debug
         setStdID(() => "123456789");
-        setMajor(() => "0");
+        setMajor(() => "1");
         setName(() => "홍길동");
         setPhoneNumber(() => "010-0000-0000");
         setEmail(() => "userID@pukyong.ac.kr");
@@ -421,7 +511,7 @@ function EditProfile(props) {
 
                                 <div className="errorBtns">
                                     <button className="errorBtn" type="button" onClick={() => {
-                                        editButtonState ? alert("전송") : console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.phoneNumber: " + isCorrect.phoneNumber + "  isCorrect.majorLogo: " + isCorrect.majorLogo);
+                                        editButtonState ? patchProfile() : alert('정보를 모두 입력해주세요.');
                                     }}>저장하기</button>
                                     <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { props.setEditProfileState(false); reset(); }}>취소</button>
 

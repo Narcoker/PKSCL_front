@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import AccessPage from './AccessPage';
 import MainPage from './MainPage';
 import ManagementPage from './ManagementPage';
+import EditMainPage from './EditMainPage';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 function loadmonth() {
@@ -46,7 +47,7 @@ function defineColor(quarter) {
 
 function App() {
 
-  const [loginPosition, setLoginPosition] = useState("admin");
+  const [loginPosition, setLoginPosition] = useState("president");
   const [todayQuarter, setTodatQuarter] = useState(selectseason);
 
   useEffect(() => {
@@ -57,20 +58,23 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path='/manage'>
+        <Route exact path='/manage'>
           <ManagementPage loginPosition={loginPosition}></ManagementPage>
         </Route>
 
-        <Route path='/main'>
+        <Route exact path='/edit-main'>
+          <EditMainPage loginPosition={loginPosition} todayQuarter={todayQuarter}></EditMainPage>
+        </Route>
+
+        <Route exact path='/main'>
           <MainPage loginPosition={loginPosition} todayQuarter={todayQuarter}></MainPage>
         </Route>
 
         <Route path='/' >
           <AccessPage setLoginPosition={setLoginPosition} todayQuarter={todayQuarter}> </AccessPage>
         </Route>
+
       </Switch>
-
-
     </div>
   );
 }
