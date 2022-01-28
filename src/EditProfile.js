@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import './css/EditProfile.css'
 import { useHistory } from 'react-router-dom';
 
 function EditProfile(props) {

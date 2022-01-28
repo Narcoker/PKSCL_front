@@ -147,7 +147,6 @@ function ManagementPage(props) {
 
                                 }
                             }}
-
                                 className='searchButton' type='button'>
                                 {
                                     searchButton === "search"
@@ -219,14 +218,18 @@ function ManagementPage(props) {
 
                     <div className='tableSet'>
                         <div className="buttons">
-                            <button className='submitButton' style={{ width: "110px" }} onClick={() => {
-                                if (rightCheckedList.length === 1) {
-                                    setRightCheckedList([]);
-                                    patchStudent("delegating");
-                                } else {
-                                    alert("학생회장 위임은 한명만 가능합니다.");
-                                }
-                            }}>회장권한위임</button>
+                            {
+                                props.loginPosition === "president"
+                                    ? (<button className='submitButton' style={{ width: "110px" }} onClick={() => {
+                                        if (rightCheckedList.length === 1) {
+                                            setRightCheckedList([]);
+                                            patchStudent("delegating");
+                                        } else {
+                                            alert("학생회장 위임은 한명만 가능합니다.");
+                                        }
+                                    }}>회장권한위임</button>)
+                                    : null
+                            }
                             <button className='submitButton' onClick={() => {
                                 setRightCheckedList([]);
                                 if (rightCheckedList.length > 0) {

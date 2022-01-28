@@ -46,7 +46,7 @@ function defineColor(quarter) {
 
 function App() {
 
-  const [loginPosition, setLoginPosition] = useState("president");
+  const [loginPosition, setLoginPosition] = useState("admin");
   const [todayQuarter, setTodatQuarter] = useState(selectseason);
 
   useEffect(() => {
