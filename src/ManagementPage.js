@@ -3,11 +3,62 @@ import { Navbar, Container } from 'react-bootstrap';
 import './css/ManagementPage.css';
 import axios from 'axios';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
-// import CertFile from './CertFile';
+import CertFile from './CertFile';
 
 function ManagementPage(props) {
+
+    let 임시리스트 = {
+        waiting:
+            [{
+                "major": "학과1",
+                "email": "aaaaa@naver.com",
+                "stdID": "111111111",
+                "name": "이름1",
+                "phoneNumber": "01011111111",
+                "studentImgPath": "/img/time.png",
+            },
+            {
+                "major": "학과2",
+                "email": "bbbbb@naver.com",
+                "stdID": "22222222",
+                "name": "이름2",
+                "phoneNumber": "01022222222",
+                "studentImgPath": "/img/time.png",
+            },
+            {
+                "major": "학과3",
+                "email": "ccccc@naver.com",
+                "stdID": "333333",
+                "name": "이름3",
+                "phoneNumber": "010333333",
+                "studentImgPath": "/img/time.png",
+            }],
+        refusal: [],
+        approval: [{
+            "major": "학과4",
+            "email": "dddd@naver.com",
+            "stdID": "444444",
+            "name": "이름4",
+            "phoneNumber": "010444444",
+            "studentImgPath": "/img/time.png",
+        }, {
+            "major": "학과5",
+            "email": "eeee@naver.com",
+            "stdID": "555555",
+            "name": "이름5",
+            "phoneNumber": "010555555",
+            "studentImgPath": "/img/time.png",
+        }, {
+            "major": "학과6",
+            "email": "ffff@naver.com",
+            "stdID": "666666",
+            "name": "이름6",
+            "phoneNumber": "010666666",
+            "studentImgPath": "/img/time.png",
+        }],
+    }
     const history = useHistory();
-    const [waiting, setWaiting] = useState([{ "stdId": "201715555", "name": "문지환", "email": "4567@naver.com", "studentImgPath": "zxc/asd4.png" }, { "stdId": "201716666", "name": "김명준", "email": "5678@naver.com", "studentImgPath": "zxc/asd5.png" }, { "stdId": "201717715", "name": "김민수", "email": "6767@naver.com", "studentImgPath": "zxc/asd11.png" }, { "stdId": "201717723", "name": "김민수", "email": "6789@naver.com", "studentImgPath": "zxc/asd6.png" }]);
+    const [waiting, setWaiting] = useState([]);
     const [refusal, setRefusal] = useState([]);
     const [approval, setApproval] = useState([]);
 
@@ -17,6 +68,11 @@ function ManagementPage(props) {
     const [leftCheckedList, setLeftCheckedList] = useState([]);
     const [rightCheckedList, setRightCheckedList] = useState([]);
 
+    const [searchStudent, setSearchStudent] = useState("");
+    const [searchButton, setSearchButton] = useState("search");
+    const [certFile, setCertFile] = useState(false);
+    const [certFileStudnet, setCertFileStudnet] = useState();
+
     const changeHandler = (checked, studentInfo, setCheckedList, checkedList) => {
         if (checked) {
             setCheckedList([...checkedList, studentInfo]);
@@ -25,10 +81,6 @@ function ManagementPage(props) {
         }
         console.log(checked)
     };
-
-    const [searchStudent, setSearchStudent] = useState("");
-    const [searchButton, setSearchButton] = useState("search");
-    const [certFile, setCertFile] = useState(false);
 
     function patchStudent(studentStatus) {
         let payload;
@@ -46,6 +98,7 @@ function ManagementPage(props) {
             alert("error!");
         }
         console.log("patch")
+        console.log(leftCheckedList)
         console.log(rightCheckedList)
         if (props.loginPosition === "president") {
             axios.patch('/student-list', payload)
@@ -86,6 +139,11 @@ function ManagementPage(props) {
                 })
                 .catch((error) => {
                     alert("학생리스트를 불러올 수 없습니다.");
+                    // setWaiting([...임시리스트["waiting"]]);
+                    // setRefusal([...임시리스트["refusal"]]);
+                    // setApproval([...임시리스트["approval"]]);
+                    // setLeftTable([...임시리스트["waiting"]]);
+                    // setRightTable([...임시리스트["approval"]]);
                 });
         } else if (props.loginPosition === "admin") {
             axios.get('/president-list')
@@ -99,17 +157,22 @@ function ManagementPage(props) {
                 })
                 .catch((error) => {
                     alert("학과리스트를 불러올 수 없습니다.");
+                    // setWaiting([...임시리스트["waiting"]]);
+                    // setRefusal([...임시리스트["refusal"]]);
+                    // setApproval([...임시리스트["approval"]]);
+                    // setLeftTable([...임시리스트["waiting"]]);
+                    // setRightTable([...임시리스트["approval"]]);
                 });
         }
     }
 
     return (
         <div className="ManagementPageContainer">
-            {/* {
+            {
                 certFile === true
-                ?<CertFile></CertFile>
-                : null
-            } */}
+                    ? (<CertFile certFileStudnet={certFileStudnet} setCertFile={setCertFile}></CertFile>)
+                    : null
+            }
             <div className="pageContainer">
                 <Navbar expand="lg" style={{ padding: "30px 0" }}>
                     <Container fluid style={{ justifyContent: "center", backgroundColor: "none" }}>
@@ -158,7 +221,7 @@ function ManagementPage(props) {
                     </Container>
                 </Navbar>
                 <div className='tables'>
-                    <div className='tableSet'>
+                    <div className="tableSet" >
                         <div className="buttons">
                             <button className='submitButton' onClick={() => {
                                 if (leftCheckedList.length === 0) {
@@ -194,19 +257,45 @@ function ManagementPage(props) {
                                             : leftTable.map((student, i) => {
                                                 return (
                                                     <tr key={i}>
-                                                        <td >{student.stdID}</td>
-                                                        <td>{student.name}</td>
-                                                        <td><button className="certFileButton" type='button' onClick={() => {
-                                                            setCertFile(true);
-                                                        }}>학생증</button></td>
-                                                        <td ><input
-                                                            id={student}
-                                                            type="checkbox"
-                                                            onChange={(e) => {
-                                                                changeHandler(e.target.checked, student["email"], setLeftCheckedList, leftCheckedList)
-                                                            }}
-                                                            checked={leftCheckedList.includes(student["email"]) ? true : false}
-                                                        /></td>
+                                                        {
+                                                            props.loginPosition === "president"
+                                                                ? (<><td>{student.stdID}</td>
+                                                                    <td>{student.name}</td>
+                                                                    <td><button className="certFileButton" type='button' onClick={() => {
+                                                                        setCertFile(true);
+                                                                    }}>학생증</button></td>
+                                                                    <td ><input
+                                                                        id={student}
+                                                                        type="checkbox"
+                                                                        onChange={(e) => {
+                                                                            changeHandler(e.target.checked, student["email"], setLeftCheckedList, leftCheckedList)
+                                                                        }}
+                                                                        checked={leftCheckedList.includes(student["email"]) ? true : false}
+                                                                    /></td>
+                                                                </>)
+                                                                : (<><tr>
+                                                                    <td>{student.major}</td>
+                                                                    <td>{student.name}</td>
+                                                                    <td>{student.stdID}</td>
+                                                                </tr><tr>
+                                                                        <td>{student.phoneNumber}</td>
+                                                                        <td>{student.email}</td>
+                                                                        <td><button className="certFileButton" type='button' onClick={() => {
+                                                                            setCertFile(true);
+                                                                            setCertFileStudnet(student);
+                                                                        }}>학생증</button></td>
+                                                                    </tr>
+                                                                    <td style={{ width: "100px" }}><input
+                                                                        id={student}
+                                                                        type="checkbox"
+                                                                        onChange={(e) => {
+                                                                            changeHandler(e.target.checked, student["email"], setLeftCheckedList, leftCheckedList)
+                                                                        }}
+                                                                        checked={leftCheckedList.includes(student["email"]) ? true : false}
+                                                                    /></td>
+                                                                </>)
+                                                        }
+
                                                     </tr>
                                                 )
                                             })
@@ -249,23 +338,50 @@ function ManagementPage(props) {
                                     {
                                         rightTable.length === 0
                                             ? <tr>
-                                                <td colSpan={"3"}>승인완료 학생이 없습니다.</td>
+                                                <td colSpan={"3"}>승인대기 학생이 없습니다.</td>
                                             </tr>
                                             : rightTable.map((student, i) => {
                                                 return (
                                                     <tr key={i}>
-                                                        <td>{student.stdID}</td>
-                                                        <td>{student.name}</td>
-                                                        <td><input
-                                                            id={student}
-                                                            type="checkbox"
-                                                            onChange={(e) => {
-                                                                changeHandler(e.currentTarget.checked, student["email"], setRightCheckedList, rightCheckedList)
-                                                            }}
-                                                            checked={rightCheckedList.includes(student["email"]) ? true : false}
-                                                        /></td>
-                                                    </tr>
+                                                        {
+                                                            props.loginPosition === "president"
+                                                                ? (<><td>{student.stdID}</td>
+                                                                    <td>{student.name}</td>
+                                                                    <td><button className="certFileButton" type='button' onClick={() => {
+                                                                        setCertFile(true);
+                                                                    }}>학생증</button></td>
+                                                                    <td ><input
+                                                                        id={student}
+                                                                        type="checkbox"
+                                                                        onChange={(e) => {
+                                                                            changeHandler(e.target.checked, student["email"], setRightCheckedList, rightCheckedList)
+                                                                        }}
+                                                                        checked={rightCheckedList.includes(student["email"]) ? true : false}
+                                                                    /></td>
+                                                                </>)
+                                                                : (<><tr>
+                                                                    <td>{student.major}</td>
+                                                                    <td>{student.name}</td>
+                                                                    <td>{student.stdID}</td>
+                                                                </tr><tr>
+                                                                        <td>{student.phoneNumber}</td>
+                                                                        <td>{student.email}</td>
+                                                                        <td><button className="certFileButton" type='button' onClick={() => {
+                                                                            setCertFile(true);
+                                                                        }}>학생증</button></td>
+                                                                    </tr>
+                                                                    <td style={{ width: "100px" }}><input
+                                                                        id={student}
+                                                                        type="checkbox"
+                                                                        onChange={(e) => {
+                                                                            changeHandler(e.target.checked, student["email"], setRightCheckedList, rightCheckedList)
+                                                                        }}
+                                                                        checked={rightCheckedList.includes(student["email"]) ? true : false}
+                                                                    /></td>
+                                                                </>)
+                                                        }
 
+                                                    </tr>
                                                 )
                                             })
                                     }
@@ -276,7 +392,13 @@ function ManagementPage(props) {
                 </div>
             </div>
             <div className="managementPageBar">
-                <i className="fas fa-chevron-left" onClick={() => { history.push('/main') }}></i>
+                <i className="fas fa-chevron-left" onClick={() => {
+                    if (props.loginPosition === "admin") {
+                        history.push('/main')
+                    } else if (props.loginPosition === "president") {
+                        history.push('/edit-main')
+                    }
+                }}></i>
             </div>
 
         </div>

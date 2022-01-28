@@ -248,6 +248,7 @@ function AccessPage(props) {
         <button type="button" onClick={() => { setPosition("admin"); reset(); history.push('/giraffe-admin') }} style={{ height: "10px", width: "20px", backgroundColor: "red" }}></button>
       </div>
       <Switch>
+
         <Route exact path="/signUp">
           <div className="right-panel" id="signup" style={{ marginTop: "20px" }}>
             <form className="userForm" >
