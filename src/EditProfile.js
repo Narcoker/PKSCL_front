@@ -157,55 +157,6 @@ function EditProfile(props) {
 
     }
 
-    // function signUp() {
-    //     if (signUpButtonState) {
-
-    //         let payload = new FormData();
-
-    //         payload.append("stdID", stdID);
-    //         payload.append("password", password);
-    //         payload.append("checkPassword", checkPassword);
-    //         payload.append("major", major)
-    //         payload.append("name", name);
-    //         payload.append("email", email);
-    //         payload.append("certFile", certFile);
-    //         if (position === "president")
-    //             payload.append("phoneNumber", phoneNumber);
-
-    //         for (let value of payload.values()) {
-    //             console.log(value);
-    //         }
-
-    //         axios.post("/signup/" + position, payload, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data'
-    //             }
-    //         })
-    //             .then((payload) => {
-    //                 switch (payload.status) {
-    //                     case 200:
-    //                         if (window.confirm("회원가입에 성공하였습니다.")) {
-    //                             reset();
-    //                             history.push('/');
-    //                         }
-    //                         else {
-    //                             history.push('/signUp');
-    //                         }
-    //                     default: alert("success: " + payload.status);
-    //                 }
-    //             })
-    //             .catch((error) => {
-    //                 switch (error.status) {
-    //                     case 400: alert("이미 존재하는 회장ID(이메일)입니다."); return;
-    //                     default: alert("error: " + error.status); return;
-    //                 }
-    //             })
-    //     }
-    //     else {
-    //         alert("빈칸을 모두 입력해주세요 :(");
-    //     }
-    // }
-
     function reset() {
         setInputEmail("");
         setInputPassword("");
