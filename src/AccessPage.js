@@ -674,7 +674,7 @@ function AccessPage(props) {
               </div>
 
               <div className="submitbox" >
-                <button type="button" onClick={() => { login() }} value="Login" className="SignInBtn">로그인</button>
+                <button type="button" onClick={() => { login() }} onKeyPress={(e) => { if (e.key === "Enter") login(); }} value="Login" className="SignInBtn">로그인</button>
               </div>
             </form>
             <div className='moveSignPage'>

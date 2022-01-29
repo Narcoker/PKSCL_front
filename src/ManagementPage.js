@@ -139,11 +139,11 @@ function ManagementPage(props) {
                 })
                 .catch((error) => {
                     alert("학생리스트를 불러올 수 없습니다.");
-                    // setWaiting([...임시리스트["waiting"]]);
-                    // setRefusal([...임시리스트["refusal"]]);
-                    // setApproval([...임시리스트["approval"]]);
-                    // setLeftTable([...임시리스트["waiting"]]);
-                    // setRightTable([...임시리스트["approval"]]);
+                    setWaiting([...임시리스트["waiting"]]);
+                    setRefusal([...임시리스트["refusal"]]);
+                    setApproval([...임시리스트["approval"]]);
+                    setLeftTable([...임시리스트["waiting"]]);
+                    setRightTable([...임시리스트["approval"]]);
                 });
         } else if (props.loginPosition === "admin") {
             axios.get('/president-list')
@@ -157,12 +157,34 @@ function ManagementPage(props) {
                 })
                 .catch((error) => {
                     alert("학과리스트를 불러올 수 없습니다.");
-                    // setWaiting([...임시리스트["waiting"]]);
-                    // setRefusal([...임시리스트["refusal"]]);
-                    // setApproval([...임시리스트["approval"]]);
-                    // setLeftTable([...임시리스트["waiting"]]);
-                    // setRightTable([...임시리스트["approval"]]);
+                    setWaiting([...임시리스트["waiting"]]);
+                    setRefusal([...임시리스트["refusal"]]);
+                    setApproval([...임시리스트["approval"]]);
+                    setLeftTable([...임시리스트["waiting"]]);
+                    setRightTable([...임시리스트["approval"]]);
                 });
+        }
+    }
+
+    function pressSearchStudent() {
+        if (searchButton === "x") {
+            setSearchStudent("");
+            setSearchButton("search");
+            setLeftTable([...waiting]);
+            setRightTable([...approval]);
+        } else {
+            if (searchStudent === "") {
+                alert("검색명을 입력해주세요 :)");
+            } else {
+                setSearchButton("x");
+
+                let left = waiting.filter((item) => (item.name.includes(searchStudent) || item.stdID.includes(searchStudent)));
+                let right = approval.filter((item) => (item.name.includes(searchStudent) || item.stdID.includes(searchStudent)));
+
+                setLeftTable(left);
+                setRightTable(right);
+            }
+
         }
     }
 
@@ -187,28 +209,15 @@ function ManagementPage(props) {
                                     setRightTable([...approval]);
                                 }
                             }}
+                                onKeyPress={(e) => {
+                                    if (e.key === "Enter") {
+                                        pressSearchStudent()
+                                    }
+                                }}
                                 name="q" value={searchStudent} type="search" placeholder="Search" ></input>
 
-                            <button onClick={(e) => {
-                                if (searchButton === "x") {
-                                    setSearchStudent("");
-                                    setSearchButton("search");
-                                    setLeftTable([...waiting]);
-                                    setRightTable([...approval]);
-                                } else {
-                                    if (searchStudent === "") {
-                                        alert("검색명을 입력해주세요 :)");
-                                    } else {
-                                        setSearchButton("x");
-
-                                        let left = waiting.filter((item) => (item.name.includes(searchStudent) || item.stdID.includes(searchStudent)));
-                                        let right = approval.filter((item) => (item.name.includes(searchStudent) || item.stdID.includes(searchStudent)));
-
-                                        setLeftTable(left);
-                                        setRightTable(right);
-                                    }
-
-                                }
+                            <button onClick={() => {
+                                pressSearchStudent()
                             }}
                                 className='searchButton' type='button'>
                                 {
