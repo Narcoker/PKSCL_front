@@ -637,7 +637,11 @@ function AccessPage(props) {
               </div>
               <div className="input-field">
                 <i className="fas fa-key"></i>
-                <input onChange={(e) => { setPassword(e.target.value) }} value={password} type="password" placeholder="비밀번호" />
+                <input onChange={(e) => { setPassword(e.target.value) }}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") { login() }
+                  }}
+                  value={password} type="password" placeholder="비밀번호" />
               </div>
 
               <div className="submitbox" >
@@ -670,11 +674,15 @@ function AccessPage(props) {
               </div>
               <div className="input-field">
                 <i className="fas fa-key"></i>
-                <input onChange={(e) => { setPassword(e.target.value) }} value={password} type="password" placeholder="비밀번호" />
+                <input onChange={(e) => { setPassword(e.target.value) }}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") { login() }
+                  }}
+                  value={password} type="password" placeholder="비밀번호" />
               </div>
 
               <div className="submitbox" >
-                <button type="button" onClick={() => { login() }} onKeyPress={(e) => { if (e.key === "Enter") login(); }} value="Login" className="SignInBtn">로그인</button>
+                <button type="button" onClick={() => { login() }} value="Login" className="SignInBtn">로그인</button>
               </div>
             </form>
             <div className='moveSignPage'>

@@ -15,6 +15,7 @@ function MainPage(props) {
 
     const history = useHistory();
 
+
     let answer = {
         "studentPresident": {
             "major": "컴퓨터공학과",
@@ -677,6 +678,7 @@ function MainPage(props) {
     }
 
     useEffect(() => {
+
         if (props.loginPosition === "admin") {
             axios.get('/ledger')
                 .then((payload) => {
@@ -739,7 +741,7 @@ function MainPage(props) {
                 editProfileState
                     ?
                     // <EditProfile loginPosition={props.loginPosition} setEditProfileState={setEditProfileState}></EditProfile>
-                    <EditProfile loginPosition={"student"} setEditProfileState={setEditProfileState}></EditProfile>
+                    <EditProfile loginPosition={"student"} editProfileState={editProfileState} setEditProfileState={setEditProfileState}></EditProfile>
                     : null
             }
             {
