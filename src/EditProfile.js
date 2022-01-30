@@ -303,7 +303,6 @@ function EditProfile(props) {
     }, [])
 
     const clickModalOutside = event => {
-
         if (props.editProfileState && (event.target === modalRef.current)) {
             props.setEditProfileState(false);
         }

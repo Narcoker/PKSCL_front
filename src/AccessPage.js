@@ -52,7 +52,7 @@ function AccessPage(props) {
   useEffect(() => {
     // https://pkscl.kro.kr/major-list
 
-    axios.get('https://pkscl.kro.kr/major-list')
+    axios.get('https://cors-jhs.herokuapp.com/https://pkscl.kro.kr/major-list')
       .then((payload) => {
         setMajorList([...payload.data.majorList]);
       })
@@ -163,7 +163,7 @@ function AccessPage(props) {
       let payload = { "email": email, "password": password };
       console.log("sdsd")
       console.log(position)
-      axios.post('https://pkscl.kro.kr/login/' + position, payload)
+      axios.post('/login/' + position, payload)
         .then((payload) => {
           props.setLoginPosition(position);
           if (position === "president") {
@@ -282,17 +282,17 @@ function AccessPage(props) {
                       ></input>[필수] 부경대학교 재학생 또는 휴학생 입니다. */}
                       <details>
                         <summary><input class="InfoCheckedList" type="checkbox"
-                          onClick={() => { changePersonalInformation(0) }}
+                         onClick={() => { changePersonalInformation(0) }}
                         ></input>[필수] 부경대학교 재학생 또는 휴학생 입니다.</summary>
                         <span>
                           <div style={{ backgroundColor: "var(--color-bright-gray)", margin: "10px 0 10px 0", height: "85px", overflowY: "auto" }}>
                             <p /> PKSCL은 부경대학교 소속인 학생들을 대상으로 학과의 장부를 공개하고 있습니다.
-                            <br /> 1차 인증 ) 학교 인증
+                            <br /> 1차 인증 ) 학교 인증 
                             <br /> - 학교 이메일로 부경대학교 학생임을 인증 후 회원가입 가능
                             <br /> 2차 인증 ) 학과 인증
                             <br /> 학생 - 학생회장이 본과 학생으로 승인할 시 해당 학과의 온라인 장부 열람 가능
                             <br /> 학생회장 - PKSCL 챗봇을 통해 학생회장 증명 서류를 제출 한 후 해당 학과의 온라인 장부 관리 가능
-                          </div>
+                        </div>
                         </span>
                       </details>
                       <details>
@@ -651,11 +651,10 @@ function AccessPage(props) {
               </div>
               <div className="input-field">
                 <i className="fas fa-key"></i>
-                <input onChange={(e) => { setPassword(e.target.value) }}
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") { login() }
-                  }}
-                  value={password} type="password" placeholder="비밀번호" />
+                <input onChange={(e) => { setPassword(e.target.value) }} 
+                onKeyPress={(e)=>{
+                    if(e.key === "Enter"){ login() } }}
+                value={password} type="password" placeholder="비밀번호" />
               </div>
 
               <div className="submitbox" >
@@ -688,11 +687,10 @@ function AccessPage(props) {
               </div>
               <div className="input-field">
                 <i className="fas fa-key"></i>
-                <input onChange={(e) => { setPassword(e.target.value) }}
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") { login() }
-                  }}
-                  value={password} type="password" placeholder="비밀번호" />
+                <input onChange={(e) => { setPassword(e.target.value) }} 
+                  onKeyPress={(e)=>{
+                    if(e.key === "Enter"){ login() } }}
+                value={password} type="password" placeholder="비밀번호" />
               </div>
 
               <div className="submitbox" >
