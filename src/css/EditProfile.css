@@ -7,7 +7,7 @@
     flex-direction: row;
     justify-content: center;
     left: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     position: fixed;
     z-index: 22;
 }
@@ -23,7 +23,7 @@
     display: flex;
     border-radius: 20px;
     padding: 20px;
-    
+
 }
 
 .errorBox i {
@@ -32,14 +32,14 @@
     margin-right: 15px;
 }
 
-.boxTitle{
+.boxTitle {
     width: 70%;
     display: flex;
     justify-content: center;
     align-items: baseline;
 }
 
-.editField{
+.editField {
     border: 7px solid var(--color-quarter);
     border-radius: 20px;
     color: black;
@@ -48,7 +48,7 @@
     /* height: 500px; */
     align-items: center;
     text-align: center;
-    
+
 }
 
 .inputField {
@@ -59,26 +59,26 @@
     margin-bottom: 10px;
 }
 
-.inputField i{
+.inputField i {
     font-size: 1.1rem;
-    color:gray;
+    color: gray;
     margin-right: 12px;
     margin-left: 12px;
 
 }
 
-.inputField [type=password]{
+.inputField [type=password] {
     font-family: 'Malgun gothic', dotum, sans-serif;
 }
 
-.inputField label{
+.inputField label {
     margin-right: 10px;
     width: 60px;
     text-align: left;
 }
 
 .inputField button,
-.fileButton{
+.fileButton {
     display: flex;
     border-radius: 20px;
     background-color: white;
@@ -89,15 +89,15 @@
     width: 60px;
 }
 
-.inputField input{
+.inputField input {
     background-color: #e4e4e4;
     border: none;
     text-align: center;
-    border-radius: 0px;  
+    border-radius: 0px;
     width: 70%;
 }
 
-.inputField input[id=major]::placeholder{
+.inputField input[id=major]::placeholder {
     color: black;
 }
 
@@ -120,8 +120,4 @@ input:required {
     transition: 0.5s;
 }
 
-.black-bg {
-
-}
-
-
+.black-bg {}

@@ -52,7 +52,7 @@ function AccessPage(props) {
   useEffect(() => {
     // https://pkscl.kro.kr/major-list
 
-    axios.get('/major-list')
+    axios.get('https://pkscl.kro.kr/major-list')
       .then((payload) => {
         setMajorList([...payload.data.majorList]);
       })
@@ -163,7 +163,7 @@ function AccessPage(props) {
       let payload = { "email": email, "password": password };
       console.log("sdsd")
       console.log(position)
-      axios.post('/login/' + position, payload)
+      axios.post('https://pkscl.kro.kr/login/' + position, payload)
         .then((payload) => {
           props.setLoginPosition(position);
           if (position === "president") {
@@ -277,16 +277,30 @@ function AccessPage(props) {
                         <br />부경대학교 온라인 장부 PKSCL 서비스를 이용해 주셔서 감사합니다. 본 약관은 온라인 장부 서비스의 이용과 관련하여 서비스를 제공하는 PKSCL와 이를 이용하는 온라인 장부를 이용할 사용자들과의 관계를 설명하며, 아울러 여러분의 PKSCL 서비스 이용에 도움이 될 수 있는 정보를 포함하고 있습니다.
                         <br /> PKSCL 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 동의해야 하기 때문에, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다.
                       </div>
-                      <input class="InfoCheckedList" style={{ marginLeft: "16px", marginTop: "20px" }} type="checkbox"
+                      {/* <input class="InfoCheckedList" style={{ marginLeft: "16px", marginTop: "20px" }} type="checkbox"
                         onClick={() => { changePersonalInformation(0) }}
-                      ></input>[필수] 부경대학교 재학생 또는 휴학생 입니다.
+                      ></input>[필수] 부경대학교 재학생 또는 휴학생 입니다. */}
                       <details>
-
+                        <summary><input class="InfoCheckedList" type="checkbox"
+                          onClick={() => { changePersonalInformation(0) }}
+                        ></input>[필수] 부경대학교 재학생 또는 휴학생 입니다.</summary>
+                        <span>
+                          <div style={{ backgroundColor: "var(--color-bright-gray)", margin: "10px 0 10px 0", height: "85px", overflowY: "auto" }}>
+                            <p /> PKSCL은 부경대학교 소속인 학생들을 대상으로 학과의 장부를 공개하고 있습니다.
+                            <br /> 1차 인증 ) 학교 인증
+                            <br /> - 학교 이메일로 부경대학교 학생임을 인증 후 회원가입 가능
+                            <br /> 2차 인증 ) 학과 인증
+                            <br /> 학생 - 학생회장이 본과 학생으로 승인할 시 해당 학과의 온라인 장부 열람 가능
+                            <br /> 학생회장 - PKSCL 챗봇을 통해 학생회장 증명 서류를 제출 한 후 해당 학과의 온라인 장부 관리 가능
+                          </div>
+                        </span>
+                      </details>
+                      <details>
                         <summary><input class="InfoCheckedList" type="checkbox"
                           onClick={() => { changePersonalInformation(1) }}
                         ></input>[필수] PKSCL 이용 약관 동의</summary>
                         <span>
-                          <div style={{ backgroundColor: "var(--color-bright-gray)", margin: "10px 0 10px 0", height: "85px", overflowY: "auto" }}>
+                          <div style={{ backgroundColor: "var(--color-bright-gray)", margin: "10px 0 10px 0", height: "100px", overflowY: "auto" }}>
                             <p />1. 계약당사자의 의무
 
                             <br />PKSCL은 여러분이 PKSCL 서비스를 투명하고 편리하게 이용할 수 있도록 최선을 다하고 있습니다. 다만, 여러분이 PKSCL 서비스를 보다 안전하게 이용하고 PKSCL 서비스에서 여러분과 타인의 권리가 서로 존중되고 보호받으려면 여러분의 도움과 협조가 필요합니다. 여러분의 안전한 서비스 이용과 권리 보호를 위해 부득이 아래와 같은 경우 여러분의 장부 관리 및 열람 권한이 제한될 수 있으므로, 다음 사항들을 확인하고 준수를 요청 드립니다.
@@ -316,7 +330,7 @@ function AccessPage(props) {
                           onClick={() => { changePersonalInformation(2) }}
                         ></input>[필수] 개인정보 수집 및 이용 동의</summary>
                         <span>
-                          <div style={{ backgroundColor: "var(--color-bright-gray)", margin: "10px 0 10px 0", height: "85px", overflowY: "auto" }}>
+                          <div style={{ backgroundColor: "var(--color-bright-gray)", margin: "10px 0 10px 0", height: "100px", overflowY: "auto" }}>
                             <p /> 1. PKSCL 계정 이용계약
 
                             <br />1 - a) 수집되는 개인 정보
