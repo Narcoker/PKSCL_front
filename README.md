@@ -1,7 +1,7 @@
 
 
 <h1>안녕하세요. 온라인 장부입니다.</h1>
-<h6> 기존 불편한 학생회비 장부 확인 시스템을 개선하고자 또한 투명한 장부공개 문화를 만들고자 PKCog를 만들게 되었습니다. </h6>
+<h6> 기존 불편한 학생회비 장부 확인 시스템을 개선하고자 또한 투명한 장부공개 문화를 만들고자 PKSCL를 만들게 되었습니다. </h6>
 
 
 
@@ -11,7 +11,7 @@
 </h6>
  <p align = "center"><img src="https://img.shields.io/badge/Spring-3766AB?style=for-the-badge&logo=Spring&logoColor=white"/></a> </a>&nbsp <img src="https://img.shields.io/badge/JavaScript-3766AB?style=for-the-badge&logo=JavaScript&logoColor=white"/></a> </a>&nbsp<img src="https://img.shields.io/badge/AWS-3766AB?style=for-the-badge&logo=AWS&logoColor=white"/></p>
 
- <br></br>
+</br></br>
  
 <h2> 아래에서 프로젝트를 자세히 확인해보실 수 있어요 </h2>
 <h6>
