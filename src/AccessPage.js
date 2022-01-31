@@ -120,8 +120,11 @@ function AccessPage(props) {
       payload.append("major", major)
       payload.append("name", name);
       payload.append("email", email);
+
       if (position === "student")
         payload.append("certFile", certFile);
+      else if (position === "president")
+        payload.append("phoneNumber", phoneNumber);
 
       for (let value of payload.values()) {
         console.log(value);
