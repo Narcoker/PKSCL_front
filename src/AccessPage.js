@@ -65,9 +65,13 @@ function AccessPage(props) {
   useEffect(() => {
     console.log(isCorrect);
     if (position === "president") {
-      if (isCorrect.includes(false))
-        setSignUpButtonState(false);
-      else setSignUpButtonState(true);
+      for (let i = 0; i < 7; i++) {
+        if (isCorrect[i] === false) {
+          setSignUpButtonState(false);
+          return
+        }
+      }
+      setSignUpButtonState(true);
     }
 
     if (position === "student") {
@@ -116,7 +120,8 @@ function AccessPage(props) {
       payload.append("major", major)
       payload.append("name", name);
       payload.append("email", email);
-      payload.append("certFile", certFile);
+      if (position === "student")
+        payload.append("certFile", certFile);
 
       for (let value of payload.values()) {
         console.log(value);
@@ -526,21 +531,26 @@ function AccessPage(props) {
                             </>)
                       }
                     </div>
+                    {
+                      position === "student"
+                        ?
+                        <div className="input-field filebox">
+                          <i className="fas fa-user-graduate" style={isCorrect[7] === true ? { color: "var(--color-quarter)" } : null}></i>
+                          <input className='uploadName' placeholder='학생증을 첨부해주세요' value={certFile.name} readOnly />
+                          <label htmlFor="certFile">찾기</label>
+                          <input type="file" id='certFile' name="certFile" accept='image/*'
+                            onChange={(e) => {
+                              setCertFile(e.target.files[0]);
+                              if (e.target.value === "") {
+                                changeIsCorrect(7, false);
+                              } else {
+                                changeIsCorrect(7, true);
+                              }
+                            }} />
+                        </div>
+                        : null
+                    }
 
-                    <div className="input-field filebox">
-                      <i className="fas fa-user-graduate" style={isCorrect[7] === true ? { color: "var(--color-quarter)" } : null}></i>
-                      <input className='uploadName' placeholder='학생증을 첨부해주세요' value={certFile.name} readOnly />
-                      <label htmlFor="certFile">찾기</label>
-                      <input type="file" id='certFile' name="certFile" accept='image/*'
-                        onChange={(e) => {
-                          setCertFile(e.target.files[0]);
-                          if (e.target.value === "") {
-                            changeIsCorrect(7, false);
-                          } else {
-                            changeIsCorrect(7, true);
-                          }
-                        }} />
-                    </div>
 
                     <div className="submitbox" >
                       <button type="button" style={signUpButtonState ? null : { backgroundColor: '#ACACAC' }}
