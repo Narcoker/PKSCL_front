@@ -52,7 +52,7 @@ function AccessPage(props) {
   useEffect(() => {
     // https://pkscl.kro.kr/major-list
 
-    axios.get('https://cors-jhs.herokuapp.com/https://pkscl.kro.kr/major-list')
+    axios.get('/major-list')
       .then((payload) => {
         setMajorList([...payload.data.majorList]);
       })
@@ -171,7 +171,7 @@ function AccessPage(props) {
       let payload = { "email": email, "password": password };
       console.log("sdsd")
       console.log(position)
-      axios.post('https://cors-jhs.herokuapp.com/https://pkscl.kro.kr/login/' + position, payload)
+      axios.post('/login' + position, payload)
         .then((payload) => {
           props.setLoginPosition(position);
           if (position === "president") {
