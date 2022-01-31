@@ -118,9 +118,9 @@ function EditProfile(props) {
             })
     }
 
-    function patchProfile() {
+    function putProfile() {
         let payload = new FormData();
-
+        console.log(props.loginPosition);
         payload.append("stdID", stdID);
         payload.append("name", name);
 
@@ -128,12 +128,12 @@ function EditProfile(props) {
             payload.append("major", major);
             payload.append("certFile", certFile);
         }
-        else if (props.loginPosition === "student") { //학생회장
+        else if (props.loginPosition === "president") { //학생회장
             payload.append("phoneNumber", phoneNumber);
             payload.append("majorLogo", majorLogo);
         }
 
-        axios.patch("/profile", payload, {
+        axios.put("/profile/" + props.loginPosition, payload, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -202,8 +202,9 @@ function EditProfile(props) {
         setName(() => "홍길동");
         setPhoneNumber(() => "010-0000-0000");
         setEmail(() => "userID@pukyong.ac.kr");
-        setCertFile({ name: "학생증.jpg" });
-        setMajorLogo({ name: "학과로고.jpg" });
+        // setCertFile({ name: "학생증.jpg" });
+        setCertFile("");
+        setMajorLogo("");
 
         setIsCorrect(
             {
@@ -437,21 +438,20 @@ function EditProfile(props) {
                                     props.loginPosition === "president"
                                         ?
                                         <div className="inputField">
-                                            <i className="fas fa-key"></i>
+                                            <i className="fas fa-user-graduate"></i>
                                             <label>학과로고</label>
-                                            {/* <empty style={{ width: "200px" }}></empty> */}
-                                            <input className='uploadName' placeholder='학과로고를 첨부해주세요' value={majorLogo.name} readOnly />
-                                            <label htmlFor="majorLogo">찾기</label>
-                                            <input type="file" id='majorLogo' name="majorLogo" accept='image/*'
+                                            <input style={{ width: "200px" }} value={majorLogo.name} readOnly></input>
+                                            <label className='fileButton' htmlFor="file">찾기</label>
+                                            <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
                                                 onChange={(e) => {
-                                                    majorLogo(e.target.files[0]);
+                                                    setMajorLogo(e.target.files[0]);
                                                     if (e.target.value === "") {
                                                         changeIsCorrect("majorLogo", false);
                                                     } else {
                                                         changeIsCorrect("majorLogo", true);
                                                     }
-                                                }} />
-                                            <button type='button'>변경하기</button>
+
+                                                }}></input>
                                         </div>
                                         :
                                         <div className="inputField">
@@ -475,7 +475,7 @@ function EditProfile(props) {
 
                             <div className="errorBtns">
                                 <button className="errorBtn" type="button" onClick={() => {
-                                    editButtonState ? patchProfile() : alert('정보를 모두 입력해주세요.');
+                                    editButtonState ? putProfile() : alert('정보를 모두 입력해주세요.');
                                 }}>저장하기</button>
                                 <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { props.setEditProfileState(false); reset(); }}>취소</button>
 
