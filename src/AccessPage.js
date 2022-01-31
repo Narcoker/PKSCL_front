@@ -6,6 +6,7 @@ import axios from 'axios';
 import './css/AccessPage.css';
 
 function AccessPage(props) {
+  const debugAPI = "'https://cors-jhs.herokuapp.com/";
   // let [signType, setSignType] =useState("signIn");
   const [position, setPosition] = useState("student");
 
@@ -169,9 +170,8 @@ function AccessPage(props) {
     }
     else {
       let payload = { "email": email, "password": password };
-      console.log("sdsd")
       console.log(position)
-      axios.post('/login' + position, payload)
+      axios.post('/login/' + position, payload)
         .then((payload) => {
           props.setLoginPosition(position);
           if (position === "president") {
