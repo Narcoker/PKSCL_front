@@ -7,7 +7,7 @@ import './css/AccessPage.css';
 
 function AccessPage(props) {
   let debugAPIURL = "";
-  debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
+  // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
 
   // let [signType, setSignType] =useState("signIn");
   const [position, setPosition] = useState("student");
