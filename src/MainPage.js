@@ -369,7 +369,7 @@ function MainPage(props) {
     }
 
     function getAdminLedger(findMajorIndex) {
-        axios.get(`${debugAPIURL}/ledger/admin?${findMajorIndex}`)
+        axios.get(debugAPIURL + `/ledger/admin?${findMajorIndex}`)
             .then((payload) => {
                 setStudentPresident({ ...payload.data["studentPresident"] });
                 setQuarter({ ...payload.data["quarter"] });
@@ -392,7 +392,7 @@ function MainPage(props) {
     }
 
     function adminGetDate(findMajorIndex) {
-        axios.get(`${debugAPIURL}/ledger-date?${findMajorIndex}`)
+        axios.get(debugAPIURL + `/ledger-date?${findMajorIndex}`)
             .then((payload) => {
                 setQuarterDate({ ...payload.data });
                 showQuarter(props.todayQuarter);
@@ -446,15 +446,10 @@ function MainPage(props) {
         } else if (props.loginPosition === "student" || props.loginPosition === "president") {
             axios.get(debugAPIURL + '/ledger')
                 .then((payload) => {
-                    console.log("1");
                     setStudentPresident({ ...payload.data["studentPresident"] });
-                    console.log("1");
-                    // setQuarter({ ...payload.data["quarter"] });
-                    console.log("1");
+                    setQuarter({ ...payload.data["quarter"] });
                     reset(props.todayQuarter);
-                    console.log("1");
                     defineColor(props.todayQuarter);
-                    console.log("1");
                 })
                 .catch((error) => {
                     alert("학과 장부를 불러올 수 없습니다.");

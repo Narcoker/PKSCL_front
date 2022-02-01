@@ -275,7 +275,7 @@
 .EditMainPageContainer .receiptTable tbody {
     display: block;
     overflow-y: auto;
-    height: 220px;
+    height: 180px;
     width: fit-content;
 }
 

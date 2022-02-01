@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import majorlogo from './img/majorlogo.png';
 import quarter1 from './img/quarter1.png';
 import quarter2 from './img/quarter2.png';
@@ -16,8 +18,6 @@ function MainPage(props) {
     // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
 
     const history = useHistory();
-
-    let tempQuarter;
 
     let answer = {
         "studentPresident": {
@@ -324,6 +324,8 @@ function MainPage(props) {
         "quarter4": ["2022-01-07", "2022-01-08"]
     }
 
+    // const [totalAmount, setTotalAmount]
+
     const [studentPresident, setStudentPresident] = useState();
 
     const [quarter, setQuarter] = useState();
@@ -357,7 +359,7 @@ function MainPage(props) {
             CalculateCurrentQuarterReceiptSumList(quarter[quarterData]["eventList"]);
             resetShowAllReceiptButton();
         }
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
     }
 
     function showQuarter(selectedQuarter) {
@@ -512,8 +514,9 @@ function MainPage(props) {
     }
 
     function changeItem(key, value, i, j, k) {
-        console.log(tempQuarter);
+        var tempQuarter = { ...quarter };
         tempQuarter[currentQuarter]["eventList"][i]["receiptList"][j]["receiptDetailList"][k][key] = value;
+        setQuarter(tempQuarter);
 
     }
 
@@ -588,9 +591,9 @@ function MainPage(props) {
                                     <div className="rightPanel">
                                         <div className="nav">
                                             <div className="buttons">
-                                                {
+                                                {/* {
                                                     console.log(quarterDate)
-                                                }
+                                                } */}
                                                 {
                                                     quarterDate !== undefined
                                                         ? (
@@ -647,9 +650,6 @@ function MainPage(props) {
                                                                                             let array = [...fixEventButton];
                                                                                             array[i] = !fixEventButton[i];
                                                                                             setFixEventButton(array);
-                                                                                            tempQuarter = quarter;
-                                                                                            console.log(quarter);
-
                                                                                         }} style={{ marginRight: "15px" }}> 행사 수정 </button>
                                                                                 }
                                                                                 {
@@ -718,7 +718,16 @@ function MainPage(props) {
                                                                                                                             <td>{sumItems(item["price"], item["amount"])}</td>
                                                                                                                         </tr>)
                                                                                                                     })}
-                                                                                                                    </tbody> </table></>)
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                                    {fixEventButton[i]
+                                                                                                                        ?
+                                                                                                                        <div style={{ display: "flex", justifyContent: "center", width: "100%" }}><button className='submitButton' style={{ margin: "0" }}>항목 추가</button></div>
+                                                                                                                        :
+                                                                                                                        null
+                                                                                                                    }
+
+                                                                                                                </>)
                                                                                                         }
                                                                                                     </>
                                                                                                     )
@@ -779,16 +788,23 @@ function MainPage(props) {
                                                                                                                                                 <td id='price' contentEditable={fixEventButton[i]}
                                                                                                                                                     onInput={(e) => {
                                                                                                                                                         changeItem("price", e.currentTarget.textContent, i, j, k);
-                                                                                                                                                        console.log(document.getElementById("price"));
+                                                                                                                                                        console.log(item["price"]);
                                                                                                                                                     }}>{item["price"]}</td>
                                                                                                                                                 <td id='amount' contentEditable={fixEventButton[i]} onInput={(e) => {
                                                                                                                                                     changeItem("amount", e.currentTarget.textContent, i, j, k);
+                                                                                                                                                    console.log(item["amount"]);
                                                                                                                                                 }}>{item["amount"]}</td>
                                                                                                                                                 <td>{sumItems(item["price"], item["amount"])}</td>
                                                                                                                                             </tr>)
                                                                                                                                         })
                                                                                                                                         }
                                                                                                                                     </tbody> </table>
+                                                                                                                                {fixEventButton[i]
+                                                                                                                                    ?
+                                                                                                                                    <div style={{ display: "flex", justifyContent: "center", width: "100%" }}><button className='submitButton' style={{ margin: "0" }}>항목 추가</button></div>
+                                                                                                                                    :
+                                                                                                                                    null
+                                                                                                                                }
                                                                                                                             </>
                                                                                                                             )
                                                                                                                     }
@@ -858,7 +874,7 @@ function MainPage(props) {
             }
 
 
-        </div>
+        </div >
     )
 }
 
