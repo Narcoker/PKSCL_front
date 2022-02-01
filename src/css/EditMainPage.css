@@ -317,7 +317,8 @@
     background-color: var(--color-tableOdd);
 }
 
-.EditMainPageContainer #receiptContent td {
+.EditMainPageContainer #receiptContent td,
+.EditMainPageContainer #receiptContent input {
     width: 100px;
 }
 

@@ -10,11 +10,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+
 function MainPage(props) {
     let debugAPIURL = "";
     // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
 
     const history = useHistory();
+
+    let tempQuarter;
 
     let answer = {
         "studentPresident": {
@@ -481,6 +484,38 @@ function MainPage(props) {
         alert("수정 API추가해야함")
     }
 
+    function eventAddButton(currentQuarter) {
+        console.log(quarter);
+        console.log(currentQuarter);
+        const temp = { ...quarter };
+        temp[currentQuarter]["eventList"].push({
+            eventContext: "행사내용",
+            eventNumber: "eventNumber",
+            eventTitle: "행사 이름",
+            receiptList: [
+                {
+                    "receiptTitle": "영수증 제목",
+                    "receiptImg": "이미지 경로",
+                    "receiptContext": "영수증 내용",
+                    "receiptDetailList": [
+                        {
+                            "context": "항목 이름",
+                            "price": "0000",
+                            "amount": "9999"
+                        },
+                    ]
+                },
+            ],
+        });
+
+        setQuarter(temp);
+    }
+
+    function changeItem(key, value, i, j, k) {
+        console.log(tempQuarter);
+        tempQuarter[currentQuarter]["eventList"][i]["receiptList"][j]["receiptDetailList"][k][key] = value;
+
+    }
 
     useEffect(() => {
         axios.get('/ledger')
@@ -502,16 +537,6 @@ function MainPage(props) {
                 defineColor(props.todayQuarter);
             })
     }, []);
-
-
-    useEffect(() => {
-        // // console.log(document.getElementById("leftPanel")[0].style.position);
-        // if (editProfileState) {
-        //     document.getElementsByClassName("leftPanel")[0].setProperty("position", "none");
-        // } else {
-
-        // }
-    }, [editProfileState])
 
 
     useEffect(() => {
@@ -621,7 +646,10 @@ function MainPage(props) {
                                                                                         : <button onClick={() => {
                                                                                             let array = [...fixEventButton];
                                                                                             array[i] = !fixEventButton[i];
-                                                                                            setFixEventButton(array)
+                                                                                            setFixEventButton(array);
+                                                                                            tempQuarter = quarter;
+                                                                                            console.log(quarter);
+
                                                                                         }} style={{ marginRight: "15px" }}> 행사 수정 </button>
                                                                                 }
                                                                                 {
@@ -633,14 +661,14 @@ function MainPage(props) {
                                                                                                     <button onClick={() => {
                                                                                                         let array = [...showAllReceiptButton];
                                                                                                         array[i] = !showAllReceiptButton[i];
-                                                                                                        setShowAllReceiptButton(array)
+                                                                                                        setShowAllReceiptButton(array);
                                                                                                     }}>전체보기 취소</button>
                                                                                                 )
                                                                                                 : (
                                                                                                     <button onClick={() => {
                                                                                                         let array = [...showAllReceiptButton];
                                                                                                         array[i] = !showAllReceiptButton[i];
-                                                                                                        setShowAllReceiptButton(array)
+                                                                                                        setShowAllReceiptButton(array);
                                                                                                     }}>전체보기</button>
                                                                                                 )
                                                                                         )
@@ -684,9 +712,9 @@ function MainPage(props) {
                                                                                                                 </thead>
                                                                                                                     <tbody>{event["receiptList"][0]["receiptDetailList"].map((item, k) => {
                                                                                                                         return (<tr>
-                                                                                                                            <td>{item["context"]}</td>
-                                                                                                                            <td>{item["price"]}</td>
-                                                                                                                            <td>{item["amount"]}</td>
+                                                                                                                            <td contentEditable={fixEventButton[i]}>{item["context"]}</td>
+                                                                                                                            <td contentEditable={fixEventButton[i]}>{item["price"]}</td>
+                                                                                                                            <td contentEditable={fixEventButton[i]}>{item["amount"]}</td>
                                                                                                                             <td>{sumItems(item["price"], item["amount"])}</td>
                                                                                                                         </tr>)
                                                                                                                     })}
@@ -741,9 +769,21 @@ function MainPage(props) {
                                                                                                                                     <tbody>
                                                                                                                                         {receipt["receiptDetailList"].map((item, k) => {
                                                                                                                                             return (<tr>
-                                                                                                                                                <td>{item["context"]}</td>
-                                                                                                                                                <td>{item["price"]}</td>
-                                                                                                                                                <td>{item["amount"]}</td>
+                                                                                                                                                <td id="context" contentEditable={fixEventButton[i]}
+                                                                                                                                                    onInput={(e) => {
+                                                                                                                                                        console.log(e.currentTarget.textContent);
+                                                                                                                                                        console.log(quarter[currentQuarter]["eventList"][i]["receiptList"][j]["receiptDetailList"][k]["context"]);
+                                                                                                                                                        changeItem("context", e.currentTarget.textContent, i, j, k);
+                                                                                                                                                    }}>{item["context"]}</td>
+
+                                                                                                                                                <td id='price' contentEditable={fixEventButton[i]}
+                                                                                                                                                    onInput={(e) => {
+                                                                                                                                                        changeItem("price", e.currentTarget.textContent, i, j, k);
+                                                                                                                                                        console.log(document.getElementById("price"));
+                                                                                                                                                    }}>{item["price"]}</td>
+                                                                                                                                                <td id='amount' contentEditable={fixEventButton[i]} onInput={(e) => {
+                                                                                                                                                    changeItem("amount", e.currentTarget.textContent, i, j, k);
+                                                                                                                                                }}>{item["amount"]}</td>
                                                                                                                                                 <td>{sumItems(item["price"], item["amount"])}</td>
                                                                                                                                             </tr>)
                                                                                                                                         })
@@ -779,7 +819,9 @@ function MainPage(props) {
                                                         )
                                                 }
                                                 <div style={{ marginBottom: "40px", display: "flex", justifyContent: "center" }}>
-                                                    <button className="editButton" onClick={() => { alert("행사추가 API 추가해야함") }} > 행사 추가 </button>
+                                                    <button className="editButton" onClick={() => {
+                                                        eventAddButton(currentQuarter);
+                                                    }} > 행사 추가 </button>
                                                 </div>
                                             </div>
                                             {/* 장부 */}
