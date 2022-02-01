@@ -256,6 +256,7 @@
     width: 400px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .EditMainPageContainer .receiptTitle div {
@@ -263,7 +264,7 @@
 }
 
 .EditMainPageContainer #receiptContent table {
-    margin: 10px 0;
+    margin: 5px 0;
     width: 400px;
     height: 240px;
 }
@@ -277,6 +278,7 @@
     overflow-y: auto;
     height: 180px;
     width: fit-content;
+    
 }
 
 .EditMainPageContainer .receiptTable tbody::-webkit-scrollbar {
@@ -320,13 +322,15 @@
 .EditMainPageContainer #receiptContent td,
 .EditMainPageContainer #receiptContent input {
     width: 100px;
+    border-bottom: 2px solid var(--color-quarter);
+
 }
 
 .EditMainPageContainer .receiptCard {
     border-top: 2px solid var(--color-quarter);
     padding-top: 10px;
     display: flex;
-    margin: 0 0 30px 0;
+    margin: 0 0 10px 0;
     padding: 30px 0 0 0;
     width: 650px;
 }
