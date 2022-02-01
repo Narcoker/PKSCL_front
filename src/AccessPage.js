@@ -6,7 +6,9 @@ import axios from 'axios';
 import './css/AccessPage.css';
 
 function AccessPage(props) {
-  const debugAPI = "'https://cors-jhs.herokuapp.com/";
+  let debugAPIURL = "";
+  // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
+
   // let [signType, setSignType] =useState("signIn");
   const [position, setPosition] = useState("student");
 
@@ -51,9 +53,7 @@ function AccessPage(props) {
   }, [email]);
 
   useEffect(() => {
-    // https://pkscl.kro.kr/major-list
-
-    axios.get('/major-list')
+    axios.get(debugAPIURL + '/major-list')
       .then((payload) => {
         setMajorList([...payload.data.majorList]);
       })
@@ -131,7 +131,7 @@ function AccessPage(props) {
         console.log(value);
       }
 
-      axios.post("/signup/" + position, payload, {
+      axios.post(debugAPIURL + "/signup/" + position, payload, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -171,7 +171,7 @@ function AccessPage(props) {
     else {
       let payload = { "email": email, "password": password };
       console.log(position)
-      axios.post('/login/' + position, payload)
+      axios.post(debugAPIURL + '/login/' + position, payload)
         .then((payload) => {
           props.setLoginPosition(position);
           if (position === "president") {
@@ -196,7 +196,7 @@ function AccessPage(props) {
     }
     else {
       let payload = { "email": email, "stdID": stdID, "name": name };
-      axios.post('/newpwd/' + position, payload)
+      axios.post(debugAPIURL + '/newpwd/' + position, payload)
         .then((payload) => {
           console.log(payload);
           if (window.confirm('입력하신 이메일로 임시 비밀번호를 발급하였습니다.')) {
@@ -217,7 +217,7 @@ function AccessPage(props) {
 
   function certEmail() {
     let payload = { "email": email };
-    axios.post('/email/' + position, payload)
+    axios.post(debugAPIURL + '/email/' + position, payload)
       .then((payload) => {
         alert("입력하신 이메일로 메일을 발송했습니다.");
       })

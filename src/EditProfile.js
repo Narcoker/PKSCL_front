@@ -4,6 +4,9 @@ import './css/EditProfile.css'
 import { useHistory } from 'react-router-dom';
 
 function EditProfile(props) {
+    let debugAPIURL = "";
+    // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
+
     const history = useHistory();
     const modalRef = useRef();
 
@@ -71,7 +74,7 @@ function EditProfile(props) {
             if (window.confirm('정말 탈퇴하시겠습니까?')) {
                 const payload = { "inputEmail": inputEmail, "inputPassword": inputPassword }
                 //axio.탈퇴
-                axios.post('/withdrawal', payload)
+                axios.post(debugAPIURL + '/withdrawal', payload)
                     .then((payload) => {
                         switch (payload.status) {
                             case 200:
@@ -101,7 +104,7 @@ function EditProfile(props) {
 
     function newPassword() {
         const payload = { "inputPassword": inputPassword, "inputNewPassword": inputNewPassword, "inputCheckNewPassword": inputCheckNewPassword }
-        axios.patch('/password', payload)
+        axios.patch(debugAPIURL + '/password', payload)
             .then((payload) => {
                 switch (payload.status) {
                     case 200:
@@ -133,7 +136,7 @@ function EditProfile(props) {
             payload.append("majorLogo", majorLogo);
         }
 
-        axios.put("/profile/" + props.loginPosition, payload, {
+        axios.put(debugAPIURL + "/profile/" + props.loginPosition, payload, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -225,7 +228,7 @@ function EditProfile(props) {
 
 
         //get 요청해서 로그인된 정보 가져오기
-        axios.get('/profile')
+        axios.get(debugAPIURL + '/profile')
             .then((payload) => {
                 switch (payload.status) {
                     case 200:
@@ -284,7 +287,7 @@ function EditProfile(props) {
 
             })
         //get 요청해서 학과리스트 가져오기
-        axios.get('/major-list')
+        axios.get(debugAPIURL + '/major-list')
             .then((payload) => {
                 setMajorList([...payload.data.majorList]);
             })
