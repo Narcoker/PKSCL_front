@@ -628,32 +628,14 @@ function MainPage(props) {
         // setShowAllReceiptButton(tempShowAllReceiptButton);
     }
 
-    function placeCaretAtEnd(el) {
-        el.focus();
-        if (typeof window.getSelection != "undefined"
-            && typeof document.createRange != "undefined") {
-            var range = document.createRange();
-            range.selectNodeContents(el);
-            range.collapse(false);
-            var sel = window.getSelection();
-            sel.removeAllRanges();
-            sel.addRange(range);
-        } else if (typeof document.body.createTextRange != "undefined") {
-            var textRange = document.body.createTextRange();
-            textRange.moveToElementText(el);
-            textRange.collapse(false);
-            textRange.select();
-        }
-    }
-
-    // placeCaretAtEnd(document.querySelector('p'));
 
     useEffect(() => {
         axios.get('/ledger')
             .then((payload) => {
                 setStudentPresident({ ...payload.data["studentPresident"] });
                 setQuarter({ ...payload.data["quarter"] });
-                reset(props.todayQuarter);
+                // reset(props.todayQuarter);
+                resetShowAllReceiptButton();
                 GetDate();
                 defineColor(props.todayQuarter);
             })
@@ -663,16 +645,15 @@ function MainPage(props) {
                 console.log(answer)
                 setStudentPresident({ ...answer["studentPresident"] });
                 setQuarter({ ...answer["quarter"] });
-                reset(props.todayQuarter);
+                // reset(props.todayQuarter);
+                resetShowAllReceiptButton();
                 GetDate();
                 defineColor(props.todayQuarter);
             })
 
-        document.addEventListener('keypress', placeCaretAtEnd);
 
-        return () => {
-            document.removeEventListener('keypress', placeCaretAtEnd);
-        };
+
+
     }, []);
 
 
@@ -683,10 +664,10 @@ function MainPage(props) {
 
     }, [currentQuarter])
 
-    useEffect(() => {
-        if (quarter !== undefined)
-            reset(props.todayQuarter);
-    }, [quarter])
+    // useEffect(() => {
+    //     if (quarter !== undefined)
+    //         reset(props.todayQuarter);
+    // }, [quarter])
 
 
 
