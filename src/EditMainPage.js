@@ -35,7 +35,7 @@ function MainPage(props) {
                 "eventList": [
                     {
                         "eventNumber": "1",
-                        "eventTitle": "공개일 O",
+                        "eventTitle": "임시데이터 입니다.",
                         "eventContext": "데이타 O",
                         "receiptList": [
 
@@ -636,7 +636,6 @@ function MainPage(props) {
                 setQuarter({ ...payload.data["quarter"] });
                 // reset(props.todayQuarter);
                 resetShowAllReceiptButton();
-                GetDate();
                 defineColor(props.todayQuarter);
             })
             .catch((error) => {
@@ -647,11 +646,10 @@ function MainPage(props) {
                 setQuarter({ ...answer["quarter"] });
                 // reset(props.todayQuarter);
                 resetShowAllReceiptButton();
-                GetDate();
                 defineColor(props.todayQuarter);
             })
 
-
+        GetDate();
 
 
     }, []);
