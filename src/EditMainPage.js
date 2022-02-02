@@ -512,7 +512,8 @@ function MainPage(props) {
 
             const payload = { "eventNumber": eventNumber };
             console.log(payload);
-            axios.delete(debugAPIURL + '/ledger', payload)
+            // `/ledger/admin?${findMajorIndex}`)
+            axios.delete(debugAPIURL + '/ledger/?eventNumber=' + eventNumber)
                 .then((payload) => {
                     switch (payload.status) {
                         case 200:
