@@ -632,11 +632,16 @@ function MainPage(props) {
     useEffect(() => {
         axios.get('/ledger')
             .then((payload) => {
+                console.log("start");
                 setStudentPresident({ ...payload.data["studentPresident"] });
+                console.log("setStudentPresident");
                 setQuarter({ ...payload.data["quarter"] });
+                console.log("setStudentPresident");
                 // reset(props.todayQuarter);
                 resetShowAllReceiptButton();
+                console.log(" resetShowAllReceiptButton");
                 defineColor(props.todayQuarter);
+                console.log(" resetShowAllReceiptButton");
             })
             .catch((error) => {
                 alert("학과 장부를 불러올 수 없습니다.");
