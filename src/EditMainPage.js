@@ -383,7 +383,9 @@ function MainPage(props) {
     function resetShowAllReceiptButton() {
         let resetArray = [];
         if (quarter[currentQuarter]["eventList"] !== undefined) {
+            console.log("resetShowAllReceiptButton if문 ");
             for (let i = 0; i < quarter[currentQuarter]["eventList"].length; i++) {
+                console.log("resetShowAllReceiptButton() ");
                 resetArray.push(true)
             }
         }
@@ -395,6 +397,7 @@ function MainPage(props) {
         if (quarter !== undefined) {
             CalculateCurrentQuarterReceiptSumList(quarter[quarterData]["eventList"]);
             resetShowAllReceiptButton();
+            console.log("reset")
         }
         // window.scrollTo(0, 0);
     }
@@ -637,20 +640,21 @@ function MainPage(props) {
                 console.log("setStudentPresident");
                 setQuarter({ ...payload.data["quarter"] });
                 console.log("setStudentPresident");
-                // reset(props.todayQuarter);
-                resetShowAllReceiptButton();
-                console.log(" resetShowAllReceiptButton");
+
+                reset(props.todayQuarter);
+                console.log(" reset(props.todayQuarter);");
                 defineColor(props.todayQuarter);
-                console.log(" resetShowAllReceiptButton");
+                console.log("  defineColor(props.todayQuarter);");
+
             })
             .catch((error) => {
                 alert("학과 장부를 불러올 수 없습니다.");
                 //지우기
-                console.log(answer)
+                console.log(answer);
                 setStudentPresident({ ...answer["studentPresident"] });
                 setQuarter({ ...answer["quarter"] });
-                // reset(props.todayQuarter);
-                resetShowAllReceiptButton();
+                reset(props.todayQuarter);
+
                 defineColor(props.todayQuarter);
             })
 
