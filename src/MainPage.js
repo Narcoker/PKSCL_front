@@ -19,154 +19,330 @@ function MainPage(props) {
 
     let answer = {
         "studentPresident": {
-            "major": "사학과",
+            "major": "국어국문학과",
             "name": "홍길동",
             "phoneNumber": "01012345678",
             "email": "PKSCL@pukyon.ac.kr"
         },
         "quarter": {
             "quarter1": {
-                "status": "false"
+                "status": "true",
+                "eventList": [
+                    {
+                        "eventNumber": "1",
+                        "eventTitle": "임시데이터 입니다.",
+                        "eventContext": "데이타 O",
+                        "receiptList": [
+
+                        ]
+                    },
+                    {
+                        "eventNumber": "2",
+                        "eventTitle": "학과 OT",
+                        "eventContext": "학과 OT를 진행하였습니다.",
+                        "receiptList": [
+                            {
+                                "receiptTitle": "학과 OT 영수증1",
+                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptContext": "학과 OT 영수증입니다.",
+                                "receiptDetailList": [
+                                    {
+                                        "context": "돈까스",
+                                        "price": "2000",
+                                        "amount": "1",
+                                        "totalAmount": "2000"
+                                    },
+                                    {
+                                        "context": "대선",
+                                        "price": "3000",
+                                        "amount": "2",
+                                        "totalAmount": "6000"
+                                    },
+                                    {
+                                        "context": "참이슬",
+                                        "price": "1000",
+                                        "amount": "1",
+                                        "totalAmount": "1000"
+                                    },
+                                    {
+                                        "context": "초콜렛",
+                                        "price": "1000",
+                                        "amount": "5",
+                                        "totalAmount": "5000"
+                                    }
+                                ]
+                            },
+                            {
+                                "receiptTitle": "학과 OT 영수증2",
+                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptContext": "학과 OT 영수증입니다.",
+                                "receiptDetailList": [
+                                    {
+                                        "context": "갈비",
+                                        "price": "2000",
+                                        "amount": "2",
+                                        "totalAmount": "4000"
+                                    },
+                                    {
+                                        "context": "과자",
+                                        "price": "3000",
+                                        "amount": "1",
+                                        "totalAmount": "3000"
+                                    },
+                                    {
+                                        "context": "지우개",
+                                        "price": "1000",
+                                        "amount": "3",
+                                        "totalAmount": "3000"
+                                    },
+                                    {
+                                        "context": "연필",
+                                        "price": "1000",
+                                        "amount": "5",
+                                        "totalAmount": "5000"
+
+                                    }
+                                ]
+                            },
+                            {
+                                "receiptTitle": "학과 OT 영수증3",
+                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptContext": "학과 OT 영수증입니다.",
+                                "receiptDetailList": [
+                                    {
+                                        "context": "컵",
+                                        "price": "2000",
+                                        "amount": "1",
+                                        "totalAmount": "2000"
+                                    },
+                                    {
+                                        "context": "휴지",
+                                        "price": "5000",
+                                        "amount": "2",
+                                        "totalAmount": "10000"
+                                    },
+                                    {
+                                        "context": "책",
+                                        "price": "6000",
+                                        "amount": "2",
+                                        "totalAmount": "12000"
+                                    },
+                                    {
+                                        "context": "바구니",
+                                        "price": "7000",
+                                        "amount": "3",
+                                        "totalAmount": "21000"
+                                    },
+                                    {
+                                        "context": "이어폰",
+                                        "price": "8000",
+                                        "amount": "4",
+                                        "totalAmount": "32000"
+                                    },
+                                    {
+                                        "context": "콜라",
+                                        "price": "5000",
+                                        "amount": "5",
+                                        "totalAmount": "25000",
+                                    },
+                                    {
+                                        "context": "물",
+                                        "price": "4000",
+                                        "amount": "7",
+                                        "totalAmount": "28000"
+                                    },
+                                    {
+                                        "context": "프라이팬",
+                                        "price": "3000",
+                                        "amount": "6",
+                                        "totalAmount": "36000"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "eventNumber": "3",
+                        "eventTitle": "학과 OT2",
+                        "eventContext": "학과 OT2를 진행하였습니다.",
+                        "receiptList": [
+                            {
+                                "receiptTitle": "학과 OT2 영수증1",
+                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptContext": "학과 OT2 영수증입니다.",
+                                "receiptDetailList": [
+                                    {
+                                        "context": "돈까스",
+                                        "price": "3000",
+                                        "amount": "1",
+                                        "totalAmount": "3000"
+                                    },
+                                    {
+                                        "context": "대선",
+                                        "price": "2000",
+                                        "amount": "2",
+                                        "totalAmount": "4000"
+                                    },
+                                    {
+                                        "context": "갈비",
+                                        "price": "4000",
+                                        "amount": "5",
+                                        "totalAmount": "20000"
+                                    },
+                                    {
+                                        "context": "참이슬",
+                                        "price": "5000",
+                                        "amount": "6",
+                                        "totalAmount": "30000"
+                                    },
+                                    {
+                                        "context": "초콜렛",
+                                        "price": "1000",
+                                        "amount": "7",
+                                        "totalAmount": "7000"
+
+                                    },
+                                    {
+                                        "context": "지우개",
+                                        "price": "2000",
+                                        "amount": "8",
+                                        "totalAmount": "16000"
+                                    },
+                                    {
+                                        "context": "연필",
+                                        "price": "3000",
+                                        "amount": "9",
+                                        "totalAmount": "27000"
+                                    }
+                                ]
+                            },
+                            {
+                                "receiptTitle": "학과 OT2 영수증2",
+                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptContext": "학과 OT2 영수증입니다.",
+                                "receiptDetailList": [
+                                    {
+                                        "context": "갈비",
+                                        "price": "4000",
+                                        "amount": "1",
+                                        "totalAmount": "4000"
+
+                                    },
+                                    {
+                                        "context": "돈까스",
+                                        "price": "5000",
+                                        "amount": "2",
+                                        "totalAmount": "10000"
+                                    },
+                                    {
+                                        "context": "휴지",
+                                        "price": "2000",
+                                        "amount": "3",
+                                        "totalAmount": "6000"
+                                    },
+                                    {
+                                        "context": "컵",
+                                        "price": "4000",
+                                        "amount": "2",
+                                        "totalAmount": "8000"
+                                    },
+                                    {
+                                        "context": "콜라",
+                                        "price": "1000",
+                                        "amount": "1",
+                                        "totalAmount": "1000"
+                                    },
+                                    {
+                                        "context": "바구니",
+                                        "price": "1000",
+                                        "amount": "2",
+                                        "totalAmount": "2000"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "eventNumber": "4",
+                        "eventTitle": "새내기배움터",
+                        "eventContext": "새내기배움터를 진행하였습니다.",
+                        "receiptList": [
+                            {
+                                "receiptTitle": "새내기배움터 영수증 1",
+                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptContext": "새내기배움터 OT 영수증입니다.",
+                                "receiptDetailList": [
+                                    {
+                                        "context": "이어폰",
+                                        "price": "5000",
+                                        "amount": "1",
+                                        "totalAmount": "5000"
+                                    },
+                                    {
+                                        "context": "콜라",
+                                        "price": "4000",
+                                        "amount": "2",
+                                        "totalAmount": "8000"
+                                    },
+                                    {
+                                        "context": "물",
+                                        "price": "3000",
+                                        "amount": "1",
+                                        "totalAmount": "3000"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "eventNumber": "5",
+                        "eventTitle": "벚꽃축제1",
+                        "eventContext": "벚꽃축제1를 진행하였습니다.",
+                        "receiptList": [
+
+                        ]
+                    }
+                ]
             },
             "quarter2": {
                 "status": "true",
                 "eventList": [
                     {
-                        "eventTitle": "plAzqFgQ",
-                        "eventContext": "plAzqFgQWvKdNagG",
+                        "eventNumber": "6",
+                        "eventTitle": "공개일 O",
+                        "eventContext": "데이타 O",
                         "receiptList": [
-                            {
-                                "receiptTitle": "pJqYikgz",
-                                "receiptImg": "./test",
-                                "receiptContext": "pJqYikgzCEJmUvHd",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "LHROdIiN",
-                                "receiptImg": "./test",
-                                "receiptContext": "LHROdIiNGyUjoUQY",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "fHPUOYrB",
-                                "receiptImg": "./test",
-                                "receiptContext": "fHPUOYrBsrbCYKYM",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "obdNTBcS",
-                                "receiptImg": "./test",
-                                "receiptContext": "obdNTBcSgHIKDLVF",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "SorFTTNG",
-                                "receiptImg": "./test",
-                                "receiptContext": "SorFTTNGgdcqKBSy",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "KQWwqFCs",
-                                "receiptImg": "./test",
-                                "receiptContext": "KQWwqFCsclLmMaXj",
-                                "receiptDetailList": []
-                            }
+
                         ]
                     },
                     {
-                        "eventTitle": "RHbkPBIE",
-                        "eventContext": "RHbkPBIEBwTsnXIj",
-                        "receiptList": []
+                        "eventNumber": "7",
+                        "eventTitle": "우리학과 OT",
+                        "eventContext": "OT를 완료하였습니다.",
+                        "receiptList": [
+
+                        ]
+                    },
+                    {
+                        "eventNumber": "8",
+                        "eventTitle": "MT 영수증",
+                        "eventContext": "MT를 진행하였습니다. 큰 사건사고 없이 잘 마무리하였습니다 !",
+                        "receiptList": [
+
+                        ]
+                    },
+                    {
+                        "eventNumber": "9",
+                        "eventTitle": "MT 영수증2",
+                        "eventContext": "MT를 진행하였습니다. 큰 사건사고 없이 잘 마무리하였습니다 !",
+                        "receiptList": [
+
+                        ]
                     }
                 ]
             },
             "quarter3": {
-                "status": "true",
-                "eventList": [
-                    {
-                        "eventTitle": "yeMdfHab",
-                        "eventContext": "yeMdfHabcgrnVkht",
-                        "receiptList": [
-                            {
-                                "receiptTitle": "ZXZDjper",
-                                "receiptImg": "./test",
-                                "receiptContext": "ZXZDjperGRNgjdJn",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "UZcvcbBe",
-                                "receiptImg": "./test",
-                                "receiptContext": "UZcvcbBeBDkDgric",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "KhlJbXuU",
-                                "receiptImg": "./test",
-                                "receiptContext": "KhlJbXuUtyYaiAkQ",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "VgvsKLQi",
-                                "receiptImg": "./test",
-                                "receiptContext": "VgvsKLQiWZxSbGCc",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "TiStGEOc",
-                                "receiptImg": "./test",
-                                "receiptContext": "TiStGEOcJGfVJynG",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "ZvJbSmcc",
-                                "receiptImg": "./test",
-                                "receiptContext": "ZvJbSmccgwJpCjFz",
-                                "receiptDetailList": []
-                            }
-                        ]
-                    },
-                    {
-                        "eventTitle": "KDZaEtQW",
-                        "eventContext": "KDZaEtQWBMhKjqyv",
-                        "receiptList": [
-                            {
-                                "receiptTitle": "HeGmdtwh",
-                                "receiptImg": "./test",
-                                "receiptContext": "HeGmdtwhhQMWMwuE",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "rBNXGenn",
-                                "receiptImg": "./test",
-                                "receiptContext": "rBNXGennDDsekmMO",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "mxZRHjSu",
-                                "receiptImg": "./test",
-                                "receiptContext": "mxZRHjSuUXbkTupH",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "NvugNiCX",
-                                "receiptImg": "./test",
-                                "receiptContext": "NvugNiCXMcGrJAGM",
-                                "receiptDetailList": []
-                            },
-                            {
-                                "receiptTitle": "tCAJtdQy",
-                                "receiptImg": "./test",
-                                "receiptContext": "tCAJtdQyGbGdgOzJ",
-                                "receiptDetailList": []
-                            }
-                        ]
-                    },
-                    {
-                        "eventTitle": "PsokpBqu",
-                        "eventContext": "PsokpBqufDlmIcaa",
-                        "receiptList": []
-                    }
-                ]
+                "status": "true"
             },
             "quarter4": {
                 "status": "false"
@@ -450,17 +626,19 @@ function MainPage(props) {
                 .then((payload) => {
                     setStudentPresident({ ...payload.data["studentPresident"] });
                     setQuarter({ ...payload.data["quarter"] });
-                    reset(props.todayQuarter);
-                    defineColor(props.todayQuarter);
+                    // reset(props.todayQuarter);
+                    // defineColor(props.todayQuarter);
                 })
                 .catch((error) => {
                     alert("학과 장부를 불러올 수 없습니다.");
-                    //지우기
                     setStudentPresident({ ...answer["studentPresident"] });
                     setQuarter({ ...answer["quarter"] });
-                    reset(props.todayQuarter);
-                    defineColor(props.todayQuarter);
+                    // reset(props.todayQuarter);
+                    // defineColor(props.todayQuarter);
                 })
+
+            reset(props.todayQuarter);
+            defineColor(props.todayQuarter);
         }
     }, []);
 

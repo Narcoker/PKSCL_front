@@ -383,9 +383,7 @@ function MainPage(props) {
     function resetShowAllReceiptButton() {
         let resetArray = [];
         if (quarter[currentQuarter]["eventList"] !== undefined) {
-            console.log("resetShowAllReceiptButton if문 ");
             for (let i = 0; i < quarter[currentQuarter]["eventList"].length; i++) {
-                console.log("resetShowAllReceiptButton() ");
                 resetArray.push(true)
             }
         }
@@ -397,7 +395,9 @@ function MainPage(props) {
         if (quarter !== undefined) {
             CalculateCurrentQuarterReceiptSumList(quarter[quarterData]["eventList"]);
             resetShowAllReceiptButton();
-            console.log("reset")
+        }
+        else {
+            console.log("quarter === undefined");
         }
         // window.scrollTo(0, 0);
     }
@@ -633,31 +633,24 @@ function MainPage(props) {
 
 
     useEffect(() => {
-        axios.get('/ledger')
+        axios.get(debugAPIURL + '/ledger')
             .then((payload) => {
-                console.log("start");
                 setStudentPresident({ ...payload.data["studentPresident"] });
-                console.log("setStudentPresident");
                 setQuarter({ ...payload.data["quarter"] });
-                console.log("setStudentPresident");
-
-                reset(props.todayQuarter);
-                console.log(" reset(props.todayQuarter);");
-                defineColor(props.todayQuarter);
-                console.log("  defineColor(props.todayQuarter);");
-
+                // reset(props.todayQuarter);
+                // defineColor(props.todayQuarter);
             })
             .catch((error) => {
                 alert("학과 장부를 불러올 수 없습니다.");
-                //지우기
-                console.log(answer);
                 setStudentPresident({ ...answer["studentPresident"] });
                 setQuarter({ ...answer["quarter"] });
-                reset(props.todayQuarter);
-
-                defineColor(props.todayQuarter);
+                // reset(props.todayQuarter);
+                // defineColor(props.todayQuarter);
             })
 
+
+        reset(props.todayQuarter);
+        defineColor(props.todayQuarter);
         GetDate();
 
 
@@ -671,10 +664,11 @@ function MainPage(props) {
 
     }, [currentQuarter])
 
-    // useEffect(() => {
-    //     if (quarter !== undefined)
-    //         reset(props.todayQuarter);
-    // }, [quarter])
+    useEffect(() => {
+        if (quarter !== undefined) {
+            reset(props.todayQuarter);
+        }
+    }, [quarter])
 
 
 
