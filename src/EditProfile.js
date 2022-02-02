@@ -232,15 +232,15 @@ function EditProfile(props) {
             .then((payload) => {
                 switch (payload.status) {
                     case 200:
-                        setStdID(...payload.data.stdID);
-                        setMajor(...payload.data.major);
-                        setName(...payload.data.name);
-                        setEmail(...payload.data.email);
+                        setStdID(...payload.data["stdID"]);
+                        setMajor(...payload.data["major"]);
+                        setName(...payload.data["name"]);
+                        setEmail(...payload.data["email"]);
 
 
                         if (props.loginPosition === "prsident") {
-                            setPhoneNumber(...payload.data.phoneNumber);
-                            setMajorLogo(...payload.data.majorLogo);
+                            setPhoneNumber(...payload.data["phoneNumber"]);
+                            setMajorLogo(...payload.data["majorLogo"]);
                             setIsCorrect(
                                 {
                                     stdID: true,
@@ -257,7 +257,7 @@ function EditProfile(props) {
                                 }
                             );
                         } else if (props.loginPosition === "student") {
-                            setCertFile(...payload.data.certFile);
+                            setCertFile(...payload.data["certFile"]);
                             setIsCorrect(
                                 {
                                     stdID: true,
