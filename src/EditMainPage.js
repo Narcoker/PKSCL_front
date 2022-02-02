@@ -508,14 +508,15 @@ function MainPage(props) {
             // alert("삭제 API추가해야함" + eventNumber);
             var tempQuarter = { ...quarter };
             tempQuarter[currentQuarter]["eventList"].splice(index, 1);
-            setQuarter(tempQuarter);
+
 
             const payload = { "eventNumber": eventNumber };
-
+            console.log(payload);
             axios.delete(debugAPIURL + '/ledger', payload)
                 .then((payload) => {
                     switch (payload.status) {
                         case 200:
+                            setQuarter(tempQuarter);
                             alert("행사 장부가 삭제되었습니다.");
                             break;
                     }
@@ -607,6 +608,22 @@ function MainPage(props) {
             alert("영수증이 삭제되었습니다.");
         }
 
+    }
+
+    function putLedgerDate() {
+        const payload = {
+            quarter: currentQuarter,
+            openDate: quarterDate[currentQuarter][0],
+            closeDate: quarterDate[currentQuarter][1],
+        }
+
+        // console.log(payload);
+        axios.put(debugAPIURL + 'ledger-date', payload)
+            .then((payload) => {
+                console.log("Success edit ledger-date");
+            }).catch((error) => {
+                alert(error.response.data["errorMessage"]);
+            })
     }
 
     function uploadImg(img, i, j) {
@@ -718,6 +735,8 @@ function MainPage(props) {
                                                                     let tempDateArray = { ...quarterDate }
                                                                     tempDateArray[currentQuarter][0] = e.target.value;
                                                                     setQuarterDate(tempDateArray)
+                                                                    putLedgerDate();
+
                                                                 }}
                                                             ></input>~
                                                                 <input className="dateInput" type={"date"} value={quarterDate[currentQuarter][1]}
@@ -725,7 +744,9 @@ function MainPage(props) {
                                                                     onChange={(e) => {
                                                                         let tempDateArray = { ...quarterDate }
                                                                         tempDateArray[currentQuarter][1] = e.target.value;
-                                                                        setQuarterDate(tempDateArray)
+                                                                        setQuarterDate(tempDateArray);
+                                                                        putLedgerDate();
+
                                                                     }}
                                                                 ></input></>
                                                         )
