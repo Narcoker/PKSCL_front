@@ -48,7 +48,7 @@ function MainPage(props) {
                         "receiptList": [
                             {
                                 "receiptTitle": "학과 OT 영수증1",
-                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptImg": { name: "./static/receiptImg/test2.png" },
                                 "receiptContext": "학과 OT 영수증입니다.",
                                 "receiptDetailList": [
                                     {
@@ -79,7 +79,7 @@ function MainPage(props) {
                             },
                             {
                                 "receiptTitle": "학과 OT 영수증2",
-                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptImg": { name: "./static/receiptImg/test2.png" },
                                 "receiptContext": "학과 OT 영수증입니다.",
                                 "receiptDetailList": [
                                     {
@@ -111,7 +111,7 @@ function MainPage(props) {
                             },
                             {
                                 "receiptTitle": "학과 OT 영수증3",
-                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptImg": { name: "./static/receiptImg/test2.png" },
                                 "receiptContext": "학과 OT 영수증입니다.",
                                 "receiptDetailList": [
                                     {
@@ -173,7 +173,7 @@ function MainPage(props) {
                         "receiptList": [
                             {
                                 "receiptTitle": "학과 OT2 영수증1",
-                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptImg": { name: "./static/receiptImg/test2.png" },
                                 "receiptContext": "학과 OT2 영수증입니다.",
                                 "receiptDetailList": [
                                     {
@@ -223,7 +223,7 @@ function MainPage(props) {
                             },
                             {
                                 "receiptTitle": "학과 OT2 영수증2",
-                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptImg": { name: "./static/receiptImg/test2.png" },
                                 "receiptContext": "학과 OT2 영수증입니다.",
                                 "receiptDetailList": [
                                     {
@@ -274,7 +274,7 @@ function MainPage(props) {
                         "receiptList": [
                             {
                                 "receiptTitle": "새내기배움터 영수증 1",
-                                "receiptImg": "./static/receiptImg/test2.png",
+                                "receiptImg": { name: "./static/receiptImg/test2.png" },
                                 "receiptContext": "새내기배움터 OT 영수증입니다.",
                                 "receiptDetailList": [
                                     {
@@ -394,7 +394,7 @@ function MainPage(props) {
     function reset(quarterData) {
         if (quarter !== undefined) {
             CalculateCurrentQuarterReceiptSumList(quarter[quarterData]["eventList"]);
-            resetShowAllReceiptButton();
+            // resetShowAllReceiptButton();
         }
         else {
             console.log("quarter === undefined");
@@ -562,7 +562,7 @@ function MainPage(props) {
             receiptList: [
                 {
                     "receiptTitle": "영수증 제목을 입력해주세요",
-                    "receiptImg": "이미지 경로",
+                    "receiptImg": { name: "" },
                     "receiptContext": "영수증 내용을 입력해주세요",
                     "receiptDetailList": [
                         {
@@ -585,7 +585,7 @@ function MainPage(props) {
         temp[currentQuarter]["eventList"][i]["receiptList"].push({
 
             "receiptTitle": "영수증 제목을 입력해주세요",
-            "receiptImg": "이미지 경로",
+            "receiptImg": { name: "" },
             "receiptContext": "영수증 내용을 입력해주세요",
             "receiptDetailList": [
                 {
@@ -628,10 +628,23 @@ function MainPage(props) {
     }
 
     function uploadImg(img, i, j) {
-        console.log(img);
+        console.log("I : " + i + "J : " + j);
         const temp = { ...quarter };
         temp[currentQuarter]["eventList"][i]["receiptList"][j]["receiptImg"] = img;
         setQuarter(temp);
+        console.log(quarter);
+    }
+
+    function processImage(file) {
+        if (file != null) {
+            const imageFile = file;
+
+            if (file["name"] === "" || file["name"].includes('/')) return file.name;
+            else {
+                const imageUrl = URL.createObjectURL(imageFile);
+                return imageUrl;
+            }
+        }
     }
 
     function changeItem(key, value, i, j, k) {
@@ -643,9 +656,9 @@ function MainPage(props) {
         item["totalAmount"] = item["price"] * item["amount"];
         setQuarter(tempQuarter);
 
-        var tempShowAllReceiptButton = [...showAllReceiptButton];
-        tempShowAllReceiptButton[i] = true;
-        console.log(tempShowAllReceiptButton);
+        // var tempShowAllReceiptButton = [...showAllReceiptButton];
+        // tempShowAllReceiptButton[i] = true;
+        // console.log(tempShowAllReceiptButton);
         // setShowAllReceiptButton(tempShowAllReceiptButton);
     }
 
@@ -773,8 +786,16 @@ function MainPage(props) {
                                                                 <div className="eventCard" >
                                                                     <div className="cardContent">
                                                                         <div className="eventSource">
-                                                                            <div><div className="eventTitle"><h4 >{event["eventTitle"]}</h4>  <div>행사 총 금액 : {eventAmount[i]}원</div></div>
-                                                                                <div>{event["eventContext"]}  </div></div>
+
+                                                                            <div>
+                                                                                <div className="eventTitle">
+                                                                                    <h4>{event["eventTitle"]}</h4>
+                                                                                    <div>행사 총 금액 : {eventAmount[i]}원</div>
+                                                                                </div>
+                                                                                <div> {event["eventContext"]}</div>
+                                                                            </div>
+
+
                                                                             <div className="eventButtons">
                                                                                 <button onClick={() => { eventDelectButton(event["eventNumber"], i); }} style={{ marginRight: "15px" }}> 행사 삭제 </button>
                                                                                 {
@@ -835,7 +856,7 @@ function MainPage(props) {
                                                                                                                         ? <span onClick={() => {
 
                                                                                                                             receiptDeleteButton(i, 0);
-                                                                                                                        }}><i class="far fa-trash-alt"></i></span>
+                                                                                                                        }}><i className="far fa-trash-alt"></i></span>
                                                                                                                         : null
                                                                                                                 }
 
@@ -923,13 +944,20 @@ function MainPage(props) {
                                                                                         {
                                                                                             event["receiptList"].length === 0
                                                                                                 ? null
-                                                                                                : <>
-                                                                                                    <input type="file" id="receiptImg" accept="image/*" style={{ display: "none" }}
-                                                                                                        onChange={(e) => { console.log(e.target.value); uploadImg(e.target.value[0], i, 0); }}></input>
-                                                                                                    <label htmlFor='receiptImg'>업로드</label>
-                                                                                                    <img src={event["receiptList"][0]["receiptImg"].name} style={{ backgroundColor: "var(--color-leftPanel)" }} alt={event["receiptList"][0]["receiptImg"]} height={"150"} width={"100"} />
+                                                                                                :
+                                                                                                !fixEventButton[i]
+                                                                                                    ? <img src={processImage(event["receiptList"][0]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
+                                                                                                        alt={processImage(event["receiptList"][0]["receiptImg"])} height={"150"} width={"100"} />
+                                                                                                    :
+                                                                                                    <>
+                                                                                                        <input type="file" id="receiptImg" accept="image/*" style={{ display: "none" }}
+                                                                                                            onChange={(e) => { uploadImg(e.target.files[0], i, 0); }}></input>
+                                                                                                        <label htmlFor='receiptImg'>
 
-                                                                                                </>
+                                                                                                            <img src={processImage(event["receiptList"][0]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
+                                                                                                                alt={processImage(event["receiptList"][0]["receiptImg"])} height={"150"} width={"100"} />
+                                                                                                        </label>
+                                                                                                    </>
                                                                                         }
 
                                                                                     </div>
@@ -985,8 +1013,8 @@ function MainPage(props) {
                                                                                                                                             return (<tr>
                                                                                                                                                 <td id="context" contentEditable={fixEventButton[i]}
                                                                                                                                                     onInput={(e) => {
-                                                                                                                                                        console.log(e.currentTarget.textContent);
-                                                                                                                                                        console.log(quarter[currentQuarter]["eventList"][i]["receiptList"][j]["receiptDetailList"][k]["context"]);
+                                                                                                                                                        // console.log(e.currentTarget.textContent);
+                                                                                                                                                        // console.log(quarter[currentQuarter]["eventList"][i]["receiptList"][j]["receiptDetailList"][k]["context"]);
                                                                                                                                                         changeItem("context", e.currentTarget.textContent, i, j, k);
                                                                                                                                                     }}>{item["context"]}</td>
 
@@ -1029,10 +1057,31 @@ function MainPage(props) {
 
                                                                                                                 </>)}
                                                                                                     </div>
+
                                                                                                     {
-                                                                                                        event["receiptList"].length === 0
-                                                                                                            ? null
-                                                                                                            : <img src={receipt["receiptImg"]} alt={receipt["receiptImg"]} style={{ backgroundColor: "var(--color-leftPanel)" }} height={"150"} width={"100"} />
+                                                                                                        console.log(j)
+                                                                                                    }
+                                                                                                    {
+
+                                                                                                        !fixEventButton[i]
+                                                                                                            ? <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
+                                                                                                                alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"} />
+                                                                                                            :
+                                                                                                            <>
+
+
+                                                                                                                <input type="file" id="receiptImg" accept="image/*" style={{ display: "none" }}
+                                                                                                                    onChange={(e) => { uploadImg(e.target.files[0], i, j); }}></input>
+
+                                                                                                                <button>{i}{j}</button>
+
+                                                                                                                <label htmlFor='receiptImg'>
+                                                                                                                    <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
+                                                                                                                        alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"} />
+                                                                                                                </label>
+
+
+                                                                                                            </>
                                                                                                     }
                                                                                                 </div>
 
