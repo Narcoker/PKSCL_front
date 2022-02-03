@@ -391,6 +391,7 @@
 .EditMainPageContainer .remotePanelBox {
     background-color: var(--color-leftPanel);
     padding: 20px;
-    margin-right: 20px;
+    margin-right: 80px;
     border-radius: 20px;
+    width: 240px;
 }

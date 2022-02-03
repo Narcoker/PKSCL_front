@@ -13,34 +13,32 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useRef } from 'react';
 import { upload } from '@testing-library/user-event/dist/upload';
+import { ReactSortable } from "react-sortablejs";
+
 
 
 function MainPage(props) {
+    const [list, setList] = useState([]);
 
-    function focusContentEditableTextToEnd(e) {
+    const [blocks, setBlocks] = useState([
+        {
+            id: 6,
+            content: "item 6",
+            width: 2,
+            type: "text",
+            parent_id: 2
+        },
+        {
+            id: 7,
+            content: "item 7",
+            width: 2,
+            type: "text",
+            parent_id: 2
+        }
+    ]
 
+    );
 
-        // console.log(e.target);
-
-        // const input = e.currentTarget.textContent.focus()
-
-        // input.setSelectionRange(e.currentTarget.textContent.length, e.currentTarget.textContent.length);
-        // return
-
-
-
-
-        var el = e.target;
-        var range = document.createRange()
-        var sel = window.getSelection()
-        console.log(el.childNodes);
-
-        range.setStart(el.childNodes[0], e.currentTarget.textContent.length)
-        range.collapse(true)
-
-        sel.removeAllRanges()
-        sel.addRange(range)
-    }
 
     let debugAPIURL = "";
     // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
@@ -420,6 +418,7 @@ function MainPage(props) {
     function reset(quarterData) {
         if (quarter !== undefined) {
             CalculateCurrentQuarterReceiptSumList(quarter[quarterData]["eventList"]);
+            setList(quarter[quarterData]["eventList"]);
             // resetShowAllReceiptButton();
         }
         else {
@@ -724,6 +723,8 @@ function MainPage(props) {
                 alert("학과 장부를 불러올 수 없습니다.");
                 setStudentPresident({ ...answer["studentPresident"] });
                 setQuarter({ ...answer["quarter"] });
+                setList(answer["quarter"][currentQuarter]["eventList"]);
+                console.log(answer["quarter"][currentQuarter]["eventList"]);
 
                 for (let i = 0; i < answer["quarter"][currentQuarter]["eventList"].length; i++) {
                     resetArray.push(false)
@@ -742,6 +743,7 @@ function MainPage(props) {
 
 
 
+
     }, []);
 
 
@@ -756,6 +758,8 @@ function MainPage(props) {
         if (quarter !== undefined) {
             reset(props.todayQuarter);
         }
+
+
     }, [quarter])
 
 
@@ -1270,19 +1274,32 @@ function MainPage(props) {
 
                                             {/* 2 */}
                                             <div className="remotePanel">
-                                                <div className="remotePanelBox">
+                                                <div className="remotePanelBox" style={{ display: "flex" }}>
                                                     <div>
-                                                        <h5>행사 목록</h5>
+                                                        <h5 style={{ textAlign: "center", marginBottom: "5px" }}>📚행사 목록📚</h5>
+                                                        <p style={{ textAlign: "center", fontSize: "12px" }}>드래그로 순서를 변경할 수 있습니다.</p>
+
                                                         {
-                                                            quarter[currentQuarter]["eventList"] === undefined
-                                                                ? (<div>입력된 행사가 없습니다.</div>)
-                                                                : (<>{
-                                                                    quarter[currentQuarter]["eventList"].map((event, i) => {
-                                                                        return (<div>{event["eventTitle"]}</div>)
-                                                                    })
-                                                                }
-                                                                </>)
+                                                            list !== undefined
+                                                                ?
+                                                                <ReactSortable tag="div" list={list} setList={setList}>
+
+                                                                    {list.map((item, i) => (
+                                                                        <div style={{ marginLeft: "20px" }} key={item.eventNumber}>{i + 1}. {item.eventTitle}</div>
+                                                                    ))}
+
+                                                                    <div style={{ justifyContent: "center", width: "100%", display: "flex" }} >
+                                                                        <button className='submitButton' type='button' onClick={() => { alert("API 문서가 없어서 기능 구현 안함") }}> 순서 변경 </button>
+                                                                    </div>
+                                                                </ReactSortable>
+                                                                : <span>등록된 행사가 없습니다.</span>
                                                         }
+
+
+
+
+
+
                                                         <div style={{ color: "#d32c2c" }}>
                                                             ※ 장부를 잘못 기입해서 문제가 발생할 경우의 책임은 학생회장 본인에게 있습니다.
                                                         </div>
@@ -1303,5 +1320,6 @@ function MainPage(props) {
         </div >
     )
 }
+
 
 export default MainPage;
