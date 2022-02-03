@@ -534,7 +534,11 @@ function MainPage(props) {
 
         console.log(payload);
 
-        axios.put(debugAPIURL + "/ledger", payload)
+        axios.put(debugAPIURL + "/ledger", payload,
+            {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            }
+        )
             .then((payload) => {
                 switch (payload.status) {
                     case 200:

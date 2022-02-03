@@ -131,11 +131,11 @@ function AccessPage(props) {
         console.log(value);
       }
 
-      axios.post(debugAPIURL + "/signup/" + position, payload, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      axios.post(debugAPIURL + "/signup/" + position, payload,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' }
         }
-      })
+      )
         .then((payload) => {
           switch (payload.status) {
             case 200:
