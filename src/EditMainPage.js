@@ -1061,15 +1061,7 @@ function MainPage(props) {
                                                                                                     {
                                                                                                         console.log(i + " " + j)
                                                                                                     }
-                                                                                                    <input type="file" id="receiptImg" accept="image/*" style={{ display: "none" }}
-                                                                                                        onChange={(e) => { uploadImg(e.target.files[0], i, j); }}></input>
 
-                                                                                                    <button>{i}{j}</button>
-
-                                                                                                    <label htmlFor='receiptImg'>
-                                                                                                        <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
-                                                                                                            alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"} />
-                                                                                                    </label>
                                                                                                     {
 
                                                                                                         fixEventButton[i]
