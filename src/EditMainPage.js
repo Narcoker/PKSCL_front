@@ -16,6 +16,32 @@ import { upload } from '@testing-library/user-event/dist/upload';
 
 
 function MainPage(props) {
+
+    function focusContentEditableTextToEnd(e) {
+
+
+        // console.log(e.target);
+
+        // const input = e.currentTarget.textContent.focus()
+
+        // input.setSelectionRange(e.currentTarget.textContent.length, e.currentTarget.textContent.length);
+        // return
+
+
+
+
+        var el = e.target;
+        var range = document.createRange()
+        var sel = window.getSelection()
+        console.log(el.childNodes);
+
+        range.setStart(el.childNodes[0], e.currentTarget.textContent.length)
+        range.collapse(true)
+
+        sel.removeAllRanges()
+        sel.addRange(range)
+    }
+
     let debugAPIURL = "";
     // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
 
@@ -416,10 +442,6 @@ function MainPage(props) {
         }
     }
 
-    function pksclSubmitButton() {
-        alert("API..")
-    }
-
     function sumItems(price, amount) {
         return price * amount;
     }
@@ -530,7 +552,10 @@ function MainPage(props) {
     }
 
     function eventFixButton(event) {
-        var payload = Object.assign(event, { quarter: currentQuarter })
+        var payload = new FormData();
+
+        payload.append("event", event)
+        payload.append("quarter", currentQuarter);
 
         console.log(payload);
 
@@ -651,6 +676,18 @@ function MainPage(props) {
         }
     }
 
+    function changeEventTitle(value, i) {
+        var tempQuarter = { ...quarter };
+        tempQuarter[currentQuarter]["eventList"][i].eventTitle = value;
+        setQuarter(tempQuarter);
+    }
+
+    function changeEventContext(value, i) {
+        var tempQuarter = { ...quarter };
+        tempQuarter[currentQuarter]["eventList"][i].eventContext = value;
+        setQuarter(tempQuarter);
+    }
+
     function changeItem(key, value, i, j, k) {
         console.log("changeItem");
         var tempQuarter = { ...quarter };
@@ -667,11 +704,19 @@ function MainPage(props) {
     }
 
 
+
+
     useEffect(() => {
+        let resetArray = [];
+
         axios.get(debugAPIURL + '/ledger')
             .then((payload) => {
                 setStudentPresident({ ...payload.data["studentPresident"] });
                 setQuarter({ ...payload.data["quarter"] });
+
+                for (let i = 0; i < payload.data["quarter"][currentQuarter]["eventList"].length; i++) {
+                    resetArray.push(false)
+                }
                 // reset(props.todayQuarter);
                 // defineColor(props.todayQuarter);
             })
@@ -679,6 +724,13 @@ function MainPage(props) {
                 alert("학과 장부를 불러올 수 없습니다.");
                 setStudentPresident({ ...answer["studentPresident"] });
                 setQuarter({ ...answer["quarter"] });
+
+                for (let i = 0; i < answer["quarter"][currentQuarter]["eventList"].length; i++) {
+                    resetArray.push(false)
+                }
+
+                console.log(resetArray);
+                setShowAllReceiptButton(resetArray);
                 // reset(props.todayQuarter);
                 // defineColor(props.todayQuarter);
             })
@@ -687,6 +739,7 @@ function MainPage(props) {
         reset(props.todayQuarter);
         defineColor(props.todayQuarter);
         GetDate();
+
 
 
     }, []);
@@ -793,10 +846,40 @@ function MainPage(props) {
 
                                                                             <div>
                                                                                 <div className="eventTitle">
-                                                                                    <h4>{event["eventTitle"]}</h4>
+                                                                                    <h4>
+
+
+                                                                                        {
+                                                                                            fixEventButton[i]
+                                                                                                ?
+                                                                                                <input type="text" style={{ border: "transparent", textAlign: "left" }} placeholder={event["eventTitle"]}
+                                                                                                    onInput={
+                                                                                                        (e) => {
+                                                                                                            changeEventTitle(e.target.value, i);
+                                                                                                        }}></input>
+                                                                                                :
+                                                                                                <>{event["eventTitle"]}</>
+                                                                                        }
+
+                                                                                    </h4>
                                                                                     <div>행사 총 금액 : {eventAmount[i]}원</div>
                                                                                 </div>
-                                                                                <div> {event["eventContext"]}</div>
+                                                                                <div>
+                                                                                    {
+                                                                                        fixEventButton[i]
+                                                                                            ?
+                                                                                            <input type="text" style={{ border: "transparent", textAlign: "left" }} placeholder={event["eventContext"]}
+                                                                                                onInput={
+                                                                                                    (e) => {
+                                                                                                        changeEventContext(e.target.value, i);
+                                                                                                    }}></input>
+                                                                                            :
+                                                                                            <>{event["eventContext"]}</>
+                                                                                    }
+
+
+
+                                                                                </div>
                                                                             </div>
 
 
@@ -819,7 +902,7 @@ function MainPage(props) {
                                                                                     event.receiptList.length <= 1
                                                                                         ? null
                                                                                         : (
-                                                                                            showAllReceiptButton[i] === false
+                                                                                            showAllReceiptButton[i] === true
                                                                                                 ? (
                                                                                                     <button onClick={() => {
                                                                                                         let array = [...showAllReceiptButton];
@@ -841,7 +924,7 @@ function MainPage(props) {
                                                                         </div>
 
                                                                         {
-                                                                            showAllReceiptButton[i] === true
+                                                                            showAllReceiptButton[i] === false
                                                                                 ? (<div id="receiptContent" style={{ height: "380px", overflowY: "hidden" }}>
 
                                                                                     <div className="receiptCard">
@@ -894,21 +977,49 @@ function MainPage(props) {
                                                                                                                         {event["receiptList"][0]["receiptDetailList"].map((item, k) => {
                                                                                                                             return (
                                                                                                                                 <tr>
-                                                                                                                                    <td id="context" contentEditable={fixEventButton[i]} ref={el}
-                                                                                                                                        onInput={(e) => {
-                                                                                                                                            changeItem("context", e.currentTarget.textContent, i, 0, k);
-                                                                                                                                        }}>{item["context"]}
+                                                                                                                                    <td>
+                                                                                                                                        {
+                                                                                                                                            fixEventButton[i]
+                                                                                                                                                ?
+                                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "center" }} placeholder={item["context"]}
+                                                                                                                                                    onInput={
+                                                                                                                                                        (e) => {
+                                                                                                                                                            changeItem("context", e.target.value, i, 0, k);
+                                                                                                                                                        }}></input>
+                                                                                                                                                :
+                                                                                                                                                <span type="text" style={{ border: "transparent", textAlign: "center" }} >{item["context"]}</span>
+                                                                                                                                        }
+
                                                                                                                                     </td>
 
-                                                                                                                                    <td id='price' contentEditable={fixEventButton[i]}
-                                                                                                                                        onInput={(e) => {
-                                                                                                                                            changeItem("price", e.currentTarget.textContent, i, 0, k);
-                                                                                                                                        }}>{item["price"]}
+                                                                                                                                    <td>
+                                                                                                                                        {
+                                                                                                                                            fixEventButton[i]
+                                                                                                                                                ?
+                                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "center" }} placeholder={item["price"]}
+                                                                                                                                                    onInput={
+                                                                                                                                                        (e) => {
+                                                                                                                                                            changeItem("price", e.target.value.replace(/[^0-9]/g, ''), i, 0, k);
+                                                                                                                                                        }}></input>
+                                                                                                                                                :
+                                                                                                                                                <span type="text" style={{ border: "transparent", textAlign: "center" }} >{item["price"]}</span>
+                                                                                                                                        }
+
                                                                                                                                     </td>
 
-                                                                                                                                    <td id='amount' contentEditable={fixEventButton[i]} onInput={(e) => {
-                                                                                                                                        changeItem("amount", e.currentTarget.textContent, i, 0, k);
-                                                                                                                                    }}>{item["amount"]}
+                                                                                                                                    <td>
+                                                                                                                                        {
+                                                                                                                                            fixEventButton[i]
+                                                                                                                                                ?
+                                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "center" }} placeholder={item["amount"]}
+                                                                                                                                                    onInput={
+                                                                                                                                                        (e) => {
+                                                                                                                                                            changeItem("amount", e.target.value.replace(/[^0-9]/g, ''), i, 0, k);
+                                                                                                                                                        }}></input>
+                                                                                                                                                :
+                                                                                                                                                <span type="text" style={{ border: "transparent", textAlign: "center" }} >{item["amount"]}</span>
+                                                                                                                                        }
+
                                                                                                                                     </td>
                                                                                                                                     <td>{item["totalAmount"]}</td>
                                                                                                                                 </tr>
@@ -959,7 +1070,7 @@ function MainPage(props) {
                                                                                                         <label htmlFor='receiptImg'>
 
                                                                                                             <img src={processImage(event["receiptList"][0]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
-                                                                                                                alt={processImage(event["receiptList"][0]["receiptImg"])} height={"150"} width={"100"} />
+                                                                                                                alt={processImage(event["receiptList"][0]["receiptImg"])} height={"150"} width={"100"} title='변경하시려면 클릭하세요.' />
                                                                                                         </label>
                                                                                                     </>
                                                                                         }
@@ -1014,25 +1125,54 @@ function MainPage(props) {
                                                                                                                                     </thead>
                                                                                                                                     <tbody>
                                                                                                                                         {receipt["receiptDetailList"].map((item, k) => {
-                                                                                                                                            return (<tr>
-                                                                                                                                                <td id="context" contentEditable={fixEventButton[i]}
-                                                                                                                                                    onInput={(e) => {
-                                                                                                                                                        // console.log(e.currentTarget.textContent);
-                                                                                                                                                        // console.log(quarter[currentQuarter]["eventList"][i]["receiptList"][j]["receiptDetailList"][k]["context"]);
-                                                                                                                                                        changeItem("context", e.currentTarget.textContent, i, j, k);
-                                                                                                                                                    }}>{item["context"]}</td>
+                                                                                                                                            return (
+                                                                                                                                                <tr>
+                                                                                                                                                    <td>
+                                                                                                                                                        {
+                                                                                                                                                            fixEventButton[i]
+                                                                                                                                                                ?
+                                                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "center" }} placeholder={item["context"]}
+                                                                                                                                                                    onInput={
+                                                                                                                                                                        (e) => {
+                                                                                                                                                                            changeItem("context", e.target.value, i, j, k);
+                                                                                                                                                                        }}></input>
+                                                                                                                                                                :
+                                                                                                                                                                <span type="text" style={{ border: "transparent", textAlign: "center" }} >{item["context"]}</span>
+                                                                                                                                                        }
+                                                                                                                                                    </td>
 
-                                                                                                                                                <td id='price' contentEditable={fixEventButton[i]}
-                                                                                                                                                    onInput={(e) => {
-                                                                                                                                                        changeItem("price", e.currentTarget.textContent, i, j, k);
-                                                                                                                                                        console.log(item["price"]);
-                                                                                                                                                    }}>{item["price"]}</td>
-                                                                                                                                                <td id='amount' contentEditable={fixEventButton[i]} onInput={(e) => {
-                                                                                                                                                    changeItem("amount", e.currentTarget.textContent, i, j, k);
-                                                                                                                                                    console.log(item["amount"]);
-                                                                                                                                                }}>{item["amount"]}</td>
-                                                                                                                                                <td>{item["totalAmount"]}</td>
-                                                                                                                                            </tr>)
+                                                                                                                                                    <td>
+                                                                                                                                                        {
+                                                                                                                                                            fixEventButton[i]
+                                                                                                                                                                ?
+                                                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "center" }} placeholder={item["price"]}
+                                                                                                                                                                    onInput={
+                                                                                                                                                                        (e) => {
+                                                                                                                                                                            changeItem("price", e.target.value.replace(/[^0-9]/g, ''), i, j, k);
+                                                                                                                                                                        }}></input>
+                                                                                                                                                                :
+                                                                                                                                                                <span type="text" style={{ border: "transparent", textAlign: "center" }} >{item["price"]}</span>
+                                                                                                                                                        }
+                                                                                                                                                    </td>
+
+                                                                                                                                                    <td>
+                                                                                                                                                        {
+                                                                                                                                                            fixEventButton[i]
+                                                                                                                                                                ?
+                                                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "center" }} placeholder={item["amount"]}
+                                                                                                                                                                    onInput={
+                                                                                                                                                                        (e) => {
+                                                                                                                                                                            changeItem("amount", e.target.value.replace(/[^0-9]/g, ''), i, j, k);
+                                                                                                                                                                        }}></input>
+                                                                                                                                                                :
+                                                                                                                                                                <span type="text" style={{ border: "transparent", textAlign: "center" }} >{item["amount"]}</span>
+                                                                                                                                                        }
+                                                                                                                                                    </td>
+
+                                                                                                                                                    <td>
+                                                                                                                                                        {item["totalAmount"]}
+                                                                                                                                                    </td>
+                                                                                                                                                </tr>)
                                                                                                                                         })
                                                                                                                                         }
                                                                                                                                     </tbody> </table>
@@ -1074,11 +1214,9 @@ function MainPage(props) {
                                                                                                                 <input type="file" id="receiptImg" accept="image/*" style={{ display: "none" }}
                                                                                                                     onChange={(e) => { uploadImg(e.target.files[0], i, j); }}></input>
 
-                                                                                                                <button>{i}{j}</button>
-
                                                                                                                 <label htmlFor='receiptImg'>
                                                                                                                     <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
-                                                                                                                        alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"} />
+                                                                                                                        alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"} title='변경하시려면 클릭하세요.' />
                                                                                                                 </label>
 
 

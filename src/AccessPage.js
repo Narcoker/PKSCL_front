@@ -47,6 +47,7 @@ function AccessPage(props) {
       setEmail(email + "@pukyong.ac.kr");
     } else if (email.length > 1) { //커서 자동이동
       let input = document.getElementById('inputEmail');
+
       input.focus();
       input.setSelectionRange(email.length - 14, email.length - 14);
     }
