@@ -20,26 +20,6 @@ import { ReactSortable } from "react-sortablejs";
 function MainPage(props) {
     const [list, setList] = useState([]);
 
-    const [blocks, setBlocks] = useState([
-        {
-            id: 6,
-            content: "item 6",
-            width: 2,
-            type: "text",
-            parent_id: 2
-        },
-        {
-            id: 7,
-            content: "item 7",
-            width: 2,
-            type: "text",
-            parent_id: 2
-        }
-    ]
-
-    );
-
-
     let debugAPIURL = "";
     // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
 
@@ -695,7 +675,6 @@ function MainPage(props) {
         item[key] = value;
         item["totalAmount"] = item["price"] * item["amount"];
         setQuarter(tempQuarter);
-
         // var tempShowAllReceiptButton = [...showAllReceiptButton];
         // tempShowAllReceiptButton[i] = true;
         // console.log(tempShowAllReceiptButton);
@@ -712,9 +691,10 @@ function MainPage(props) {
             .then((payload) => {
                 setStudentPresident({ ...payload.data["studentPresident"] });
                 setQuarter({ ...payload.data["quarter"] });
-
-                for (let i = 0; i < payload.data["quarter"][currentQuarter]["eventList"].length; i++) {
-                    resetArray.push(false)
+                if (quarter[currentQuarter]["eventList"] !== undefined) {
+                    for (let i = 0; i < payload.data["quarter"][currentQuarter]["eventList"].length; i++) {
+                        resetArray.push(false)
+                    }
                 }
                 // reset(props.todayQuarter);
                 // defineColor(props.todayQuarter);
@@ -1214,17 +1194,15 @@ function MainPage(props) {
 
                                                                                                         fixEventButton[i]
                                                                                                             ?
-                                                                                                            <>
-                                                                                                                <input type="file" id="receiptImg" accept="image/*" style={{ display: "none" }}
-                                                                                                                    onChange={(e) => { uploadImg(e.target.files[0], i, j); }}></input>
+                                                                                                            <div className="uploadimg">
 
                                                                                                                 <label htmlFor='receiptImg'>
                                                                                                                     <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
-                                                                                                                        alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"} title='변경하시려면 클릭하세요.' />
+                                                                                                                        alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} title='변경하시려면 클릭하세요.' />
                                                                                                                 </label>
-
-
-                                                                                                            </>
+                                                                                                                {/* <input type="file" id="receiptImg" accept="image/*"
+                                                                                                                    onChange={(e) => { uploadImg(e.target.files[0], i, j); console.log("hi:" + i + " " + j) }} style={{ display: "none" }}></input> */}
+                                                                                                            </div>
 
                                                                                                             : <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
                                                                                                                 alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"} />

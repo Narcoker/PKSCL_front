@@ -353,7 +353,7 @@ function EditProfile(props) {
                                             changeIsCorrect("stdID", false);
                                         }
                                     }
-                                    } name="stdID" value={stdID} maxLength="9" placeholder="내용을 입력해주세요" type="text" />
+                                    } name="stdID" maxLength="9" placeholder={stdID} type="text" />
 
                                 </div>
 
@@ -363,7 +363,7 @@ function EditProfile(props) {
                                     {
                                         props.loginPosition === "president"
                                             ?
-                                            <input type="text" list="majorList-options" id='major' name="major" placeholder="학과를 입력하세요." value={major} readOnly></input>
+                                            <input type="text" list="majorList-options" id='major' name="major" placeholder={major} readOnly></input>
                                             :
                                             <>
 
@@ -399,7 +399,7 @@ function EditProfile(props) {
                                 <div className="inputField">
                                     <i className="fas fa-user"></i>
                                     <label>이름</label>
-                                    <input onChange={(e) => {
+                                    <input onInput={(e) => {
                                         setName(e.target.value)
                                         if (e.target.value === "") {
                                             changeIsCorrect("name", false);
@@ -407,7 +407,7 @@ function EditProfile(props) {
                                             changeIsCorrect("name", true);
                                         }
                                     }
-                                    } name="name" value={name} type="text" placeholder="이름을 입력해주세요" />
+                                    } name="name" type="text" placeholder={name} />
                                 </div>
 
                                 {
@@ -424,7 +424,7 @@ function EditProfile(props) {
                                                     changeIsCorrect("phoneNum", true);
                                                 }
                                             }
-                                            } maxLength="13" name="phoneNum" value={phoneNumber} type="text" placeholder="내용을 입력하세요" />
+                                            } maxLength="13" name="phoneNum" type="text" placeholder={phoneNumber} />
                                         </div>
                                         : null
                                 }
