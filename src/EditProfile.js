@@ -74,7 +74,7 @@ function EditProfile(props) {
             if (window.confirm('정말 탈퇴하시겠습니까?')) {
                 const payload = { "inputEmail": inputEmail, "inputPassword": inputPassword }
                 //axio.탈퇴
-                axios.post(debugAPIURL + '/withdrawal', payload)
+                axios.delete(debugAPIURL + '/withdrawal', payload)
                     .then((payload) => {
                         switch (payload.status) {
                             case 200:
