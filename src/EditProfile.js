@@ -230,9 +230,7 @@ function EditProfile(props) {
                         setEmail(...payload.data["email"]);
 
 
-
-
-                        if (props.loginPosition === "prsident") {
+                        if (props.loginPosition === "president") {
                             setPhoneNumber(...payload.data["phoneNumber"]);
                             setMajorLogo(...payload.data["majorLogo"]);
 
@@ -291,8 +289,10 @@ function EditProfile(props) {
             })
             .catch((error) => {
                 switch (error.response.status) {
-                    case 400: console.log("정보를 로드하는데 실패했습니다."); break;
-                    default: console.log("error: " + error.response.status); break;
+                    case 400:
+                        console.log("정보를 로드하는데 실패했습니다."); break;
+                    default:
+                        console.log("error: " + error.response.status); break;
                 }
 
                 //debug
