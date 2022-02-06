@@ -823,10 +823,7 @@ function MainPage(props) {
                                                         : null
                                                 }
                                                 <button className='submitButton' type='button' onClick={() => { history.push('/main') }}>학생 입장 장부 확인</button>
-                                                <button className='submitButton' type='button' onClick={() => {
-                                                    setEditProfileState(true);
-
-                                                }}>프로필 편집</button>
+                                                <button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
                                                 <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
                                             </div>
                                         </div>
@@ -842,7 +839,7 @@ function MainPage(props) {
                                                         ? <div>입력된 행사가 없습니다.</div>
                                                         : (quarter[currentQuarter]["eventList"].map((event, i) => {
                                                             return (
-                                                                <div className="eventCard"  >
+                                                                <div className="eventCard" key={i} >
                                                                     <div className="cardContent">
                                                                         <div className="eventSource">
 
@@ -976,8 +973,10 @@ function MainPage(props) {
                                                                                                         {fixEventButton[i]
                                                                                                             ? <>
                                                                                                                 <div>
-
-                                                                                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "400px" }} placeholder={event["receiptList"][0]["receiptContext"]}
+                                                                                                                    <span onClick={() => { receiptDeleteButton(i, 0); }}>
+                                                                                                                        <i className="far fa-trash-alt"></i>
+                                                                                                                    </span>
+                                                                                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "360px" }} placeholder={event["receiptList"][0]["receiptContext"]}
                                                                                                                         onInput={
                                                                                                                             (e) => {
                                                                                                                                 changeReceiptContext(e.target.value, i);
@@ -1007,7 +1006,7 @@ function MainPage(props) {
                                                                                                                     <tbody>
                                                                                                                         {event["receiptList"][0]["receiptDetailList"].map((item, k) => {
                                                                                                                             return (
-                                                                                                                                <tr >
+                                                                                                                                <tr key={k}>
                                                                                                                                     <td>
                                                                                                                                         {
                                                                                                                                             fixEventButton[i]
@@ -1115,35 +1114,22 @@ function MainPage(props) {
                                                                                     {
                                                                                         event["receiptList"].map((receipt, j) => {
                                                                                             return (
-                                                                                                <div className="receiptCard" >
+                                                                                                <div className="receiptCard" key={j}>
                                                                                                     <div className="receiptResource">
                                                                                                         {
                                                                                                             event["receiptList"].length === 0
                                                                                                                 ? <div>입력된 영수증이 없습니다.</div>
                                                                                                                 : (<>
                                                                                                                     <div className="receiptTitle">
-                                                                                                                        <h5>
+                                                                                                                        <h5>{receipt["receiptTitle"]}
                                                                                                                             {
                                                                                                                                 fixEventButton[i]
-                                                                                                                                    ?
-                                                                                                                                    <>
-                                                                                                                                        <span onClick={() => { receiptDeleteButton(i, 0); }}>
-                                                                                                                                            <i className="far fa-trash-alt"></i>
-                                                                                                                                        </span>
-                                                                                                                                        <input type="text" style={{ border: "transparent", textAlign: "left", width: "160px" }} placeholder={event["receiptList"][0]["receiptTitle"]}
-                                                                                                                                            onInput={
-                                                                                                                                                (e) => {
-                                                                                                                                                    changeReceiptTitle(e.target.value, i);
-                                                                                                                                                }}></input>
+                                                                                                                                    ? <span onClick={() => {
 
-                                                                                                                                    </>
-
-                                                                                                                                    :
-                                                                                                                                    <>
-                                                                                                                                        {event["receiptList"][0]["receiptTitle"]}
-                                                                                                                                    </>
+                                                                                                                                        receiptDeleteButton(i, j);
+                                                                                                                                    }}><i class="far fa-trash-alt"></i></span>
+                                                                                                                                    : null
                                                                                                                             }
-
                                                                                                                         </h5>
 
                                                                                                                         {
@@ -1153,21 +1139,7 @@ function MainPage(props) {
                                                                                                                         }
 
                                                                                                                     </div>
-                                                                                                                    {fixEventButton[i]
-                                                                                                                        ? <>
-                                                                                                                            <div>
-                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "left", width: "400px" }} placeholder={event["receiptList"][0]["receiptContext"]}
-                                                                                                                                    onInput={
-                                                                                                                                        (e) => {
-                                                                                                                                            changeReceiptContext(e.target.value, i);
-                                                                                                                                        }}>
-                                                                                                                                </input>
-                                                                                                                            </div>
-
-                                                                                                                        </>
-                                                                                                                        :
-                                                                                                                        <div>{event["receiptList"][0]["receiptContext"]}</div>
-                                                                                                                    }
+                                                                                                                    <div>{receipt["receiptContext"]}</div>
                                                                                                                     {
                                                                                                                         receipt["receiptDetailList"].length === 0
                                                                                                                             ? <div>입력된 영수증 내역이 없습니다.</div>
@@ -1184,7 +1156,7 @@ function MainPage(props) {
                                                                                                                                     <tbody>
                                                                                                                                         {receipt["receiptDetailList"].map((item, k) => {
                                                                                                                                             return (
-                                                                                                                                                <tr>
+                                                                                                                                                <tr key={k}>
                                                                                                                                                     <td>
                                                                                                                                                         {
                                                                                                                                                             fixEventButton[i]
