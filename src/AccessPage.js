@@ -221,9 +221,10 @@ function AccessPage(props) {
 
   function certEmail() {
     let payload = { "email": email };
+    alert("입력하신 이메일로 메일을 발송했습니다.");
     axios.post(debugAPIURL + '/email/' + position, payload)
       .then((payload) => {
-        alert("입력하신 이메일로 메일을 발송했습니다.");
+        console.log("Post Email ok");
       })
       .catch((payload) => {
         console.log(payload);
