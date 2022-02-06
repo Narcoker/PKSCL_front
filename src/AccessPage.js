@@ -268,7 +268,7 @@ function AccessPage(props) {
 
 
   return (
-    <div className="container">
+    <div className="accessContainer">
 
       <div className="left-panel">
         <div className="content">

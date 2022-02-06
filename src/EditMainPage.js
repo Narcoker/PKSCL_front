@@ -843,12 +843,9 @@ function MainPage(props) {
                                                                 <div className="eventCard" key={i} >
                                                                     <div className="cardContent">
                                                                         <div className="eventSource">
-
-                                                                            <div>
+                                                                            <div style={{ width: "230px" }}>
                                                                                 <div className="eventTitle">
                                                                                     <h4>
-
-
                                                                                         {
                                                                                             fixEventButton[i]
                                                                                                 ?
@@ -862,7 +859,7 @@ function MainPage(props) {
                                                                                         }
 
                                                                                     </h4>
-                                                                                    <div>행사 총 금액 : {eventAmount[i]}원</div>
+                                                                                    <div style={{ width: "500px" }}> 행사 총 금액 : {eventAmount[i]}원</div>
                                                                                 </div>
 
                                                                             </div>
@@ -978,7 +975,7 @@ function MainPage(props) {
                                                                                                                 <div>
 
 
-                                                                                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "360px" }} placeholder={event["receiptList"][0]["receiptContext"]}
+                                                                                                                    <input type="text" style={{ border: "transparent", textAlign: "right", width: "400px" }} placeholder={event["receiptList"][0]["receiptContext"]}
                                                                                                                         onInput={
                                                                                                                             (e) => {
                                                                                                                                 changeReceiptContext(e.target.value, i);
@@ -988,7 +985,7 @@ function MainPage(props) {
 
                                                                                                             </>
                                                                                                             :
-                                                                                                            <div>{event["receiptList"][0]["receiptContext"]}</div>
+                                                                                                            <div style={{ width: "400px", textAlign: "right" }}>{event["receiptList"][0]["receiptContext"]}</div>
                                                                                                         }
 
 
@@ -1059,10 +1056,9 @@ function MainPage(props) {
                                                                                                                         }
                                                                                                                         )}
                                                                                                                     </tbody>
-                                                                                                                </table>
                                                                                                                     {fixEventButton[i]
                                                                                                                         ?
-                                                                                                                        <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                                                                                                                        <div style={{ display: "flex", justifyContent: "center", width: "400px", position: "relative", }}>
                                                                                                                             <button type='button' className='submitButton' style={{ margin: "0" }}
                                                                                                                                 onClick={() => {
                                                                                                                                     var tempQuarter = { ...quarter };
@@ -1080,6 +1076,9 @@ function MainPage(props) {
                                                                                                                         :
                                                                                                                         null
                                                                                                                     }
+
+                                                                                                                </table>
+
 
                                                                                                                 </>)
                                                                                                         }
@@ -1123,25 +1122,57 @@ function MainPage(props) {
                                                                                                                 ? <div>입력된 영수증이 없습니다.</div>
                                                                                                                 : (<>
                                                                                                                     <div className="receiptTitle">
-                                                                                                                        <h5>{receipt["receiptTitle"]}
+                                                                                                                        <h5>
                                                                                                                             {
                                                                                                                                 fixEventButton[i]
-                                                                                                                                    ? <span onClick={() => {
-                                                                                                                                        receiptDeleteButton(i, j);
-                                                                                                                                    }}><i class="far fa-trash-alt"></i></span>
-                                                                                                                                    : null
+                                                                                                                                    ?
+                                                                                                                                    <>
+                                                                                                                                        <span onClick={() => { receiptDeleteButton(i, 0); }}>
+                                                                                                                                            <i className="far fa-trash-alt"></i>
+                                                                                                                                        </span>
+                                                                                                                                        <input type="text" style={{ border: "transparent", textAlign: "left", width: "160px" }} placeholder={event["receiptList"][0]["receiptTitle"]}
+                                                                                                                                            onInput={
+                                                                                                                                                (e) => {
+                                                                                                                                                    changeReceiptTitle(e.target.value, i);
+                                                                                                                                                }}></input>
+
+                                                                                                                                    </>
+
+                                                                                                                                    :
+                                                                                                                                    <>
+                                                                                                                                        {event["receiptList"][0]["receiptTitle"]}
+                                                                                                                                    </>
                                                                                                                             }
+
                                                                                                                         </h5>
                                                                                                                         {
-                                                                                                                            receipt["receiptDetailList"].length === 0
+                                                                                                                            event["receiptList"][0]["receiptDetailList"].length === 0
                                                                                                                                 ? null
-                                                                                                                                : <div>{j + 1}번째 영수증 금액 : {sumReceipt(receipt["receiptDetailList"])}원</div>
+                                                                                                                                : (<div>
+                                                                                                                                    1번째 영수증 금액 : {sumReceipt(event["receiptList"][0]["receiptDetailList"])}원
+                                                                                                                                </div>)
                                                                                                                         }
 
 
                                                                                                                     </div>
 
-                                                                                                                    <div>{receipt["receiptContext"]}</div>
+                                                                                                                    {fixEventButton[i]
+                                                                                                                        ? <>
+                                                                                                                            <div>
+
+
+                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "right", width: "400px" }} placeholder={event["receiptList"][0]["receiptContext"]}
+                                                                                                                                    onInput={
+                                                                                                                                        (e) => {
+                                                                                                                                            changeReceiptContext(e.target.value, i);
+                                                                                                                                        }}>
+                                                                                                                                </input>
+                                                                                                                            </div>
+
+                                                                                                                        </>
+                                                                                                                        :
+                                                                                                                        <div style={{ width: "400px", textAlign: "right" }}>{event["receiptList"][0]["receiptContext"]}</div>
+                                                                                                                    }
                                                                                                                     {
                                                                                                                         receipt["receiptDetailList"].length === 0
                                                                                                                             ? <div>입력된 영수증 내역이 없습니다.</div>
@@ -1207,25 +1238,28 @@ function MainPage(props) {
                                                                                                                                                 </tr>)
                                                                                                                                         })
                                                                                                                                         }
-                                                                                                                                    </tbody> </table>
-                                                                                                                                {fixEventButton[i]
-                                                                                                                                    ?
-                                                                                                                                    <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
-                                                                                                                                        <button className='submitButton' type='button' style={{ margin: "0" }}
-                                                                                                                                            onClick={() => {
-                                                                                                                                                var tempQuarter = { ...quarter };
+                                                                                                                                    </tbody>
+                                                                                                                                    {fixEventButton[i]
+                                                                                                                                        ?
+                                                                                                                                        <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                                                                                                                                            <button className='submitButton' type='button' style={{ margin: "0" }}
+                                                                                                                                                onClick={() => {
+                                                                                                                                                    var tempQuarter = { ...quarter };
 
-                                                                                                                                                tempQuarter[currentQuarter]["eventList"][i]["receiptList"][j]["receiptDetailList"].push({
-                                                                                                                                                    context: "",
-                                                                                                                                                    price: "",
-                                                                                                                                                    amount: "",
-                                                                                                                                                    totalAmount: ""
-                                                                                                                                                })
-                                                                                                                                                setQuarter(tempQuarter)
-                                                                                                                                            }}>항목 추가</button></div>
-                                                                                                                                    :
-                                                                                                                                    null
-                                                                                                                                }
+                                                                                                                                                    tempQuarter[currentQuarter]["eventList"][i]["receiptList"][j]["receiptDetailList"].push({
+                                                                                                                                                        context: "",
+                                                                                                                                                        price: "",
+                                                                                                                                                        amount: "",
+                                                                                                                                                        totalAmount: ""
+                                                                                                                                                    })
+                                                                                                                                                    setQuarter(tempQuarter)
+                                                                                                                                                }}>항목 추가</button></div>
+                                                                                                                                        :
+                                                                                                                                        null
+                                                                                                                                    }
+
+                                                                                                                                </table>
+
                                                                                                                             </>
                                                                                                                             )
                                                                                                                     }
@@ -1270,7 +1304,9 @@ function MainPage(props) {
                                                                         {
                                                                             fixEventButton[i] === true
                                                                                 ?
-                                                                                <div style={{ width: "650px", display: "flex", justifyContent: "flex-end" }}>
+                                                                                <div style={{
+                                                                                    width: "650px", display: "flex", justifyContent: "flex-end", position: "relative",
+                                                                                }}>
                                                                                     <button className='submitButton' type='button'
                                                                                         onClick={() => {
                                                                                             receiptAddButton(i);
