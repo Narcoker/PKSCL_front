@@ -1,7 +1,7 @@
 .EditMainPageContainer {
     /* font-family: "OTWelcomeRA"; */
     font-family: "Work Sans";
-   font-weight: bold;
+    font-weight: bold;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -229,6 +229,7 @@
     display: flex;
     box-shadow: 1px 1px 10px 0px gray;
     margin-bottom: 60px;
+    background-color: white;
 }
 
 .EditMainPageContainer .quarterTotalAmount {
@@ -261,6 +262,9 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    /* border-left: 9px solid var(--color-quarter); */
+    flex-direction: column;
+
 }
 
 .EditMainPageContainer .receiptTitle div {

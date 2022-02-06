@@ -32,10 +32,11 @@
     margin-right: 15px;
 }
 
+
 .boxTitle {
     width: 70%;
     display: flex;
-    justify-content: flex-end;
+    justify-content:flex-end;
     align-items: baseline;
 }
 
@@ -121,5 +122,3 @@ input:required {
     cursor: pointer;
     transition: 0.5s;
 }
-
-.black-bg {}

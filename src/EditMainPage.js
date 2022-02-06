@@ -463,22 +463,23 @@ function MainPage(props) {
         }
     }
 
-    function setColorProperty(colorQuarter, colorQuarterCircle, colorLeftPanel, colorCard) {
+    function setColorProperty(colorQuarter, colorQuarterCircle, colorLeftPanel, colorCard, colorBackground) {
         document.documentElement.style.setProperty("--color-quarter", colorQuarter);
         document.documentElement.style.setProperty("--color-quarterCircle", colorQuarterCircle);
         document.documentElement.style.setProperty("--color-leftPanel", colorLeftPanel);
         document.documentElement.style.setProperty("--color-card", colorCard);
+        document.documentElement.style.setProperty("--color-background", colorBackground);
     }
 
     function defineColor(quarter) {
         if (quarter === "quarter1") {
-            setColorProperty("#db8f8e", "#efbebc", "#f5dede", "#fff5ed");
+            setColorProperty("#db8f8e", "#efbebc", "#f5dede", "#fff5ed", "#fff5f5");
         } else if (quarter === "quarter2") {
-            setColorProperty("#649d67", "#cedbcf", "#cedbcf", "#dee7df");
+            setColorProperty("#649d67", "#cedbcf", "#cedbcf", "#dee7df", "#f3f9f3");
         } else if (quarter === "quarter3") {
-            setColorProperty("#c18356", "#efdccd", "#e9d8cd", "#fff5ed");
+            setColorProperty("#c18356", "#efdccd", "#e9d8cd", "#fff5ed", "#fff5ee");
         } else if (quarter === "quarter4") {
-            setColorProperty("#6b8396", "#d0dbe5", "#d0dbe5", "#e6f1fb");
+            setColorProperty("#6b8396", "#d0dbe5", "#d0dbe5", "#e6f1fb", "#f5faff");
         }
     }
 
@@ -965,17 +966,18 @@ function MainPage(props) {
                                                                                                                     ? null
                                                                                                                     : (<div>
                                                                                                                         1번째 영수증 금액 : {sumReceipt(event["receiptList"][0]["receiptDetailList"])}원
-
                                                                                                                     </div>)
                                                                                                             }
+
+
                                                                                                         </div>
+
 
                                                                                                         {fixEventButton[i]
                                                                                                             ? <>
                                                                                                                 <div>
-                                                                                                                    <span onClick={() => { receiptDeleteButton(i, 0); }}>
-                                                                                                                        <i className="far fa-trash-alt"></i>
-                                                                                                                    </span>
+
+
                                                                                                                     <input type="text" style={{ border: "transparent", textAlign: "left", width: "360px" }} placeholder={event["receiptList"][0]["receiptContext"]}
                                                                                                                         onInput={
                                                                                                                             (e) => {
@@ -1125,20 +1127,20 @@ function MainPage(props) {
                                                                                                                             {
                                                                                                                                 fixEventButton[i]
                                                                                                                                     ? <span onClick={() => {
-
                                                                                                                                         receiptDeleteButton(i, j);
                                                                                                                                     }}><i class="far fa-trash-alt"></i></span>
                                                                                                                                     : null
                                                                                                                             }
                                                                                                                         </h5>
-
                                                                                                                         {
                                                                                                                             receipt["receiptDetailList"].length === 0
                                                                                                                                 ? null
                                                                                                                                 : <div>{j + 1}번째 영수증 금액 : {sumReceipt(receipt["receiptDetailList"])}원</div>
                                                                                                                         }
 
+
                                                                                                                     </div>
+
                                                                                                                     <div>{receipt["receiptContext"]}</div>
                                                                                                                     {
                                                                                                                         receipt["receiptDetailList"].length === 0
