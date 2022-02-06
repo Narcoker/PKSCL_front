@@ -10,7 +10,7 @@ function AccessPage(props) {
   // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
 
   // let [signType, setSignType] =useState("signIn");
-  const [position, setPosition] = useState("student");
+  const [position, setPosition] = useState("");
 
   const [stdID, setStdID] = useState("");
   const [name, setName] = useState("");
