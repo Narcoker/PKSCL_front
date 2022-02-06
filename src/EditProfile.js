@@ -224,19 +224,14 @@ function EditProfile(props) {
             .then((payload) => {
                 switch (payload.status) {
                     case 200:
-                        setStdID(...payload.data["stdID"]);
-                        setMajor(...payload.data["major"]);
-                        setName(...payload.data["name"]);
-                        setEmail(...payload.data["email"]);
-
+                        setStdID(payload.data["stdID"]);
+                        setMajor(payload.data["major"]);
+                        setName(payload.data["name"]);
+                        setEmail(payload.data["email"]);
 
                         if (props.loginPosition === "president") {
-                            setPhoneNumber(...payload.data["phoneNumber"]);
-                            setMajorLogo(...payload.data["majorLogo"]);
-
-                            console.log(payload.data["phoneNumber"]);
-                            console.log(payload.data["majorLogo"]);
-
+                            setPhoneNumber(payload.data["phoneNumber"]);
+                            setMajorLogo(payload.data["majorLogo"]);
                             setIsCorrect(
                                 {
                                     stdID: true,
@@ -253,10 +248,7 @@ function EditProfile(props) {
                                 }
                             );
                         } else if (props.loginPosition === "student") {
-                            setCertFile(...payload.data["certFile"]);
-                            console.log(payload.data["certFile"]);
-
-
+                            setCertFile(payload.data["certFile"]);
                             setIsCorrect(
                                 {
                                     stdID: true,
@@ -273,15 +265,6 @@ function EditProfile(props) {
                                 }
                             );
                         }
-
-                        console.log("payload.data")
-                        console.log(payload.data["stdID"]);
-                        console.log(payload.data["major"]);
-                        console.log(payload.data["name"]);
-                        console.log(payload.data["email"]);
-                        console.log(payload.data["phoneNumber"]);
-                        console.log(payload.data["majorLogo"]);
-                        console.log(payload.data["certFile"]);
                         break;
                     default: break;
                 }
@@ -290,17 +273,18 @@ function EditProfile(props) {
             .catch((error) => {
                 switch (error.response.status) {
                     case 400:
-                        console.log("정보를 로드하는데 실패했습니다."); break;
-                    default:
-                        console.log("error: " + error.response.status); break;
+                        console.log("정보를 로드하는데 실패했습니다.");
+                        break;
+                    default: console.log("error: " + error.response.status); break;
                 }
 
                 //debug
-                setStdID(() => "123456789");
-                setMajor(() => "1");
-                setName(() => "홍길동");
+
+                setStdID(() => "201892643");
+                setMajor(() => "국어국문학과");
+                setName(() => "한준규");
                 setPhoneNumber(() => "010-0000-0000");
-                setEmail(() => "userID@pukyong.ac.kr");
+                setEmail(() => "test1@pukyong.ac.kr");
                 // setCertFile({ name: "학생증.jpg" });
                 setCertFile("");
                 setMajorLogo("");
@@ -373,7 +357,7 @@ function EditProfile(props) {
                                             changeIsCorrect("stdID", false);
                                         }
                                     }
-                                    } name="stdID" maxLength="9" placeholder={stdID} type="text" />
+                                    } name="stdID" value={stdID} maxLength="9" placeholder="내용을 입력해주세요" type="text" />
 
                                 </div>
 
@@ -383,7 +367,7 @@ function EditProfile(props) {
                                     {
                                         props.loginPosition === "president"
                                             ?
-                                            <input type="text" list="majorList-options" id='major' name="major" placeholder={major} readOnly></input>
+                                            <input type="text" list="majorList-options" id='major' name="major" placeholder="학과를 입력하세요." value={major} readOnly></input>
                                             :
                                             <>
 
@@ -419,7 +403,7 @@ function EditProfile(props) {
                                 <div className="inputField">
                                     <i className="fas fa-user"></i>
                                     <label>이름</label>
-                                    <input onInput={(e) => {
+                                    <input onChange={(e) => {
                                         setName(e.target.value)
                                         if (e.target.value === "") {
                                             changeIsCorrect("name", false);
@@ -427,7 +411,7 @@ function EditProfile(props) {
                                             changeIsCorrect("name", true);
                                         }
                                     }
-                                    } name="name" type="text" placeholder={name} />
+                                    } name="name" value={name} type="text" placeholder="이름을 입력해주세요" />
                                 </div>
 
                                 {
@@ -444,7 +428,7 @@ function EditProfile(props) {
                                                     changeIsCorrect("phoneNum", true);
                                                 }
                                             }
-                                            } maxLength="13" name="phoneNum" type="text" placeholder={phoneNumber} />
+                                            } maxLength="13" name="phoneNum" value={phoneNumber} type="text" placeholder="내용을 입력하세요" />
                                         </div>
                                         : null
                                 }
@@ -500,19 +484,7 @@ function EditProfile(props) {
                                 <button className="errorBtn" type="button" onClick={() => {
                                     editButtonState ? putProfile() : alert('정보를 모두 입력해주세요.');
                                 }}>저장하기</button>
-                                <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => {
-                                    props.setEditProfileState(false); reset();
-
-                                    console.log("usestate()")
-                                    console.log(stdID);
-                                    console.log(major);
-                                    console.log(name);
-                                    console.log(email);
-                                    console.log(phoneNumber);
-                                    console.log(majorLogo);
-                                    console.log(certFile);
-
-                                }}>취소</button>
+                                <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { props.setEditProfileState(false); reset(); }}>취소</button>
 
                             </div>
                         </>

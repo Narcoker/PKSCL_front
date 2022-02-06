@@ -68,7 +68,7 @@
 }
 
 .inputField [type=password] {
-    /* font-family: 'Malgun gothic', dotum, sans-serif; */
+    font-family: 'Malgun gothic', dotum, sans-serif;
 }
 
 .inputField label {
@@ -95,7 +95,6 @@
     text-align: center;
     border-radius: 0px;
     width: 70%;
-    font-weight: 600;
 }
 
 .inputField input[id=major]::placeholder {
