@@ -140,15 +140,13 @@ function AccessPage(props) {
         .then((payload) => {
           switch (payload.status) {
             case 200:
-              if (alert("회원가입에 성공하였습니다 :)")) {
-                reset();
-                history.push('/');
-                return;
+              alert("회원가입에 성공하였습니다 :)")
+              if (position === "president") {
+                if (window.confirm('학생회장 인증을 완료해야지 장부 업로드 및 학생 관리를 할 수 있습니다. 챗봇으로 이동하시겠습니까?'))
+                  window.location("http://pf.kakao.com/_hxnlXb")
               }
-              else {
-                history.push('/signUp');
-                return;
-              }
+              history.push('/');
+              return;
             default: alert("success: " + payload.status); return;
           }
         })
@@ -221,15 +219,16 @@ function AccessPage(props) {
 
   function certEmail() {
     let payload = { "email": email };
-    alert("입력하신 이메일로 메일을 발송했습니다.");
     axios.post(debugAPIURL + '/email/' + position, payload)
       .then((payload) => {
-        console.log("Post Email ok");
+        alert("입력하신 이메일로 메일을 발송했습니다.");
       })
-      .catch((payload) => {
-
-        console.log(payload);
-        alert(payload.data.errorMessage);
+      .catch((error) => {
+        switch (error.response.status) {
+          case 409: alert("이미 존재하는 이메일입니다 :)"); return;
+          case 403: alert("이메일이 인증되지 않았습니다. 이메일 인증을 완료해주세요 :) "); return;
+          default: alert("error: " + error.response.status); return;
+        }
       });
   };
 
