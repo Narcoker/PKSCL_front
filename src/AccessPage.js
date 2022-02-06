@@ -153,10 +153,10 @@ function AccessPage(props) {
           }
         })
         .catch((error) => {
-          switch (error.status) {
+          switch (error.response.status) {
             case 409: alert("이미 존재하는 이메일입니다 :)"); return;
             case 403: alert("이메일이 인증되지 않았습니다. 이메일 인증을 완료해주세요 :) "); return;
-            default: alert("error: " + error.status); return;
+            default: alert("error: " + error.response.status); return;
           }
         })
     }
@@ -227,6 +227,7 @@ function AccessPage(props) {
         console.log("Post Email ok");
       })
       .catch((payload) => {
+
         console.log(payload);
         alert(payload.data.errorMessage);
       });
