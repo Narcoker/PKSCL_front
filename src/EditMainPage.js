@@ -398,7 +398,7 @@ function MainPage(props) {
     function reset(quarterData) {
         if (quarter !== undefined) {
             CalculateCurrentQuarterReceiptSumList(quarter[quarterData]["eventList"]);
-            setList(quarter[quarterData]["eventList"]);
+            setList(...quarter[quarterData]["eventList"]);
             // resetShowAllReceiptButton();
         }
         else {
@@ -717,7 +717,7 @@ function MainPage(props) {
                 alert("학과 장부를 불러올 수 없습니다.");
                 setStudentPresident({ ...answer["studentPresident"] });
                 setQuarter({ ...answer["quarter"] });
-                setList(answer["quarter"][currentQuarter]["eventList"]);
+                setList(...answer["quarter"][currentQuarter]["eventList"]);
                 console.log(answer["quarter"][currentQuarter]["eventList"]);
 
                 for (let i = 0; i < answer["quarter"][currentQuarter]["eventList"].length; i++) {
