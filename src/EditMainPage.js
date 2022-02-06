@@ -973,9 +973,7 @@ function MainPage(props) {
                                                                                                         {fixEventButton[i]
                                                                                                             ? <>
                                                                                                                 <div>
-                                                                                                                    <span onClick={() => { receiptDeleteButton(i, 0); }}>
-                                                                                                                        <i className="far fa-trash-alt"></i>
-                                                                                                                    </span>
+
                                                                                                                     <input type="text" style={{ border: "transparent", textAlign: "left", width: "360px" }} placeholder={event["receiptList"][0]["receiptContext"]}
                                                                                                                         onInput={
                                                                                                                             (e) => {
@@ -1121,15 +1119,28 @@ function MainPage(props) {
                                                                                                                 ? <div>입력된 영수증이 없습니다.</div>
                                                                                                                 : (<>
                                                                                                                     <div className="receiptTitle">
-                                                                                                                        <h5>{receipt["receiptTitle"]}
+                                                                                                                        <h5>
                                                                                                                             {
                                                                                                                                 fixEventButton[i]
-                                                                                                                                    ? <span onClick={() => {
+                                                                                                                                    ?
+                                                                                                                                    <>
+                                                                                                                                        <span onClick={() => { receiptDeleteButton(i, 0); }}>
+                                                                                                                                            <i className="far fa-trash-alt"></i>
+                                                                                                                                        </span>
+                                                                                                                                        <input type="text" style={{ border: "transparent", textAlign: "left", width: "160px" }} placeholder={event["receiptList"][0]["receiptTitle"]}
+                                                                                                                                            onInput={
+                                                                                                                                                (e) => {
+                                                                                                                                                    changeReceiptTitle(e.target.value, i);
+                                                                                                                                                }}></input>
 
-                                                                                                                                        receiptDeleteButton(i, j);
-                                                                                                                                    }}><i class="far fa-trash-alt"></i></span>
-                                                                                                                                    : null
+                                                                                                                                    </>
+
+                                                                                                                                    :
+                                                                                                                                    <>
+                                                                                                                                        {event["receiptList"][0]["receiptTitle"]}
+                                                                                                                                    </>
                                                                                                                             }
+
                                                                                                                         </h5>
 
                                                                                                                         {
@@ -1139,7 +1150,21 @@ function MainPage(props) {
                                                                                                                         }
 
                                                                                                                     </div>
-                                                                                                                    <div>{receipt["receiptContext"]}</div>
+                                                                                                                    {fixEventButton[i]
+                                                                                                                        ? <>
+                                                                                                                            <div>
+                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "left", width: "360px" }} placeholder={event["receiptList"][0]["receiptContext"]}
+                                                                                                                                    onInput={
+                                                                                                                                        (e) => {
+                                                                                                                                            changeReceiptContext(e.target.value, i);
+                                                                                                                                        }}>
+                                                                                                                                </input>
+                                                                                                                            </div>
+
+                                                                                                                        </>
+                                                                                                                        :
+                                                                                                                        <div>{event["receiptList"][0]["receiptContext"]}</div>
+                                                                                                                    }
                                                                                                                     {
                                                                                                                         receipt["receiptDetailList"].length === 0
                                                                                                                             ? <div>입력된 영수증 내역이 없습니다.</div>
