@@ -459,7 +459,7 @@ function EditProfile(props) {
                                                 ? <div className="inputField">
                                                     <i className="fas fa-user-graduate"></i>
                                                     <label>학과로고</label>
-                                                    <input style={{ width: "200px" }} value={majorLogo.name} readOnly></input>
+                                                    <input style={{ width: "200px" }} placeholder={majorLogo} readOnly></input>
                                                     <label className='fileButton' htmlFor="file">찾기</label>
                                                     <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
                                                         onChange={(e) => {
@@ -479,7 +479,7 @@ function EditProfile(props) {
                                         <div className="inputField">
                                             <i className="fas fa-user-graduate"></i>
                                             <label>학생증</label>
-                                            <input style={{ width: "200px" }} value={certFile.name} readOnly></input>
+                                            <input style={{ width: "200px" }} placeholder={certFile} readOnly></input>
                                             <label className='fileButton' htmlFor="file">찾기</label>
                                             <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
                                                 onChange={(e) => {
