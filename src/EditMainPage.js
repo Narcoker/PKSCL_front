@@ -398,7 +398,7 @@ function MainPage(props) {
     function reset(quarterData) {
         if (quarter !== undefined) {
             CalculateCurrentQuarterReceiptSumList(quarter[quarterData]["eventList"]);
-            setList(...quarter[quarterData]["eventList"]);
+            setList(quarter[quarterData]["eventList"]);
             // resetShowAllReceiptButton();
         }
         else {
@@ -717,7 +717,7 @@ function MainPage(props) {
                 alert("학과 장부를 불러올 수 없습니다.");
                 setStudentPresident({ ...answer["studentPresident"] });
                 setQuarter({ ...answer["quarter"] });
-                setList(...answer["quarter"][currentQuarter]["eventList"]);
+                setList(answer["quarter"][currentQuarter]["eventList"]);
                 console.log(answer["quarter"][currentQuarter]["eventList"]);
 
                 for (let i = 0; i < answer["quarter"][currentQuarter]["eventList"].length; i++) {
@@ -839,7 +839,7 @@ function MainPage(props) {
                                                         ? <div>입력된 행사가 없습니다.</div>
                                                         : (quarter[currentQuarter]["eventList"].map((event, i) => {
                                                             return (
-                                                                <div className="eventCard" key={i} >
+                                                                <div className="eventCard"  >
                                                                     <div className="cardContent">
                                                                         <div className="eventSource">
 
@@ -1006,7 +1006,7 @@ function MainPage(props) {
                                                                                                                     <tbody>
                                                                                                                         {event["receiptList"][0]["receiptDetailList"].map((item, k) => {
                                                                                                                             return (
-                                                                                                                                <tr key={k}>
+                                                                                                                                <tr >
                                                                                                                                     <td>
                                                                                                                                         {
                                                                                                                                             fixEventButton[i]
@@ -1114,7 +1114,7 @@ function MainPage(props) {
                                                                                     {
                                                                                         event["receiptList"].map((receipt, j) => {
                                                                                             return (
-                                                                                                <div className="receiptCard" key={j}>
+                                                                                                <div className="receiptCard" >
                                                                                                     <div className="receiptResource">
                                                                                                         {
                                                                                                             event["receiptList"].length === 0
@@ -1156,7 +1156,7 @@ function MainPage(props) {
                                                                                                                                     <tbody>
                                                                                                                                         {receipt["receiptDetailList"].map((item, k) => {
                                                                                                                                             return (
-                                                                                                                                                <tr key={k}>
+                                                                                                                                                <tr>
                                                                                                                                                     <td>
                                                                                                                                                         {
                                                                                                                                                             fixEventButton[i]
