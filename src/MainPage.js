@@ -22,7 +22,8 @@ function MainPage(props) {
             "major": "국어국문학과",
             "name": "홍길동",
             "phoneNumber": "01012345678",
-            "email": "PKSCL@pukyon.ac.kr"
+            "email": "PKSCL@pukyon.ac.kr",
+            "majorLogo": majorlogo
         },
         "quarter": {
             "quarter1": {
@@ -685,7 +686,7 @@ function MainPage(props) {
                                 <div className="presidentCard">
                                     <h2>{studentPresident["major"]}</h2>
                                     <p> 온라인 장부 입니다. </p>
-                                    <img src={majorlogo} alt="majorlogo" height={"150"} width={"10"} />
+                                    <img src={studentPresident["majorLogo"]} alt="majorlogo" height={"150"} width={"10"} />
                                     <h3>{studentPresident["name"]}</h3>
                                     <p>{studentPresident["phoneNumber"]}</p>
                                     <p>{studentPresident["email"]}</p>

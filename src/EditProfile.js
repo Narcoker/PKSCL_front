@@ -238,6 +238,7 @@ function EditProfile(props) {
                         setEmail(...payload.data["email"]);
 
 
+
                         if (props.loginPosition === "prsident") {
                             setPhoneNumber(...payload.data["phoneNumber"]);
                             setMajorLogo(...payload.data["majorLogo"]);
