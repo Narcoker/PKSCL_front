@@ -1,398 +1,230 @@
-.EditMainPageContainer {
-    font-family: "OTWelcomeRA";
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.container {
+    width: 100%;
     height: 100vh;
-    width: 100vw;
-}
-
-.EditMainPageContainer .leftPanel {
-    min-width: 20vw;
-    height: 100%;
-    background-color: var(--color-leftPanel);
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 0;
-    position: fixed;
-    left: 0;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    z-index: 10;
+    font-family: 'OTWelcomeRA';
 }
 
-.EditMainPageContainer .quarter {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 20px;
-}
-
-.EditMainPageContainer .quarterButton div:hover,
-.EditMainPageContainer .quarterButton:hover {
-    transition: 0.5s;
-    transform: scale(1.05);
-    cursor: pointer;
-}
-
-.EditMainPageContainer .quarterButton {
-    width: 100px;
-    height: 100px;
-    margin: 10px auto;
-    position: relative;
-}
-
-.EditMainPageContainer .quarterButton img {
-    padding: 0;
-    height: 100px;
-    width: 100px;
-    filter: drop-shadow(3px 5px 3px gray);
-}
-
-.EditMainPageContainer .quarterButton div {
-    z-index: 20;
-    padding: 5px 10px;
-    text-align: center;
+.container:before {
+    content: "";
     position: absolute;
-    height: 100px;
-    width: 100px;
-    line-height: 100px;
-    color: white;
+    height: 2000px;
+    width: 2000px;
+    top: -10%;
+    right: 48%;
+    transform: translateY(-50%);
+    background: var(--color-quarterCircle);
+    border-radius: 50%;
+    z-index: 4;
 }
 
-.EditMainPageContainer .fa-chevron-right {
-    cursor: pointer;
-}
-
-.EditMainPageContainer .managementPageBar {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-}
-
-.EditMainPageContainer .managementPageBar:hover {
-    transition: 0.5s;
-    transform: scale(1.5);
-}
-
-.EditMainPageContainer .rightPanel {
-    width: 70vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-.EditMainPageContainer .nav {
-    top: 0;
-    width: 100%;
-    justify-content: flex-end;
-    position: fixed;
-    height: 20px;
-}
-
-.EditMainPageContainer .majorList {
-    height: 50px;
-}
-
-.EditMainPageContainer .dateInput {
-    height: 32px;
-    border-radius: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    display: flex;
-    background-color: var(--color-white);
-    margin-left: 20px;
-    box-shadow: 1px 1px 5px 0px gray;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-top: 15px;
-    font-size: 15px;
-    border: none;
-    width: 200px;
-    caret-color: black;
-}
-
-.EditMainPageContainer .mainSearchBar {
-    height: 32px;
-    border-radius: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    display: flex;
-    background-color: var(--color-white);
-    margin-left: 20px;
-    box-shadow: 1px 1px 5px 0px gray;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-top: 15px;
-    font-size: 15px;
-}
-
-.EditMainPageContainer .mainSearchBar input {
-    border: none;
-    width: 300px;
-    caret-color: black;
-    height: auto;
-}
-
-.EditMainPageContainer .mainSearchBar input:focus {
-    outline-color: var(--color-leftPanel);
-    caret-color: black;
-    background-color: none;
-}
-
-.EditMainPageContainer .mainSearchBar input[type=text]:-ms-clear {
-    display: none;
-}
-
-.EditMainPageContainer .eventButtons {
-    display: flex;
-    flex-direction: row !important;
-    align-items: flex-start;
-}
-
-.EditMainPageContainer .buttons {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 8vh;
-}
-
-.EditMainPageContainer .submitButton {
-    background-color: var(--color-quarter);
-    border: none;
-    outline: none;
-    color: var(--color-white);
-    width: 100px;
-    padding: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    border-radius: 20px;
-    margin: 15px 10px;
-    transition: 0.5s;
-}
-
-
-.EditMainPageContainer .quarterData {
-    margin-top: 12vh;
-    width: 700px;
-    margin-right: 0;
-}
-
-.EditMainPageContainer .eventTitle {
-    display: flex !important;
-    width: 200px;
-    margin: 10px 0;
-    flex-direction: column !important;
-    justify-content: space-between;
-    color: var(--color-quarter);
-}
-
-.EditMainPageContainer .eventSource {
-    border-left: 9px solid var(--color-quarter);
-    display: flex;
-    width: 650px;
-    margin: 10px 0;
-    justify-content: space-between;
-}
-
-.EditMainPageContainer .eventSource div,
-.EditMainPageContainer .eventSource h4 {
-    margin-left: 10px;
-    text-align: left;
-}
-
-
-.EditMainPageContainer .eventSource button {
-    width: 120px;
-    background-color: var(--color-leftPanel);
-    border: none;
-    outline: none;
-    height: 35px;
-    border-radius: 49px;
-    color: var(--color-quarter);
-    margin: 0 0 15px 0;
-}
-
-.EditMainPageContainer .eventSource div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.EditMainPageContainer .eventCard {
-    margin-top: 30px;
-    display: flex;
-    box-shadow: 1px 1px 10px 0px gray;
-    margin-bottom: 60px;
-}
-
-.EditMainPageContainer .quarterTotalAmount {
-    color: var(--color-quarter);
-}
-
-.EditMainPageContainer .cardContent {
-    display: flex;
-    margin: 10px 30px;
-    width: 500px;
-    text-align: center;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.EditMainPageContainer #receiptContent {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.EditMainPageContainer .cardContent h4,
-.EditMainPageContainer .cardContent h5 {
-    color: var(--color-quarter);
-}
-
-.EditMainPageContainer .receiptTitle {
-    width: 400px;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-.EditMainPageContainer .receiptTitle div {
-    color: var(--color-quarter);
-}
-
-.EditMainPageContainer #receiptContent table {
-    margin: 5px 0;
-    width: 400px;
-    height: 240px;
-}
-
-.EditMainPageContainer .receiptTable thead {
-    display: block;
-}
-
-.EditMainPageContainer .receiptTable tbody {
-    display: block;
-    overflow-y: auto;
-    height: 180px;
-    width: fit-content;
-    
-}
-
-.EditMainPageContainer .receiptTable tbody::-webkit-scrollbar {
-    width: 8px;
-}
-
-.EditMainPageContainer .receiptTable tbody::-webkit-scrollbar-track-piece {
-    background-color: var(--color-tableOdd);
-    border-radius: 100px;
-    width: 10px;
-}
-
-.EditMainPageContainer .receiptTable tbody::-webkit-scrollbar-thumb {
-    background-color: var(--color-quarter);
-    border-radius: 100px;
-}
-
-.EditMainPageContainer .receiptTable tbody::-webkit-scrollbar-track-piece:end {
-    background-color: none;
-    margin-bottom: 20px;
-}
-
-.EditMainPageContainer .receiptTable tr {
-    height: 40px;
-}
-
-.EditMainPageContainer #receiptContent th {
-    background-color: var(--color-quarter);
-    color: var(--color-white);
-    width: 100px;
-}
-
-.EditMainPageContainer #receiptContent tr:nth-child(even) {
-    background-color: var(--color-tableEven);
-}
-
-.EditMainPageContainer #receiptContent tr:nth-child(odd) {
-    background-color: var(--color-tableOdd);
-}
-
-.EditMainPageContainer #receiptContent td,
-.EditMainPageContainer #receiptContent input {
-    width: 100px;
-    border-bottom: 2px solid var(--color-quarter);
-
-}
-
-.EditMainPageContainer .receiptCard {
-    border-top: 2px solid var(--color-quarter);
-    padding-top: 10px;
-    display: flex;
-    margin: 0 0 10px 0;
-    padding: 30px 0 0 0;
-    width: 650px;
-}
-
-.EditMainPageContainer .receiptResource {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.EditMainPageContainer .receiptCard img {
-    display: inline-block;
-    width: 220px;
-    height: 330px;
-    overflow: hidden;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-left: 30px;
-}
-
-/* .cardImg .pagenation {
+.left-panel {
+    position: relative;
+    width: 50%;
+    margin: 0;
+    z-index: 9;
     display: flex;
     justify-content: center;
-    width: 100%;
-    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
 }
 
-.cardImg .pagenationItem {
-    color: var(--color-quarter);
-} */
-
-.EditMainPageContainer .remotePanel {
-    width: 20vw;
-    height: 100%;
+.right-panel {
+    position: relative;
+    width: 50%;
+    margin: 0;
+    z-index: 9;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    margin-top: 10%;
-    padding: 0;
-    position: fixed;
-    right: 0;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
 }
 
-.EditMainPageContainer .editButton {
-    width: 120px;
-    background-color: var(--color-leftPanel);
+.image {
+    right: 0;
+    width: 70%;
+}
+
+.userForm {
+    border: solid var(--color-middle-gray);
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 30px;
+}
+
+#nav {
+    width: 100%;
+    border-top-left-radius: 27px;
+    border-top-right-radius: 27px;
+    background-color: var(--color-bright-gray);
+}
+
+#nav .nav-item,
+#nav .nav,
+#nav .nav-tabs,
+#nav .nav-fill,
+#nav a.nav-link.active,
+#nav .nav-link.active,
+#nav .nav-link {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border: none;
+}
+
+#nav .nav-link {
+    color: var(--color-dark-gray);
+}
+
+#nav .nav-tabs,
+#nav .nav-lin {
+    border: none;
+}
+
+.accessTitle {
+    display: flex;
+    align-content: center;
+    align-items: flex-end;
+    margin-top: 10px;
+    padding: 0;
+    font-family: "YUniverse-B";
+    font-weight: 900;
+}
+
+
+.accessTitle img {
+    margin-right: 10px;
+}
+
+/* 추가 */
+summary {
+    cursor: pointer;
+}
+
+
+.input-field {
+    max-width: 380px;
+    width: 100%;
+    background-color: var(--color-bright-gray);
+    margin: 0 0 15px 0;
+    height: 55px;
+    border-radius: 30px;
+    padding: 0 0.4rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-field i {
+    text-align: center;
+    line-height: 55px;
+    color: var(--color-middle-gray);
+    transition: 0.5s;
+    font-size: 1.1rem;
+    padding: 0 20px;
+}
+
+
+.input-field input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-dark-gray);
+    width: 70%;
+}
+
+.input-field button {
+    background-color: var(--color-middle-gray);
     border: none;
     outline: none;
-    height: 35px;
     border-radius: 49px;
-    color: var(--color-quarter);
-    margin: 0 0 15px 0
+    color: var(--color-white);
+    cursor: pointer;
+    font-size: 15px;
 }
 
-.EditMainPageContainer .remotePanelBox {
-    background-color: var(--color-leftPanel);
-    padding: 20px;
-    margin-right: 80px;
-    border-radius: 20px;
-    width: 240px;
-    box-shadow: 1px 1px 10px 0px grey;
+.SignInBtn {
+    width: 150px;
+    background-color: var(--color-quarter);
+    border: none;
+    outline: none;
+    height: 49px;
+    border-radius: 49px;
+    color: var(--color-white);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    cursor: pointer;
+    z-index: 11;
+}
+
+.moveSignPage button {
+    background-color: transparent;
+    border: none;
+    padding: 0 10px;
+    color: var(--color-middle-gray);
+}
+
+.admin {
+    color: #9b4346;
+}
+
+
+.filebox .upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 70%;
+    color: #999999;
+}
+
+.filebox label,
+.certEmail {
+    background-color: var(--color-middle-gray);
+    border: none;
+    outline: none;
+    border-radius: 49px;
+    color: var(--color-white);
+    cursor: pointer;
+    font-size: 15px;
+    height: 24.5px;
+    text-align: center;
+    padding: 1px 6px;
+    width: 60px;
+}
+
+.certEmail input[name="email"] {
+    width: 75%;
+}
+
+input[name="major"] {
+    width: 78%;
+}
+
+
+.filebox input[type="file"] {
+    position: absolute;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+div .checkbox-form {
+    display: flex;
+    position: relative;
+    align-items: baseline;
+    left: 20px;
+    border-radius: 0.25em;
+}
+
+.input-field input[type=password] {
+    font-family: 'Malgun gothic', dotum, sans-serif;
 }
