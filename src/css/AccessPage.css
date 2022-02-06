@@ -3,7 +3,9 @@
     height: 100vh;
     display: flex;
     z-index: 10;
-    font-family: 'OTWelcomeRA';
+    /* font-family: 'OTWelcomeRA'; */
+    font-family: "Work Sans";
+    font-weight: bold;
 }
 
 .container:before {
@@ -226,5 +228,7 @@ div .checkbox-form {
 }
 
 .input-field input[type=password] {
-    font-family: 'Malgun gothic', dotum, sans-serif;
+    /* font-family: 'Malgun gothic', dotum, sans-serif; */
+    font-family: "Work Sans";
+    font-weight: bold;
 }

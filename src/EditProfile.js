@@ -48,6 +48,7 @@ function EditProfile(props) {
     const [inputCheckNewPassword, setInputCheckNewPassword] = useState("");
 
     const [newPasswordButton, setNewPasswordButton] = useState(false);
+    const [userStatus, setUserStatus] = useState()
 
 
     function changeIsCorrect(key, type) {
@@ -199,7 +200,16 @@ function EditProfile(props) {
     }, [isCorrect])
 
     useEffect(() => {
+        //debug
 
+        setStdID(() => "201892643");
+        setMajor(() => "1");
+        setName(() => "한준규");
+        setPhoneNumber(() => "010-0000-0000");
+        setEmail(() => "test1@pukyong.ac.kr");
+        // setCertFile({ name: "학생증.jpg" });
+        setCertFile("");
+        setMajorLogo("");
 
         setIsCorrect(
             {
@@ -268,26 +278,25 @@ function EditProfile(props) {
                         break;
                     default: break;
                 }
-
+                axios.get(debugAPIURL + '/status')
+                    .then((payload) => {
+                        switch (payload.status) {
+                            case 200: setUserStatus(payload.data["status"]); break;
+                            default: console.log("error: " + payload.response.status); break;
+                        }
+                    })
+                    .catch((error) => {
+                        switch (error.response.status) {
+                            case 400: console.log("사용자의 승인상태를 확인하는데 실패했습니다."); break;
+                            default: console.log("error: " + payload.response.status); break;
+                        }
+                    })
             })
             .catch((error) => {
                 switch (error.response.status) {
-                    case 400:
-                        console.log("정보를 로드하는데 실패했습니다.");
-                        break;
+                    case 400: console.log("정보를 로드하는데 실패했습니다."); break;
                     default: console.log("error: " + error.response.status); break;
                 }
-
-                //debug
-
-                setStdID(() => "201892643");
-                setMajor(() => "국어국문학과");
-                setName(() => "한준규");
-                setPhoneNumber(() => "010-0000-0000");
-                setEmail(() => "test1@pukyong.ac.kr");
-                // setCertFile({ name: "학생증.jpg" });
-                setCertFile("");
-                setMajorLogo("");
 
             })
         //get 요청해서 학과리스트 가져오기
@@ -332,9 +341,9 @@ function EditProfile(props) {
                 {
                     boxState === "profile"
                         ? <>
-                            <div className='boxTitle' >
-                                <h2 style={{ marginLeft: "20%" }}><i className="fas fa-users" />프로필 편집</h2>
-                                <button className="btn btn-danger" style={{ marginLeft: "auto", height: "30px" }} onClick={() => { setBoxState("withdrawal") }}>회원탈퇴</button>
+                            <div className='boxTitle'>
+                                <h2 ><i className="fas fa-users" />프로필 편집</h2>
+                                <button className="btn btn-danger" onClick={() => { setBoxState("withdrawal") }}>회원탈퇴</button>
                             </div>
 
                             <div className='editField'>
@@ -367,10 +376,11 @@ function EditProfile(props) {
                                     {
                                         props.loginPosition === "president"
                                             ?
-                                            <input type="text" list="majorList-options" id='major' name="major" placeholder="학과를 입력하세요." value={major} readOnly></input>
+                                            <>
+                                                <input type="text" list="majorList-options" id='major' name="major" placeholder={majorList[major]} value={majorList[major]} readOnly></input>
+                                            </>
                                             :
                                             <>
-
                                                 <input type="text" list="majorList-options" id='major' name="major" placeholder={majorList[major]}
                                                     style={{ textColor: "black" }}
                                                     onChange={(e) => {
@@ -444,22 +454,27 @@ function EditProfile(props) {
                                 {
                                     props.loginPosition === "president"
                                         ?
-                                        <div className="inputField">
-                                            <i className="fas fa-user-graduate"></i>
-                                            <label>학과로고</label>
-                                            <input style={{ width: "200px" }} value={majorLogo.name} readOnly></input>
-                                            <label className='fileButton' htmlFor="file">찾기</label>
-                                            <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
-                                                onChange={(e) => {
-                                                    setMajorLogo(e.target.files[0]);
-                                                    if (e.target.value === "") {
-                                                        changeIsCorrect("majorLogo", false);
-                                                    } else {
-                                                        changeIsCorrect("majorLogo", true);
-                                                    }
+                                        <>
+                                            {userStatus === "approval"
+                                                ? <div className="inputField">
+                                                    <i className="fas fa-user-graduate"></i>
+                                                    <label>학과로고</label>
+                                                    <input style={{ width: "200px" }} value={majorLogo.name} readOnly></input>
+                                                    <label className='fileButton' htmlFor="file">찾기</label>
+                                                    <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
+                                                        onChange={(e) => {
+                                                            setMajorLogo(e.target.files[0]);
+                                                            if (e.target.value === "") {
+                                                                changeIsCorrect("majorLogo", false);
+                                                            } else {
+                                                                changeIsCorrect("majorLogo", true);
+                                                            }
 
-                                                }}></input>
-                                        </div>
+                                                        }}></input>
+                                                </div>
+                                                : null
+                                            }
+                                        </>
                                         :
                                         <div className="inputField">
                                             <i className="fas fa-user-graduate"></i>
@@ -490,7 +505,7 @@ function EditProfile(props) {
                         </>
                         : boxState === "withdrawal"
                             ? <>
-                                <div className='boxTitle' >
+                                <div className='boxTitle'  >
                                     <h2 ><i className="fas fa-users" style={{ color: "#dc3545" }} />회원 탈퇴</h2>
                                 </div>
 

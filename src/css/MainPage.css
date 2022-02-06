@@ -1,5 +1,7 @@
 .MainPageContainer {
     /* font-family: "OTWelcomeRA"; */
+    font-family: "Work Sans";
+    font-weight: bold;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -283,6 +285,7 @@
 .cardContent h4,
 .cardContent h5 {
     color: var(--color-quarter);
+    font-weight: bold;
 }
 
 .receiptTitle {

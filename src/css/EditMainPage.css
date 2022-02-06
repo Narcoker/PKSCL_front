@@ -1,5 +1,7 @@
 .EditMainPageContainer {
-    font-family: "OTWelcomeRA";
+    /* font-family: "OTWelcomeRA"; */
+    font-family: "Work Sans";
+   font-weight: bold;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -395,6 +397,6 @@
     padding: 20px;
     margin-right: 80px;
     border-radius: 20px;
-    width: 240px;
+    width: 250px;
     box-shadow: 1px 1px 10px 0px grey;
 }

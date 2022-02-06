@@ -822,7 +822,7 @@ function MainPage(props) {
                                                         )
                                                         : null
                                                 }
-                                                <button className='submitButton' type='button' onClick={() => { history.push('/main') }}>학생 입장 장부 확인</button>
+                                                <button className='submitButton' type='button' onClick={() => { history.push('/main') }}>학생 입장 장부</button>
                                                 <button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
                                                 <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
                                             </div>
@@ -1301,7 +1301,7 @@ function MainPage(props) {
                                             <div className="remotePanel">
                                                 <div className="remotePanelBox" style={{ display: "flex" }}>
                                                     <div>
-                                                        <h5 style={{ textAlign: "center", marginBottom: "5px" }}>📚행사 목록📚</h5>
+                                                        <h5 style={{ textAlign: "center", marginBottom: "5px", fontWeight: "bold" }}>📚행사 목록📚</h5>
                                                         <p style={{ textAlign: "center", fontSize: "12px" }}>드래그로 순서를 변경할 수 있습니다.</p>
 
                                                         {
