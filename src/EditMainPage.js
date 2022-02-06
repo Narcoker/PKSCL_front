@@ -377,6 +377,7 @@ function MainPage(props) {
     const [currentQuarter, setCurrentQuarter] = useState(props.todayQuarter);
     const [showAllReceiptButton, setShowAllReceiptButton] = useState([]);
     const [editProfileState, setEditProfileState] = useState(false);
+    const [editEventState, setEditEventState] = useState(false);
 
     const [major, setMajor] = useState();
     const [majorList, setMajorList] = useState();
@@ -769,6 +770,7 @@ function MainPage(props) {
                             // <EditProfile editProfileState={editProfileState} loginPosition={"president"} setEditProfileState={setEditProfileState}></EditProfile>
                             : null
                     }
+
                         {
                             quarter === undefined
                                 ? null
@@ -849,7 +851,7 @@ function MainPage(props) {
                                                                                         {
                                                                                             fixEventButton[i]
                                                                                                 ?
-                                                                                                <input type="text" style={{ border: "transparent", textAlign: "left", width: "100%" }} placeholder={event["eventTitle"]}
+                                                                                                <input type="text" style={{ border: "transparent", textAlign: "left" }} placeholder={event["eventTitle"]}
                                                                                                     onInput={
                                                                                                         (e) => {
                                                                                                             changeEventTitle(e.target.value, i);
@@ -861,22 +863,7 @@ function MainPage(props) {
                                                                                     </h4>
                                                                                     <div>행사 총 금액 : {eventAmount[i]}원</div>
                                                                                 </div>
-                                                                                <div>
-                                                                                    {
-                                                                                        fixEventButton[i]
-                                                                                            ?
-                                                                                            <input type="text" style={{ border: "transparent", textAlign: "left", width: "600px" }} placeholder={event["eventContext"]}
-                                                                                                onInput={
-                                                                                                    (e) => {
-                                                                                                        changeEventContext(e.target.value, i);
-                                                                                                    }}></input>
-                                                                                            :
-                                                                                            <>{event["eventContext"]}</>
-                                                                                    }
 
-
-
-                                                                                </div>
                                                                             </div>
 
 
@@ -918,6 +905,23 @@ function MainPage(props) {
 
                                                                                 }
                                                                             </div>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            {
+                                                                                fixEventButton[i]
+                                                                                    ?
+                                                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "650px" }} placeholder={event["eventContext"]}
+                                                                                        onInput={
+                                                                                            (e) => {
+                                                                                                changeEventContext(e.target.value, i);
+                                                                                            }}></input>
+                                                                                    :
+                                                                                    <>{event["eventContext"]}</>
+                                                                            }
+
+
+
                                                                         </div>
 
                                                                         {
@@ -1285,6 +1289,7 @@ function MainPage(props) {
                                                 <div style={{ marginBottom: "40px", display: "flex", justifyContent: "center" }}>
                                                     <button className="editButton" onClick={() => {
                                                         eventAddButton(currentQuarter);
+                                                        setEditEventState(true);
                                                     }} > 행사 추가 </button>
                                                 </div>
 

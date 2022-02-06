@@ -199,15 +199,15 @@ function EditProfile(props) {
     }, [isCorrect])
 
     useEffect(() => {
-        // //debug
-        // setStdID(() => "123456789");
-        // setMajor(() => "1");
-        // setName(() => "홍길동");
-        // setPhoneNumber(() => "010-0000-0000");
-        // setEmail(() => "userID@pukyong.ac.kr");
-        // // setCertFile({ name: "학생증.jpg" });
-        // setCertFile("");
-        // setMajorLogo("");
+        //debug
+        setStdID(() => "123456789");
+        setMajor(() => "1");
+        setName(() => "홍길동");
+        setPhoneNumber(() => "010-0000-0000");
+        setEmail(() => "userID@pukyong.ac.kr");
+        // setCertFile({ name: "학생증.jpg" });
+        setCertFile("");
+        setMajorLogo("");
 
         setIsCorrect(
             {
