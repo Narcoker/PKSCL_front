@@ -1,5 +1,5 @@
 .MainPageContainer {
-    font-family: "OTWelcomeRA";
+    /* font-family: "OTWelcomeRA"; */
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
