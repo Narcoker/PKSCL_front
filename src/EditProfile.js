@@ -231,9 +231,14 @@ function EditProfile(props) {
 
 
 
+
                         if (props.loginPosition === "prsident") {
                             setPhoneNumber(...payload.data["phoneNumber"]);
                             setMajorLogo(...payload.data["majorLogo"]);
+
+                            console.log(payload.data["phoneNumber"]);
+                            console.log(payload.data["majorLogo"]);
+
                             setIsCorrect(
                                 {
                                     stdID: true,
@@ -251,6 +256,9 @@ function EditProfile(props) {
                             );
                         } else if (props.loginPosition === "student") {
                             setCertFile(...payload.data["certFile"]);
+                            console.log(payload.data["certFile"]);
+
+
                             setIsCorrect(
                                 {
                                     stdID: true,
@@ -267,6 +275,15 @@ function EditProfile(props) {
                                 }
                             );
                         }
+
+                        console.log("payload.data")
+                        console.log(payload.data["stdID"]);
+                        console.log(payload.data["major"]);
+                        console.log(payload.data["name"]);
+                        console.log(payload.data["email"]);
+                        console.log(payload.data["phoneNumber"]);
+                        console.log(payload.data["majorLogo"]);
+                        console.log(payload.data["certFile"]);
                         break;
                     default: break;
                 }
@@ -483,7 +500,19 @@ function EditProfile(props) {
                                 <button className="errorBtn" type="button" onClick={() => {
                                     editButtonState ? putProfile() : alert('정보를 모두 입력해주세요.');
                                 }}>저장하기</button>
-                                <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { props.setEditProfileState(false); reset(); }}>취소</button>
+                                <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => {
+                                    props.setEditProfileState(false); reset();
+
+                                    console.log("usestate()")
+                                    console.log(stdID);
+                                    console.log(major);
+                                    console.log(name);
+                                    console.log(email);
+                                    console.log(phoneNumber);
+                                    console.log(majorLogo);
+                                    console.log(certFile);
+
+                                }}>취소</button>
 
                             </div>
                         </>

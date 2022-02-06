@@ -823,7 +823,10 @@ function MainPage(props) {
                                                         : null
                                                 }
                                                 <button className='submitButton' type='button' onClick={() => { history.push('/main') }}>학생 입장 장부 확인</button>
-                                                <button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
+                                                <button className='submitButton' type='button' onClick={() => {
+                                                    setEditProfileState(true);
+
+                                                }}>프로필 편집</button>
                                                 <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
                                             </div>
                                         </div>
@@ -974,7 +977,7 @@ function MainPage(props) {
                                                                                                             ? <>
                                                                                                                 <div>
 
-                                                                                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "360px" }} placeholder={event["receiptList"][0]["receiptContext"]}
+                                                                                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "400px" }} placeholder={event["receiptList"][0]["receiptContext"]}
                                                                                                                         onInput={
                                                                                                                             (e) => {
                                                                                                                                 changeReceiptContext(e.target.value, i);
@@ -1153,7 +1156,7 @@ function MainPage(props) {
                                                                                                                     {fixEventButton[i]
                                                                                                                         ? <>
                                                                                                                             <div>
-                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "left", width: "360px" }} placeholder={event["receiptList"][0]["receiptContext"]}
+                                                                                                                                <input type="text" style={{ border: "transparent", textAlign: "left", width: "400px" }} placeholder={event["receiptList"][0]["receiptContext"]}
                                                                                                                                     onInput={
                                                                                                                                         (e) => {
                                                                                                                                             changeReceiptContext(e.target.value, i);
