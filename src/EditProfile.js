@@ -199,15 +199,7 @@ function EditProfile(props) {
     }, [isCorrect])
 
     useEffect(() => {
-        //debug
-        setStdID(() => "123456789");
-        setMajor(() => "1");
-        setName(() => "홍길동");
-        setPhoneNumber(() => "010-0000-0000");
-        setEmail(() => "userID@pukyong.ac.kr");
-        // setCertFile({ name: "학생증.jpg" });
-        setCertFile("");
-        setMajorLogo("");
+
 
         setIsCorrect(
             {
@@ -285,6 +277,16 @@ function EditProfile(props) {
                     case 400: console.log("정보를 로드하는데 실패했습니다."); break;
                     default: console.log("error: " + error.response.status); break;
                 }
+
+                //debug
+                setStdID(() => "123456789");
+                setMajor(() => "1");
+                setName(() => "홍길동");
+                setPhoneNumber(() => "010-0000-0000");
+                setEmail(() => "userID@pukyong.ac.kr");
+                // setCertFile({ name: "학생증.jpg" });
+                setCertFile("");
+                setMajorLogo("");
 
             })
         //get 요청해서 학과리스트 가져오기
