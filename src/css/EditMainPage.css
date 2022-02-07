@@ -286,7 +286,7 @@
     overflow-y: auto;
     height: 180px;
     width: fit-content;
-    
+
 }
 
 .EditMainPageContainer .receiptTable tbody::-webkit-scrollbar {
@@ -403,4 +403,13 @@
     border-radius: 20px;
     width: 250px;
     box-shadow: 1px 1px 10px 0px grey;
+}
+
+.sortTable {
+    cursor: pointer;
+}
+
+.sortTable div:hover {
+    transition: 0.5s;
+    transform: scale(1.05);
 }

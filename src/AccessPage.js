@@ -278,7 +278,8 @@ function AccessPage(props) {
           </p>
         </div>
         <img src={log} className="image" alt="" />
-        <button type="button" onClick={() => { setPosition("admin"); reset(); history.push('/giraffe-admin') }} style={{ height: "10px", width: "20px", backgroundColor: "red" }}></button>
+        <button type="button" onClick={() => { setPosition("admin"); reset(); history.push('/giraffe-admin') }}
+          style={{ height: "10px", width: "20px", backgroundColor: "ffffff00", boxShadow: "0px 0px 0px 0px grey" }}></button>
       </div>
       <Switch>
 
