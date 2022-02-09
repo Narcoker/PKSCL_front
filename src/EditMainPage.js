@@ -132,8 +132,6 @@ function MainPage(props) {
         // window.scrollTo(0, 0);
     }
 
-
-
     function showQuarter(selectedQuarter) {
         if (props.loginPosition === "student") {
             if (quarter[selectedQuarter]["status"] === "true") {
@@ -445,7 +443,7 @@ function MainPage(props) {
             .then((payload) => {
                 setStudentPresident({ ...payload.data["studentPresident"] });
                 setQuarter({ ...payload.data["quarter"] });
-                setList(...payload.data["quarter"][currentQuarter]["eventList"]);
+                setList(payload.data["quarter"][currentQuarter]["eventList"]);
 
                 if (payload.data["quarter"][currentQuarter]["eventList"] !== undefined) {
                     for (let i = 0; i < payload.data["quarter"][currentQuarter]["eventList"].length; i++) {
