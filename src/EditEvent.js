@@ -158,7 +158,7 @@ function EditEvent(props) {
         console.log(eventData)
         editEventNameAPI();
         sendReciept();
-        if (deleteReceiptList.length !== 0) deleteEventNameAPI();
+        if (deleteReceiptList.length !== 0) deleteReceiptListAPI();
     }
 
     function editEventNameAPI() {
@@ -176,7 +176,7 @@ function EditEvent(props) {
             })
     }
 
-    function deleteEventNameAPI() {
+    function deleteReceiptListAPI() {
         let deleteReceiptListURL = "";
         for (let i = 0; i < deleteReceiptList.length; i++) {
             if (deleteReceiptListURL === "") {
@@ -185,8 +185,8 @@ function EditEvent(props) {
                 deleteReceiptListURL = deleteReceiptListURL + "," + deleteReceiptList[i];
             }
         }
-        console.log("deleteReceiptListURL")
-        console.log(deleteReceiptListURL)
+        console.log("deleteReceiptListAPI")
+        console.log("/receipt" + deleteReceiptListURL)
         axios.delete("/receipt" + deleteReceiptListURL)
             .then((payload) => {
                 alert("영수증 삭제 완료")
@@ -211,7 +211,6 @@ function EditEvent(props) {
             payload.append(`price[${i}]`, receiptData["receiptDetailList"][i]["price"]);
             payload.append(`amount[${i}]`, receiptData["receiptDetailList"][i]["amount"]);
         }
-
 
 
         axios.post(debugAPIURL + "/receipt", payload,
