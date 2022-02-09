@@ -202,7 +202,7 @@ function EditEvent(props) {
 
         let receiptData = eventData["receiptList"][j];
 
-        payload.append("eventNumber", eventData["eventNumber"]);
+
         payload.append("receiptTitle", receiptData["receiptTitle"]);
         payload.append("receiptContext", receiptData["receiptContext"]);
 
@@ -239,7 +239,6 @@ function EditEvent(props) {
     function putReceipt(j) {
 
         let payload = new FormData();
-
         let receiptData = eventData["receiptList"][j];
 
         payload.append("eventNumber", eventData["eventNumber"]);
