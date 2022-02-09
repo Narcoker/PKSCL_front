@@ -203,7 +203,7 @@ function EditEvent(props) {
         let receiptData = eventData["receiptList"][j];
 
         payload.append("eventNumber", eventData["eventNumber"]);
-        payload.append("receiptNumber", receiptData["receiptNumber"]);
+
         payload.append("receiptTitle", receiptData["receiptTitle"]);
         payload.append("receiptContext", receiptData["receiptContext"]);
 
