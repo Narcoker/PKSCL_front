@@ -177,8 +177,17 @@ function EditEvent(props) {
     }
 
     function deleteEventNameAPI() {
-        let payload = { "deleteReceiptList": deleteReceiptList }
-        axios.delete("/receipt", payload)
+        let deleteReceiptListURL = "";
+        for (let i = 0; i < deleteReceiptList.length; i++) {
+            if (deleteReceiptListURL === "") {
+                deleteReceiptListURL = deleteReceiptListURL + deleteReceiptList[i];
+            } else {
+                deleteReceiptListURL = deleteReceiptListURL + "," + deleteReceiptList[i];
+            }
+        }
+        console.log("deleteReceiptListURL")
+        console.log(deleteReceiptListURL)
+        axios.delete("/receipt" + deleteReceiptListURL)
             .then((payload) => {
                 alert("영수증 삭제 완료")
             })
@@ -233,6 +242,7 @@ function EditEvent(props) {
 
         let receiptData = eventData["receiptList"][j];
 
+        payload.append("eventNumber", eventData["eventNumber"]);
         payload.append("receiptNumber", receiptData["receiptNumber"]);
         payload.append("receiptTitle", receiptData["receiptTitle"]);
         payload.append("receiptContext", receiptData["receiptContext"]);
