@@ -192,9 +192,11 @@ function EditEvent(props) {
         let payload = new FormData();
 
         let receiptData = eventData["receiptList"][j];
+
+        payload.append("eventNumber", eventData["eventNumber"]);
         payload.append("receiptTitle", receiptData["receiptTitle"]);
         payload.append("receiptContext", receiptData["receiptContext"]);
-        payload.append("receiptDetailist", receiptData["receiptDetailist"])
+        payload.append("receiptDetailist", receiptData["receiptDetailList"])
 
         axios.post(debugAPIURL + "/receipt", payload,
             {
@@ -222,11 +224,17 @@ function EditEvent(props) {
 
         let payload = new FormData();
 
+
+
         let receiptData = eventData["receiptList"][j];
+
         payload.append("receiptNumber", receiptData["receiptNumber"]);
         payload.append("receiptTitle", receiptData["receiptTitle"]);
         payload.append("receiptContext", receiptData["receiptContext"]);
-        payload.append("receiptDetailist", receiptData["receiptDetailist"])
+        payload.append("receiptDetailist", receiptData["receiptDetailList"])
+
+
+        console.log("payload")
 
         axios.put(debugAPIURL + "/receipt", payload,
             {
@@ -257,7 +265,8 @@ function EditEvent(props) {
             } else {
                 putReceipt(j);
             }
-        })
+        }
+        )
 
     }
 
