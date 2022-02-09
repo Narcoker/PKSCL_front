@@ -75,7 +75,7 @@ function MainPage(props) {
         else {
             console.log("quarter === undefined");
         }
-        // window.scrollTo(0, 0);
+
     }
 
     function showQuarter(selectedQuarter) {
@@ -959,9 +959,6 @@ function MainPage(props) {
                                                                                                                 </>)}
                                                                                                     </div>
 
-                                                                                                    {
-                                                                                                        console.log(i + " " + j)
-                                                                                                    }
 
                                                                                                     {
 
@@ -969,12 +966,17 @@ function MainPage(props) {
                                                                                                             ?
                                                                                                             <div className="uploadimg">
 
+
+                                                                                                                <input type="file" id=" receiptImg" accept="image/*" style={{ display: "none" }}
+                                                                                                                    onChange={(e) => { uploadImg(e.target.files[0], i, j); console.log("uploadImg: " + i + " " + j) }} ></input>
+
                                                                                                                 <label htmlFor='receiptImg'>
                                                                                                                     <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
                                                                                                                         alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} title='변경하시려면 클릭하세요.' />
                                                                                                                 </label>
-                                                                                                                <input type="file" id="receiptImg" accept="image/*"
-                                                                                                                    onChange={(e) => { uploadImg(e.target.files[0], i, j); console.log("hi:" + i + " " + j) }} style={{ display: "none" }}></input>
+
+
+
                                                                                                             </div>
 
                                                                                                             : <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
