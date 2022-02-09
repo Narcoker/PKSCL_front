@@ -133,13 +133,24 @@ function EditEvent(props) {
         setEventData(tempEditEventData);
     }
 
+    function receiptTableAddButton(j){
+        let tempEditEventData = { ...eventData };
+        tempEditEventData["receiptList"][j]["receiptDetailList"].push({
+                    "context": "",
+                    "price": "",
+                    "amount": "",
+                    "totalAmount": ""
+        })
+        setEventData(tempEditEventData);
+    }
+
     function receiptAddButton() {
         let tempEditEventData = { ...eventData };
         tempEditEventData["receiptList"].push({
 
-            "receiptTitle": "영수증 제목을 입력해주세요",
+            "receiptTitle": "",
             "receiptImg": { name: "" },
-            "receiptContext": "영수증 내용을 입력해주세요",
+            "receiptContext": "",
             "receiptDetailList": [
                 {
                     "context": "",
@@ -147,7 +158,7 @@ function EditEvent(props) {
                     "amount": "",
                     "totalAmount": ""
 
-                },
+                }
             ]
         })
         setEventData(tempEditEventData);
@@ -187,7 +198,7 @@ function EditEvent(props) {
         }
         console.log("deleteReceiptListAPI")
         console.log("/receipt" + deleteReceiptListURL)
-        axios.delete("/receipt" + deleteReceiptListURL)
+        axios.delete("/receipt?receiptNumber=" + deleteReceiptListURL)
             .then((payload) => {
                 alert("영수증 삭제 완료")
             })
@@ -310,7 +321,7 @@ function EditEvent(props) {
                                                 <h4>
 
                                                     <input type="text" style={{ border: "transparent", textAlign: "left", width: "450px" }}
-                                                        placeholder={eventData["eventTitle"]}
+                                                        placeholder={"행사 제목을 입력하세요"}
                                                         value={eventData["eventTitle"]}
                                                         onInput={
                                                             (e) => {
@@ -369,7 +380,7 @@ function EditEvent(props) {
                                                                                         <i className="far fa-trash-alt"></i>
                                                                                     </span>
                                                                                     <input type="text" style={{ border: "transparent", textAlign: "left", width: "350px" }}
-                                                                                        placeholder={eventData["receiptList"][j]["receiptTitle"]}
+                                                                                        placeholder={"영수증 제목을 입력하세요"}
                                                                                         value={eventData["receiptList"][j]["receiptTitle"]}
 
                                                                                         onInput={
@@ -393,7 +404,7 @@ function EditEvent(props) {
 
 
                                                                                 <input type="text" style={{ border: "transparent", textAlign: "right", width: "400px" }}
-                                                                                    placeholder={eventData["receiptList"][j]["receiptContext"]}
+                                                                                    placeholder={"영수증 비고를 입력하세요"}
                                                                                     value={eventData["receiptList"][j]["receiptContext"]}
                                                                                     onInput={
                                                                                         (e) => {
@@ -405,7 +416,12 @@ function EditEvent(props) {
 
                                                                             {
                                                                                 receipt["receiptDetailList"].length === 0
-                                                                                    ? <div>입력된 영수증 내역이 없습니다.</div>
+                                                                                    ? (<><div>입력된 영수증 내역이 없습니다.</div>
+                                                                                    <button className='editSubmitButton' type='button'
+                                                                                        onClick={() => {
+                                                                                            receiptTableAddButton(j);
+                                                                                        }}><i class="fas fa-plus"></i></button>
+                                                                                    </>)
                                                                                     : (<>
                                                                                         <table className="receiptTable" style={{ width: "400px" }}>
                                                                                             <thead >
@@ -428,7 +444,7 @@ function EditEvent(props) {
                                                                                                             </td>
                                                                                                             <td style={{ width: "90px" }}>
                                                                                                                 <input type="text" style={{ border: "transparent", textAlign: "center", width: "90px" }}
-                                                                                                                    placeholder={item["context"]}
+                                                                                                                    placeholder={"품명"}
                                                                                                                     value={item["context"]}
                                                                                                                     onInput={
                                                                                                                         (e) => {
@@ -441,7 +457,7 @@ function EditEvent(props) {
                                                                                                             <td style={{ width: "90px" }}>
 
                                                                                                                 <input type="text" style={{ border: "transparent", textAlign: "center", width: "90px" }}
-                                                                                                                    placeholder={item["price"]}
+                                                                                                                    placeholder={"가격"}
                                                                                                                     value={item["price"]}
                                                                                                                     onInput={
                                                                                                                         (e) => {
@@ -452,7 +468,7 @@ function EditEvent(props) {
 
                                                                                                             <td style={{ width: "90px" }}>
                                                                                                                 <input type="text" style={{ border: "transparent", textAlign: "center", width: "90px" }}
-                                                                                                                    placeholder={item["amount"]}
+                                                                                                                    placeholder={"단가"}
                                                                                                                     value={item["amount"]}
                                                                                                                     onInput={
                                                                                                                         (e) => {
