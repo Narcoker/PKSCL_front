@@ -14,6 +14,7 @@ import { useRef } from 'react';
 import { upload } from '@testing-library/user-event/dist/upload';
 import { ReactSortable } from "react-sortablejs";
 import EditEvent from './EditEvent';
+import { selectOptions } from '@testing-library/user-event/dist/select-options';
 
 
 
@@ -436,9 +437,9 @@ function EditMainPage(props) {
     // setShowAllReceiptButton(tempShowAllReceiptButton);
     // }
 
-    function getLedger() {
+    async function getLedger() {
         let resetArray = [];
-        axios.get(debugAPIURL + '/ledger')
+        await axios.get(debugAPIURL + '/ledger')
             .then((payload) => {
                 setStudentPresident({ ...payload.data["studentPresident"] });
                 setQuarter({ ...payload.data["quarter"] });
@@ -495,7 +496,9 @@ function EditMainPage(props) {
     }, []);
 
     useEffect(() => {
-        if (editEventState === false) getLedger();
+        if (editEventState === false) {
+            getLedger();
+        }
     }, [editEventState]);
 
 

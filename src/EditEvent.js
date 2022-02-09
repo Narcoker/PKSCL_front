@@ -213,7 +213,7 @@ function EditEvent(props) {
             })
     }
 
-    function postReceipt(j) {
+    async function postReceipt(j) {
 
         let payload = new FormData();
 
@@ -230,7 +230,7 @@ function EditEvent(props) {
         }
 
 
-        axios.post(debugAPIURL + "/receipt", payload,
+        await axios.post(debugAPIURL + "/receipt", payload,
             {
                 headers: { 'Content-Type': 'multipart/form-data' }
             }
@@ -252,7 +252,7 @@ function EditEvent(props) {
 
     }
 
-    function putReceipt(j) {
+    async function putReceipt(j) {
 
         let payload = new FormData();
         let receiptData = eventData["receiptList"][j];
@@ -267,7 +267,7 @@ function EditEvent(props) {
             payload.append(`amount[${i}]`, receiptData["receiptDetailList"][i]["amount"]);
         }
 
-        axios.put(debugAPIURL + "/receipt", payload,
+        await axios.put(debugAPIURL + "/receipt", payload,
             {
                 headers: { 'Content-Type': 'multipart/form-data' }
             }
