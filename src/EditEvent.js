@@ -198,14 +198,9 @@ function EditEvent(props) {
         payload.append("receiptContext", receiptData["receiptContext"]);
 
         for (var i = 0; i < receiptData["receiptDetailList"].length; i++) {
-
-            console.log(receiptData["receiptDetailList"]["context"][i]);
-            console.log(receiptData["receiptDetailList"]["price"][i]);
-            console.log(receiptData["receiptDetailList"]["totalAmount"][i]);
-
-            payload.append(`context[${i}]`, receiptData["receiptDetailList"]["context"][i]);
-            payload.append(`price[${i}]`, receiptData["receiptDetailList"]["price"][i]);
-            payload.append(`totalAmount[${i}]`, receiptData["receiptDetailList"]["totalAmount"][i]);
+            payload.append(`context[${i}]`, receiptData["receiptDetailList"][i]["context"]);
+            payload.append(`price[${i}]`, receiptData["receiptDetailList"][i]["price"]);
+            payload.append(`totalAmount[${i}]`, receiptData["receiptDetailList"][i]["amount"]);
         }
 
 
@@ -243,10 +238,6 @@ function EditEvent(props) {
         payload.append("receiptContext", receiptData["receiptContext"]);
 
         for (var i = 0; i < receiptData["receiptDetailList"].length; i++) {
-            console.log(receiptData["receiptDetailList"][i]["context"]);
-            console.log(receiptData["receiptDetailList"][i]["price"]);
-            console.log(receiptData["receiptDetailList"][i]["amount"]);
-
             payload.append(`context[${i}]`, receiptData["receiptDetailList"][i]["context"]);
             payload.append(`price[${i}]`, receiptData["receiptDetailList"][i]["price"]);
             payload.append(`totalAmount[${i}]`, receiptData["receiptDetailList"][i]["amount"]);
