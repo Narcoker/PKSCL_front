@@ -18,7 +18,7 @@ import EditEvent from './EditEvent';
 
 
 
-function MainPage(props) {
+function EditMainPage(props) {
     const [list, setList] = useState([]);
 
     let debugAPIURL = "";
@@ -52,9 +52,8 @@ function MainPage(props) {
                                 "receiptNumber": "19",
                                 "receiptTitle": "기말고사 응원전 영수증 1번",
                                 "receiptImg": { "name": "./static/receiptImg/test2.png" },
-                                "receiptContext": "기말고사 응원전 영수증 1번",
-                                "receiptDetailList": [{ "context": "휴지", "price": "2731", "amount": "1", "totalAmount": "2731" }, { "context": "프라이팬", "price": "2731", "amount": "2", "totalAmount": "5462" },
-                                ]
+                                "receiptContext": "",
+                                "receiptDetailList": []
                             }, {
                                 "receiptNumber": "19",
                                 "receiptTitle": "기말고사 응원전 영수증 1번",
@@ -921,4 +920,4 @@ function MainPage(props) {
 }
 
 
-export default MainPage;
+export default EditMainPage;
