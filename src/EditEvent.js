@@ -203,14 +203,13 @@ function EditEvent(props) {
         let receiptData = eventData["receiptList"][j];
 
         payload.append("eventNumber", eventData["eventNumber"]);
-
         payload.append("receiptTitle", receiptData["receiptTitle"]);
         payload.append("receiptContext", receiptData["receiptContext"]);
 
         for (var i = 0; i < receiptData["receiptDetailList"].length; i++) {
             payload.append(`context[${i}]`, receiptData["receiptDetailList"][i]["context"]);
             payload.append(`price[${i}]`, receiptData["receiptDetailList"][i]["price"]);
-            payload.append(`totalAmount[${i}]`, receiptData["receiptDetailList"][i]["amount"]);
+            payload.append(`amount[${i}]`, receiptData["receiptDetailList"][i]["amount"]);
         }
 
 
@@ -249,7 +248,7 @@ function EditEvent(props) {
         for (var i = 0; i < receiptData["receiptDetailList"].length; i++) {
             payload.append(`context[${i}]`, receiptData["receiptDetailList"][i]["context"]);
             payload.append(`price[${i}]`, receiptData["receiptDetailList"][i]["price"]);
-            payload.append(`totalAmount[${i}]`, receiptData["receiptDetailList"][i]["amount"]);
+            payload.append(`amount[${i}]`, receiptData["receiptDetailList"][i]["amount"]);
         }
 
 
