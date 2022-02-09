@@ -3,7 +3,7 @@ import log from './img/log.svg';
 import { Nav } from 'react-bootstrap';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import './css/AccessPage.css';
+import './css/AccessPage.scss';
 
 function AccessPage(props) {
   let debugAPIURL = "";
@@ -247,40 +247,44 @@ function AccessPage(props) {
   };
 
   function setColorProperty(colorQuarter, colorQuarterCircle, colorLeftPanel, colorCard, colorBackground) {
-    document.documentElement.style.setProperty("--color-quarter", colorQuarter);
-    document.documentElement.style.setProperty("--color-quarterCircle", colorQuarterCircle);
-    document.documentElement.style.setProperty("--color-leftPanel", colorLeftPanel);
-    document.documentElement.style.setProperty("--color-card", colorCard);
-    document.documentElement.style.setProperty("--color-background", colorBackground);
-  }
-
-  function defineColor(quarter) {
-    if (quarter === "quarter1") {
-      setColorProperty("#db8f8e", "#efbebc", "#f5dede", "#fff5ed", "#fff5f5");
-    } else if (quarter === "quarter2") {
-      setColorProperty("#649d67", "#cedbcf", "#cedbcf", "#dee7df", "#f3f9f3");
-    } else if (quarter === "quarter3") {
-      setColorProperty("#c18356", "#efdccd", "#e9d8cd", "#fff5ed", "#fff5ee");
-    } else if (quarter === "quarter4") {
-      setColorProperty("#6b8396", "#d0dbe5", "#d0dbe5", "#e6f1fb", "#f5faff");
+        document.documentElement.style.setProperty("--color-quarter", colorQuarter);
+        document.documentElement.style.setProperty("--color-quarterCircle", colorQuarterCircle);
+        document.documentElement.style.setProperty("--color-leftPanel", colorLeftPanel);
+        document.documentElement.style.setProperty("--color-card", colorCard);
+        document.documentElement.style.setProperty("--color-background", colorBackground);
     }
-  }
+
+    function defineColor(quarter) {
+        if (quarter === "quarter1") {
+            setColorProperty("#db8f8e", "#efbebc", "#f5dede", "#fff5ed", "#fbf6f6");
+        } else if (quarter === "quarter2") {
+            setColorProperty("#649d67", "#cedbcf", "#cedbcf", "#dee7df", "#f6f7f6");
+        } else if (quarter === "quarter3") {
+            setColorProperty("#c18356", "#efdccd", "#e9d8cd", "#fff5ed", "#fff5ee");
+        } else if (quarter === "quarter4") {
+            setColorProperty("#6b8396", "#d0dbe5", "#d0dbe5", "#e6f1fb", "#f5faff");
+        }
+    }
 
 
   return (
     <div className="accessContainer">
 
       <div className="left-panel">
+                <div class='wave -one'></div>
+                <div class='wave -two'></div>
+                <div class='wave -three'></div>
         <div className="content">
+            
           <button type="button" style={{ boxShadow: "0 0 0 0 white", fontFamily: 'YUniverse-B' }} onClick={() => { setPosition("student"); reset(); history.push('/') }}><h3>PKNU 온라인 장부</h3></button>
           <p>
             우리 학과의 장부를 분기 별로 확인할 수 있습니다.
           </p>
         </div>
-        <img src={log} className="image" alt="" />
+            <img src={log} className="image" alt="" />
         <button type="button" onClick={() => { setPosition("admin"); reset(); history.push('/giraffe-admin') }}
           style={{ height: "10px", width: "20px", backgroundColor: "ffffff00", boxShadow: "0px 0px 0px 0px grey" }}></button>
-      </div>
+        </div>
       <Switch>
 
         <Route exact path="/signUp">
@@ -703,7 +707,7 @@ function AccessPage(props) {
               </div>
 
               <div className="submitbox" >
-                <button type="button" onClick={() => { setPosition("admin"); login(); }} value="Login" className="SignInBtn">로그인</button>
+                <button type="button" onClick={() => { reset(); setPosition("admin"); login(); }} value="Login" className="SignInBtn">로그인</button>
               </div>
             </form>
             <div className='moveSignPage'>
@@ -744,7 +748,7 @@ function AccessPage(props) {
               </div>
 
               <div className="submitbox" >
-                <button type="button" onClick={() => { login() }} value="Login" className="SignInBtn">로그인</button>
+                <button type="button" onClick={() => { reset(); login() }} value="Login" className="SignInBtn">로그인</button>
               </div>
             </form>
             <div className='moveSignPage'>

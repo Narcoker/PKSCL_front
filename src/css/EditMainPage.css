@@ -7,6 +7,7 @@
     justify-content: center;
     min-height: 100vh;
     width: 100vw;
+    background-color: var(--color-background);
 }
 
 .EditMainPageContainer .leftPanel {
@@ -21,6 +22,7 @@
     left: 0;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    z-index: 10;
 }
 
 .EditMainPageContainer .quarter {
@@ -153,11 +155,19 @@
     align-items: flex-start;
 }
 
+.EditMainPageContainer .eventButtons i {
+    color: var(--color-quarter);
+    font-size: 20px;
+}
+
 .EditMainPageContainer .buttons {
+    width: 100%;
+    z-index: 1;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     height: 8vh;
+    background-color: var(--color-background);
 }
 
 .EditMainPageContainer .submitButton {
@@ -207,7 +217,7 @@
 
 
 .EditMainPageContainer .eventSource button {
-    width: 120px;
+    width: 50px;
     background-color: var(--color-leftPanel);
     border: none;
     outline: none;
@@ -306,7 +316,6 @@
 
 .EditMainPageContainer .receiptTable tbody::-webkit-scrollbar-track-piece:end {
     background-color: none;
-    margin-bottom: 20px;
 }
 
 .EditMainPageContainer .receiptTable tr {
@@ -333,6 +342,7 @@
     border-bottom: 2px solid var(--color-quarter);
 
 }
+
 
 .EditMainPageContainer .receiptCard {
     border-top: 2px solid var(--color-quarter);
@@ -371,7 +381,7 @@
 } */
 
 .EditMainPageContainer .remotePanel {
-    width: 20vw;
+    width: 1px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -386,7 +396,7 @@
 }
 
 .EditMainPageContainer .editButton {
-    width: 120px;
+    width: 50px;
     background-color: var(--color-leftPanel);
     border: none;
     outline: none;

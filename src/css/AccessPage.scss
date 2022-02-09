@@ -7,19 +7,13 @@
     font-family: "Work Sans";
     font-weight: bold;
     overflow: hidden;
-}
 
-.accessContainer:before {
-    content: "";
-    position: absolute;
-    height: 2000px;
-    width: 2000px;
-    top: -10%;
-    right: 48%;
-    transform: translateY(-50%);
-    background: var(--color-quarterCircle);
-    border-radius: 50%;
-    z-index: 4;
+    border-radius: 5px;
+    box-shadow: 0 2px 30px rgba(black, .2);
+    background: var(--color-white);
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
 }
 
 .left-panel {
@@ -101,7 +95,6 @@
     margin-right: 10px;
 }
 
-/* 추가 */
 summary {
     cursor: pointer;
 }
@@ -234,25 +227,70 @@ div .checkbox-form {
     font-weight: bold;
 }
 
-@media (max-width:950px) {
 
-    .accessContainer:before {
-        background-color: var(--color-background);
+.box {
+    border-radius: 5px;
+    box-shadow: 0 2px 30px rgba(black, .2);
+    background: var(--color-white);
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+}
+
+.wave {
+    position: absolute;
+    width: 1100px;
+    height: 1100px;
+    margin-left: -250px;
+    margin-top: -100px;
+    transform-origin: 50% 48%;
+    border-radius: 43%;
+    z-index: -20;
+    animation: drift 9000ms infinite linear;
+    // background-color: red;
+    opacity: .6;
+    background: var(--color-quarter);
+}
+
+.wave.-three {
+    animation: drift 13000ms infinite linear;
+    opacity: .6;
+    background: var(--color-leftPanel);
+
+}
+
+.wave.-two {
+    animation: drift 7000ms infinite linear;
+    opacity: .4;
+    background: var(--color-quarterCircle);
+    // background-color: black;
+}
+
+
+.title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    line-height: 300px;
+    text-align: center;
+    transform: translate3d(0, 0, 0);
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: .4em;
+    font-size: 24px;
+    text-shadow: 0 1px 0 rgba(black, .1);
+    text-indent: .3em;
+}
+
+@keyframes drift {
+    from {
+        transform: rotate(0deg);
     }
 
-    .left-panel {
-        display: none;
-    }
-
-    .userForm {
-        background-color: white;
-    }
-
-    .accessContainer {
-        background-color: var(—color-background);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        max-width: auto !important;
+    from {
+        transform: rotate(360deg);
     }
 }
