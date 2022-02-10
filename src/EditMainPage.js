@@ -332,7 +332,8 @@ function EditMainPage(props) {
                 })
                 promise
                     .then(() => {
-                        let i = Number(quarter[currentQuarter]["eventList"].length) - 1;
+                        console.log(Number(quarter[currentQuarter]["eventList"].length))
+                        let i = Number(quarter[currentQuarter]["eventList"].length);
                         setEditEventState(true)
                         setEditEventData(quarter[currentQuarter]["eventList"][i]);
                         setEditEventAmount(eventAmount[i]);
