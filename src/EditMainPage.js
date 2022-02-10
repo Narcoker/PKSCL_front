@@ -437,9 +437,9 @@ function EditMainPage(props) {
     // setShowAllReceiptButton(tempShowAllReceiptButton);
     // }
 
-    async function getLedger() {
+    function getLedger() {
         let resetArray = [];
-        await axios.get(debugAPIURL + '/ledger')
+        axios.get(debugAPIURL + '/ledger')
             .then((payload) => {
                 setStudentPresident({ ...payload.data["studentPresident"] });
                 setQuarter({ ...payload.data["quarter"] });
