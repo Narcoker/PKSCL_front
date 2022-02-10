@@ -142,7 +142,7 @@ function EditMainPage(props) {
                 for (let i = 0; i < answer["quarter"][currentQuarter]["eventList"].length; i++) {
                     resetArray.push(false)
                 }
-
+                GetDate();
                 setShowAllReceiptButton(resetArray);
 
                 setList([...answer["quarter"][currentQuarter]["eventList"]]);
@@ -553,15 +553,7 @@ function EditMainPage(props) {
                                             <div className="quarterButton" onClick={() => { setList(quarter["quarter3"]["eventList"]); showQuarter("quarter3"); window.scrollTo(0, 0); }}><div>3분기</div><img src={quarter3} alt="quarter3" ></img></div>
                                             <div className="quarterButton" onClick={() => { setList(quarter["quarter4"]["eventList"]); showQuarter("quarter4"); window.scrollTo(0, 0); }}><div>4분기</div><img src={quarter4} alt="quarter4" ></img></div>
                                         </div>
-                                        {
-                                            props.loginPosition === "student"
-                                                ? null
-                                                : (<div className="managementPageBar">
-                                                    <i className="fas fa-chevron-right" onClick={() => {
-                                                        defineColor(props.todayQuarter); history.push('/manage')
-                                                    }}></i>
-                                                </div>)
-                                        }
+
                                     </div>
                                     {/* rightPanel */}
                                     <div className="rightPanel">
@@ -570,10 +562,14 @@ function EditMainPage(props) {
                                                 {/* {
                                                     console.log(quarterDate)
                                                 } */}
+                                                <div style={{ display: "flex" }}>
+                                                    <button className='submitButton' type='button' onClick={() => { defineColor(props.todayQuarter); history.push('/manage') }}>학생 관리</button>
+                                                    <button className='submitButton' type='button' onClick={() => { history.push('/main') }}>학생 입장 장부</button>
+                                                </div>
                                                 {
                                                     quarterDate !== undefined
                                                         ? (
-                                                            <>{currentQuarter[currentQuarter.length - 1]}분기 장부 공개일 : <input className="dateInput" type={"date"} value={quarterDate[currentQuarter][0]}
+                                                            <div style={{ display: "flex", alignItems: "center" }}>{currentQuarter[currentQuarter.length - 1]}분기 장부 공개일 : <input className="dateInput" type={"date"} value={quarterDate[currentQuarter][0]}
                                                                 onChange={(e) => {
                                                                     let tempDateArray = { ...quarterDate }
                                                                     tempDateArray[currentQuarter][0] = e.target.value;
@@ -590,13 +586,14 @@ function EditMainPage(props) {
                                                                         putLedgerDate();
 
                                                                     }}
-                                                                ></input></>
+                                                                ></input></div>
                                                         )
                                                         : null
                                                 }
-                                                <button className='submitButton' type='button' onClick={() => { history.push('/main') }}>학생 입장 장부</button>
-                                                <button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
-                                                <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
+                                                <div style={{ display: "flex" }}>
+                                                    <button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
+                                                    <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
+                                                </div>
                                             </div>
                                         </div>
 
