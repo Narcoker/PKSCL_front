@@ -238,7 +238,10 @@ function EditEvent(props) {
 
         let receiptData = eventData["receiptList"][j];
 
-        payload.append("receiptImgFile", receiptData["receiptImg"])
+
+        if (receiptData["receiptImg"]["name"] !== "") {
+            payload.append("receiptImgFile", receiptData["receiptImg"])
+        }
         payload.append("receiptImgPath", "./static/receiptImg/" + receiptData["receiptImg"]["name"])
 
         payload.append("eventNumber", eventData["eventNumber"]);
@@ -280,7 +283,10 @@ function EditEvent(props) {
         let payload = new FormData();
         let receiptData = eventData["receiptList"][j];
 
-        payload.append("receiptImgFile", receiptData["receiptImg"])
+        if (receiptData["receiptImg"]["name"] !== "") {
+            payload.append("receiptImgFile", receiptData["receiptImg"])
+        }
+
         payload.append("receiptImgPath", "./static/receiptImg/" + receiptData["receiptImg"]["name"])
 
         payload.append("receiptNumber", receiptData["receiptNumber"]);
