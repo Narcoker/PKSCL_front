@@ -290,65 +290,27 @@ function EditMainPage(props) {
 
     function eventAddButton(currentQuarter) {
         let payload = { "quarter": currentQuarter }
-        axios.post(debugAPIURL + "/ledger", payload)
-            .then((payload) => {
-                alert("장부를 추가하였습니다.");
 
-                let promise = new Promise((resolve, reject) => {
-                    let resetArray = [];
-                    axios.get(debugAPIURL + '/ledger')
-                        .then((payload) => {
-                            setStudentPresident({ ...payload.data["studentPresident"] });
-                            setQuarter({ ...payload.data["quarter"] });
-                            setList(payload.data["quarter"][currentQuarter]["eventList"]);
-
-                            if (payload.data["quarter"][currentQuarter]["eventList"] !== undefined) {
-                                for (let i = 0; i < payload.data["quarter"][currentQuarter]["eventList"].length; i++) {
-                                    resetArray.push(false)
-                                }
-                            }
-                            reset(props.todayQuarter);
-                            defineColor(props.todayQuarter);
-                            setShowAllReceiptButton(resetArray);
-                            GetDate();
-                            resolve()
-                        })
-                        .catch((error) => {
-                            alert("학과 장부를 불러올 수 없습니다.");
-                            //지우기
-                            setStudentPresident({ ...answer["studentPresident"] });
-                            setQuarter({ ...answer["quarter"] });
-                            setList(answer["quarter"][currentQuarter]["eventList"]);
-                            console.log(answer["quarter"][currentQuarter]["eventList"]);
-
-                            for (let i = 0; i < answer["quarter"][currentQuarter]["eventList"].length; i++) {
-                                resetArray.push(false)
-                            }
-
-                            setShowAllReceiptButton(resetArray);
-
-                            reject()
-                        })
+        let promise = new Promise((resolve, reject) => {
+            axios.post(debugAPIURL + "/ledger", payload)
+                .then((payload) => {
+                    resolve("장부를 추가하였습니다.");
                 })
-                promise
-                    .then(() => {
-                        console.log(Number(quarter[currentQuarter]["eventList"].length))
-                        let i = Number(quarter[currentQuarter]["eventList"].length);
-                        setEditEventState(true)
-                        setEditEventData(quarter[currentQuarter]["eventList"][i]);
-                        setEditEventAmount(eventAmount[i]);
-                    })
-                    .catch((value => {
-                        alert(value)
-                    }))
+                .catch((error) => {
+                    reject("장부 추가에 실패했습니다. code: " + error.response.status)
+                });
+        })
 
-
+        promise
+            .then(value => {
+                getLedger();
             })
-            .catch((error) => {
-                alert("장부 추가에 실패했습니다. code: " + error.response.status)
-
-            });
+            .catch((value => {
+                alert(value)
+                getLedger();
+            }))
     }
+
 
     // function receiptAddButton(i) {
     //     const temp = { ...quarter };
@@ -500,15 +462,25 @@ function EditMainPage(props) {
                 eventNumberList.push(event["eventNumber"])
         })
         let payload = { "eventNumberList": [...eventNumberList] };
-        axios.patch(debugAPIURL + '/event-sequence', payload)
-            .then((payload) => {
-                setList(list)
-                console.log("행사 순서가 수정되었습니다.");
+
+        let promise = new Promise((resolve, reject) => {
+            axios.patch(debugAPIURL + '/event-sequence', payload)
+                .then((payload) => {
+                    resolve("행사 순서가 수정되었습니다.");
+                }).catch((error) => {
+                    reject(error.response.data["errorMessage"]);
+                })
+        })
+
+        promise
+            .then(value => {
                 getLedger();
-            }).catch((error) => {
-                setList(quarter[currentQuarter]["eventList"])
-                alert(error.response.data["errorMessage"]);
             })
+            .catch((value => {
+                getLedger();
+                setEditState(false)
+            }))
+
     }
 
 
