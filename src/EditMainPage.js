@@ -14,7 +14,6 @@ import { useRef } from 'react';
 import { upload } from '@testing-library/user-event/dist/upload';
 import { ReactSortable } from "react-sortablejs";
 import EditEvent from './EditEvent';
-import { selectOptions } from '@testing-library/user-event/dist/select-options';
 
 
 
@@ -290,46 +289,61 @@ function EditMainPage(props) {
     // }
 
     function eventAddButton(currentQuarter) {
-        console.log(quarter);
-        console.log(currentQuarter);
-        // const temp = { ...quarter };
-        // temp[currentQuarter]["eventList"].push({
-        //     eventContext: "행사내용",
-        //     eventNumber: "eventNumber",
-        //     eventTitle: "행사 이름",
-        //     receiptList: [
-        //         {
-        //             "receiptTitle": "영수증 제목을 입력해주세요",
-        //             "receiptImg": { name: "" },
-        //             "receiptContext": "영수증 내용을 입력해주세요",
-        //             "receiptDetailList": [
-        //                 {
-        //                     "context": "",
-        //                     "price": "",
-        //                     "amount": "",
-        //                     "totalAmount": ""
-
-        //                 },
-        //             ]
-        //         },
-        //     ],
-        // });
         let payload = { "quarter": currentQuarter }
         axios.post(debugAPIURL + "/ledger", payload)
             .then((payload) => {
-                switch (payload.status) {
-                    case 200:
-                        alert("장부를 추가하였습니다.");
-                        getLedger();
-                        break;
-                    default:
-                        alert("success code: " + payload.status);
-                        getLedger();
-                        break;
-                }
+                alert("장부를 추가하였습니다.");
+
+                let promise = new Promise((resolve, reject) => {
+                    let resetArray = [];
+                    axios.get(debugAPIURL + '/ledger')
+                        .then((payload) => {
+                            setStudentPresident({ ...payload.data["studentPresident"] });
+                            setQuarter({ ...payload.data["quarter"] });
+                            setList(payload.data["quarter"][currentQuarter]["eventList"]);
+
+                            if (payload.data["quarter"][currentQuarter]["eventList"] !== undefined) {
+                                for (let i = 0; i < payload.data["quarter"][currentQuarter]["eventList"].length; i++) {
+                                    resetArray.push(false)
+                                }
+                            }
+                            reset(props.todayQuarter);
+                            defineColor(props.todayQuarter);
+                            setShowAllReceiptButton(resetArray);
+                            GetDate();
+                            resolve()
+                        })
+                        .catch((error) => {
+                            alert("학과 장부를 불러올 수 없습니다.");
+                            //지우기
+                            setStudentPresident({ ...answer["studentPresident"] });
+                            setQuarter({ ...answer["quarter"] });
+                            setList(answer["quarter"][currentQuarter]["eventList"]);
+                            console.log(answer["quarter"][currentQuarter]["eventList"]);
+
+                            for (let i = 0; i < answer["quarter"][currentQuarter]["eventList"].length; i++) {
+                                resetArray.push(false)
+                            }
+
+                            setShowAllReceiptButton(resetArray);
+                            reject()
+                        })
+                })
+                promise
+                    .then(() => {
+                        let i = Number(quarter[currentQuarter]["eventList"].length) - 1;
+                        setEditEventState(true)
+                        setEditEventData(quarter[currentQuarter]["eventList"][i]);
+                        setEditEventAmount(eventAmount[i]);
+                    })
+                    .catch((value => {
+                        alert(value)
+                    }))
+
             })
             .catch((error) => {
                 alert("장부 추가에 실패했습니다. code: " + error.response.status)
+
             });
     }
 
@@ -453,6 +467,7 @@ function EditMainPage(props) {
                 reset(props.todayQuarter);
                 defineColor(props.todayQuarter);
                 setShowAllReceiptButton(resetArray);
+                GetDate();
             })
             .catch((error) => {
                 alert("학과 장부를 불러올 수 없습니다.");
@@ -468,10 +483,6 @@ function EditMainPage(props) {
 
                 setShowAllReceiptButton(resetArray);
             })
-
-        reset(props.todayQuarter);
-        defineColor(props.todayQuarter);
-        GetDate();
     }
 
     function eventSequenceButton() {
@@ -496,11 +507,8 @@ function EditMainPage(props) {
     }, []);
 
     useEffect(() => {
-        if (editEventState === false) {
-            getLedger();
-        }
+        if (editEventState === false) getLedger();
     }, [editEventState]);
-
 
     useEffect(() => {
         if (quarter !== undefined) {
@@ -632,7 +640,7 @@ function EditMainPage(props) {
                                                                                 <button onClick={() => {
                                                                                     eventDeleteButton(event["eventNumber"], i);
                                                                                 }} style={{ marginRight: "15px" }}>
-                                                                                    <i class="far fa-trash-alt"></i> </button>
+                                                                                    <i class="far fa-trash-alt"></i></button>
                                                                                 <button onClick={() => {
                                                                                     setEditEventState(true)
                                                                                     setEditEventData(quarter[currentQuarter]["eventList"][i]);
@@ -834,8 +842,6 @@ function EditMainPage(props) {
 
                                                                                                     <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
                                                                                                         alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"} />
-
-
 
                                                                                                 </div>
 

@@ -369,7 +369,7 @@ function EditEvent(props) {
 
                                     <div>
                                         <input type="text" style={{ border: "transparent", textAlign: "left", width: "650px" }}
-                                            placeholder={eventData["eventContext"]}
+                                            placeholder={"행사 비고를 입력하세요"}
                                             value={eventData["eventContext"]}
                                             onInput={
                                                 (e) => {
