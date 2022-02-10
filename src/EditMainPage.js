@@ -502,9 +502,11 @@ function EditMainPage(props) {
         let payload = { "eventNumberList": [...eventNumberList] };
         axios.patch(debugAPIURL + '/event-sequence', payload)
             .then((payload) => {
+                setList(list)
                 console.log("행사 순서가 수정되었습니다.");
                 getLedger();
             }).catch((error) => {
+                setList(quarter[currentQuarter]["eventList"])
                 alert(error.response.data["errorMessage"]);
             })
     }
