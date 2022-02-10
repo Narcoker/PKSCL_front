@@ -106,6 +106,46 @@ function EditMainPage(props) {
 
     // const [fixEventButton, setFixEventButton] = useState([]);
 
+
+    function getLedger() {
+        let resetArray = [];
+        axios.get(debugAPIURL + '/ledger')
+            .then((payload) => {
+                setStudentPresident({ ...payload.data["studentPresident"] });
+                setQuarter({ ...payload.data["quarter"] });
+                setList([...payload.data["quarter"][currentQuarter]["eventList"]]);
+
+                if (payload.data["quarter"][currentQuarter]["eventList"] !== undefined) {
+                    for (let i = 0; i < payload.data["quarter"][currentQuarter]["eventList"].length; i++) {
+                        resetArray.push(false)
+                    }
+                }
+                reset(currentQuarter);
+                defineColor(currentQuarter);
+                setShowAllReceiptButton(resetArray);
+                GetDate();
+            })
+            .catch((error) => {
+                switch (error.response.status) {
+                    case 403:
+                        history.push('/main')
+                        break;
+                }
+                alert("학과 장부를 불러올 수 없습니다.");
+                //지우기
+                setStudentPresident({ ...answer["studentPresident"] });
+                setQuarter({ ...answer["quarter"] });
+                setList([...answer["quarter"][currentQuarter]["eventList"]]);
+                console.log(answer["quarter"][currentQuarter]["eventList"]);
+
+                for (let i = 0; i < answer["quarter"][currentQuarter]["eventList"].length; i++) {
+                    resetArray.push(false)
+                }
+
+                setShowAllReceiptButton(resetArray);
+            })
+    }
+
     function resetShowAllReceiptButton() {
         let resetArray = [];
         if (quarter[currentQuarter]["eventList"] !== undefined) {
@@ -416,44 +456,7 @@ function EditMainPage(props) {
     // setShowAllReceiptButton(tempShowAllReceiptButton);
     // }
 
-    function getLedger() {
-        let resetArray = [];
-        axios.get(debugAPIURL + '/ledger')
-            .then((payload) => {
-                setStudentPresident({ ...payload.data["studentPresident"] });
-                setQuarter({ ...payload.data["quarter"] });
-                setList(payload.data["quarter"][currentQuarter]["eventList"]);
 
-                if (payload.data["quarter"][currentQuarter]["eventList"] !== undefined) {
-                    for (let i = 0; i < payload.data["quarter"][currentQuarter]["eventList"].length; i++) {
-                        resetArray.push(false)
-                    }
-                }
-                reset(currentQuarter);
-                defineColor(currentQuarter);
-                setShowAllReceiptButton(resetArray);
-                GetDate();
-            })
-            .catch((error) => {
-                switch (error.response.status) {
-                    case 403:
-                        history.push('/main')
-                        break;
-                }
-                alert("학과 장부를 불러올 수 없습니다.");
-                //지우기
-                setStudentPresident({ ...answer["studentPresident"] });
-                setQuarter({ ...answer["quarter"] });
-                setList(answer["quarter"][currentQuarter]["eventList"]);
-                console.log(answer["quarter"][currentQuarter]["eventList"]);
-
-                for (let i = 0; i < answer["quarter"][currentQuarter]["eventList"].length; i++) {
-                    resetArray.push(false)
-                }
-
-                setShowAllReceiptButton(resetArray);
-            })
-    }
 
     function eventSequenceButton() {
         let eventNumberList = [];
@@ -478,7 +481,6 @@ function EditMainPage(props) {
             })
             .catch((value => {
                 getLedger();
-                setEditState(false)
             }))
 
     }
@@ -574,7 +576,6 @@ function EditMainPage(props) {
                                                                     tempDateArray[currentQuarter][0] = e.target.value;
                                                                     setQuarterDate(tempDateArray)
                                                                     putLedgerDate();
-
                                                                 }}
                                                             ></input>~
                                                                 <input className="dateInput" type={"date"} value={quarterDate[currentQuarter][1]}
