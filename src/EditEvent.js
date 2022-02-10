@@ -12,6 +12,8 @@ function EditEvent(props) {
     const [showImg, setShowImg] = useState(false);
     const [editState, setEditState] = useState(true);
 
+    const [previewImg, setPreviewImg] = useState();
+
     useEffect(() => {
         setEventData(props.editEventData);
     }, []);
@@ -331,7 +333,7 @@ function EditEvent(props) {
         <div className="editEventBox">
             {
                 showImg
-                    ? <PreviewImg setShowImg={setShowImg}></PreviewImg>
+                    ? <PreviewImg setShowImg={setShowImg} previewImg={previewImg}></PreviewImg>
                     : null
             }
             <div className="quarterData" style={{ marginTop: "0" }}>
@@ -536,9 +538,10 @@ function EditEvent(props) {
                                                             <div className="uploadimg">
 
                                                                 {/* <label for='receiptImg'> */}
-                                                                <img src={processImage(receipt["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
+                                                                <img className="receiptImg"
+                                                                    src={processImage(receipt["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
                                                                     alt={processImage(receipt["receiptImg"])} height={"150"} width={"100"} title='영수증 사진'
-                                                                    onClick={() => { setShowImg(true) }}
+                                                                    onClick={() => { setShowImg(true); setPreviewImg(processImage(receipt["receiptImg"])); }}
                                                                 />
 
                                                                 {/* </label> */}

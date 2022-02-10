@@ -61,3 +61,7 @@ input {
     font-family: "Work Sans";
     font-weight: bold;
 }
+
+.receiptImg:hover {
+    cursor: pointer;
+}

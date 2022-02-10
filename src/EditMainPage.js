@@ -14,8 +14,7 @@ import { useRef } from 'react';
 import { upload } from '@testing-library/user-event/dist/upload';
 import { ReactSortable } from "react-sortablejs";
 import EditEvent from './EditEvent';
-
-
+import PreviewImg from './PreviewImg';
 
 
 function EditMainPage(props) {
@@ -104,8 +103,8 @@ function EditMainPage(props) {
     const [editEventData, setEditEventData] = useState({});
     const [editEventAmount, setEditEventAmount] = useState({});
 
-    // const [fixEventButton, setFixEventButton] = useState([]);
-
+    const [showImg, setShowImg] = useState(false);
+    const [previewImg, setPreviewImg] = useState();
 
     function getLedger() {
         let resetArray = [];
@@ -524,6 +523,11 @@ function EditMainPage(props) {
     return (
         <div className="EditMainPageContainer">
             {
+                showImg
+                    ? <PreviewImg setShowImg={setShowImg} previewImg={previewImg}></PreviewImg>
+                    : null
+            }
+            {
                 props.loginPosition !== "president"
                     ? <div>잘못된 접근입니다.</div>
                     : (<>{
@@ -548,7 +552,7 @@ function EditMainPage(props) {
                                 : (<>
                                     <div className="leftPanel" id='leftPanel'>
                                         <div className="quarter">
-                                            <div className="quarterButton" style={{ margin: "50px" }} onClick={() => { setList(quarter["quarter1"]["eventList"]); showQuarter("quarter1"); window.scrollTo(0, 0); }}><div>1분기</div><img src={quarter1} alt="quarter1" ></img></div>
+                                            <div className="quarterButton" style={{ marginTop: "50px" }} onClick={() => { setList(quarter["quarter1"]["eventList"]); showQuarter("quarter1"); window.scrollTo(0, 0); }}><div>1분기</div><img src={quarter1} alt="quarter1" ></img></div>
                                             <div className="quarterButton" onClick={() => { setList(quarter["quarter2"]["eventList"]); showQuarter("quarter2"); window.scrollTo(0, 0); }}><div>2분기</div><img src={quarter2} alt="quarter2" ></img></div>
                                             <div className="quarterButton" onClick={() => { setList(quarter["quarter3"]["eventList"]); showQuarter("quarter3"); window.scrollTo(0, 0); }}><div>3분기</div><img src={quarter3} alt="quarter3" ></img></div>
                                             <div className="quarterButton" onClick={() => { setList(quarter["quarter4"]["eventList"]); showQuarter("quarter4"); window.scrollTo(0, 0); }}><div>4분기</div><img src={quarter4} alt="quarter4" ></img></div>
@@ -738,10 +742,9 @@ function EditMainPage(props) {
                                                                                             event["receiptList"].length === 0
                                                                                                 ? null
                                                                                                 :
-                                                                                                <img src={processImage(event["receiptList"][0]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
-                                                                                                    alt={processImage(event["receiptList"][0]["receiptImg"])} height={"150"} width={"100"} />
-
-
+                                                                                                <img className="receiptImg" src={processImage(event["receiptList"][0]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
+                                                                                                    alt={processImage(event["receiptList"][0]["receiptImg"])} height={"150"} width={"100"}
+                                                                                                    onClick={() => { setShowImg(true); setPreviewImg(processImage(event["receiptList"][0]["receiptImg"])); }} />
                                                                                         }
 
                                                                                     </div>
@@ -826,7 +829,9 @@ function EditMainPage(props) {
                                                                                                     </div>
 
                                                                                                     <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
-                                                                                                        alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"} />
+                                                                                                        alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"}
+                                                                                                        className="receiptImg"
+                                                                                                        onClick={() => { setShowImg(true); setPreviewImg(processImage(event["receiptList"][0]["receiptImg"])); }} />
 
                                                                                                 </div>
 

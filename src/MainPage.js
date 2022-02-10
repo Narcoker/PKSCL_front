@@ -10,6 +10,7 @@ import './css/MainPage.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import PreviewImg from './PreviewImg';
 
 
 function MainPage(props) {
@@ -100,6 +101,9 @@ function MainPage(props) {
     const [chatbot, setChatbot] = useState(true);
 
     const [tempQuarter, setTempQuarter] = useState(false);
+
+    const [showImg, setShowImg] = useState(false);
+    const [previewImg, setPreviewImg] = useState();
 
     function resetShowAllReceiptButton() {
         let resetArray = [];
@@ -450,6 +454,11 @@ function MainPage(props) {
     return (
         <div className="MainPageContainer">
             {
+                showImg
+                    ? <PreviewImg setShowImg={setShowImg} previewImg={previewImg}></PreviewImg>
+                    : null
+            }
+            {
                 editProfileState
                     ?
                     // <EditProfile loginPosition={props.loginPosition} setEditProfileState={setEditProfileState}></EditProfile>
@@ -621,7 +630,10 @@ function MainPage(props) {
                                                                                             event["receiptList"].length === 0
                                                                                                 ? null
                                                                                                 :
-                                                                                                <img src={event["receiptList"][0]["receiptImg"]["name"]} style={{ backgroundColor: "var(--color-leftPanel)" }} alt={event["receiptList"][0]["receiptImg"]["name"]} height={"150"} width={"100"} />
+                                                                                                <img className="receiptImg" src={event["receiptList"][0]["receiptImg"]["name"]}
+                                                                                                    style={{ backgroundColor: "var(--color-leftPanel)" }}
+                                                                                                    alt={event["receiptList"][0]["receiptImg"]["name"]} height={"150"} width={"100"}
+                                                                                                    onClick={() => { setShowImg(true); setPreviewImg(event["receiptList"][0]["receiptImg"]["name"]); }} />
                                                                                         }
                                                                                     </div>
                                                                                 </div>)
@@ -676,7 +688,9 @@ function MainPage(props) {
                                                                                                         event["receiptList"].length === 0
                                                                                                             ? null
                                                                                                             : <img src={receipt["receiptImg"]["name"]} alt={receipt["receiptImg"]["name"]}
-                                                                                                                style={{ backgroundColor: "var(--color-leftPanel)" }} height={"150"} width={"100"} />
+                                                                                                                style={{ backgroundColor: "var(--color-leftPanel)" }} height={"150"} width={"100"}
+                                                                                                                className="receiptImg"
+                                                                                                                onClick={() => { setShowImg(true); setPreviewImg(event["receiptList"][0]["receiptImg"]["name"]); }} />
                                                                                                     }
                                                                                                 </div>
 
