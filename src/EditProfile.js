@@ -447,7 +447,7 @@ function EditProfile(props) {
                                                     <i className="fas fa-user-graduate" style={{ fontSize: "1.25rem" }}></i>
                                                     <label>학과로고</label>
                                                     <input style={{ width: "200px" }} placeholder={majorLogo} readOnly></input>
-                                                    <label className='fileButton' htmlFor="file">찾기</label>
+                                                    <label className='fileButton' htmlFor="file" style={{ width: "60px" }}>찾기</label>
                                                     <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
                                                         onChange={(e) => {
                                                             setMajorLogo(e.target.files[0]);
