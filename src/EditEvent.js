@@ -63,6 +63,8 @@ function EditEvent(props) {
                 const imageUrl = URL.createObjectURL(imageFile);
                 return imageUrl;
             }
+        } else {
+            return "./static/receiptImg/defaultReceiptImg.jpg"
         }
     }
 
