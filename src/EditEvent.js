@@ -283,7 +283,7 @@ function EditEvent(props) {
         let payload = new FormData();
         let receiptData = eventData["receiptList"][j];
 
-        if (receiptData["receiptImg"]["name"].includes("./static/receiptImg/")) {
+        if (!receiptData["receiptImg"]["name"].includes("./static/receiptImg/")) {
             payload.append("receiptImgFile", receiptData["receiptImg"])
         }
 
