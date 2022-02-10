@@ -131,6 +131,10 @@ function EditEvent(props) {
     function uploadImg(img, j) {
         let tempEditEventData = { ...eventData };
         tempEditEventData["receiptList"][j]["receiptImg"] = img;
+        // console.log(tempEditEventData["receiptList"][j]["receiptImg"]);
+        // console.log(tempEditEventData["receiptList"][j]["receiptImg"]["name"]);
+
+
         setEventData(tempEditEventData);
     }
 
@@ -232,6 +236,9 @@ function EditEvent(props) {
 
         let receiptData = eventData["receiptList"][j];
 
+        payload.append("receiptImgPath", receiptData["receiptImg"])
+        payload.append("receiptImgFile", "./static/receiptImg/" + receiptData["receiptImg"]["name"])
+
         payload.append("eventNumber", eventData["eventNumber"]);
         payload.append("receiptTitle", receiptData["receiptTitle"]);
         payload.append("receiptContext", receiptData["receiptContext"]);
@@ -252,7 +259,7 @@ function EditEvent(props) {
                     resolve("영수증 추가 완료")
                 })
                 .catch((error) => {
-                    reject("영수증 삭제 실패")
+                    reject("영수증 추가 실패")
                 })
         })
 
@@ -271,6 +278,9 @@ function EditEvent(props) {
         let payload = new FormData();
         let receiptData = eventData["receiptList"][j];
 
+        payload.append("receiptImgPath", receiptData["receiptImg"])
+        payload.append("receiptImgFile", "./static/receiptImg/" + receiptData["receiptImg"]["name"])
+
         payload.append("receiptNumber", receiptData["receiptNumber"]);
         payload.append("receiptTitle", receiptData["receiptTitle"]);
         payload.append("receiptContext", receiptData["receiptContext"]);
@@ -288,10 +298,10 @@ function EditEvent(props) {
                 }
             )
                 .then((payload) => {
-                    resolve("영수증 추가 완료")
+                    resolve("영수증 수정 완료")
                 })
                 .catch((error) => {
-                    reject("영수증 삭제 실패")
+                    reject("영수증 수정 실패")
                 })
         })
 
