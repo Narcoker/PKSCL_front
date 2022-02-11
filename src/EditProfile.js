@@ -16,7 +16,7 @@ function EditProfile(props) {
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
-    const [certFile, setCertFile] = useState("");
+    const [certFile, setCertFile] = useState({ name: "" });
     const [majorLogo, setMajorLogo] = useState("");
     const [isCorrect, setIsCorrect] = useState(
         {
