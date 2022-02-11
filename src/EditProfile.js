@@ -130,11 +130,17 @@ function EditProfile(props) {
 
         if (props.loginPosition === "student") { //학생
             payload.append("major", major);
-            payload.append("certFile", certFile);
+           
+            if (!certFile["name"].includes("./static/studentCertFile/")) {
+                payload.append("certFile", certFile);
+            }
         }
         else if (props.loginPosition === "president") { //학생회장
             payload.append("phoneNumber", phoneNumber);
-            payload.append("majorLogo", majorLogo);
+
+           if (!majorLogo["name"].includes("./static/majarLogo/")) {
+                payload.append("majorLogo", majorLogo);
+            }
         }
 
         axios.put(debugAPIURL + "/profile/" + props.loginPosition, payload, {
