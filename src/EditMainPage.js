@@ -374,8 +374,6 @@ function EditMainPage(props) {
 
 
     useEffect(() => {
-        console.log("props.loginPosition");
-        console.log(props.loginPosition);
         getLedger();
     }, []);
 

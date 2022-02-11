@@ -454,7 +454,7 @@
     }
 
     .MainPageContainer .quarterTotalAmount {
-        font-size: 1.5rem;
+        font-size: 25px;
     }
 
     .MainPageContainer .cardContent {
@@ -500,9 +500,16 @@
     }
 
     .MainPageContainer .tempAlert {
-        font-size: 10px;
+        font-size: 8px !important;
     }
 
+    .MainPageContainer .edit {
+        width: 90px !important;
+    }
+
+    .MainPageContainer .receiptTable {
+        font-size: 12px !important;
+    }
 
 
 }
