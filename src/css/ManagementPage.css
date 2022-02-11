@@ -2,7 +2,7 @@
     font-family: "OTWelcomeRA";
     background-color: var(--color-background);
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
 }
@@ -240,15 +240,25 @@ i {
     .tables {
         justify-content: center;
         flex-direction: column;
+        align-items: center;
+        margin-top: 8vh;
     }
 
     .ManagementPageContainer table {
         width: 90%;
         font-size: 0.8rem;
+        margin: 0;
     }
 
     .ManagementPageContainer .tableSet {
         margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ManagementPageContainer .tableSet:last-child {
+        margin-bottom: 50px;
     }
 
     .ManagementPageContainer .tableSet th,
@@ -259,6 +269,10 @@ i {
     .ManagementPageContainer .submitButton {
         font-size: 0.3rem;
         width: 15vw;
+    }
+
+    .ManagementPageContainer .buttons {
+        margin: 0;
     }
 
     .tableSet:nth-child(1) {
