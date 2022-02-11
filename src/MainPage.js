@@ -318,7 +318,7 @@ function MainPage(props) {
     }
 
     function getExPKSCL() {
-        axios.get(debugAPIURL + '/temp-ledger')
+        axios.get(debugAPIURL + '/temp-major-info')
             .then((payload) => {
                 setStudentPresident({ ...payload.data["studentPresident"] });
                 setQuarter({ ...payload.data["quarter"] });

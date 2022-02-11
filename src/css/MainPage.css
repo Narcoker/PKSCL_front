@@ -6,7 +6,7 @@
     flex-direction: row;
     justify-content: flex-end;
     min-height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: var(--color-background);
 }
 
@@ -143,6 +143,7 @@
     width: 100%;
     justify-content: flex-end;
     height: 8vh;
+    top: 0;
 }
 
 .majorList {
@@ -167,6 +168,10 @@
     caret-color: black;
     justify-content: center;
     align-items: center;
+}
+
+.eventCardBox {
+    display: flex;
 }
 
 .mainSearchBar {
@@ -281,6 +286,7 @@
     box-shadow: 1px 1px 10px 0px gray;
     margin-bottom: 50px;
     background-color: white;
+    width: 90vw;
 }
 
 .quarterTotalAmount {
@@ -419,12 +425,15 @@
 
     .MainPageContainer .nav {
         width: 100vw;
-        background-color: red;
         left: 0;
     }
 
+    .MainPageContainer .quarterTotalAmount {
+        margin-bottom: 2vh;
+    }
+
     .MainPageContainer .submitButton {
-        font-size: 0.3rem;
+        font-size: 10px;
         width: 15vw;
     }
 
@@ -439,7 +448,7 @@
     }
 
     .MainPageContainer .eventButtons button {
-        font-size: 0.3rem;
+        font-size: 10px;
         width: 30px;
         height: 30px;
     }
@@ -450,6 +459,8 @@
 
     .MainPageContainer .cardContent {
         width: 90vw;
+        margin: 10px 20px;
+        align-items: center;
     }
 
     .MainPageContainer .eventSource {
@@ -466,15 +477,31 @@
         align-items: center;
     }
 
-    #receiptContent table {
+    .MainPageContainer #receiptContent {
+        width: 90%;
+        height: 100% !important;
+        overflow-y: auto !important;
+    }
+
+    .MainPageContainer #receiptContent table {
         width: 90%;
     }
 
-    .receiptCard img {
+    .MainPageContainer .receiptCard img {
         margin-left: 0;
     }
 
+    .MainPageContainer .eventCardBox {
+        align-items: center !important;
+    }
 
+    .MainPageContainer .image {
+        display: none;
+    }
+
+    .MainPageContainer .tempAlert {
+        font-size: 10px;
+    }
 
 
 
