@@ -478,7 +478,7 @@ function EditProfile(props) {
                                             <i className="fas fa-user-graduate"></i>
                                             <label>학생증</label>
                                             {/* <input style={{ width: "200px" }} placeholder="학생증을 첨부해주세요" value={certFile["name"].replace(/^.*\//, '')} readOnly></input> */}
-                                            <input style={{ width: "200px" }} placeholder="학생증을 첨부해주세요" value={certFile["name"]} readOnly></input>
+                                            <input style={{ width: "200px" }} placeholder="학생증을 첨부해주세요" value={certFile["name"].replace(/^.*\//, '')} readOnly></input>
                                             <label className='fileButton' htmlFor="file">찾기</label>
                                             <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
                                                 onChange={(e) => {
