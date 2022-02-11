@@ -213,8 +213,6 @@ function EditProfile(props) {
     useEffect(() => {
         //debug
 
-
-
         // setStdID(() => "201892643");
         // setMajor(() => "1");
         // setName(() => "한준규");
@@ -479,7 +477,8 @@ function EditProfile(props) {
                                         <div className="inputField">
                                             <i className="fas fa-user-graduate"></i>
                                             <label>학생증</label>
-                                            <input style={{ width: "200px" }} placeholder="학생증을 첨부해주세요" value={certFile["name"].replace(/^.*\//, '')} readOnly></input>
+                                            {/* <input style={{ width: "200px" }} placeholder="학생증을 첨부해주세요" value={certFile["name"].replace(/^.*\//, '')} readOnly></input> */}
+                                            <input style={{ width: "200px" }} placeholder="학생증을 첨부해주세요" value={certFile["name"]} readOnly></input>
                                             <label className='fileButton' htmlFor="file">찾기</label>
                                             <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
                                                 onChange={(e) => {
