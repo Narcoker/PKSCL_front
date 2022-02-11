@@ -130,7 +130,7 @@ function EditProfile(props) {
 
         if (props.loginPosition === "student") { //학생
             payload.append("major", major);
-           
+
             console.log(" if (!certFile['name'].includes('./static/studentCertFile/'))");
             console.log(certFile["name"]);
             if (!certFile["name"].includes("./static/studentCertFile/")) {
@@ -139,11 +139,11 @@ function EditProfile(props) {
         }
         else if (props.loginPosition === "president") { //학생회장
             payload.append("phoneNumber", phoneNumber);
-            
+
             console.log(" if (!majorLogo['name'].includes('./static/majorLogo/'))");
             console.log(majorLogo["name"]);
 
-           if (!majorLogo["name"].includes("./static/majorLogo/")) {
+            if (!majorLogo["name"].includes("./static/majorLogo/")) {
                 payload.append("majorLogo", majorLogo);
             }
         }
@@ -212,8 +212,8 @@ function EditProfile(props) {
 
     useEffect(() => {
         //debug
-       
-        
+
+
 
         setStdID(() => "201892643");
         setMajor(() => "1");
@@ -355,7 +355,7 @@ function EditProfile(props) {
                     boxState === "profile"
                         ? <>
                             <div className='boxTitle'>
-                                <h2 style={{ marginRight: "8px" }}><i className="fas fa-users" />프로필 편집</h2>
+                                <h2 style={{ marginRight: "8px", justifyContent: "center" }}><i className="fas fa-users" />프로필 편집</h2>
                                 <button className="btn btn-danger" style={{ fontWeight: "600" }} onClick={() => { setBoxState("withdrawal") }}>회원탈퇴</button>
                             </div>
 
@@ -496,6 +496,33 @@ function EditProfile(props) {
                             </div>
 
                             <div className="errorBtns">
+                                {
+                                    editButtonState
+                                        ?
+                                        <>
+                                            <button className="errorBtn" type="button" onClick={() => {
+                                                putProfile()
+                                                props.loginPosition === "student"
+                                                    ? (<>{window.confirm('프로필 편집을 하실 경우 학생회장의 학과 장부 열람 승인을 다시 받아야 합니다. 프로필을 편집하시겠습니까?')
+                                                        ? putProfile()
+                                                        : alert("정보수정이 취소되었습니다. ")}</>)
+                                                    : (<>{
+                                                        props.loginPosition === "president"
+                                                            ? (<>{window.confirm('프로필 편집을 변경하실 경우 챗봇을 통하여 관리자에게 회장인증을 해야 합니다. 프로필을 편집하시겠습니까?')
+                                                                ? putProfile()
+                                                                : alert("정보수정이 취소되었습니다. ")}</>)
+                                                            : null
+                                                    }</>)
+                                            }}>저장하기</button>
+                                        </>
+                                        :
+                                        <>
+                                            <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }}
+                                                onClick={() => { alert('정보를 모두 입력해주세요.'); }}>저장하기</button>
+                                        </>
+                                }
+
+                                {/* 
                                 <button className="errorBtn" type="button" onClick={() => {
                                     editButtonState ? putProfile() : alert('정보를 모두 입력해주세요.');
                                     props.loginPosition === "student"
@@ -509,16 +536,15 @@ function EditProfile(props) {
                                                     : alert("정보수정이 취소되었습니다. ")}</>)
                                                 : null
                                         }</>)
+                                }}>저장하기</button> */}
 
-
-                                }}>저장하기</button>
                                 <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { props.setEditProfileState(false); reset(); }}>취소</button>
 
                             </div>
                         </>
                         : boxState === "withdrawal"
                             ? <>
-                                <div className='boxTitle'  >
+                                <div className='boxTitle' style={{ justifyContent: "center" }}  >
                                     <h2 ><i className="fas fa-users" style={{ color: "#dc3545" }} />회원 탈퇴</h2>
                                 </div>
 
@@ -561,14 +587,14 @@ function EditProfile(props) {
                             </>
                             : boxState === "newPassword"
                                 ? <>
-                                    <div className='boxTitle' >
+                                    <div className='boxTitle' style={{ justifyContent: "center" }} >
                                         <h2 ><i className="fas fa-users" />비밀번호 변경</h2>
                                     </div>
 
                                     <div className='editField' >
                                         <div className="inputField">
                                             <i className="fas fa-key"></i>
-                                            <label style={{ width: "80px" }}>비밀번호</label>
+                                            <label style={{ width: "160px" }}>비밀번호</label>
                                             {/* <empty style={{ width: "200px" }}></empty> */}
                                             <input type="password" onChange={(e) => {
                                                 setInputPassword(e.target.value)
@@ -582,7 +608,7 @@ function EditProfile(props) {
 
                                         <div className="inputField">
                                             <i className="fas fa-key"></i>
-                                            <label style={{ width: "80px" }}>새 비밀번호</label>
+                                            <label style={{ width: "160px" }}>새 비밀번호</label>
                                             {/* <empty style={{ width: "200px" }}></empty> */}
                                             <input type="password" onChange={(e) => {
                                                 setInputNewPassword(e.target.value)
@@ -596,7 +622,7 @@ function EditProfile(props) {
 
                                         <div className="inputField">
                                             <i className="fas fa-key"></i>
-                                            <label style={{ width: "80px" }} >새 비밀번호 확인</label>
+                                            <label style={{ width: "160px" }} >새 비밀번호 확인</label>
                                             {/* <empty style={{ width: "200px" }}></empty> */}
                                             <input type="password" onChange={(e) => {
                                                 setInputCheckNewPassword(e.target.value)
@@ -605,7 +631,7 @@ function EditProfile(props) {
                                                 } else {
                                                     changeIsCorrect("inputCheckNewPassword", true);
                                                 }
-                                            }} value={inputCheckNewPassword} placeholder='새 비밀번호를 다시 입력하세요.' />
+                                            }} value={inputCheckNewPassword} placeholder='비밀번호를 다시 입력하세요.' />
                                         </div>
                                     </div>
 
@@ -621,7 +647,7 @@ function EditProfile(props) {
                                         }
 
                                         <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }}
-                                         onClick={() => { setBoxState("profile"); reset(); }}>취소</button>
+                                            onClick={() => { setBoxState("profile"); reset(); }}>취소</button>
 
                                     </div>
                                 </>
