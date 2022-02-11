@@ -212,6 +212,7 @@ function EditProfile(props) {
 
     useEffect(() => {
         //debug
+        console.log("./static/studentCertFile/testimg.png".replace(/^.*\//, ''));
 
         // setStdID(() => "201892643");
         // setMajor(() => "1");
@@ -473,24 +474,34 @@ function EditProfile(props) {
                                                 : null
                                             }
                                         </>
-                                        :
-                                        <div className="inputField">
-                                            <i className="fas fa-user-graduate"></i>
-                                            <label>학생증</label>
-                                            {/* <input style={{ width: "200px" }} placeholder="학생증을 첨부해주세요" value={certFile["name"].replace(/^.*\//, '')} readOnly></input> */}
-                                            <input style={{ width: "200px" }} placeholder="학생증을 첨부해주세요" value={certFile["name"].replace(/^.*\//, '')} readOnly></input>
-                                            <label className='fileButton' htmlFor="file">찾기</label>
-                                            <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
-                                                onChange={(e) => {
-                                                    setCertFile(e.target.files[0]);
-                                                    if (e.target.value === "") {
-                                                        changeIsCorrect("certFile", false);
-                                                    } else {
-                                                        changeIsCorrect("certFile", true);
-                                                    }
+                                        : null
 
-                                                }}></input>
-                                        </div>
+
+                                }
+
+                                {
+                                    props.loginPosition === "student"
+                                        ?
+                                        <>
+                                            <div className="inputField">
+                                                <i className="fas fa-user-graduate"></i>
+                                                <label>학생증</label>
+                                                <input style={{ width: "200px" }} placeholder="학생증을 첨부해주세요." value={certFile["name"].replace(/^.*\//, '')} readOnly></input>
+                                                <label className='fileButton' htmlFor="file">찾기</label>
+                                                <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
+                                                    onChange={(e) => {
+                                                        setCertFile(e.target.files[0]);
+                                                        if (e.target.value === "") {
+                                                            changeIsCorrect("certFile", false);
+                                                        } else {
+                                                            changeIsCorrect("certFile", true);
+                                                        }
+
+                                                    }}></input>
+                                            </div>
+                                        </>
+                                        : null
+
                                 }
                             </div>
 
@@ -654,7 +665,7 @@ function EditProfile(props) {
                 }
 
             </div>
-        </div>
+        </div >
 
     );
 }
