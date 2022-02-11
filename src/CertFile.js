@@ -1,7 +1,7 @@
 import { propTypes } from 'react-bootstrap/esm/Image';
 import './css/CertFile.css';
 
-function CertFile(props){
+function AlertBox(props){
     return(
       <div className="certFileContainer">
       <div className="certFileBox">
@@ -9,11 +9,11 @@ function CertFile(props){
             <button className="CertFileButton" onClick={()=>{props.setCertFile(false)}}><i className="fas fa-times"></i></button>
         </div>
         <br/>
-        <img src= {props.certFileStudnet["studentImgPath"]} width={"auto"} height={"500vh"} alt={props.certFileStudnet["studentImgPath"]}/>
+        <img src= {props.certFileStudnet["studentImgPath"]} width={"auto"} height={"500vh"} alt=""/>
       </div>
     </div>
     )
     
   }
   
-export default CertFile;
+export default AlertBox;
