@@ -215,14 +215,14 @@ function EditProfile(props) {
 
 
 
-        setStdID(() => "201892643");
-        setMajor(() => "1");
-        setName(() => "한준규");
-        setPhoneNumber(() => "010-0000-0000");
-        setEmail(() => "test1@pukyong.ac.kr");
+        // setStdID(() => "201892643");
+        // setMajor(() => "1");
+        // setName(() => "한준규");
+        // setPhoneNumber(() => "010-0000-0000");
+        // setEmail(() => "test1@pukyong.ac.kr");
         // setCertFile({ name: "학생증.jpg" });
-        setCertFile("");
-        setMajorLogo("");
+        // setCertFile("");
+        // setMajorLogo("");
 
         setIsCorrect(
             {
