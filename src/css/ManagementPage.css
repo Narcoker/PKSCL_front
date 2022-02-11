@@ -1,6 +1,6 @@
 .ManagementPageContainer {
     font-family: "OTWelcomeRA";
-    background-color: var(--color-leftPanel);
+    background-color: var(--color-background);
     width: 100%;
     height: 100vh;
     display: flex;
@@ -15,17 +15,32 @@
     position: fixed;
     height: 20px;
     left: 0;
+    align-items: center;
+    display: flex;
+    height: 8vh;
+    background: rgb(255 255 255 / 90%);
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    z-index: 1;
+    justify-content: center;
+    box-shadow: 1px 1px 1px 0 rgb(207 206 206);
 }
 
 .searchBar {
-    height: 40px;
-    border-radius: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    height: 60%;
     display: flex;
     background-color: var(--color-white);
     margin-left: 20px;
     box-shadow: 1px 1px 5px 0px gray;
+    border: none;
+    outline: none;
+    color: var(--color-white);
+    padding: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 20px;
+    transition: 0.5s;
 }
 
 .searchBar input {
@@ -84,6 +99,7 @@ i {
 .tables {
     display: flex;
     justify-content: center;
+    margin-top: 90px;
 }
 
 .tableSet {
@@ -201,14 +217,24 @@ i {
     /* box-shadow: 0 0 0 white; */
 }
 
+@media (hover: none) and (pointer: coarse) {
 
-@media (max-width:950px) {
-    .container-fluid {
-        flex-direction: column;
+    /* .ManagementPageContainer {
+        background-color: aqua;
+    } */
+
+    .ManagementPageContainer .nav h2 {
+        font-size: 1rem;
     }
 
     .searchBar {
-        margin-top: 10px;
+        width: 40%;
+        margin-left: 10px;
+        height: 50%;
+    }
+
+    .searchBar input {
+        width: 90%;
     }
 
     .tables {
@@ -216,8 +242,31 @@ i {
         flex-direction: column;
     }
 
+    .ManagementPageContainer table {
+        width: 90%;
+        font-size: 0.8rem;
+    }
+
+    .ManagementPageContainer .tableSet {
+        margin: 0;
+    }
+
+    .ManagementPageContainer .tableSet th,
+    .ManagementPageContainer .tableSet td {
+        font-size: 0.8rem;
+    }
+
+    .ManagementPageContainer .submitButton {
+        font-size: 0.3rem;
+        width: 15vw;
+    }
+
     .tableSet:nth-child(1) {
         margin-bottom: 20px;
+    }
+
+    .ManagementPageContainer .tableSet tr {
+        height: 40px;
     }
 
 }

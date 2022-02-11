@@ -100,7 +100,7 @@ function MainPage(props) {
 
     const [chatbot, setChatbot] = useState(true);
 
-    const[tempQuarter, setTempQuarter]=useState(false);
+    const [tempQuarter, setTempQuarter] = useState(false);
 
     const [showImg, setShowImg] = useState(false);
     const [previewImg, setPreviewImg] = useState();
@@ -333,6 +333,8 @@ function MainPage(props) {
     }
 
     useEffect(() => {
+        console.log("props.loginPosition");
+        console.log(props.loginPosition);
         if (props.loginPosition === "admin") {
             let ledgerMajor;
             axios.get(debugAPIURL + '/major-list')
@@ -392,7 +394,7 @@ function MainPage(props) {
                         .catch((error) => {
                             alert("학생회장의 승인, 거절, 대기 상태를 확인할 수 없습니다. ")
                             if (window.confirm('임시장부를 확인하시겠습니까?')) getExPKSCL();
-                            
+
                         })
                 })
 
@@ -522,13 +524,21 @@ function MainPage(props) {
                                     }
                                     {
                                         props.loginPosition === "president"
-                                            ? (<>{
-                                                tempQuarter === true
-                                                ?<><div style={{ color: "red" }}>회원님은 장부 열람 권한이 없어 임시 장부를 확인 중입니다.</div><button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
-                                                <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button></>
-                                                :(<><div style={{ color: "red" }}>현재 {studentPresident["major"]} 학생들에게 공개된 장부 입니다. </div>
-                                                <button className='submitButton' style={{ width: "130px" }} type='button' onClick={() => { history.push('/edit-main') }}>장부 수정 페이지</button></>)
-                                            }
+                                            ? (<>
+                                                {
+                                                    tempQuarter === true
+                                                        ?
+                                                        <>
+                                                            <div style={{ color: "red" }}>회원님은 장부 열람 권한이 없어 임시 장부를 확인 중입니다.</div>
+                                                            <button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
+                                                            <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button >
+                                                        </>
+                                                        :
+                                                        <>
+                                                            <div style={{ color: "red" }}>현재 {studentPresident["major"]} 학생들에게 공개된 장부 입니다. </div>
+                                                            <button className='submitButton' style={{ width: "130px" }} type='button' onClick={() => { history.push('/edit-main') }}>장부 수정 페이지</button>
+                                                        </>
+                                                }
                                             </>)
                                             : (<><button className='submitButton' type='button' onClick={() => { setEditProfileState(true); }}>프로필 편집</button>
                                                 <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button></>)
@@ -636,10 +646,10 @@ function MainPage(props) {
                                                                                             event["receiptList"].length === 0
                                                                                                 ? null
                                                                                                 :
-                                                                                                <img className= "receiptImg" src={event["receiptList"][0]["receiptImg"]["name"]} 
-                                                                                                style={{ backgroundColor: "var(--color-leftPanel)" }} 
-                                                                                                alt={event["receiptList"][0]["receiptImg"]["name"]} height={"150"} width={"100"} 
-                                                                                                onClick={() => { setShowImg(true); setPreviewImg(event["receiptList"][0]["receiptImg"]["name"]);}}/>
+                                                                                                <img className="receiptImg" src={event["receiptList"][0]["receiptImg"]["name"]}
+                                                                                                    style={{ backgroundColor: "var(--color-leftPanel)" }}
+                                                                                                    alt={event["receiptList"][0]["receiptImg"]["name"]} height={"150"} width={"100"}
+                                                                                                    onClick={() => { setShowImg(true); setPreviewImg(event["receiptList"][0]["receiptImg"]["name"]); }} />
                                                                                         }
                                                                                     </div>
                                                                                 </div>)
@@ -694,9 +704,9 @@ function MainPage(props) {
                                                                                                         event["receiptList"].length === 0
                                                                                                             ? null
                                                                                                             : <img src={receipt["receiptImg"]["name"]} alt={receipt["receiptImg"]["name"]}
-                                                                                                                style={{ backgroundColor: "var(--color-leftPanel)" }} height={"150"} width={"100"} 
-                                                                                                                className= "receiptImg"
-                                                                                                                onClick={() => { setShowImg(true); setPreviewImg(event["receiptList"][0]["receiptImg"]["name"]);}}/>
+                                                                                                                style={{ backgroundColor: "var(--color-leftPanel)" }} height={"150"} width={"100"}
+                                                                                                                className="receiptImg"
+                                                                                                                onClick={() => { setShowImg(true); setPreviewImg(event["receiptList"][0]["receiptImg"]["name"]); }} />
                                                                                                     }
                                                                                                 </div>
 

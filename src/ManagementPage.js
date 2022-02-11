@@ -233,7 +233,15 @@ function ManagementPage(props) {
                                                     : <i className="fas fa-times"></i>
                                             }
                                         </button>
+
                                     </div>
+                                    <button className="submitButton" onClick={() => {
+                                        if (props.loginPosition === "admin") {
+                                            history.push('/main')
+                                        } else if (props.loginPosition === "president") {
+                                            history.push('/edit-main')
+                                        }
+                                    }}>장부 수정</button>
                                 </div>
                                 <div className='tables'>
                                     <div className="tableSet" >
@@ -406,15 +414,6 @@ function ManagementPage(props) {
                                         </table>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="managementPageBar">
-                                <i className="fas fa-chevron-left" onClick={() => {
-                                    if (props.loginPosition === "admin") {
-                                        history.push('/main')
-                                    } else if (props.loginPosition === "president") {
-                                        history.push('/edit-main')
-                                    }
-                                }}></i>
                             </div>
                         </>)}
         </div>
