@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import logo from './img/logo.png';
+import logo from './img/logo1.png';
 import { Nav } from 'react-bootstrap';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -278,7 +278,7 @@ function AccessPage(props) {
 
           <button type="button" style={{ boxShadow: "0 0 0 0 white", fontFamily: 'YUniverse-B' }} onClick={() => { setPosition("student"); reset(); history.push('/') }}>
             <div>
-              <div style={{ display: "flex", alignItems: "flex-end" }}>
+              <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
                 <img src={logoImgPath} alt="logo" style={{}} width={"80px"} height={"80px"} />
                 <span style={{ marginLeft: "5px", fontSize: "50px" }}>PKSCL</span>
               </div>
