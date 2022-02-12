@@ -367,7 +367,7 @@ function EditEvent(props) {
                                             <div className="eventTitle">
                                                 <h4>
 
-                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "400px" }}
+                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "400px" }} maxLength="25"
                                                         placeholder={"행사 제목을 입력하세요"}
                                                         value={eventData["eventTitle"]}
                                                         onInput={
@@ -399,7 +399,7 @@ function EditEvent(props) {
                                     </div>
 
                                     <div>
-                                        <input type="text" style={{ border: "transparent", textAlign: "left", width: "650px" }}
+                                        <input type="text" style={{ border: "transparent", textAlign: "left", width: "650px" }} maxLength="60"
                                             placeholder={"행사 비고를 입력하세요"}
                                             value={eventData["eventContext"]}
                                             onInput={
@@ -425,7 +425,7 @@ function EditEvent(props) {
                                                                                     <span onClick={() => { receiptDeleteButton(j); }}>
                                                                                         <i className="far fa-trash-alt"></i>
                                                                                     </span>
-                                                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "350px" }}
+                                                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "350px" }} maxLength="30"
                                                                                         placeholder={"영수증 제목을 입력하세요"}
                                                                                         value={eventData["receiptList"][j]["receiptTitle"]}
 
@@ -449,7 +449,7 @@ function EditEvent(props) {
                                                                             <div>
 
 
-                                                                                <input type="text" style={{ border: "transparent", textAlign: "right", width: "400px" }}
+                                                                                <input type="text" style={{ border: "transparent", textAlign: "right", width: "400px" }} maxLength="40"
                                                                                     placeholder={"영수증 비고를 입력하세요"}
                                                                                     value={eventData["receiptList"][j]["receiptContext"]}
                                                                                     onInput={
