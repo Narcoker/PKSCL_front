@@ -222,7 +222,7 @@ function MainPage(props) {
             if (major === "") {
                 alert("검색명을 입력해주세요 :)");
             } else if ((majorList.includes(ledgerMajor))) {
-                let findMajorIndex = majorList.indexOf(ledgerMajor) + 1
+                let findMajorIndex = majorList.indexOf(ledgerMajor)
                 getAdminLedger(findMajorIndex);
                 adminGetDate(findMajorIndex);
                 setMajor("");
