@@ -269,15 +269,30 @@ function AccessPage(props) {
         <div class='wave -two'></div>
         <div class='wave -three'></div>
         <div className="content">
-
-          <button type="button" style={{ boxShadow: "0 0 0 0 white", fontFamily: 'YUniverse-B' }} onClick={() => { setPosition("student"); reset(); history.push('/') }}><h3>PKNU 온라인 장부</h3></button>
+          {/* <button type="button" style={{ boxShadow: "0 0 0 0 white", fontFamily: 'YUniverse-B' }} onClick={() => { setPosition("student"); reset(); history.push('/') }}>
+            <h3>PKNU 온라인 장부</h3>
+          </button>
           <p>
             우리 학과의 장부를 분기 별로 확인할 수 있습니다.
-          </p>
+          </p> */}
+
+          <button type="button" style={{ boxShadow: "0 0 0 0 white", fontFamily: 'YUniverse-B' }} onClick={() => { setPosition("student"); reset(); history.push('/') }}>
+            <div>
+              <div style={{ display: "flex", alignItems: "flex-end" }}>
+                <img src={logoImgPath} alt="logo" style={{}} width={"80px"} height={"80px"} />
+                <span style={{ marginLeft: "5px", fontSize: "50px" }}>PKSCL</span>
+              </div>
+              <div>PuKyong Student Council Ledger</div>
+            </div>
+          </button>
+
+
+
         </div>
         <img src={logo} className="image" alt="PKSCL logo" />
         <button type="button" onClick={() => { setPosition("admin"); reset(); history.push('/giraffe-admin') }}
-          style={{ height: "10px", width: "20px", backgroundColor: "ffffff00", boxShadow: "0px 0px 0px 0px grey" }}></button>
+          style={{ height: "10px", width: "20px", backgroundColor: "ffffff00", boxShadow: "0px 0px 0px 0px grey" }}>
+        </button>
       </div>
       <Switch>
 
@@ -295,7 +310,7 @@ function AccessPage(props) {
                 </Nav>
               </div>
               <h3 className="accessTitle" style={{ margin: "10px 0 0 0" }}>
-                  <img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />가입을 시작합니다!</h3>
+                <img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />가입을 시작합니다!</h3>
               {
                 position === "student"
                   ? <div style={{ marginBottom: "10px" }}>PKSCL로 편리하고 투명하게 장부를 이용하세요:) </div>
@@ -720,7 +735,12 @@ function AccessPage(props) {
                   </Nav.Item>
                 </Nav>
               </div>
-              <h3 className="accessTitle" ><img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />PKSCL</h3>
+              <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
+                <h3 className="accessTitle" >🤗환영합니다🤗</h3>
+                <p>우리 학과의 장부를 분기 별로 확인할 수 있습니다.</p>
+              </div>
+
+
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
                 <input id="inputEmail" onChange={(e) => { setEmail(e.target.value) }}
