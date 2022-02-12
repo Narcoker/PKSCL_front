@@ -396,27 +396,46 @@ function EditProfile(props) {
                                 <div className="inputField">
                                     <i className="fas fa-book-open" style={{ fontSize: "0.85rem" }}></i>
                                     <label >학과</label>
-                                    <input type="text" list="majorList-options" id='major' name="major" placeholder={majorList[major]}
-                                        style={{ textColor: "black" }}
-                                        onChange={(e) => {
-                                            setMajor(majorList.indexOf(e.target.value) + 1);
 
-                                            if (majorList.includes(e.target.value)) {
-                                                changeIsCorrect("major", true);
-                                            } else {
-                                                changeIsCorrect("major", false);
-                                            }
-                                        }
-                                        } ></input>
-                                    <datalist id="majorList-options" >
-                                        {
-                                            majorList.map((majorName, i) => {
-                                                return (
-                                                    <option value={majorName} key={i} ></option>
-                                                )
-                                            })
-                                        }
-                                    </datalist>
+                                    {
+                                        props.loginPosition === "student"
+                                            ?
+                                            <>
+                                                <input type="text" list="majorList-options" id='major' name="major" placeholder={majorList[major]}
+                                                    style={{ textColor: "black" }}
+                                                    onChange={(e) => {
+                                                        setMajor(majorList.indexOf(e.target.value));
+
+                                                        if (majorList.includes(e.target.value)) {
+                                                            changeIsCorrect("major", true);
+                                                        } else {
+                                                            changeIsCorrect("major", false);
+                                                        }
+                                                    }
+                                                    } ></input>
+                                                <datalist id="majorList-options" >
+                                                    {
+                                                        majorList.map((majorName, i) => {
+                                                            return (
+                                                                <option value={majorName} key={i} ></option>
+                                                            )
+                                                        })
+                                                    }
+                                                </datalist>
+                                            </>
+                                            : null
+                                    }
+
+                                    {
+                                        props.loginPosition === "president"
+                                            ?
+                                            <>
+                                                <input type="text" list="majorList-options" id='major' name="major" placeholder={majorList[major]}
+                                                    style={{ textColor: "black" }} readOnly ></input>
+                                            </>
+                                            : null
+                                    }
+
 
                                 </div>
 
@@ -529,7 +548,7 @@ function EditProfile(props) {
                                                         : alert("정보수정이 취소되었습니다. ")}</>)
                                                     : (<>{
                                                         props.loginPosition === "president"
-                                                            ? (<>{window.confirm('프로필 편집을 변경하실 경우 챗봇을 통하여 관리자에게 회장인증을 해야 합니다. 프로필을 편집하시겠습니까?')
+                                                            ? (<>{window.confirm('프로필을 편집하시겠습니까?')
                                                                 ? putProfile()
                                                                 : alert("정보수정이 취소되었습니다. ")}</>)
                                                             : null
