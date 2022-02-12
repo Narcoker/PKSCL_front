@@ -367,7 +367,7 @@ function ManagementPage(props) {
                                                                                             ? (<><td>{student.stdID}</td>
                                                                                                 <td>{student.name}</td>
                                                                                                 <td><button className="certFileButton" type='button' onClick={() => {
-                                                                                                    setPreviewImg(student);
+                                                                                                    setPreviewImg(student.studentImgPath);
                                                                                                     setShowImg(true);
                                                                                                 }}>학생증</button></td>
                                                                                                 <td ><input
@@ -387,7 +387,7 @@ function ManagementPage(props) {
                                                                                                     <td style={{ borderBottom: "1px solid var(--color-quarterCircle)" }}>{student.phoneNumber}</td>
                                                                                                     <td style={{ borderBottom: "1px solid var(--color-quarterCircle)" }}>{student.email}</td>
                                                                                                     <td style={{ borderBottom: "1px solid var(--color-quarterCircle)" }}><button className="certFileButton" type='button' onClick={() => {
-                                                                                                        setPreviewImg(student);
+                                                                                                        setPreviewImg(student.studentImgPath);
                                                                                                         setShowImg(true);
                                                                                                     }}>학생증</button></td>
                                                                                                 </tr>
