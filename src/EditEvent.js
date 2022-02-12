@@ -66,6 +66,9 @@ function EditEvent(props) {
                 return imageUrl;
             }
         }
+        else {
+            return "./static/receiptImg/defaultReceiptImg.jpg"
+        }
     }
 
     function receiptDeleteButton(j) {
