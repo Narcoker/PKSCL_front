@@ -110,7 +110,7 @@ function EditProfile(props) {
                 switch (payload.status) {
                     case 200:
                         alert("비밀번호가 수정되었습니다.");
-                        setBoxState("profile");
+                        logout();
                         break;
                     default:
                         alert(payload.status);
@@ -179,6 +179,17 @@ function EditProfile(props) {
         setInputPassword("");
         setInputNewPassword("");
         setInputCheckNewPassword("");
+    }
+
+    function logout() {
+        axios.post(debugAPIURL + '/logout')
+            .then((payload) => {
+                history.push('/');
+            }).catch((error) => {
+                console.log("error: " + error.response.status);
+                // 빼기
+                history.push('/');
+            })
     }
 
     useEffect(() => {
