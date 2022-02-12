@@ -736,8 +736,8 @@ function AccessPage(props) {
                 </Nav>
               </div>
               <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
-                <h3 className="accessTitle" >🤗환영합니다🤗</h3>
-                <p>우리 학과의 장부를 분기 별로 확인할 수 있습니다.</p>
+                <h3 className="accessTitle" style={{ marginBottom: "2px" }}>🤗환영합니다🤗</h3>
+                <p style={{ fontSize: "12px" }}>우리 학과의 장부를 분기 별로 확인할 수 있습니다.</p>
               </div>
 
 
