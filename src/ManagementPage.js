@@ -246,7 +246,7 @@ function ManagementPage(props) {
                                             <div className="nav" style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <div className="logoNav" onClick={() => { history.push('/main') }}>
                                                     <img src={logoImgPath} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
-                                                    <div style={{ marginLeft: "5px", fontSize: "25px", fontFamily: "Work Sans" }}>PKSCL</div>
+                                                    <div style={{ marginLeft: "5px", fontSize: "25px", fontFamily: "Work Sans", fontWeight: "bold" }}>PKSCL</div>
                                                 </div>
                                                 <div style={{ display: "flex", alignItems: "center" }}>
                                                     <div style={{ fontSize: "25px" }}>학생승인 현황</div>

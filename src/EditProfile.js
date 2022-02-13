@@ -223,7 +223,7 @@ function EditProfile(props) {
 
     useEffect(() => {
         //debug
-        console.log("./static/studentCertFile/testimg.png".replace(/^.*\//, ''));
+        console.log(props.loginPosition);
 
         // setStdID(() => "201892643");
         // setMajor(() => "1");
