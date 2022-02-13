@@ -159,7 +159,7 @@ function EditEvent(props) {
         tempEditEventData["receiptList"].push({
 
             "receiptTitle": "",
-            "receiptImg": { name: "" },
+            "receiptImg": { name: "./static/receiptImg/defaultReceiptImg.jpg" },
             "receiptContext": "",
             "receiptDetailList": [
                 {
