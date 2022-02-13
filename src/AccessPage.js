@@ -212,18 +212,22 @@ function AccessPage(props) {
   };
 
   function certEmail() {
-    let payload = { "email": email };
-    axios.post(debugAPIURL + '/email/' + position, payload)
-      .then((payload) => {
-        alert("입력하신 이메일로 메일을 발송했습니다.");
-      })
-      .catch((error) => {
-        switch (error.response.status) {
-          case 409: alert("이미 존재하는 이메일입니다 :)"); return;
-          case 403: alert("이메일이 인증되지 않았습니다. 이메일 인증을 완료해주세요 :) "); return;
-          default: alert("error: " + error.response.status); return;
-        }
-      });
+
+    if (window.confirm("입력하신 이메일로 인증 메일을 발송하시겠습니까?")) {
+      let payload = { "email": email };
+      axios.post(debugAPIURL + '/email/' + position, payload)
+        .then((payload) => {
+          // alert("입력하신 이메일로 메일을 발송했습니다.");
+        })
+        .catch((error) => {
+          switch (error.response.status) {
+            case 409: alert("이미 존재하는 이메일입니다 :)"); return;
+            // case 403: alert("이메일이 인증되지 않았습니다. 이메일 인증을 완료해주세요 :) "); return;
+            default: alert("error: " + error.response.status); return;
+          }
+        });
+    }
+
   };
 
   function changeIsCorrect(i, type) {
