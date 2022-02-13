@@ -386,10 +386,12 @@ function ManagementPage(props) {
                                                                                             </tr><tr style={{ backgroundColor: "var(--color-tableEven)" }}>
                                                                                                     <td style={{ borderBottom: "1px solid var(--color-quarterCircle)" }}>{student.phoneNumber}</td>
                                                                                                     <td style={{ borderBottom: "1px solid var(--color-quarterCircle)" }}>{student.email}</td>
-                                                                                                    <td style={{ borderBottom: "1px solid var(--color-quarterCircle)" }}><button className="certFileButton" type='button' onClick={() => {
-                                                                                                        setPreviewImg(student.studentImgPath);
-                                                                                                        setShowImg(true);
-                                                                                                    }}>학생증</button></td>
+                                                                                                    <td style={{ borderBottom: "1px solid var(--color-quarterCircle)" }}>
+                                                                                                        <button className="certFileButton" type='button' onClick={() => {
+                                                                                                            setPreviewImg(student.studentImgPath);
+                                                                                                            setShowImg(true);
+                                                                                                        }}>학생증</button>
+                                                                                                    </td>
                                                                                                 </tr>
                                                                                                 <td style={{ width: "100px", backgroundColor: "var(--color-tableEven)", borderBottom: "1px solid var(--color-quarterCircle)" }}><
                                                                                                     input

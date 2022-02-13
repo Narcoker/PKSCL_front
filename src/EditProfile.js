@@ -104,6 +104,8 @@ function EditProfile(props) {
     }
 
     function newPassword() {
+
+
         const payload = { "inputPassword": inputPassword, "inputNewPassword": inputNewPassword, "inputCheckNewPassword": inputCheckNewPassword }
         axios.patch(debugAPIURL + '/password', payload)
             .then((payload) => {
@@ -682,7 +684,14 @@ function EditProfile(props) {
                                                 <button className="errorBtn" type="button" onClick={() => { newPassword(); }}>변경</button>
                                                 :
                                                 <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }}
-                                                    onClick={() => { console.log(isCorrect.inputPassword + " " + isCorrect.inputNewPassword + " " + isCorrect.inputCheckNewPassword); }}>변경</button>
+                                                    onClick={() => {
+                                                        if (inputNewPassword !== inputPassword) {
+                                                            alert("새 비밀번호 값이 일치하지 않습니다.")
+                                                        } else {
+                                                            alert("빈칸을 모두 입력해주세요")
+                                                        }
+
+                                                    }}>변경</button>
 
                                         }
 
