@@ -459,7 +459,7 @@ function MainPage(props) {
                                             <div className="presidentCard">
                                                 <h2>{studentPresident["major"]}</h2>
                                                 <p> 온라인 장부 입니다. </p>
-                                                <img src={studentPresident["majorLogo"]["name"]} alt="majorLogo" height={"150"} width={"10"} />
+                                                <img src={studentPresident["majorLogo"]} alt="majorLogo" height={"150"} width={"10"} />
                                                 <h3>{studentPresident["name"]}</h3>
                                                 <p>{studentPresident["phoneNumber"]}</p>
                                                 <p>{studentPresident["email"]}</p>
@@ -482,7 +482,7 @@ function MainPage(props) {
                                     <div className="rightPanel">
 
                                         <div className="nav">
-                                            <div className="logoNav">
+                                            <div className="logoNav" onClick={() => { history.push('/main') }}>
                                                 <img src={logoImgPath} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
                                                 <div style={{ marginLeft: "5px", fontSize: "25px" }}>PKSCL</div>
                                             </div>

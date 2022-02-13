@@ -523,7 +523,7 @@ function EditMainPage(props) {
                                                     <div className="nav">
 
                                                         <div className="buttons">
-                                                            <div className="logoNav">
+                                                            <div className="logoNav" onClick={() => { history.push('/main') }}>
                                                                 <img src={logoImgPath} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
                                                                 <div style={{ marginLeft: "5px", fontSize: "25px" }}>PKSCL</div>
                                                             </div>
