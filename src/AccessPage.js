@@ -490,7 +490,7 @@ function AccessPage(props) {
                       <label htmlFor="majorList"></label>
                       <input type="text" list="majorList-options" id='major' name="major" placeholder="학과를 입력하세요."
                         onChange={(e) => {
-                          setMajor(majorList.indexOf(e.target.value) + 1);
+                          setMajor(majorList.indexOf(e.target.value));
                           if (majorList.includes(e.target.value)) {
                             changeIsCorrect(3, true);
                           } else {
