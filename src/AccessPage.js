@@ -617,7 +617,8 @@ function AccessPage(props) {
 
             </form>
             <div className='moveSignPage'>
-              <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/newpwd') }}>비밀번호 찾기</button><button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/'); }}>로그인</button>
+              <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/newpwd') }}>비밀번호 찾기</button>
+              <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/'); }}>로그인</button>
             </div>
           </div>
 

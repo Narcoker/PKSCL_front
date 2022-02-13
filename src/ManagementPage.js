@@ -302,7 +302,7 @@ function ManagementPage(props) {
                                                     props.loginPosition === "admin"
                                                         ?
                                                         <>
-                                                            <button className="submitButton"
+                                                            <button className="submitButton" style={{ width: "auto" }}
                                                                 onClick={() => {
                                                                     if (props.loginPosition === "admin") {
                                                                         history.push('/main')
@@ -316,14 +316,14 @@ function ManagementPage(props) {
 
 
 
-                                                <button className="submitButton"
+                                                {/* <button className="submitButton"
                                                     onClick={() => {
                                                         if (props.loginPosition === "admin") {
                                                             history.push('/main')
                                                         } else if (props.loginPosition === "president") {
                                                             history.push('/edit-main')
                                                         }
-                                                    }}>장부 수정</button>
+                                                    }}>장부 수정</button> */}
                                             </div>
                                             <div className='tables'>
                                                 <div className="tableSet" >
