@@ -280,7 +280,7 @@ function AccessPage(props) {
             <div>
               <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
                 <img src={logoImgPath} alt="logo" style={{}} width={"80px"} height={"80px"} />
-                <span style={{ marginLeft: "5px", fontSize: "50px" }}>PKSCL</span>
+                <span style={{ fontSize: "50px" }}>PKSCL</span>
               </div>
               <div>PuKyong Student Council Ledger</div>
             </div>
@@ -736,7 +736,9 @@ function AccessPage(props) {
                 </Nav>
               </div>
               <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
-                <h3 className="accessTitle" style={{ marginBottom: "2px" }}>🤗환영합니다🤗</h3>
+                <h3 className="accessTitle" style={{ marginBottom: "2px" }}>
+                  <img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />환영합니다</h3>
+
                 <p style={{ fontSize: "12px" }}>우리 학과의 장부를 분기 별로 확인할 수 있습니다.</p>
               </div>
 
