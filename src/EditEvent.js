@@ -154,7 +154,7 @@ function EditEvent(props) {
         tempEditEventData["receiptList"].push({
 
             "receiptTitle": "",
-            "receiptImg": { name: "" },
+            "receiptImg": { name: "./static/receiptImg/defaultReceiptImg.jpg" },
             "receiptContext": "",
             "receiptDetailList": [
                 {
@@ -592,12 +592,7 @@ function EditEvent(props) {
 
                                                                 <input type="file" id="receiptImg" accept="image/*"
                                                                     onChange={(e) => {
-                                                                        if (e.target.files.length < 1) {
-                                                                            uploadImg({ name: "" }, j);
-                                                                        } else {
-                                                                            uploadImg(e.target.files[0], j);
-                                                                        }
-
+                                                                        uploadImg(e.target.files[0], j);
                                                                     }}
                                                                 ></input>
                                                             </div>
