@@ -288,6 +288,7 @@ function ManagementPage(props) {
                 </div>
                 <div style={{ display: "flex", alignItems: "center" }}>
                     <button className='submitButton' type='button' onClick={() => { history.push('/'); }}>로그인</button>
+
                     <i class="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_hxnlXb") }}></i>
                 </div>
             </div>
@@ -352,15 +353,17 @@ function ManagementPage(props) {
                                                 userLoginPosition === "president"
                                                     ?
                                                     <>
-                                                        <button className="submitButton"
-                                                            onClick={() => {
-                                                                if (userLoginPosition === "admin") {
-                                                                    history.push('/main')
-                                                                } else if (userLoginPosition === "president") {
-                                                                    history.push('/edit-main')
-                                                                }
-                                                            }}>장부 수정</button>
-                                                        <i class="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_hxnlXb") }}></i>
+                                                        <div>
+                                                            <button className="submitButton"
+                                                                onClick={() => {
+                                                                    if (userLoginPosition === "admin") {
+                                                                        history.push('/main')
+                                                                    } else if (userLoginPosition === "president") {
+                                                                        history.push('/edit-main')
+                                                                    }
+                                                                }}>장부 수정</button>
+                                                            <i class="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_hxnlXb") }}></i>
+                                                        </div>
                                                     </>
                                                     : null
                                             }
@@ -369,15 +372,17 @@ function ManagementPage(props) {
                                                 userLoginPosition === "admin"
                                                     ?
                                                     <>
-                                                        <button className="submitButton" style={{ width: "auto" }}
-                                                            onClick={() => {
-                                                                if (userLoginPosition === "admin") {
-                                                                    history.push('/main')
-                                                                } else if (userLoginPosition === "president") {
-                                                                    history.push('/edit-main')
-                                                                }
-                                                            }}>학과별 장부 확인 및 수정</button>
-                                                        <i class="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_hxnlXb") }}></i>
+                                                        <div>
+                                                            <button className="submitButton" style={{ width: "auto" }}
+                                                                onClick={() => {
+                                                                    if (userLoginPosition === "admin") {
+                                                                        history.push('/main')
+                                                                    } else if (userLoginPosition === "president") {
+                                                                        history.push('/edit-main')
+                                                                    }
+                                                                }}>학과별 장부 확인 및 수정</button>
+                                                            <i class="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_hxnlXb") }}></i>
+                                                        </div>
                                                     </>
                                                     : null
                                             }

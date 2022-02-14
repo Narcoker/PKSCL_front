@@ -159,7 +159,7 @@ function EditProfile(props) {
             switch (payload.status) {
                 case 200:
                     alert("정보가 변경되었습니다.");
-                    setEditProfileState(false);
+                    props.setEditProfileState(false);
                     break;
                 default: alert("success: " + payload.status); break;
             }
