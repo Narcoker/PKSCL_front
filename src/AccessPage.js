@@ -175,14 +175,23 @@ function AccessPage(props) {
         .then((payload) => {
           props.setLoginPosition(position);
           if (position === "president") {
-            history.push('/edit-main');
+              axios.get('/status')
+                .then((payload) => {
+                    if (payload.data["status"] === "approval") {
+                        history.push('/edit-main');
+                    }else if (payload.data["status"] === "waiting"||payload.data["status"] === "refusal") {
+                        history.push('/main');
+                    }
+                })
+                .catch((error) => {        
+                    alert("error"+error.response.status)
+                }) 
           } else if (position === "admin" || position === "student") {
             history.push('/main');
           }
         })
         .catch((error) => {
           alert("로그인에 실패했습니다 :)")
-
         });
 
     }
@@ -782,11 +791,6 @@ function AccessPage(props) {
 
       </Switch >
     </div >
-
-
-
-
-
   )
 }
 

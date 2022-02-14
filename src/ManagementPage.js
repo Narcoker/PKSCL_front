@@ -110,6 +110,10 @@ function ManagementPage(props) {
 
     const [logoImgPath, setLogoImgPath] = useState();
 
+    const [wrongApproach,setWrongApproach] = useState(false);
+    const [wrongApproachContext,setWrongApproachContext] = useState();
+    const [userLoginPosition,setUserLoginPosition] = useState();
+
     const changeHandler = (checked, studentInfo, setCheckedList, checkedList) => {
         if (checked) {
             setCheckedList([...checkedList, studentInfo]);
@@ -137,35 +141,73 @@ function ManagementPage(props) {
         console.log("patch")
         console.log(leftCheckedList)
         console.log(rightCheckedList)
-        if (props.loginPosition === "president") {
+        if (userLoginPosition === "president") {
             axios.patch(debugAPIURL + '/student-list', payload)
                 .then((payload) => {
-                    getList();
+                    getPresidentList();
                 })
                 .catch((error) => {
-                    getList();
                     alert("학생 전송에 실패했습니다 :)")
+                    getPresidentList();
                 });
-        } else if (props.loginPosition === "admin") {
+        } else if (userLoginPosition === "admin") {
             axios.patch(debugAPIURL + '/president-list', payload)
                 .then((payload) => {
-                    getList();
+                    getAdminList();
                 })
                 .catch((error) => {
-                    getList();
                     alert("학과 전송에 실패했습니다 :)")
+                    getAdminList();
                 });
         }
     }
 
 
     useEffect(() => {
-        getList();
-        setLogoImgPath(`./img/${props.todayQuarter}.png`);
+        axios.get('/position')
+        .then((payload) => {
+                setUserLoginPosition(payload.data["position"])
+            })
+            .catch((error) => {
+                setWrongApproachContext(`사용자의 Position을 알 수 없습니다.`);
+                setWrongApproach(true)        
+             })
+        axios.get('/position')
+        .then((payload) => {
+                if(payload.data["position"]=== "president"){
+                axios.get('/status')
+                    .then((payload) => {
+                        if (payload.data["status"] === "refusal") {
+                                        setWrongApproachContext("사용자(학생회장)은 현재 거절 상태입니다. PKSCL 챗봇을 통해 회장 신청을 다시 진행해 주십시오.");
+                                        setWrongApproach(true)
+                                    }
+                                    else if (payload.data["status"] === "waiting") {
+                                        setWrongApproachContext("사용자(학생회장)은 현재 대기 상태입니다. PKSCL 챗봇을 통해 회장 인증을 해주세요 :)");
+                                        setWrongApproach(true)
+                                    }else if (payload.data["status"] === "approval") {
+                                        getPresidentList();
+                                    }
+                    })
+                    .catch((error) => {
+                        setWrongApproachContext("잘못된 접근입니다.");
+                        setWrongApproach(true) 
+                    })
+                }else if (payload.data["position"]=== "admin"){
+                    getAdminList();
+                }else{
+                    setWrongApproachContext("잘못된 접근입니다.");
+                    setWrongApproach(true)     
+                }
+            })
+            .catch((error) => {
+                setWrongApproachContext("잘못된 접근입니다.");
+                setWrongApproach(true)          
+             })
+        
+        
     }, []);
 
-    function getList() {
-        if (props.loginPosition === "president") {
+    function getPresidentList() {
             axios.get(debugAPIURL + '/student-list')
                 .then((payload) => {
                     console.log(payload)
@@ -174,16 +216,22 @@ function ManagementPage(props) {
                     setApproval([...payload.data["approval"]]);
                     setLeftTable([...payload.data["waiting"]]);
                     setRightTable([...payload.data["approval"]]);
+                    setWrongApproach(false)
                 })
                 .catch((error) => {
-                    alert("학생리스트를 불러올 수 없습니다.");
+                    setWrongApproachContext("학생리스트를 불러올 수 없습니다.");
+                    setWrongApproach(true)
+                    //삭제하기
                     setWaiting([...임시리스트["waiting"]]);
                     setRefusal([...임시리스트["refusal"]]);
                     setApproval([...임시리스트["approval"]]);
                     setLeftTable([...임시리스트["waiting"]]);
                     setRightTable([...임시리스트["approval"]]);
                 });
-        } else if (props.loginPosition === "admin") {
+                setLogoImgPath(`./img/${props.todayQuarter}.png`);
+        } 
+        
+        function getAdminList(){
             axios.get(debugAPIURL + '/president-list')
                 .then((payload) => {
                     console.log(payload)
@@ -192,18 +240,22 @@ function ManagementPage(props) {
                     setApproval([...payload.data["approval"]]);
                     setLeftTable([...payload.data["waiting"]]);
                     setRightTable([...payload.data["approval"]]);
+            setWrongApproach(false)
                 })
                 .catch((error) => {
-                    alert("학과리스트를 불러올 수 없습니다.");
+                    setWrongApproachContext("학과리스트를 불러올 수 없습니다.");
+                    setWrongApproach(true)
+                    //삭제하기
                     setWaiting([...임시리스트["waiting"]]);
                     setRefusal([...임시리스트["refusal"]]);
                     setApproval([...임시리스트["approval"]]);
                     setLeftTable([...임시리스트["waiting"]]);
                     setRightTable([...임시리스트["approval"]]);
                 });
+                setLogoImgPath(`./img/${props.todayQuarter}.png`);
         }
-        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-    }
+        
+    
 
     function pressSearchStudent() {
         if (searchButton === "x") {
@@ -228,9 +280,23 @@ function ManagementPage(props) {
     }
 
     return (
-        <>{
-            props.loginPosition !== ""
-                ? (
+        <>{wrongApproach===true
+            ?(<><div className="nav" style={{justifyContent: "space-between"}}>
+                                <div className="logoNav">
+                                    <img src={`./img/${props.todayQuarter}.png`} alt="logo" style={{marginLeft:"30px"}} width={"40px"} height={"40px"} />
+                                    <div style={{marginLeft:"20px",fontSize:"25px"}}>PKSCL</div>
+                                </div>
+                                                <div style={{ display: "flex",alignItems: "center"}}>
+                                                    <button className='submitButton' type='button' onClick={() => { history.push('/'); }}>로그인</button>
+                                                    <i class="fas fa-headset" style={{fontSize:"20px", marginRight:"10px"}} onClick={()=>{window.open("http://pf.kakao.com/_hxnlXb")}}></i>
+                                                </div>
+                                        </div>
+            <div className="MainPageContainer" 
+            style={{display:"flex",justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
+                {wrongApproachContext}<br />
+            <a href="http://pf.kakao.com/_hxnlXb" target="_blank" rel="noreferrer" title="챗봇으로 연결됩니다." style={{color:"black"}}>PKSCL 문의하기</a>
+            </div></>)
+            :(
                     <div className="ManagementPageContainer">
                         {
                             showImg === true
@@ -238,14 +304,14 @@ function ManagementPage(props) {
                                 : null
                         }
                         {
-                            props.loginPosition === "student"
+                            userLoginPosition === "student"
                                 ? <div>잘못된 접근입니다.</div>
                                 : (
                                     <>
                                         <div className="pageContainer">
                                             <div className="nav" style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <div className="logoNav" onClick={() => { history.push('/main') }}>
-                                                    <img src={logoImgPath} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
+                                                    <img src={`./img/${props.todayQuarter}.png`} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
                                                     <div style={{ marginLeft: "5px", fontSize: "25px", fontFamily: "Work Sans", fontWeight: "bold" }}>PKSCL</div>
                                                 </div>
                                                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -283,33 +349,35 @@ function ManagementPage(props) {
 
 
                                                 {
-                                                    props.loginPosition === "president"
+                                                    userLoginPosition === "president"
                                                         ?
                                                         <>
                                                             <button className="submitButton"
                                                                 onClick={() => {
-                                                                    if (props.loginPosition === "admin") {
+                                                                    if (userLoginPosition === "admin") {
                                                                         history.push('/main')
-                                                                    } else if (props.loginPosition === "president") {
+                                                                    } else if (userLoginPosition === "president") {
                                                                         history.push('/edit-main')
                                                                     }
                                                                 }}>장부 수정</button>
+                                                                <i class="fas fa-headset" style={{fontSize:"20px", marginRight:"10px"}} onClick={()=>{window.open("http://pf.kakao.com/_hxnlXb")}}></i>
                                                         </>
                                                         : null
                                                 }
 
                                                 {
-                                                    props.loginPosition === "admin"
+                                                    userLoginPosition === "admin"
                                                         ?
                                                         <>
                                                             <button className="submitButton" style={{ width: "auto" }}
                                                                 onClick={() => {
-                                                                    if (props.loginPosition === "admin") {
+                                                                    if (userLoginPosition === "admin") {
                                                                         history.push('/main')
-                                                                    } else if (props.loginPosition === "president") {
+                                                                    } else if (userLoginPosition === "president") {
                                                                         history.push('/edit-main')
                                                                     }
                                                                 }}>학과별 장부 확인 및 수정</button>
+                                                                <i class="fas fa-headset" style={{fontSize:"20px", marginRight:"10px"}} onClick={()=>{window.open("http://pf.kakao.com/_hxnlXb")}}></i>
                                                         </>
                                                         : null
                                                 }
@@ -318,9 +386,9 @@ function ManagementPage(props) {
 
                                                 {/* <button className="submitButton"
                                                     onClick={() => {
-                                                        if (props.loginPosition === "admin") {
+                                                        if (userLoginPosition === "admin") {
                                                             history.push('/main')
-                                                        } else if (props.loginPosition === "president") {
+                                                        } else if (userLoginPosition === "president") {
                                                             history.push('/edit-main')
                                                         }
                                                     }}>장부 수정</button> */}
@@ -363,7 +431,7 @@ function ManagementPage(props) {
                                                                             return (
                                                                                 <tr key={i}>
                                                                                     {
-                                                                                        props.loginPosition === "president"
+                                                                                        userLoginPosition === "president"
                                                                                             ? (<><td>{student.stdID}</td>
                                                                                                 <td>{student.name}</td>
                                                                                                 <td><button className="certFileButton" type='button' onClick={() => {
@@ -416,8 +484,8 @@ function ManagementPage(props) {
 
                                                 <div className='tableSet'>
                                                     <div className="buttons">
-                                                        {
-                                                            props.loginPosition === "president"
+                                                        {/* {
+                                                            userLoginPosition === "president"
                                                                 ? (<button className='submitButton' style={{ width: "110px" }} onClick={() => {
                                                                     if (rightCheckedList.length === 1) {
                                                                         setRightCheckedList([]);
@@ -427,7 +495,7 @@ function ManagementPage(props) {
                                                                     }
                                                                 }}>회장권한위임</button>)
                                                                 : null
-                                                        }
+                                                        } */}
                                                         <button className='submitButton' onClick={() => {
                                                             setRightCheckedList([]);
                                                             if (rightCheckedList.length > 0) {
@@ -453,7 +521,7 @@ function ManagementPage(props) {
                                                                             return (
                                                                                 <tr key={i}>
                                                                                     {
-                                                                                        props.loginPosition === "president"
+                                                                                        userLoginPosition === "president"
                                                                                             ? (<><td>{student.stdID}</td>
                                                                                                 <td>{student.name}</td>
                                                                                                 <td><button className="certFileButton" type='button' onClick={() => {
@@ -502,10 +570,7 @@ function ManagementPage(props) {
                                         </div>
                                     </>)}
                     </div>
-                )
-                : <div className="ManagementPageContainer" style={{ display: "flex", justifyContent: "center" }}><div>잘못된 접근입니다.</div></div>
-        }</>
-
+            )}</>
     )
 }
 

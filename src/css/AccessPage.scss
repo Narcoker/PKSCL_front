@@ -352,8 +352,14 @@ div .checkbox-form {
     }
 }
 
-.logoMain{
+.logoMain {
     display: flex;
     flex-direction: column;
-    
+
+}
+
+.giraffe:hover {
+    transition: 0.5s;
+    transform: scale(1.05);
+    cursor: pointer;
 }

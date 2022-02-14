@@ -13,10 +13,8 @@ function EditEvent(props) {
     const [editState, setEditState] = useState(true);
 
     const [previewImg, setPreviewImg] = useState();
+    const [eventAmount,setEventAmount] = useState();
 
-    useEffect(() => {
-        setEventData(props.editEventData);
-    }, []);
 
     function changeEventItem(value, item) {
         let tempEditEventData = { ...eventData };
@@ -65,9 +63,6 @@ function EditEvent(props) {
                 const imageUrl = URL.createObjectURL(imageFile);
                 return imageUrl;
             }
-        }
-        else {
-            return "./static/receiptImg/defaultReceiptImg.jpg"
         }
     }
 
@@ -159,7 +154,7 @@ function EditEvent(props) {
         tempEditEventData["receiptList"].push({
 
             "receiptTitle": "",
-            "receiptImg": { name: "./static/receiptImg/defaultReceiptImg.jpg" },
+            "receiptImg": { name: "" },
             "receiptContext": "",
             "receiptDetailList": [
                 {
@@ -228,6 +223,7 @@ function EditEvent(props) {
 
         promise
             .then(value => {
+                alert(value)
                 sendReciept();
             })
             .catch((value => {
@@ -332,10 +328,8 @@ function EditEvent(props) {
             eventData["receiptList"].map((receipt, j) => {
                 if (receipt["receiptNumber"] === undefined) {
                     postReceipt(j);
-                    console.log("postReceipt")
                 } else {
                     putReceipt(j);
-                    console.log("putReceipt")
                 }
             })
             resolve()
@@ -343,12 +337,37 @@ function EditEvent(props) {
 
         promise
             .then(value => {
-                if (editState === true) props.setEditEventState(false);
+                if (editState === true){
+                    alert("행사 수정 끗.")
+                    props.setEditEventState(false);}
+                else if (editState === false) alert("행사 수정을 실패했습니다.")
             })
             .catch((value => {
+                if (editState === true) props.setEditEventState(false);
+                else if (editState === false) alert("행사 수정을 실패했습니다.")
             }))
-
     }
+
+    function CalculateCurrentQuarterReceiptSumList(eventList) {
+        let amountReceipt=0;
+        if(eventData!== undefined){
+            for(let i = 0 ; i < eventData["receiptList"].length ; i++){
+                amountReceipt = amountReceipt + sumReceipt(eventData["receiptList"][i]["receiptDetailList"])
+            }
+            setEventAmount(amountReceipt)
+        }
+    }
+    
+
+    useEffect(()=>{
+        setEventAmount(props.editEventAmount);
+        setEventData(props.editEventData);
+    },[])
+
+
+    useEffect(() => {
+        CalculateCurrentQuarterReceiptSumList(); 
+    }, [eventData]);
 
     return (
         // <div className="editEventContainer">
@@ -370,7 +389,7 @@ function EditEvent(props) {
                                             <div className="eventTitle">
                                                 <h4>
 
-                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "400px" }} maxLength="25"
+                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "400px" }}
                                                         placeholder={"행사 제목을 입력하세요"}
                                                         value={eventData["eventTitle"]}
                                                         onInput={
@@ -379,7 +398,7 @@ function EditEvent(props) {
                                                             }}></input>
 
                                                 </h4>
-                                                <div style={{ width: "500px" }}> 행사 총 금액 : {props.editEventAmount}원</div>
+                                                <div style={{ width: "500px" }}> 행사 총 금액 : {eventAmount}원</div>
                                             </div>
 
                                         </div>
@@ -402,7 +421,7 @@ function EditEvent(props) {
                                     </div>
 
                                     <div>
-                                        <input type="text" style={{ border: "transparent", textAlign: "left", width: "650px" }} maxLength="60"
+                                        <input type="text" style={{ border: "transparent", textAlign: "left", width: "650px" }}
                                             placeholder={"행사 비고를 입력하세요"}
                                             value={eventData["eventContext"]}
                                             onInput={
@@ -428,9 +447,9 @@ function EditEvent(props) {
                                                                                     <span onClick={() => { receiptDeleteButton(j); }}>
                                                                                         <i className="far fa-trash-alt"></i>
                                                                                     </span>
-                                                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "350px" }} maxLength="30"
+                                                                                    <input type="text" style={{ border: "transparent", textAlign: "left", width: "350px" }}
                                                                                         placeholder={"영수증 제목을 입력하세요"}
-                                                                                        value={eventData["receiptList"][j]["receiptTitle"]}
+                                                                                        value={receipt["receiptTitle"]}
 
                                                                                         onInput={
                                                                                             (e) => {
@@ -439,10 +458,10 @@ function EditEvent(props) {
 
                                                                                 </h5>
                                                                                 {
-                                                                                    eventData["receiptList"][j]["receiptDetailList"].length === 0
+                                                                                    receipt["receiptDetailList"].length === 0
                                                                                         ? null
                                                                                         : (<div>
-                                                                                            {j + 1}번째 영수증 금액 : {sumReceipt(eventData["receiptList"][j]["receiptDetailList"])}원
+                                                                                            {j + 1}번째 영수증 금액 : {sumReceipt(receipt["receiptDetailList"])}원
                                                                                         </div>)
                                                                                 }
 
@@ -452,7 +471,7 @@ function EditEvent(props) {
                                                                             <div>
 
 
-                                                                                <input type="text" style={{ border: "transparent", textAlign: "right", width: "400px" }} maxLength="40"
+                                                                                <input type="text" style={{ border: "transparent", textAlign: "right", width: "400px" }}
                                                                                     placeholder={"영수증 비고를 입력하세요"}
                                                                                     value={eventData["receiptList"][j]["receiptContext"]}
                                                                                     onInput={
@@ -487,7 +506,9 @@ function EditEvent(props) {
                                                                                                     return (
                                                                                                         <tr key={k}>
                                                                                                             <td style={{ width: "40px" }}>
-                                                                                                                <span onClick={() => { receiptDetailDeleteButton(j, k); }}>
+                                                                                                                <span onClick={() => { 
+                                                                                                                    receiptDetailDeleteButton(j, k); 
+                                                                                                                    }}>
                                                                                                                     <i className="far fa-trash-alt"></i>
                                                                                                                 </span>
                                                                                                             </td>
