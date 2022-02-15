@@ -642,7 +642,7 @@ function MainPage(props) {
                                     showCurrentQuerter === "true"
                                         ? (<>
                                             <div className="quarterData">
-                                                <h2 className="quarterTotalAmount">
+                                                <h2 className="quarterTotalAmount" style={{ fontWeight: "bold" }}>
                                                     {currentQuarter[currentQuarter.length - 1]}분기 총 금액 : {quarterAmount}원
                                                 </h2>
                                                 {
