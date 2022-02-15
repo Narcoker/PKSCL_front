@@ -552,7 +552,6 @@ function EditMainPage(props) {
     }, []);
 
     useEffect(() => {
-        defineColor(currentQuarter); // 여기에 넣는게 맞나..?
 
         //여기 한 줄 지우면 local 가능
         if (editEventState === false) {
@@ -657,7 +656,7 @@ function EditMainPage(props) {
                                         <div className="buttons">
                                             <div className="logoNav">
                                                 <img src={`./img/${props.todayQuarter}.png`} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
-                                                <div style={{ marginLeft: "20px", fontSize: "25px" }}>PKSCL</div>
+                                                <div style={{ marginLeft: "5px", fontSize: "25px" }}>PKSCL</div>
                                             </div>
                                             <div style={{ display: "flex" }}>
                                                 <button className='submitButton' type='button' onClick={() => { defineColor(props.todayQuarter); history.push('/manage') }}>학생 관리</button>
