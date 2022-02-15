@@ -118,7 +118,7 @@ function EditMainPage(props) {
 
     const [eventAmount, setEventAmount] = useState([]);
     const [quarterAmount, setQuarterAmount] = useState(0);
-    const [currentQuarter, setCurrentQuarter] = useState(props.todayQuarter);
+    const [currentQuarter, setCurrentQuarter] = useState();
     const [showAllReceiptButton, setShowAllReceiptButton] = useState([]);
     const [editProfileState, setEditProfileState] = useState(false);
 
@@ -548,6 +548,7 @@ function EditMainPage(props) {
         //여기 한 줄 주석 해제 하면 local 가능
         // getLedger(); GetDate();
         setLogoImgPath(`./img/${props.todayQuarter}.png`);
+        setCurrentQuarter(props.todayQuarter);
     }, []);
 
     useEffect(() => {
