@@ -609,8 +609,9 @@ function MainPage(props) {
                                                                         )
                                                                         : null
                                                                 }
-                                                                <div className="tempAlert" style={{ color: "red" }}>회원님은 장부 열람 권한이 없어 임시 장부를 확인 중입니다.</div>
+
                                                                 <div style={{ alignItems: "center" }}>
+                                                                    <span className="tempAlert" style={{ color: "red" }}>회원님은 장부 열람 권한이 없어 임시 장부를 확인 중입니다.</span>
                                                                     <i class="fas fa-user" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { setEditProfileState(true); }}></i>
                                                                     <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button >
                                                                 </div>
