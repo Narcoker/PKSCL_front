@@ -582,7 +582,7 @@ function MainPage(props) {
                                 <div className="nav">
                                     <div className="logoNav">
                                         <img src={`./img/${props.todayQuarter}.png`} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
-                                        <div style={{ marginLeft: "20px", fontSize: "25px" }}>PKSCL</div>
+                                        <div style={{ marginLeft: "5px", fontSize: "25px" }}>PKSCL</div>
                                     </div>
                                     <div className="buttons">
 
