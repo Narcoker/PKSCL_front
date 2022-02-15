@@ -519,7 +519,7 @@ function EditMainPage(props) {
                 }
             })
             .catch((error) => {
-                setWrongApproachContext(`사용자의 Position을 알 수 없습니다.`);
+                setWrongApproachContext(`사용자의 승인 상태를 알 수 없습니다.`);
                 setWrongApproach(true)
                 setEditProfileButton(false);
             })
