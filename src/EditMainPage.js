@@ -118,7 +118,7 @@ function EditMainPage(props) {
 
     const [eventAmount, setEventAmount] = useState([]);
     const [quarterAmount, setQuarterAmount] = useState(0);
-    const [currentQuarter, setCurrentQuarter] = useState();
+    const [currentQuarter, setCurrentQuarter] = useState(props.todayQuarter);
     const [showAllReceiptButton, setShowAllReceiptButton] = useState([]);
     const [editProfileState, setEditProfileState] = useState(false);
 
@@ -548,10 +548,12 @@ function EditMainPage(props) {
         //여기 한 줄 주석 해제 하면 local 가능
         // getLedger(); GetDate();
         setLogoImgPath(`./img/${props.todayQuarter}.png`);
-        setCurrentQuarter(props.todayQuarter);
+
     }, []);
 
     useEffect(() => {
+        defineColor(currentQuarter); // 여기에 넣는게 맞나..?
+
         //여기 한 줄 지우면 local 가능
         if (editEventState === false) {
             alert("leger 요청.. 보낸다 !!")
