@@ -511,7 +511,7 @@ function MainPage(props) {
                 <div className="nav" style={{ justifyContent: "space-between" }}>
                     <div className="logoNav">
                         <img src={`./img/${props.todayQuarter}.png`} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
-                        <div style={{ marginLeft: "5px", fontSize: "25px" }}>PKSCL</div>
+                        <div style={{ marginLeft: "5px", fontSize: "25px", fontWeight: 'bold' }}>PKSCL</div>
                     </div>
                     {
                         editProfileButton === true
@@ -642,7 +642,7 @@ function MainPage(props) {
                                     showCurrentQuerter === "true"
                                         ? (<>
                                             <div className="quarterData">
-                                                <h2 className="quarterTotalAmount" style={{ fontWeight: "bold" }}>
+                                                <h2 className="quarterTotalAmount">
                                                     {currentQuarter[currentQuarter.length - 1]}분기 총 금액 : {quarterAmount}원
                                                 </h2>
                                                 {
