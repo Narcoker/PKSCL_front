@@ -209,7 +209,7 @@ function AccessPage(props) {
         let payload = { "email": email, "stdID": stdID, "name": name };
         axios.post(debugAPIURL + '/newpwd/' + position, payload)
           .then((payload) => {
-            console.log(payload);
+            alert("입력하신 이메일로 임시 비밀번호를 발급하였습니다.");
             history.push('/');
 
           })
