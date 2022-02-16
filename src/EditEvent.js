@@ -408,8 +408,8 @@ function EditEvent(props) {
 
 
                                         <div className="eventButtons">
-                                            <button onClick={() => { eventDeleteButton(); }} style={{ marginRight: "15px" }}>
-                                                <i class="far fa-trash-alt"></i> </button>
+                                            {/* <button onClick={() => { eventDeleteButton(); }} style={{ marginRight: "15px" }}>
+                                                <i class="far fa-trash-alt"></i> </button> */}
                                             <button onClick={() => {
                                                 editEventButton();
                                             }} style={{ marginRight: "15px" }}> <i class="fas fa-check"></i> </button>
