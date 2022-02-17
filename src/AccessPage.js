@@ -482,26 +482,37 @@ function AccessPage(props) {
                       <input onChange={(e) => {
                         console.log(e.target.value);
                         setPassword(e.target.value);
-                        if (e.target.value.length !== 0) {
+                        // if (e.target.value.length !== 0) {
+                        if (e.target.value.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\d~!@#$%^&*()+|=]{8,16}$/)) {
                           changeIsCorrect(1, true);
                         } else {
                           changeIsCorrect(1, false);
                         }
 
                       }} name="password" value={password} type="password" placeholder="비밀번호" />
+                      {
+                        isCorrect[1]
+                          ? null
+                          : <span style={{ fontSize: "1px", color: "red" }}>8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요. </span>
+                      }
+
+
                     </div>
+
                     <div className="input-field">
                       <i className="fas fa-key" style={isCorrect[2] === true ? { color: "var(--color-quarter)" } : null}></i>
                       <input onChange={(e) => {
                         setCheckPassword(e.target.value)
-                        if (password !== e.target.value || password === "") {
-                          changeIsCorrect(2, false);
-                        } else if (password === e.target.value) {
+                        if (e.target.value.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\d~!@#$%^&*()+|=]{8,16}$/) && password === e.target.value) {
                           changeIsCorrect(2, true);
+                        } else {
+                          changeIsCorrect(2, false);
                         }
                       }
                       } name="checkPassword" value={checkPassword} type="password" placeholder="비밀번호 재확인" />
                     </div>
+
+
                     <div className="input-field" style={{ fontSize: "80%" }}>
                       <i className="fas fa-book-open" style={isCorrect[3] === true ? { color: "var(--color-quarter)" } : null}></i>
                       <label htmlFor="majorList"></label>

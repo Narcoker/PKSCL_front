@@ -564,7 +564,7 @@ function MainPage(props) {
                                     </div>
                                     <div className="cogExplanation">
                                         안녕하세요 {studentPresident["major"]} 회장 {studentPresident["name"]}입니다.
-                                        PKCOG 온라인 장부를 통해 학과 장부를 분기별로 확인하세요 :)
+                                        PKSCL 온라인 장부를 통해 학과 장부를 분기별로 확인하세요 :)
                                         장부 확인 중 문의 사항이 있으시다면 이메일로 연락주십시오.
                                         <div style={{ color: "#d32c2c" }}>※ 학과의 장부를 외부로 유출 시 발생하는 문제의 책임은 학생 본인에게 있습니다.</div>
                                     </div>
