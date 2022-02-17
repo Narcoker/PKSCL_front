@@ -82,18 +82,22 @@ function MainPage(props) {
     function showQuarter(selectedQuarter) {
         if (userLoginPosition === "student" || userLoginPosition === "president") {
             if (quarter[selectedQuarter]["status"] === "true") {
+                setQuarterAmount(0)
                 setCurrentQuarter(selectedQuarter);
                 defineColor(selectedQuarter);
                 setLogoImgPath(`./img/${selectedQuarter}.png`);
                 setShowCurrentQuerter(quarter[selectedQuarter]["status"]);
             } else {
+                 setQuarterAmount(0)
                 setCurrentQuarter(selectedQuarter);
                 defineColor(selectedQuarter);
                 setLogoImgPath(`./img/${selectedQuarter}.png`);
                 setShowCurrentQuerter(quarter[selectedQuarter]["status"]);
             }
-        } else {
+        } else if(userLoginPosition === "admin"){
+             setQuarterAmount(0)
             setCurrentQuarter(selectedQuarter);
+            setLogoImgPath(`./img/${selectedQuarter}.png`);
             defineColor(selectedQuarter);
         }
     }
@@ -257,12 +261,6 @@ function MainPage(props) {
                     setWrongApproach(true)
                     setEditProfileButton(false);
                 }
-                //지우기
-                setStudentPresident({ ...answer["studentPresident"] });
-                setQuarter({ ...answer["quarter"] });
-                reset(props.todayQuarter);
-                showQuarter(props.todayQuarter);
-                setShowCurrentQuerter(answer["quarter"][props.todayQuarter]["status"])
             })
 
     }
@@ -285,9 +283,6 @@ function MainPage(props) {
                     setWrongApproach(true)
                     setEditProfileButton(false);
                 }
-                //지우기
-                setQuarterDate({ ...answerDate });
-                showQuarter(props.todayQuarter);
             })
     }
 
@@ -341,9 +336,6 @@ function MainPage(props) {
                 setWrongApproachContext("관리자 ) 학과 리스트를 불러올 수 없습니다.")
                 setWrongApproach(false)
                 setEditProfileButton(false);
-                //지우기
-                // adminGetDate(ledgerMajor)
-                // getExPKSCL();
             })
     }
 
@@ -375,7 +367,6 @@ function MainPage(props) {
                             setWrongApproachContext("사용자(학생회장)는 현재 승인 상태입니다. PKSCL 챗봇을 통해 문의 해주세요 :)");
                             setWrongApproach(true)
                             setEditProfileButton(true);
-                            //챗봇
                         })
                 }
             })
@@ -425,10 +416,7 @@ function MainPage(props) {
                 setEditProfileButton(false)
                 setWrongApproach(false)
                 setEditProfileButton(false);
-                //지우기
-                // setStudentPresident({ ...answer["studentPresident"] });
-                // setQuarter({ ...answer["quarter"] });
-                // setShowCurrentQuerter(answer["quarter"][props.todayQuarter]["status"])
+                
             })
         reset(props.todayQuarter);
         defineColor(props.todayQuarter);
@@ -462,9 +450,12 @@ function MainPage(props) {
     }
 
     useEffect(() => {
+
+        // push 할때 주석 풀기
         axios.get('/position')
             .then((payload) => {
                 setUserLoginPosition(payload.data["position"])
+               setLogoImgPath(`./img/${props.todayQuarter}.png`);
                 reload()
             })
             .catch((error) => {
@@ -472,18 +463,17 @@ function MainPage(props) {
                 setWrongApproach(true)
                 setEditProfileButton(false);
             })
+
+        // push 할때 주석 넣기
+        // setStudentPresident({ ...answer["studentPresident"] });
+        //         setQuarter({ ...answer["quarter"] });
+        //         reset(props.todayQuarter);
+        //         showQuarter(props.todayQuarter);
+        //         setLogoImgPath(`./img/${props.todayQuarter}.png`);
+        //         setShowCurrentQuerter(answer["quarter"][props.todayQuarter]["status"])
+        //         setStudentPresident({ ...answer["studentPresident"] });
+        //         setQuarterDate({ ...answerDate });
     }, []);
-
-
-    useEffect(() => {
-        // // console.log(document.getElementById("leftPanel")[0].style.position);
-        // if (editProfileState) {
-        //     document.getElementsByClassName("leftPanel")[0].setProperty("position", "none");
-        // } else {
-
-        // }
-    }, [editProfileState])
-
 
     useEffect(() => {
         if (quarter !== undefined) {
@@ -510,8 +500,8 @@ function MainPage(props) {
                 }
                 <div className="nav" style={{ justifyContent: "space-between" }}>
                     <div className="logoNav">
-                        <img src={`./img/${props.todayQuarter}.png`} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
-                        <div style={{ marginLeft: "5px", fontSize: "25px", fontWeight: 'bold' }}>PKSCL</div>
+                        <img src={logoImgPath} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
+                        <div className="PKSCL" >PKSCL</div>
                     </div>
                     {
                         editProfileButton === true
@@ -528,14 +518,15 @@ function MainPage(props) {
 
                 </div>
                 <div className="MainPageContainer"
-                    style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                    style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                        <div className="errorGiraffe">
                     {wrongApproachContext}<br />
                     장부의 예시를 보고싶다면 기린을 눌러주세요 :)
 
                     <img onClick={() => { getExPKSCL() }} src={giraffe} className="giraffe" alt="기린"
                         style={{ width: "70px", height: "70px", marginLeft: "20px" }} />
                     <a href="http://pf.kakao.com/_hxnlXb" target="_blank" rel="noreferrer" title="챗봇으로 연결됩니다." style={{ color: "black" }}>PKSCL 문의하기</a>
-                </div></>)
+                </div></div></>)
             : (<div className="MainPageContainer">
                 {
                     showImg
@@ -581,8 +572,14 @@ function MainPage(props) {
 
                                 <div className="nav">
                                     <div className="logoNav">
-                                        <img src={`./img/${props.todayQuarter}.png`} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
-                                        <div style={{ marginLeft: "5px", fontSize: "25px" }}>PKSCL</div>
+                                        <img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />
+                                         <div className="PKSCL" >PKSCL</div>
+                                        <div className="quarterSelecter">
+                                    <div className="quarterButton" onClick={() => { showQuarter("quarter1") }}><div>1</div><img src={quarter1} alt="quarter1" ></img></div>
+                                    <div className="quarterButton" onClick={() => { showQuarter("quarter2") }}><div>2</div><img src={quarter2} alt="quarter2" ></img></div>
+                                    <div className="quarterButton" onClick={() => { showQuarter("quarter3") }}><div>3</div><img src={quarter3} alt="quarter3" ></img></div>
+                                    <div className="quarterButton" onClick={() => { showQuarter("quarter4") }}><div>4</div><img src={quarter4} alt="quarter4" ></img></div>
+                                </div>
                                     </div>
                                     <div className="buttons">
 
@@ -816,7 +813,7 @@ function MainPage(props) {
                                                                     </div>
                                                                     {
                                                                         event.receiptList.length > 1 && showAllReceiptButton[i] === false
-                                                                            ? <div><img src={giraffe} className="image" alt="" style={{ width: "70px", height: "70px" }} /><div style={{ marginBottom: "50px", textAlign: "center" }}></div></div>
+                                                                            ? <div className="giraffeDiv"><img src={giraffe} className="image" alt="" style={{ width: "70px", height: "70px" }} /><div style={{ marginBottom: "50px", textAlign: "center" }}></div></div>
                                                                             : null
                                                                     }
                                                                 </div>
@@ -828,9 +825,11 @@ function MainPage(props) {
                                             </div>
                                         </>)
                                         : <div className="quarterData" style={{ display: "flex", color: "red" }}>
-                                            {currentQuarter[currentQuarter.length - 1]}분기 장부는 학생회장이 아직 공개하지 않았습니다.
-                                            <br />장부의 예시를 보고싶다면 기린을 눌러주세요 :)
-                                            <img onClick={() => { getExPKSCL() }} src={giraffe} className="image" alt="" style={{ width: "70px", height: "70px", marginLeft: "20px" }} />
+                                            <div className="errorGiraffe">
+                                                {currentQuarter[currentQuarter.length - 1]}분기 장부는 학생회장이 아직 공개하지 않았습니다.
+                                                <br />장부의 예시를 보고싶다면 기린을 눌러주세요 :)
+                                                <img onClick={() => { getExPKSCL() }} src={giraffe} className="image" alt="" style={{ width: "70px", height: "70px", marginLeft: "20px" }} />
+                                            </div>
                                         </div>
                                 }
                             </div>
