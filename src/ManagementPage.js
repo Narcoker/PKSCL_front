@@ -177,7 +177,7 @@ function ManagementPage(props) {
                 history.push('/');
             })
             .catch((error) => {
-                alert("학생회장 위임에 실패했습니다.")
+                alert("학과에 존재하지않는 이메일입니다.")
             });
     }
 
@@ -244,51 +244,51 @@ function ManagementPage(props) {
 
 
     useEffect(() => {
-        axios.get('/position')
-            .then((payload) => {
-                setUserLoginPosition(payload.data["position"])
-            })
-            .catch((error) => {
-                setWrongApproachContext(`사용자의 Position을 알 수 없습니다.`);
-                setWrongApproach(true)
-            })
-        axios.get('/position')
-            .then((payload) => {
-                if (payload.data["position"] === "president") {
-                    axios.get('/status')
-                        .then((payload) => {
-                            if (payload.data["status"] === "refusal") {
-                                setWrongApproachContext("사용자(학생회장)은 현재 거절 상태입니다. PKSCL 챗봇을 통해 회장 신청을 다시 진행해 주십시오.");
-                                setWrongApproach(true)
-                            }
-                            else if (payload.data["status"] === "waiting") {
-                                setWrongApproachContext("사용자(학생회장)은 현재 대기 상태입니다. PKSCL 챗봇을 통해 회장 인증을 해주세요 :)");
-                                setWrongApproach(true)
-                            } else if (payload.data["status"] === "approval") {
-                                getPresidentList();
-                            }
-                        })
-                        .catch((error) => {
-                            setWrongApproachContext("잘못된 접근입니다.");
-                            setWrongApproach(true)
-                        })
-                } else if (payload.data["position"] === "admin") {
-                    getAdminList();
-                } else {
-                    setWrongApproachContext("잘못된 접근입니다.");
-                    setWrongApproach(true)
-                }
-            })
-            .catch((error) => {
-                setWrongApproachContext("잘못된 접근입니다.");
-                setWrongApproach(true)
-            })
+        // axios.get('/position')
+        //     .then((payload) => {
+        //         setUserLoginPosition(payload.data["position"])
+        //     })
+        //     .catch((error) => {
+        //         setWrongApproachContext(`사용자의 Position을 알 수 없습니다.`);
+        //         setWrongApproach(true)
+        //     })
+        // axios.get('/position')
+        //     .then((payload) => {
+        //         if (payload.data["position"] === "president") {
+        //             axios.get('/status')
+        //                 .then((payload) => {
+        //                     if (payload.data["status"] === "refusal") {
+        //                         setWrongApproachContext("사용자(학생회장)은 현재 거절 상태입니다. PKSCL 챗봇을 통해 회장 신청을 다시 진행해 주십시오.");
+        //                         setWrongApproach(true)
+        //                     }
+        //                     else if (payload.data["status"] === "waiting") {
+        //                         setWrongApproachContext("사용자(학생회장)은 현재 대기 상태입니다. PKSCL 챗봇을 통해 회장 인증을 해주세요 :)");
+        //                         setWrongApproach(true)
+        //                     } else if (payload.data["status"] === "approval") {
+        //                         getPresidentList();
+        //                     }
+        //                 })
+        //                 .catch((error) => {
+        //                     setWrongApproachContext("잘못된 접근입니다.");
+        //                     setWrongApproach(true)
+        //                 })
+        //         } else if (payload.data["position"] === "admin") {
+        //             getAdminList();
+        //         } else {
+        //             setWrongApproachContext("잘못된 접근입니다.");
+        //             setWrongApproach(true)
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         setWrongApproachContext("잘못된 접근입니다.");
+        //         setWrongApproach(true)
+        //     })
 
-        // setWaiting([...임시리스트["waiting"]]);
-        // setRefusal([...임시리스트["refusal"]]);
-        // setApproval([...임시리스트["approval"]]);
-        // setLeftTable([...임시리스트["waiting"]]);
-        // setRightTable([...임시리스트["approval"]]);
+        setWaiting([...임시리스트["waiting"]]);
+        setRefusal([...임시리스트["refusal"]]);
+        setApproval([...임시리스트["approval"]]);
+        setLeftTable([...임시리스트["waiting"]]);
+        setRightTable([...임시리스트["approval"]]);
 
     }, []);
 
@@ -298,7 +298,7 @@ function ManagementPage(props) {
                 ? (<><div className="nav" style={{ justifyContent: "space-between" }}>
                     <div className="logoNav">
                         <img src={`./img/${props.todayQuarter}.png`} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
-                        <div style={{ marginLeft: "5px", fontSize: "25px", fontWeight: "bold" }}>PKSCL</div>
+                        <div style={{ marginLeft: "5px", fontSize: "25px" }}>PKSCL</div>
                     </div>
                     <div style={{ display: "flex", alignItems: "center" }}>
                         <button className='submitButton' type='button' onClick={() => { history.push('/'); }}>로그인</button>
@@ -323,7 +323,6 @@ function ManagementPage(props) {
                                     {
                                         userLoginPosition === "president"
                                             ? (<>
-                                                <button className="submitButton" onClick={() => { setDelegating(true) }}>학생회장 위임</button>
                                                 <button className="submitButton" onClick={() => { history.push('/edit-main') }}>장부 수정</button></>)
                                             : null
                                     }
@@ -333,7 +332,6 @@ function ManagementPage(props) {
                                             : null
                                     }
                                 </div >
-
 
                                 {
                                     userLoginPosition === "president"
@@ -361,7 +359,7 @@ function ManagementPage(props) {
                         <div className="PCVersion">
 
                             {
-                                delegating === true
+                                delegating === false
                                     ? <div className="alertEmailContainer">
                                         <div className="alertEmailbox">
                                             <div className='boxTitle' style={{ justifyContent: "center" }}  >
@@ -370,7 +368,7 @@ function ManagementPage(props) {
                                             </div>
                                             <div className="alertEmailField">
                                                 <div style={{ width: "80%" }}>
-                                                    <br /> 1. 새 학생회장이 "학생회장 계정"으로 회원가입
+                                                    1. 새 학생회장이 "학생회장 계정"으로 회원가입
                                                     <br /> 2. 위임하고자 하는 학생회장 계정의 이메일을 입력
 
                                                     <div className="inputField alertEmail" style={{ marginTop: "10px" }}>
@@ -460,6 +458,8 @@ function ManagementPage(props) {
                                                             ?
                                                             <>
                                                                 <div>
+
+                                                                    <button className="submitButton" onClick={() => { setDelegating(true) }}>학생회장 위임</button>
                                                                     <button className="submitButton"
                                                                         onClick={() => {
                                                                             if (userLoginPosition === "admin") {
