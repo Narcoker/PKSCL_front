@@ -244,51 +244,51 @@ function ManagementPage(props) {
 
 
     useEffect(() => {
-        // axios.get('/position')
-        //     .then((payload) => {
-        //         setUserLoginPosition(payload.data["position"])
-        //     })
-        //     .catch((error) => {
-        //         setWrongApproachContext(`사용자의 Position을 알 수 없습니다.`);
-        //         setWrongApproach(true)
-        //     })
-        // axios.get('/position')
-        //     .then((payload) => {
-        //         if (payload.data["position"] === "president") {
-        //             axios.get('/status')
-        //                 .then((payload) => {
-        //                     if (payload.data["status"] === "refusal") {
-        //                         setWrongApproachContext("사용자(학생회장)은 현재 거절 상태입니다. PKSCL 챗봇을 통해 회장 신청을 다시 진행해 주십시오.");
-        //                         setWrongApproach(true)
-        //                     }
-        //                     else if (payload.data["status"] === "waiting") {
-        //                         setWrongApproachContext("사용자(학생회장)은 현재 대기 상태입니다. PKSCL 챗봇을 통해 회장 인증을 해주세요 :)");
-        //                         setWrongApproach(true)
-        //                     } else if (payload.data["status"] === "approval") {
-        //                         getPresidentList();
-        //                     }
-        //                 })
-        //                 .catch((error) => {
-        //                     setWrongApproachContext("잘못된 접근입니다.");
-        //                     setWrongApproach(true)
-        //                 })
-        //         } else if (payload.data["position"] === "admin") {
-        //             getAdminList();
-        //         } else {
-        //             setWrongApproachContext("잘못된 접근입니다.");
-        //             setWrongApproach(true)
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         setWrongApproachContext("잘못된 접근입니다.");
-        //         setWrongApproach(true)
-        //     })
+        axios.get('/position')
+            .then((payload) => {
+                setUserLoginPosition(payload.data["position"])
+            })
+            .catch((error) => {
+                setWrongApproachContext(`사용자의 Position을 알 수 없습니다.`);
+                setWrongApproach(true)
+            })
+        axios.get('/position')
+            .then((payload) => {
+                if (payload.data["position"] === "president") {
+                    axios.get('/status')
+                        .then((payload) => {
+                            if (payload.data["status"] === "refusal") {
+                                setWrongApproachContext("사용자(학생회장)은 현재 거절 상태입니다. PKSCL 챗봇을 통해 회장 신청을 다시 진행해 주십시오.");
+                                setWrongApproach(true)
+                            }
+                            else if (payload.data["status"] === "waiting") {
+                                setWrongApproachContext("사용자(학생회장)은 현재 대기 상태입니다. PKSCL 챗봇을 통해 회장 인증을 해주세요 :)");
+                                setWrongApproach(true)
+                            } else if (payload.data["status"] === "approval") {
+                                getPresidentList();
+                            }
+                        })
+                        .catch((error) => {
+                            setWrongApproachContext("잘못된 접근입니다.");
+                            setWrongApproach(true)
+                        })
+                } else if (payload.data["position"] === "admin") {
+                    getAdminList();
+                } else {
+                    setWrongApproachContext("잘못된 접근입니다.");
+                    setWrongApproach(true)
+                }
+            })
+            .catch((error) => {
+                setWrongApproachContext("잘못된 접근입니다.");
+                setWrongApproach(true)
+            })
 
-        setWaiting([...임시리스트["waiting"]]);
-        setRefusal([...임시리스트["refusal"]]);
-        setApproval([...임시리스트["approval"]]);
-        setLeftTable([...임시리스트["waiting"]]);
-        setRightTable([...임시리스트["approval"]]);
+        // setWaiting([...임시리스트["waiting"]]);
+        // setRefusal([...임시리스트["refusal"]]);
+        // setApproval([...임시리스트["approval"]]);
+        // setLeftTable([...임시리스트["waiting"]]);
+        // setRightTable([...임시리스트["approval"]]);
 
     }, []);
 
@@ -298,7 +298,7 @@ function ManagementPage(props) {
                 ? (<><div className="nav" style={{ justifyContent: "space-between" }}>
                     <div className="logoNav">
                         <img src={`./img/${props.todayQuarter}.png`} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
-                        <div style={{ marginLeft: "5px", fontSize: "25px" }}>PKSCL</div>
+                        <div style={{ marginLeft: "5px", fontSize: "25px", fontWeight: "bold" }}>PKSCL</div>
                     </div>
                     <div style={{ display: "flex", alignItems: "center" }}>
                         <button className='submitButton' type='button' onClick={() => { history.push('/'); }}>로그인</button>
@@ -368,33 +368,37 @@ function ManagementPage(props) {
                                                 <h2 ><i className="fas fa-users" style={{ color: "#dc3545" }} />학생회장 위임 절차</h2>
 
                                             </div>
-                                            <div style={{ width: "80%" }}>
-                                                <br /> 1. 새 학생회장이 "학생회장 계정"으로 회원가입
-                                                <br /> 2. 위임하고자 하는 학생회장 계정의 이메일을 입력
+                                            <div className="alertEmailField">
+                                                <div style={{ width: "80%" }}>
+                                                    <br /> 1. 새 학생회장이 "학생회장 계정"으로 회원가입
+                                                    <br /> 2. 위임하고자 하는 학생회장 계정의 이메일을 입력
 
-                                                <div className="inputField alertEmail" style={{ marginTop: "10px" }}>
-                                                    <i className="fas fa-envelope"></i>
-                                                    <label>이메일</label>
-                                                    <input id="email" onChange={(e) => {
-                                                        setEmail(e.target.value)
-                                                        if (e.target.value === "") {
+                                                    <div className="inputField alertEmail" style={{ marginTop: "10px" }}>
+                                                        <i className="fas fa-envelope"></i>
+                                                        <label>이메일</label>
+                                                        <input id="email" onChange={(e) => {
+                                                            setEmail(e.target.value)
+                                                            if (e.target.value === "") {
 
-                                                        } else {
+                                                            } else {
 
-                                                        }
-                                                    }} value={email} type="text" placeholder='이메일을 입력하세요.' />
-                                                </div>
-                                                ※ 위임 완료시 본 계정은 대기 상태로 전환되며 장부 수정 및 학생 관리 기능을 수행하실 수 없습니다.</div>
-                                            <br />
-
-                                            <button className="submitButton" onClick={() => {
-                                                delegatingButton()
-                                            }}>위임하기
-                                            </button>
-                                            <button className="submitButton" onClick={() => {
-                                                setDelegating(false);
-                                            }}>취소하기
-                                            </button></div>
+                                                            }
+                                                        }} value={email} type="text" placeholder='이메일을 입력하세요.' />
+                                                    </div>
+                                                    ※ 위임 완료시 본 계정은 대기 상태로 전환되며 장부 수정 및 학생 관리 기능을 수행하실 수 없습니다.</div>
+                                                <br />
+                                            </div>
+                                            <div>
+                                                <button className="submitButton" onClick={() => {
+                                                    delegatingButton()
+                                                }}>위임하기
+                                                </button>
+                                                <button className="submitButton" style={{ backgroundColor: "white", color: "black" }}
+                                                    onClick={() => {
+                                                        setDelegating(false);
+                                                    }}>취소하기
+                                                </button></div>
+                                        </div>
                                     </div>
                                     : null
                             }
@@ -451,8 +455,6 @@ function ManagementPage(props) {
 
                                                         </div>
                                                     </div >
-
-
                                                     {
                                                         userLoginPosition === "president"
                                                             ?
