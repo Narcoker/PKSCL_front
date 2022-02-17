@@ -120,7 +120,15 @@ function EditProfile(props) {
 
             })
             .catch((error) => {
-                alert(error.response.status); // 수정필요
+                switch (error.response.status) {
+                    case 401:
+                        alert("비밀번호가 일치하지 않습니다.");
+                        break;
+                    default:
+                        alert("Error code: " + error.response.status); // 수정필요
+                        break;
+                }
+
             })
     }
 
