@@ -482,7 +482,7 @@ function AccessPage(props) {
                       <input onChange={(e) => {
                         console.log(e.target.value);
                         setPassword(e.target.value);
-                        if (e.target.value.length !== 0) {
+                        if (e.target.value.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,-])|([!,@,#,$,%,^,&,*,?,_,~,-].*[a-zA-Z0-9])/)) {
                           changeIsCorrect(1, true);
                         } else {
                           changeIsCorrect(1, false);

@@ -88,14 +88,14 @@ function MainPage(props) {
                 setLogoImgPath(`./img/${selectedQuarter}.png`);
                 setShowCurrentQuerter(quarter[selectedQuarter]["status"]);
             } else {
-                 setQuarterAmount(0)
+                setQuarterAmount(0)
                 setCurrentQuarter(selectedQuarter);
                 defineColor(selectedQuarter);
                 setLogoImgPath(`./img/${selectedQuarter}.png`);
                 setShowCurrentQuerter(quarter[selectedQuarter]["status"]);
             }
-        } else if(userLoginPosition === "admin"){
-             setQuarterAmount(0)
+        } else if (userLoginPosition === "admin") {
+            setQuarterAmount(0)
             setCurrentQuarter(selectedQuarter);
             setLogoImgPath(`./img/${selectedQuarter}.png`);
             defineColor(selectedQuarter);
@@ -228,7 +228,7 @@ function MainPage(props) {
             if (major === "") {
                 alert("검색명을 입력해주세요 :)");
             } else if ((majorList.includes(ledgerMajor))) {
-                let findMajorIndex = majorList.indexOf(ledgerMajor) + 1
+                let findMajorIndex = majorList.indexOf(ledgerMajor)
                 getAdminLedger(findMajorIndex);
                 adminGetDate(findMajorIndex);
                 setMajor("");
@@ -416,7 +416,7 @@ function MainPage(props) {
                 setEditProfileButton(false)
                 setWrongApproach(false)
                 setEditProfileButton(false);
-                
+
             })
         reset(props.todayQuarter);
         defineColor(props.todayQuarter);
@@ -455,7 +455,7 @@ function MainPage(props) {
         axios.get('/position')
             .then((payload) => {
                 setUserLoginPosition(payload.data["position"])
-               setLogoImgPath(`./img/${props.todayQuarter}.png`);
+                setLogoImgPath(`./img/${props.todayQuarter}.png`);
                 reload()
             })
             .catch((error) => {
@@ -505,11 +505,20 @@ function MainPage(props) {
                     </div>
                     {
                         editProfileButton === true
-                            ? (<div style={{ display: "flex", alignItems: "center" }}>
-                                <i class="fas fa-user" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { setEditProfileState(true); }}></i>
-                                <i class="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_hxnlXb") }}></i>
-                                <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
-                            </div>)
+                            ? (<>{
+                                userLoginPosition === "admin"
+                                    ? (<div style={{ display: "flex", alignItems: "center" }}>
+                                        <i class="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_hxnlXb") }}></i>
+                                        <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
+                                    </div>)
+                                    : (
+                                        <div style={{ display: "flex", alignItems: "center" }}>
+                                            <i class="fas fa-user" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { setEditProfileState(true); }}></i>
+                                            <i class="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_hxnlXb") }}></i>
+                                            <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
+                                        </div>)
+                            }</>
+                            )
                             : (<div style={{ display: "flex" }}>
                                 <button className='submitButton' type='button' onClick={() => { history.push('/'); }}>로그인</button>
                             </div>)
@@ -518,15 +527,15 @@ function MainPage(props) {
 
                 </div>
                 <div className="MainPageContainer"
-                    style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                        <div className="errorGiraffe">
-                    {wrongApproachContext}<br />
-                    장부의 예시를 보고싶다면 기린을 눌러주세요 :)
+                    style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                    <div className="errorGiraffe">
+                        {wrongApproachContext}<br />
+                        장부의 예시를 보고싶다면 기린을 눌러주세요 :)
 
-                    <img onClick={() => { getExPKSCL() }} src={giraffe} className="giraffe" alt="기린"
-                        style={{ width: "70px", height: "70px", marginLeft: "20px" }} />
-                    <a href="http://pf.kakao.com/_hxnlXb" target="_blank" rel="noreferrer" title="챗봇으로 연결됩니다." style={{ color: "black" }}>PKSCL 문의하기</a>
-                </div></div></>)
+                        <img onClick={() => { getExPKSCL() }} src={giraffe} className="giraffe" alt="기린"
+                            style={{ width: "70px", height: "70px", marginLeft: "20px" }} />
+                        <a href="http://pf.kakao.com/_hxnlXb" target="_blank" rel="noreferrer" title="챗봇으로 연결됩니다." style={{ color: "black" }}>PKSCL 문의하기</a>
+                    </div></div></>)
             : (<div className="MainPageContainer">
                 {
                     showImg
@@ -573,13 +582,14 @@ function MainPage(props) {
                                 <div className="nav">
                                     <div className="logoNav">
                                         <img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />
-                                         <div className="PKSCL" >PKSCL</div>
+                                        <div className="PKSCL" >PKSCL</div>
+                                        {/* PKSCL marginLeft 필요 */}
                                         <div className="quarterSelecter">
-                                    <div className="quarterButton" onClick={() => { showQuarter("quarter1") }}><div>1</div><img src={quarter1} alt="quarter1" ></img></div>
-                                    <div className="quarterButton" onClick={() => { showQuarter("quarter2") }}><div>2</div><img src={quarter2} alt="quarter2" ></img></div>
-                                    <div className="quarterButton" onClick={() => { showQuarter("quarter3") }}><div>3</div><img src={quarter3} alt="quarter3" ></img></div>
-                                    <div className="quarterButton" onClick={() => { showQuarter("quarter4") }}><div>4</div><img src={quarter4} alt="quarter4" ></img></div>
-                                </div>
+                                            <div className="quarterButton" onClick={() => { showQuarter("quarter1") }}><div>1</div><img src={quarter1} alt="quarter1" ></img></div>
+                                            <div className="quarterButton" onClick={() => { showQuarter("quarter2") }}><div>2</div><img src={quarter2} alt="quarter2" ></img></div>
+                                            <div className="quarterButton" onClick={() => { showQuarter("quarter3") }}><div>3</div><img src={quarter3} alt="quarter3" ></img></div>
+                                            <div className="quarterButton" onClick={() => { showQuarter("quarter4") }}><div>4</div><img src={quarter4} alt="quarter4" ></img></div>
+                                        </div>
                                     </div>
                                     <div className="buttons">
 
