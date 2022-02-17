@@ -801,9 +801,7 @@ function AccessPage(props) {
               <button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/newpwd') }}>비밀번호 찾기</button><button style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { reset(); history.push('/signUp'); }}>회원가입</button>
             </div>
           </div>
-
         </Route>
-
       </Switch >
     </div >
   )
