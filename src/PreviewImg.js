@@ -11,8 +11,11 @@ function PreviewImg(props){
         <div className="imgBox">
             <img src={props.previewImg} 
                 style={{ backgroundColor: "var(--color-leftPanel)" , maxHeight:"80%", maxWidth:"80%"}}
-                alt={props.previewImg}  title='영수증 사진'
+                alt={props.previewImg}  title={props.previewImg}
             />
+            {
+                console.log(props.previewImg)
+            }
         </div>
       </div>
     </div>
