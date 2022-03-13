@@ -1,6 +1,10 @@
 .ManagementPageContainer {
     font-family: "OTWelcomeRA";
+<<<<<<< HEAD
     background-color: var(--color-background);
+=======
+    background-color: #e8e8e8;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     width: 100%;
     display: flex;
     min-height: 100vh;
@@ -11,20 +15,35 @@
 .ManagementPageContainer .nav {
     top: 0;
     width: 100%;
+<<<<<<< HEAD
     justify-content: flex-end;
     position: fixed;
     height: 20px;
     left: 0;
     align-items: center;
     display: flex;
+=======
+    position: fixed;
+    height: 20px;
+    left: 0;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     height: 8vh;
     background: rgb(255 255 255 / 90%);
     width: 100%;
     margin-right: 0;
     margin-left: 0;
     z-index: 1;
+<<<<<<< HEAD
     justify-content: center;
     box-shadow: 1px 1px 1px 0 rgb(207 206 206);
+=======
+    display: flex;
+    justify-content: space-between !important;
+    box-shadow: 1px 1px 1px 0 rgb(207 206 206);
+    align-items: center;
+    padding-right: 30px;
+    padding-left: 30px;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 }
 
 .searchBar {
@@ -92,10 +111,46 @@ input::-webkit-search-results-decoration {
     cursor: pointer
 }
 
+<<<<<<< HEAD
 i {
     color: var(--color-quarter);
 }
 
+=======
+.ManagementPageContainer .nav {
+    top: 0;
+    width: 100%;
+    position: fixed;
+    height: 20px;
+    left: 0;
+    height: 8vh;
+    background: rgb(255 255 255 / 90%);
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 1px 1px 1px 0 rgb(207 206 206);
+    align-items: center;
+}
+
+.ManagementPageContainer i {
+    color: #59577b;
+}
+
+.ManagementPageContainer .buttonNav {
+    display: flex;
+    align-items: center;
+}
+
+.ManagementPageContainer .buttonNav i {
+    margin: 10px;
+    font-size: 20px;
+}
+
+
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 .tables {
     display: flex;
     justify-content: center;
@@ -128,7 +183,11 @@ i {
     overflow-y: auto;
     width: fit-content;
     max-height: 400px;
+<<<<<<< HEAD
     scrollbar-color: var(--color-quarter);
+=======
+    scrollbar-color: rgb(114, 114, 114);
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 }
 
 .tableList::-webkit-scrollbar {
@@ -143,7 +202,11 @@ i {
 }
 
 .tableList::-webkit-scrollbar-thumb {
+<<<<<<< HEAD
     background-color: var(--color-quarter);
+=======
+    background-color: #606060;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     border-radius: 100px;
 }
 
@@ -158,7 +221,11 @@ i {
 }
 
 .tableSet th {
+<<<<<<< HEAD
     background-color: var(--color-quarter);
+=======
+    background-color: #59577b;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     color: var(--color-white);
 }
 
@@ -178,7 +245,11 @@ i {
 }
 
 .submitButton {
+<<<<<<< HEAD
     background-color: var(--color-quarter);
+=======
+    background-color: #7c7a9a;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     border: none;
     outline: none;
     color: var(--color-white);
@@ -191,6 +262,26 @@ i {
     transition: 0.5s;
 }
 
+<<<<<<< HEAD
+=======
+.boxUser {
+    margin-right: 15px;
+}
+
+.ManagementPageContainer .navButton {
+    background-color: #7c7a9a;
+    border: none;
+    outline: none;
+    color: var(--color-white);
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 20px;
+    margin: 0 5px 0 5px;
+    padding: 5px 15px 5px 15px;
+    transition: 0.5s;
+}
+
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 .buttons {
     display: flex;
     justify-content: flex-end;
@@ -204,7 +295,11 @@ i {
 }
 
 .tableSet .pagenationItem {
+<<<<<<< HEAD
     color: var(--color-quarter);
+=======
+    color: #59577b;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     margin: 4px;
 }
 
@@ -236,7 +331,11 @@ i {
 
 .alertEmailbox {
     background-color: white;
+<<<<<<< HEAD
     width: 600px;
+=======
+    width: 700px;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     z-index: 20;
     flex-direction: column;
     justify-content: center;
@@ -249,11 +348,19 @@ i {
 }
 
 .alertEmailField {
+<<<<<<< HEAD
     border: 7px solid var(--color-quarter);
     border-radius: 20px;
     color: black;
     width: 80%;
     padding: 20px;
+=======
+    border: 7px solid #59577b;
+    border-radius: 20px;
+    color: black;
+    width: 80%;
+    padding: 20px 0;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     /* height: 500px; */
     display: flex;
     align-items: center;
@@ -261,12 +368,26 @@ i {
     justify-content: center;
 }
 
+<<<<<<< HEAD
+=======
+.ManagementPageContainer .lastNavButton {
+    margin-right: 30px;
+}
+
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 @media (hover: none) and (pointer: coarse) {
 
     .PCVersion {
         display: none;
     }
 
+<<<<<<< HEAD
+=======
+    .mobileVersion {
+        display: block;
+    }
+
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     .ManagementPageContainer .mobileVersion {
         display: flex;
         flex-direction: column;
@@ -275,4 +396,26 @@ i {
         justify-content: center;
     }
 
+<<<<<<< HEAD
+=======
+    .ManagementPageContainer .navButton {
+        font-size: 10px;
+    }
+
+    .ManagementPageContainer .buttonNav i {
+        font-size: 20px;
+    }
+
+    .ManagementPageContainer .fa-headset {
+        font-size: 20px !important;
+        margin-right: 15px !important;
+    }
+
+    .ManagementPageContainer .nav {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 }

@@ -6,12 +6,20 @@
     font-style: normal;
 } */
 
+<<<<<<< HEAD
 @font-face {
+=======
+/* @font-face {
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     font-family: 'YUniverse-B';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_yuniverse@1.0/YUniverse-B.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+<<<<<<< HEAD
 }
+=======
+} */
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
 
 :root {
@@ -31,7 +39,11 @@
 
 body {
     /* font-family: "OTWelcomeRA"; */
+<<<<<<< HEAD
     font-family: "Work Sans";
+=======
+    /* font-family: "Work Sans"; */
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     font-weight: bold;
 
     width: 100%;
@@ -58,7 +70,11 @@ button {
 input {
     line-height: normal;
     /* font-family: 'Malgun gothic', sans-serif !important; */
+<<<<<<< HEAD
     font-family: "Work Sans";
+=======
+    /* font-family: "Work Sans"; */
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     font-weight: bold;
 }
 
@@ -83,4 +99,74 @@ i:hover {
     display: flex;
     align-items: center;
     flex-direction: column;
+<<<<<<< HEAD
+=======
+    height: 80vh;
+    justify-content: center;
+}
+
+.tempAlert {
+    margin-right: 20px;
+}
+
+.PksclNav {
+    margin-left: 5px;
+    font-size: 20px;
+    /* font-family: "Work Sans"; */
+    font-weight: bold;
+}
+
+.mobileVersion {
+    display: none !important;
+}
+
+.PCVersion {
+    display: block;
+}
+
+@media (hover: hover) and (pointer: fine) and (max-width: 1200px) {
+
+    .majorCard {
+        display: none !important;
+    }
+
+    .remotePanelBox {
+        display: none !important;
+    }
+
+    .leftPanel {
+        min-width: 20vw !important;
+    }
+
+    .EditMainPageContainer .leftPanel {
+        display: none !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) and (max-width: 800px) {
+
+    .leftPanel {
+        display: none !important;
+    }
+
+    .MainPageContainer {
+        justify-content: center !important;
+    }
+
+    .quarterData {
+        margin-right: 0 !important;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) and (max-width: 710px) {}
+
+@media (hover: none) and (pointer: coarse) {
+    .mobileVersion {
+        display: block !important;
+    }
+
+    .PCVersion {
+        display: none;
+    }
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 }

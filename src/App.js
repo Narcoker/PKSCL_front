@@ -36,13 +36,18 @@ function setColorProperty(colorQuarter, colorQuarterCircle, colorLeftPanel, colo
 
 function defineColor(quarter) {
   if (quarter === "quarter1") {
+<<<<<<< HEAD
     setColorProperty("#db8f8e", "#fdeded", "#f5dede", "#fff5ed", "#fbf6f6");
+=======
+    setColorProperty("#db8f8e", "#fdeded", "#f5dede", "#FDEDF0", "#fbf6f6");
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
   } else if (quarter === "quarter2") {
     setColorProperty("#649d67", "#e9ede9", "#cedbcf", "#dee7df", "#f6f7f6");
   } else if (quarter === "quarter3") {
     setColorProperty("#c18356", "#f9eee5", "#e9d8cd", "#fff5ed", "#fbf7f4");
   } else if (quarter === "quarter4") {
     setColorProperty("#6b8396", "#e0eaf3", "#d0dbe5", "#e6f1fb", "#f8fcff");
+<<<<<<< HEAD
   }
 }
 
@@ -55,6 +60,17 @@ function App() {
   useEffect(() => {
     let quarter = selectseason();
     defineColor(quarter);
+=======
+  } 
+}
+
+function App() {
+  const [loginPosition, setLoginPosition] = useState("");
+  const [todayQuarter, setTodayQuarter] = useState(selectseason());
+
+  useEffect(() => {
+    setColorProperty("#59577b", "#7c7a9a", "#cdc9e6", "#ebeaee", "#f8f6fb");
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
   }, [])
 
   return (
@@ -73,7 +89,11 @@ function App() {
         </Route>
 
         <Route path='/'>
+<<<<<<< HEAD
           <AccessPage loginPosition={loginPosition} setLoginPosition={setLoginPosition} todayQuarter={todayQuarter}> </AccessPage>
+=======
+          <AccessPage loginPosition={loginPosition} setLoginPosition={setLoginPosition} > </AccessPage>
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
         </Route>
 
       </Switch>

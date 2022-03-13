@@ -33,6 +33,7 @@
     margin-left: 20px;
 }
 
+<<<<<<< HEAD
 .EditMainPageContainer .quarterButton div:hover,
 .EditMainPageContainer .quarterButton:hover {
     transition: 0.5s;
@@ -64,6 +65,8 @@
     line-height: 18vh;
     color: white;
 }
+=======
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
 .EditMainPageContainer .fa-chevron-right {
     cursor: pointer;
@@ -81,6 +84,7 @@
 }
 
 .EditMainPageContainer .rightPanel {
+<<<<<<< HEAD
     width: 70vw;
     display: flex;
     flex-direction: column;
@@ -95,6 +99,60 @@
     position: fixed;
     height: 20px;
     left: 0;
+=======
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.EditMainPageContainer .nav {
+    top: 0;
+    width: 100%;
+    position: fixed;
+    height: 20px;
+    left: 0;
+    height: 8vh;
+    background: rgb(255 255 255 / 90%);
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 1px 1px 0 rgb(207 206 206);
+    align-items: center;
+    font-size: 15px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.EditMainPageContainer i {
+    color: var(--color-quarter);
+}
+
+.EditMainPageContainer .buttonNav {
+    display: flex;
+    align-items: center;
+}
+
+.EditMainPageContainer .navButton {
+    background-color: var(--color-quarter);
+    border: none;
+    outline: none;
+    color: var(--color-white);
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 20px;
+    margin: 0 5px 0 5px;
+    padding: 5px 15px 5px 15px;
+    transition: 0.5s;
+}
+
+.EditMainPageContainer .buttonNav i {
+    margin: 10px;
+    font-size: inherit;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 }
 
 .EditMainPageContainer .majorList {
@@ -113,7 +171,11 @@
     margin-right: 10px;
     margin-bottom: 10px;
     margin-top: 15px;
+<<<<<<< HEAD
     font-size: 15px;
+=======
+    font-size: inherit;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     border: none;
     width: 200px;
     caret-color: black;
@@ -131,7 +193,11 @@
     margin-right: 10px;
     margin-bottom: 10px;
     margin-top: 15px;
+<<<<<<< HEAD
     font-size: 15px;
+=======
+    font-size: inherit;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 }
 
 .EditMainPageContainer .mainSearchBar input {
@@ -155,6 +221,10 @@
     display: flex;
     flex-direction: row !important;
     align-items: flex-start;
+<<<<<<< HEAD
+=======
+    z-index: 0;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 }
 
 .EditMainPageContainer .eventButtons i {
@@ -162,6 +232,7 @@
     font-size: 20px;
 }
 
+<<<<<<< HEAD
 .EditMainPageContainer .buttons {
     align-items: center;
     display: flex;
@@ -175,6 +246,8 @@
     box-shadow: 1px 1px 1px 0 rgb(207 206 206);
 }
 
+=======
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 .EditMainPageContainer .submitButton {
     background-color: var(--color-quarter);
     border: none;
@@ -191,14 +264,24 @@
 
 
 .EditMainPageContainer .quarterData {
+<<<<<<< HEAD
     margin-top: 100px;
     width: 700px;
     margin-right: 0;
+=======
+    width: 700px;
+    margin-right: 0;
+    margin-top: 12vh;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 }
 
 .EditMainPageContainer .eventTitle {
     display: flex !important;
+<<<<<<< HEAD
     width: 200px;
+=======
+    width: 400px !important;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     margin: 10px 0;
     flex-direction: column !important;
     justify-content: space-between;
@@ -220,7 +303,10 @@
     width: 100%;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 .EditMainPageContainer .eventSource button {
     width: 50px;
     background-color: var(--color-leftPanel);
@@ -237,6 +323,14 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
+<<<<<<< HEAD
+=======
+    width: 200px;
+}
+
+.EditMainPageContainer td {
+    overflow: hidden;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 }
 
 .EditMainPageContainer .eventCard {
@@ -377,6 +471,7 @@
     border: 1px solid var(--color-quarter);
 }
 
+<<<<<<< HEAD
 /* .cardImg .pagenation {
     display: flex;
     justify-content: center;
@@ -388,6 +483,8 @@
     color: var(--color-quarter);
 } */
 
+=======
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 .EditMainPageContainer .remotePanel {
     width: 1px;
     height: 100%;
@@ -459,16 +556,35 @@
         align-items: flex-start;
     }
 
+<<<<<<< HEAD
+=======
+    .EditMainPageContainer .nav {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     .EditMainPageContainer .PCVersion {
         display: none !important;
     }
 
     .EditMainPageContainer .mobileVersion {
+<<<<<<< HEAD
         display: flex;
+=======
+        display: flex !important;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
         flex-direction: column;
         align-items: center;
     }
 
+<<<<<<< HEAD
+=======
+    .EditMainPageContainer .navButton {
+        font-size: 10px;
+    }
+
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     .EditMainPageContainer .remotePanelBox {
         display: none !important;
     }
@@ -494,11 +610,14 @@
         display: none;
     }
 
+<<<<<<< HEAD
     .EditMainPageContainer .nav {
         width: 100%;
         left: 0;
     }
 
+=======
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     .PKSCL {
         display: none;
     }
@@ -507,6 +626,7 @@
         display: flex;
     }
 
+<<<<<<< HEAD
     .quarterSelecter .quarterButton {
         width: 8vw;
         height: 8vw;
@@ -544,16 +664,21 @@
         display: none;
     }
 
+=======
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     .EditMainPageContainer .quarterTotalAmount {
         margin-bottom: 2vh;
         font-size: 20px !important;
     }
 
+<<<<<<< HEAD
     .EditMainPageContainer .submitButton {
         font-size: 10px;
         width: 15vw;
     }
 
+=======
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     .EditMainPageContainer .quarterData {
         left: 0;
         margin: 0;
@@ -621,7 +746,11 @@
     }
 
     .EditMainPageContainer .tempAlert {
+<<<<<<< HEAD
         font-size: 8px !important;
+=======
+        font-size: inherit !important;
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     }
 
     .EditMainPageContainer .edit {
@@ -632,4 +761,18 @@
         font-size: 12px !important;
     }
 
+<<<<<<< HEAD
+=======
+    .EditMainPageContainer .submitButton {
+        width: auto !important;
+        padding: 5px 15px 5px 15px;
+        font-size: inherit;
+    }
+
+    .EditMainPageContainer .logoNav img {
+        height: 30px !important;
+        width: 30px !important;
+    }
+
+>>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 }
