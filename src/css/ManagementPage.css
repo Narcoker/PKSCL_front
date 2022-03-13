@@ -1,0 +1,278 @@
+.ManagementPageContainer {
+    font-family: "OTWelcomeRA";
+    background-color: var(--color-background);
+    width: 100%;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+
+.ManagementPageContainer .nav {
+    top: 0;
+    width: 100%;
+    justify-content: flex-end;
+    position: fixed;
+    height: 20px;
+    left: 0;
+    align-items: center;
+    display: flex;
+    height: 8vh;
+    background: rgb(255 255 255 / 90%);
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    z-index: 1;
+    justify-content: center;
+    box-shadow: 1px 1px 1px 0 rgb(207 206 206);
+}
+
+.searchBar {
+    height: 60%;
+    display: flex;
+    background-color: var(--color-white);
+    margin-left: 20px;
+    box-shadow: 1px 1px 5px 0px gray;
+    border: none;
+    outline: none;
+    color: var(--color-white);
+    padding: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.searchBar input {
+    border: none;
+    width: 300px;
+    caret-color: black;
+    padding-left: 10px;
+}
+
+.searchBar input:focus {
+    outline-color: var(--color-leftPanel);
+    caret-color: black;
+    background-color: none;
+}
+
+.searchBar input[type=text]:-ms-clear {
+    display: none;
+}
+
+input::-ms-clear,
+input::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+    display: none;
+}
+
+.d-flex {
+    display: flex !important;
+    background-color: var(--color-white);
+    width: 400px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    margin-left: 30px;
+}
+
+.searchButton {
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    cursor: pointer
+}
+
+i {
+    color: var(--color-quarter);
+}
+
+.tables {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+}
+
+.tableSet {
+    margin: 0 30px;
+    width: 90%;
+    text-align: center;
+}
+
+.tableSet table {
+    margin: 0 30px;
+    width: 40vw;
+}
+
+.tableSet thead {
+    display: block;
+}
+
+.tableRadius {
+    background-color: var(--color-tableOdd);
+    overflow: auto;
+    box-shadow: 1px 1px 5px 0px gray;
+}
+
+.tableList {
+    display: block;
+    overflow-y: auto;
+    width: fit-content;
+    max-height: 400px;
+    scrollbar-color: var(--color-quarter);
+}
+
+.tableList::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+.tableList::-webkit-scrollbar-track-piece {
+    background-color: var(--color-tableOdd);
+    border-radius: 100px;
+    width: 10px;
+}
+
+.tableList::-webkit-scrollbar-thumb {
+    background-color: var(--color-quarter);
+    border-radius: 100px;
+}
+
+.tableList::-webkit-scrollbar-track-piece:end {
+    background-color: none;
+    margin-bottom: 20px;
+}
+
+
+.tableSet tr {
+    height: 50px;
+}
+
+.tableSet th {
+    background-color: var(--color-quarter);
+    color: var(--color-white);
+}
+
+.tableSet th,
+.tableSet td {
+    text-align: left;
+    width: 40vw;
+    text-align: center;
+}
+
+.tableSet tr:nth-child(even) {
+    background-color: var(--color-tableEven);
+}
+
+.tableSet tr:nth-child(odd) {
+    background-color: var(--color-tableOdd);
+}
+
+.submitButton {
+    background-color: var(--color-quarter);
+    border: none;
+    outline: none;
+    color: var(--color-white);
+    padding: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    transition: 0.5s;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tableSet .pagenation {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 20px 30px;
+}
+
+.tableSet .pagenationItem {
+    color: var(--color-quarter);
+    margin: 4px;
+}
+
+i {
+    margin: 4px;
+}
+
+.certFileButton {
+    border-radius: 20px;
+    /* box-shadow: 0 0 0 white; */
+}
+
+.mobileVersion {
+    display: none;
+}
+
+.alertEmailContainer {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 22;
+}
+
+.alertEmailbox {
+    background-color: white;
+    width: 600px;
+    z-index: 20;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    display: flex;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 2px 2px 10px 0px black;
+}
+
+.alertEmailField {
+    border: 7px solid var(--color-quarter);
+    border-radius: 20px;
+    color: black;
+    width: 80%;
+    padding: 20px;
+    /* height: 500px; */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+@media (hover: none) and (pointer: coarse) {
+
+    .PCVersion {
+        display: none;
+    }
+
+    .ManagementPageContainer .mobileVersion {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        justify-content: center;
+    }
+
+}

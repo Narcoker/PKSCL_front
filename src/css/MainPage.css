@@ -1,0 +1,605 @@
+.MainPageContainer {
+    /* font-family: "OTWelcomeRA"; */
+    font-family: "Work Sans";
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--color-background);
+}
+
+.leftPanel {
+    min-width: 35vw;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 0;
+    position: fixed;
+    left: 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.majorCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    align-items: center;
+}
+
+.presidentCard {
+    background-color: var(--color-leftPanel);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: 250px;
+    padding-top: 20px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px 0px gray;
+    margin-top: 50px;
+}
+
+.presidentCard img {
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.cogExplanation {
+    margin-top: 20px;
+    width: 250px;
+    padding: 10px;
+    background-color: var(--color-white);
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px 0px gray;
+    font-size: 13px;
+}
+
+.quarter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.quarterButton div:hover,
+.quarterButton:hover {
+    transition: 0.5s;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.quarterButton {
+    width: 18vh;
+    height: 18vh;
+    margin: 10px auto;
+    position: relative;
+}
+
+.quarterButton:nth-child(1) {
+    width: 18vh;
+    height: 18vh;
+    margin-top: 50px;
+    position: relative;
+}
+
+.quarterButton img {
+    padding: 0;
+    width: 18vh;
+    height: 18vh;
+    filter: drop-shadow(3px 5px 3px gray);
+}
+
+.quarterButton div {
+    z-index: 20;
+    padding: 5px 10px;
+    text-align: center;
+    position: absolute;
+    width: 18vh;
+    height: 18vh;
+    line-height: 18vh;
+    color: white;
+}
+
+.fa-chevron-right {
+    cursor: pointer;
+}
+
+.managementPageBar {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.managementPageBar:hover {
+    transition: 0.5s;
+    transform: scale(1.5);
+}
+
+.rightPanel {
+    width: 65vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.MainPageContainer .nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    position: fixed;
+    list-style: none;
+    background: rgb(255 255 255 / 90%);
+    right: 0;
+    box-shadow: 1px 1px 1px 0 rgb(207 206 206);
+    width: 100%;
+    justify-content: space-between;
+    height: 8vh;
+    top: 0;
+    align-items: center;
+}
+
+.majorList {
+    height: 50px;
+}
+
+.dateInput {
+    height: 32px;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    background-color: var(--color-white);
+    margin-left: 20px;
+    box-shadow: 1px 1px 5px 0px grey;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    font-size: 15px;
+    border: none;
+    width: 250px;
+    caret-color: black;
+    justify-content: center;
+    align-items: center;
+}
+
+.eventCardBox {
+    display: flex;
+}
+
+.mainSearchBar {
+    height: 32px;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    background-color: var(--color-white);
+    margin-left: 20px;
+    box-shadow: 1px 1px 5px 0px gray;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.mainSearchBar input {
+    border: none;
+    width: 300px;
+    caret-color: black;
+    height: auto;
+}
+
+.mainSearchBar input:focus {
+    outline-color: var(--color-leftPanel);
+    caret-color: #000000;
+    background-color: none;
+}
+
+.mainSearchBar input[type=text]:-ms-clear {
+    display: none;
+}
+
+.eventButtons {
+    display: flex;
+    flex-direction: row !important;
+    align-items: flex-start;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.submitButton {
+    background-color: var(--color-quarter);
+    border: none;
+    outline: none;
+    color: var(--color-white);
+    width: 100px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 20px;
+    margin: 15px 10px;
+    transition: 0.5s;
+    font-size: 12px important !;
+}
+
+
+.quarterData {
+    margin-top: 30px;
+    width: 700px;
+    margin-right: 100px;
+    margin-top: 90px;
+}
+
+.eventSource {
+    border-left: 9px solid var(--color-quarter);
+    display: flex;
+    width: 650px;
+    margin: 10px 0;
+    justify-content: space-between;
+}
+
+.eventSource div,
+.eventSource h4 {
+    margin-left: 10px;
+    text-align: left;
+}
+
+
+.eventSource button {
+    width: 120px;
+    background-color: var(--color-leftPanel);
+    border: none;
+    outline: none;
+    height: 35px;
+    border-radius: 49px;
+    color: var(--color-quarter);
+    margin: 0 0 15px 0;
+}
+
+.eventSource div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.eventTitle {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 400px;
+    justify-content: space-between;
+    color: var(--color-quarter);
+}
+
+.eventCard {
+    display: flex;
+    box-shadow: 1px 1px 10px 0px gray;
+    margin-bottom: 50px;
+    background-color: white;
+    border-radius: 20px;
+    width: 710px;
+}
+
+.quarterTotalAmount {
+    margin-bottom: 30px;
+    color: var(--color-quarter);
+}
+
+.cardContent {
+    display: flex;
+    margin: 10px 30px;
+    width: 650px;
+    text-align: center;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#receiptContent {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cardContent h4,
+.cardContent h5 {
+    color: var(--color-quarter);
+    font-weight: bold;
+}
+
+.receiptTitle {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.receiptTitle div {
+    color: var(--color-quarter);
+}
+
+#receiptContent table {
+    margin: 10px 0;
+    width: 400px;
+    height: 240px;
+}
+
+.receiptTable thead {
+    display: block;
+}
+
+.receiptTable tbody {
+    display: block;
+    overflow-y: auto;
+    max-height: 200px;
+    width: fit-content;
+}
+
+.receiptTable tbody::-webkit-scrollbar {
+    width: 8px;
+}
+
+.receiptTable tbody::-webkit-scrollbar-track-piece {
+    background-color: var(--color-tableOdd);
+    border-radius: 100px;
+    width: 10px;
+}
+
+.receiptTable tbody::-webkit-scrollbar-thumb {
+    background-color: var(--color-quarter);
+    border-radius: 100px;
+}
+
+.receiptTable tbody::-webkit-scrollbar-track-piece:end {
+    background-color: none;
+}
+
+.receiptTable tr {
+    height: 40px;
+}
+
+#receiptContent th {
+    background-color: var(--color-quarter);
+    color: var(--color-white);
+    width: 100px;
+}
+
+#receiptContent tr:nth-child(even) {
+    background-color: var(--color-tableEven);
+}
+
+#receiptContent tr:nth-child(odd) {
+    background-color: var(--color-tableOdd);
+}
+
+#receiptContent td {
+    width: 100px;
+}
+
+.receiptCard {
+    border-top: 2px solid var(--color-quarter);
+    padding-top: 10px;
+    display: flex;
+    margin: 0 0 30px 0;
+    padding: 30px 0 0 0;
+    width: 650px;
+    justify-content: space-between;
+}
+
+.receiptResource {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.receiptCard img {
+    display: inline-block;
+    width: 90%;
+    height: 330px;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-left: 30px;
+    border: 1px solid var(--color-quarter);
+}
+
+.logoNav {
+    display: flex;
+    align-items: center;
+}
+
+.PKSCL {
+    margin-left: 5px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.quarterSelecter {
+    display: none;
+}
+
+.giraffeDiv {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 50px;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .MainPageContainer {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .MainPageContainer .rightPanel {
+        width: 100vw;
+        align-items: flex-start;
+    }
+
+    .MainPageContainer .leftPanel {
+        display: none;
+    }
+
+    .MainPageContainer .majorCard {
+        display: none;
+    }
+
+    .MainPageContainer .nav {
+        width: 100%;
+        left: 0;
+    }
+
+    .PKSCL {
+        display: none;
+    }
+
+    .leftPanel .quarterButton {
+        display: none;
+    }
+
+    .MainPageContainer .quarterTotalAmount {
+        margin-bottom: 2vh;
+        font-size: 20px !important;
+    }
+
+    .MainPageContainer .submitButton {
+        font-size: 10px;
+        width: 15vw;
+    }
+
+    .MainPageContainer .quarterData {
+        width: 100%;
+        left: 0;
+        margin: 0;
+        margin-top: 10vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .MainPageContainer .eventButtons button {
+        font-size: 10px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .MainPageContainer .quarterTotalAmount {
+        font-size: 25px;
+    }
+
+    .MainPageContainer .eventCard {
+        width: 90vw;
+    }
+
+    .MainPageContainer .cardContent {
+        width: 90vw;
+        margin: 10px 20px;
+        align-items: center;
+    }
+
+    .MainPageContainer .eventSource {
+        width: 100%;
+    }
+
+    .MainPageContainer .receiptResource {
+        margin-left: 10%;
+    }
+
+    .MainPageContainer .receiptCard {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .MainPageContainer #receiptContent {
+        width: 90%;
+        height: 100% !important;
+        overflow-y: auto !important;
+    }
+
+    .MainPageContainer #receiptContent table {
+        width: 90%;
+    }
+
+    .MainPageContainer .receiptCard img {
+        margin-left: 0;
+    }
+
+    .MainPageContainer .eventCardBox {
+        align-items: center !important;
+    }
+
+    .MainPageContainer .image {
+        display: none;
+    }
+
+    .MainPageContainer .tempAlert {
+        font-size: 8px !important;
+    }
+
+    .MainPageContainer .edit {
+        width: 90px !important;
+    }
+
+    .MainPageContainer .receiptTable {
+        font-size: 12px !important;
+    }
+
+    .logoNav img {
+        margin: 0;
+        width: 10vw !important;
+        height: 10vw !important;
+    }
+
+    .quarterSelecter {
+        display: flex;
+    }
+
+    .quarterSelecter .quarterButton {
+        width: 8vw;
+        height: 8vw;
+        margin: 10px auto;
+        position: relative;
+    }
+
+    .quarterSelecter .quarterButton:nth-child(1) {
+        margin-left: 0 !important;
+        width: 8vw;
+        height: 8vw;
+        margin: 10px auto;
+        position: relative;
+    }
+
+    .quarterSelecter .quarterButton img {
+        padding: 0;
+        width: 8vw !important;
+        height: 8vw !important;
+        filter: drop-shadow(3px 5px 3px white);
+    }
+
+    .quarterSelecter .quarterButton div {
+        z-index: 20;
+        padding: 5px 10px;
+        text-align: center;
+        position: absolute;
+        width: 8vw;
+        height: 8vw;
+        line-height: 5vw;
+        color: white;
+    }
+
+    .MainPageContainer .tempAlert {
+        width: 20vw;
+    }
+}
