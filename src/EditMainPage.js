@@ -92,8 +92,8 @@ function EditMainPage(props) {
                 setList([...payload.data["quarter"][currentQuarter]["eventList"]]);
                 console.log('setList([...payload.data["quarter"][currentQuarter]["eventList"]]);');
 
-                resetShowAllReceiptButton();
-                console.log('resetShowAllReceiptButton();');
+                // resetShowAllReceiptButton();
+                // console.log('resetShowAllReceiptButton();');
 
                 defineColor(currentQuarter);
                 console.log('defineColor(currentQuarter);');
