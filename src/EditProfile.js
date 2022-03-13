@@ -4,11 +4,6 @@ import './css/EditProfile.css'
 import { useHistory } from 'react-router-dom';
 
 function EditProfile(props) {
-<<<<<<< HEAD
-    let debugAPIURL = "";
-    // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
     const history = useHistory();
     const modalRef = useRef();
@@ -41,11 +36,7 @@ function EditProfile(props) {
 
     const [majorList, setMajorList] = useState(
         [
-<<<<<<< HEAD
-            "국어국문학과", "영어영문학부", "일어일문학부", "사학과", "경제학부", "법학과", "행정학과", "국제지역학부", "중국학과", "신문방송학과", "정치외교학과", "유아교육과", "시각디자인학과", "공업디자인학과", "패션디자인학과", "경영학부", "국제통상학부", "응용수학과", "통계학과", "물리학과", "화학과", "미생물학과", "해양스포츠학과", "간호학과", "과학시스템시뮬레이션학과", "건축공학과", "건축학과", "소방공학과", "시스템경영공학부", "IT융합응용공학과", "안전공학과", "융합디스플레이공학과", "의공학과", "전기공학과", "전자공학과", "정보통신공학과", "제어계측공학과", "조선해양시스템공학과", "컴퓨터공학과", "토목공학과", "고분자공학과", "공업화학과", "금속공학과", "기계공학과", "기계설계공학과", "기계시스템공학과", "냉동공조공학과", "신소재시스템공학과", "인쇄정보공학과", "재료공학과", "화학공학과", "지속가능공학부", "식품공학과", "해양바이오신소재학과", "해양생산시스템관리학부", "해양수산경영학과", "수해양산업교육과", "자원생물학과", "식품영양학과", "생물공학과", "수산생명의학과", "환경공학과", "해양공학과", "해양학과", "지구환경과학과", "환경대기과학과", "에너지자원공학과", "공간정보시스템공학과", "생태공학과", "데이터정보과학부(빅데이터융합전공)", "데이터정보과학부(통계·데이터사이언스전공)", "미디어커뮤니케이션학부(언론정보전공)", "미디어커뮤니케이션학부(휴먼ICT융합전공)", "스마트헬스케어학부(의공학전공)", "스마트헬스케어학부(해양스포츠전공)", "스마트헬스케어학부(휴먼바이오융합전공)", "전자정보통신공학부(전자공학전공)", "전자정보통신공학부(정보통신공학전공)", "조형학부(건축학전공)", "조형학부(공업디자인전공)", "조형학부(시각디자인전공)", "컴퓨터공학부(소프트웨어·인공지능전공)", "컴퓨터공학부(컴퓨터공학전공)", "평생교육·상담학과", "기계조선융합공학과", "전기전자소프트웨어공학과", "공공안전경찰학과"
-=======
             "기린학과","국어국문학과", "영어영문학부", "일어일문학부", "사학과", "경제학부", "법학과", "행정학과", "국제지역학부", "중국학과", "신문방송학과", "정치외교학과", "유아교육과", "시각디자인학과", "공업디자인학과", "패션디자인학과", "경영학부", "국제통상학부", "응용수학과", "통계학과", "물리학과", "화학과", "미생물학과", "해양스포츠학과", "간호학과", "과학시스템시뮬레이션학과", "건축공학과", "건축학과", "소방공학과", "시스템경영공학부", "IT융합응용공학과", "안전공학과", "융합디스플레이공학과", "의공학과", "전기공학과", "전자공학과", "정보통신공학과", "제어계측공학과", "조선해양시스템공학과", "컴퓨터공학과", "토목공학과", "고분자공학과", "공업화학과", "금속공학과", "기계공학과", "기계설계공학과", "기계시스템공학과", "냉동공조공학과", "신소재시스템공학과", "인쇄정보공학과", "재료공학과", "화학공학과", "지속가능공학부", "식품공학과", "해양바이오신소재학과", "해양생산시스템관리학부", "해양수산경영학과", "수해양산업교육과", "자원생물학과", "식품영양학과", "생물공학과", "수산생명의학과", "환경공학과", "해양공학과", "해양학과", "지구환경과학과", "환경대기과학과", "에너지자원공학과", "공간정보시스템공학과", "생태공학과", "데이터정보과학부(빅데이터융합전공)", "데이터정보과학부(통계·데이터사이언스전공)", "미디어커뮤니케이션학부(언론정보전공)", "미디어커뮤니케이션학부(휴먼ICT융합전공)", "스마트헬스케어학부(의공학전공)", "스마트헬스케어학부(해양스포츠전공)", "스마트헬스케어학부(휴먼바이오융합전공)", "전자정보통신공학부(전자공학전공)", "전자정보통신공학부(정보통신공학전공)", "조형학부(건축학전공)", "조형학부(공업디자인전공)", "조형학부(시각디자인전공)", "컴퓨터공학부(소프트웨어·인공지능전공)", "컴퓨터공학부(컴퓨터공학전공)", "평생교육·상담학과", "기계조선융합공학과", "전기전자소프트웨어공학과", "공공안전경찰학과"
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
         ]);
 
     const [inputEmail, setInputEmail] = useState("");
@@ -55,11 +46,7 @@ function EditProfile(props) {
     const [inputCheckNewPassword, setInputCheckNewPassword] = useState("");
 
     const [newPasswordButton, setNewPasswordButton] = useState(false);
-    const [userStatus, setUserStatus] = useState()
-<<<<<<< HEAD
-=======
     const [userApprovalStatus,setUserApprovalStatus] = useState(false);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
 
     function changeIsCorrect(key, type) {
@@ -75,53 +62,28 @@ function EditProfile(props) {
         else if (key === "inputPassword") temp.inputPassword = type;
         else if (key === "inputNewPassword") temp.inputNewPassword = type;
         else if (key === "inputCheckNewPassword") temp.inputCheckNewPassword = type;
-<<<<<<< HEAD
-        else console.log("function changeIsCorrect() error ");
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
         setIsCorrect(temp);
     };
 
     function withdrawal() {
-<<<<<<< HEAD
-        console.log(isCorrect.inputEmail + " " + isCorrect.inputPassword);
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
         if (isCorrect.inputEmail && isCorrect.inputPassword) {
             if (window.confirm('정말 탈퇴하시겠습니까?')) {
                 const payload = { "inputEmail": inputEmail, "inputPassword": inputPassword }
                 //axio.탈퇴
-<<<<<<< HEAD
-                axios.post(debugAPIURL + '/withdrawal', payload)
-                    .then((payload) => {
-                        switch (payload.status) {
-                            case 200:
-                                alert("회원 탈퇴가 정상적으로 처리 되었습니다.");
-                                history.push('/');
-                                break;
-                            default: break;
-                        }
-=======
                 axios.post('/withdrawal', payload)
                     .then((payload) => {
                         alert("회원 탈퇴가 정상적으로 처리 되었습니다.");
                         logout();
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                     })
                     .catch((error) => {
                         switch (error.response.status) {
                             case 401:
                                 alert("이메일과 패스워드가 올바르지 않습니다.");
-<<<<<<< HEAD
-                                break;
-                            default: break;
-=======
                             break;
                             default: 
                                 alert("회원 탈퇴 실패/ error: " + error.response.status); 
                             break;
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                         }
                     })
             }
@@ -138,24 +100,10 @@ function EditProfile(props) {
 
 
         const payload = { "inputPassword": inputPassword, "inputNewPassword": inputNewPassword, "inputCheckNewPassword": inputCheckNewPassword }
-<<<<<<< HEAD
-        axios.patch(debugAPIURL + '/password', payload)
-            .then((payload) => {
-                switch (payload.status) {
-                    case 200:
-                        alert("비밀번호가 수정되었습니다.");
-                        logout();
-                        break;
-                    default:
-                        alert(payload.status);
-                }
-
-=======
         axios.patch( '/password', payload)
             .then((payload) => {
                 alert("비밀번호가 수정되었습니다.");
                 logout();
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             })
             .catch((error) => {
                 switch (error.response.status) {
@@ -163,11 +111,7 @@ function EditProfile(props) {
                         alert("비밀번호가 일치하지 않습니다.");
                         break;
                     default:
-<<<<<<< HEAD
-                        alert("Error code: " + error.response.status); // 수정필요
-=======
                         alert("비밀번호 변경 실패/ error: " + error.response.status); // 수정필요
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                         break;
                 }
 
@@ -176,21 +120,6 @@ function EditProfile(props) {
 
     function putProfile() {
         let payload = new FormData();
-<<<<<<< HEAD
-        console.log(props.loginPosition);
-        payload.append("stdID", stdID);
-        payload.append("name", name);
-
-        if (props.loginPosition === "student") { //학생
-            payload.append("major", major);
-
-            console.log(" if (!certFile['name'].includes('./static/studentCertFile/'))");
-            console.log(certFile["name"]);
-            if (!certFile["name"].includes("./static/studentCertFile/")) {
-                payload.append("certFile", certFile);
-            }
-
-=======
         payload.append("stdID", stdID);
         payload.append("name", name);
         payload.append("majorNumber", major);
@@ -199,40 +128,20 @@ function EditProfile(props) {
             if (!certFile["name"].includes("./static/studentCertFile/")) {
                 payload.append("certFile", certFile);
             }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
         }
         else if (props.loginPosition === "president") { //학생회장
             payload.append("phoneNumber", phoneNumber);
 
-<<<<<<< HEAD
-            console.log(" if (!majorLogo['name'].includes('./static/majorLogo/'))");
-            console.log(majorLogo["name"]);
-
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             if (!majorLogo["name"].includes("./static/majorLogo/")) {
                 payload.append("majorLogo", majorLogo);
             }
         }
 
-<<<<<<< HEAD
-        axios.put(debugAPIURL + "/profile/" + props.loginPosition, payload, {
-=======
         axios.put( "/profile/" + props.loginPosition, payload, {
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         }).then((payload) => {
-<<<<<<< HEAD
-            switch (payload.status) {
-                case 200:
-                    alert("정보가 변경되었습니다.");
-                    props.setEditProfileState(false);
-                    break;
-                default: alert("success: " + payload.status); break;
-            }
-=======
             alert("정보가 변경되었습니다.");
             if(props.loginPosition === "student"){
                 logout();
@@ -240,7 +149,6 @@ function EditProfile(props) {
                 logout();
             }
             props.setEditProfileState(false);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
         })
             .catch((error) => {
                 switch (error.response.status) {
@@ -248,11 +156,7 @@ function EditProfile(props) {
                         alert(error.response.data.errorMessage);
                         break;
                     default:
-<<<<<<< HEAD
-                        alert("error: " + error.status);
-=======
                         alert("프로필 편집 실패/ error: " + error.status);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                         break;
                 }
             })
@@ -268,15 +172,6 @@ function EditProfile(props) {
     }
 
     function logout() {
-<<<<<<< HEAD
-        axios.post(debugAPIURL + '/logout')
-            .then((payload) => {
-                history.push('/');
-            }).catch((error) => {
-                console.log("error: " + error.response.status);
-                // 빼기
-                history.push('/');
-=======
         axios.post( '/logout')
             .then((payload) => {
                 history.push('/');
@@ -285,7 +180,6 @@ function EditProfile(props) {
                     case 400:  alert("로그아웃에 실패하였습니다."); break;
                     default: alert("로그아웃 실패/ error: " + error.response.status); break;
                 }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             })
     }
 
@@ -296,23 +190,13 @@ function EditProfile(props) {
             } else {
                 setEditButtonState(false);
             }
-<<<<<<< HEAD
-            console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.phoneNumber: " + isCorrect.phoneNumber + "  isCorrect.majorLogo: " + isCorrect.majorLogo);
-        } else if (props.loginPosition === "student") {
-=======
             } else if (props.loginPosition === "student") {
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             if (isCorrect.stdID && isCorrect.name && isCorrect.major && isCorrect.certFile) {
                 setEditButtonState(true);
             } else {
                 setEditButtonState(false);
             }
-<<<<<<< HEAD
-            console.log("isCorrect.stdID: " + isCorrect.stdID + " isCorrect.name: " + isCorrect.name + " isCorrect.major: " + isCorrect.major + " isCorrect.certFile: " + isCorrect.certFile);
-        }
-=======
             }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
         if (isCorrect.inputPassword && isCorrect.inputNewPassword && isCorrect.inputCheckNewPassword) {
             if (inputNewPassword === inputCheckNewPassword)
@@ -326,88 +210,30 @@ function EditProfile(props) {
 
     }, [isCorrect])
 
-<<<<<<< HEAD
-    useEffect(() => {
-        //debug
-        console.log(props.loginPosition);
-
-        // setStdID(() => "201892643");
-        // setMajor(() => "1");
-        // setName(() => "한준규");
-        // setPhoneNumber(() => "010-0000-0000");
-        // setEmail(() => "test1@pukyong.ac.kr");
-        // setCertFile({ name: "학생증.jpg" });
-        // setCertFile("");
-        // setMajorLogo("");
-
-        setIsCorrect(
-            {
-                stdID: true,
-                major: true,
-                name: true,
-                phoneNumber: true,
-                email: true,
-                certFile: true,
-                majorLogo: true,
-                inputEmail: false,
-                inputPassword: false,
-                inputNewPassword: false,
-                inputCheckNewPassword: false
-            }
-        );
-
-
-
-        //get 요청해서 로그인된 정보 가져오기
-        axios.get(debugAPIURL + '/profile')
-            .then((payload) => {
-                switch (payload.status) {
-                    case 200:
-=======
     function getProfileStudent(){
         axios.get( '/profile')
             .then((payload) => {
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                         setStdID(payload.data["stdID"]);
                         setMajor(payload.data["major"]);
                         setName(payload.data["name"]);
                         setEmail(payload.data["email"]);
-<<<<<<< HEAD
-
-                        if (props.loginPosition === "president") {
-                            setPhoneNumber(payload.data["phoneNumber"]);
-                            setMajorLogo(payload.data["majorLogo"]);
-=======
-                        setUserStatus(props.userstatus)
 
                             setCertFile(payload.data["certFile"]);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                             setIsCorrect(
                                 {
                                     stdID: true,
                                     major: true,
                                     name: true,
-<<<<<<< HEAD
-                                    phoneNumber: true,
-                                    email: true,
-                                    certFile: false,
-                                    majorLogo: true,
-=======
                                     phoneNumber: false,
                                     email: true,
                                     certFile: true,
                                     majorLogo: false,
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                     inputEmail: false,
                                     inputPassword: false,
                                     inputNewPassword: false,
                                     inputCheckNewPassword: false,
                                 }
                             );
-<<<<<<< HEAD
-                        } else if (props.loginPosition === "student") {
-                            setCertFile(payload.data["certFile"]);
-=======
             })
             .catch((error) => {
                 switch (error.response.status) {
@@ -424,62 +250,24 @@ function EditProfile(props) {
                         setMajor(payload.data["major"]);
                         setName(payload.data["name"]);
                         setEmail(payload.data["email"]);
-                        setUserStatus(props.userstatus)
 
                             setPhoneNumber(payload.data["phoneNumber"]);
                             setMajorLogo(payload.data["majorLogo"]);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                             setIsCorrect(
                                 {
                                     stdID: true,
                                     major: true,
                                     name: true,
-<<<<<<< HEAD
-                                    phoneNumber: false,
-                                    email: true,
-                                    certFile: true,
-                                    majorLogo: false,
-=======
                                     phoneNumber: true,
                                     email: true,
                                     certFile: false,
                                     majorLogo: true,
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                     inputEmail: false,
                                     inputPassword: false,
                                     inputNewPassword: false,
                                     inputCheckNewPassword: false,
                                 }
                             );
-<<<<<<< HEAD
-                        }
-                        break;
-                    default: break;
-                }
-                axios.get(debugAPIURL + '/status')
-                    .then((payload) => {
-                        switch (payload.status) {
-                            case 200: setUserStatus(payload.data["status"]); break;
-                            default: console.log("error: " + payload.response.status); break;
-                        }
-                    })
-                    .catch((error) => {
-                        switch (error.response.status) {
-                            case 400: console.log("사용자의 승인상태를 확인하는데 실패했습니다."); break;
-                            default: console.log("error: " + payload.response.status); break;
-                        }
-                    })
-            })
-            .catch((error) => {
-                switch (error.response.status) {
-                    case 400: console.log("정보를 로드하는데 실패했습니다."); break;
-                    default: console.log("error: " + error.response.status); break;
-                }
-
-            })
-        //get 요청해서 학과리스트 가져오기
-        axios.get(debugAPIURL + '/major-list')
-=======
                         
             })
             .catch((error) => {
@@ -493,18 +281,11 @@ function EditProfile(props) {
     function getMajorList(){
         //get 요청해서 학과리스트 가져오기
         axios.get( '/major-list')
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             .then((payload) => {
                 setMajorList([...payload.data.majorList]);
             })
             .catch((error) => {
                 switch (error.response.status) {
-<<<<<<< HEAD
-                    case 400: alert("학과리스트를 불러올 수 없습니다."); return;
-                    default: console.log("error: " + error.response.status); return;
-                }
-            })
-=======
                     case 400: alert("학과리스트를 불러올 수 없습니다."); break;
                     default: alert("학과 리스트 로드 실패/ error: " + error.response.status); break;
                 }
@@ -560,14 +341,12 @@ function EditProfile(props) {
 
 
                 //push 할때 삭제
-                // setUserStatus(props.loginPosition)
                 // setStdID("202013245");
                 // setMajor(0);
                 // setName("홍길동");
                 // setEmail("hongildong@naver.com");
                 // setPhoneNumber("01057925915");
                 // setUserApprovalStatus(false)
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
         document.addEventListener('mousedown', clickModalOutside);
 
@@ -575,10 +354,7 @@ function EditProfile(props) {
             document.removeEventListener('mousedown', clickModalOutside);
         };
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     }, [])
 
     const clickModalOutside = event => {
@@ -598,28 +374,12 @@ function EditProfile(props) {
     }, [phoneNumber]);
 
     return (
-<<<<<<< HEAD
-        <div className="errorContainer" ref={modalRef}>
-            <div className="errorBox">
-=======
         <div className="editProfileContainer" ref={modalRef}>
             <div className="editProfileBox">
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 {
                     boxState === "profile"
                         ? <>
                             <div className='boxTitle'>
-<<<<<<< HEAD
-                                <h2 style={{ marginRight: "8px", justifyContent: "center" }}><i className="fas fa-users" />프로필 편집</h2>
-                                <button className="btn btn-danger" style={{ fontWeight: "600" }} onClick={() => { setBoxState("withdrawal") }}>회원탈퇴</button>
-                            </div>
-
-                            <div className='editField'>
-                                <div className="inputField">
-                                    <i className="fas fa-key"></i>
-                                    <label>비밀번호</label>
-                                    <empty style={{ width: "200px" }}></empty>
-=======
                                 {/* <i className="fas fa-user" /> */}
                                 <div className="profileEditTitle">프로필 편집</div>
                                 <button className="btn btn-danger dangerButton" onClick={() => { setBoxState("withdrawal") }}>회원탈퇴</button>
@@ -634,26 +394,12 @@ function EditProfile(props) {
                                     <div>
                                     <i className="fas fa-key"></i>
                                     <label>비밀번호</label></div>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                     <button type='button' style={{ fontWeight: "bold" }} onClick={() => { setBoxState("newPassword") }}>변경</button>
                                 </div>
 
                                 <div className="inputField">
                                     <i className="fas fa-lock"></i>
                                     <label>학번</label>
-<<<<<<< HEAD
-                                    <input onChange={(e) => {
-                                        setStdID(e.target.value.replace(/[^0-9]/g, ''));
-                                        if (e.target.value.length === 9) {
-                                            changeIsCorrect("stdID", true);
-
-                                        } else {
-                                            changeIsCorrect("stdID", false);
-                                        }
-                                    }
-                                    } name="stdID" value={stdID} maxLength="9" placeholder="내용을 입력해주세요" type="text" />
-
-=======
                                     {
                                         props.loginPosition === "president" && userApprovalStatus === true
                                             ?
@@ -670,7 +416,6 @@ function EditProfile(props) {
                                                 }
                                                 } name="stdID" value={stdID} maxLength="9" placeholder="내용을 입력해주세요" type="text" />
                                     }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                 </div>
 
                                 <div className="inputField">
@@ -709,11 +454,7 @@ function EditProfile(props) {
                                     }
 
                                     {
-<<<<<<< HEAD
-                                        props.loginPosition === "president"
-=======
                                         props.loginPosition === "president" && userApprovalStatus === true
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                             ?
                                             <>
                                                 <input type="text" list="majorList-options" id='major' name="major" placeholder={majorList[major]}
@@ -721,8 +462,6 @@ function EditProfile(props) {
                                             </>
                                             : null
                                     }
-<<<<<<< HEAD
-=======
                                     {
                                         props.loginPosition === "president" && userApprovalStatus === false
                                         ?<>
@@ -752,7 +491,6 @@ function EditProfile(props) {
                                             </>
                                         : null
                                     }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
 
                                 </div>
@@ -799,20 +537,13 @@ function EditProfile(props) {
                                 </div>
 
                                 {
-                                    props.loginPosition === "president"
-                                        ?
-                                        <>
-                                            {userStatus === "approval"
+                                    props.loginPosition === "president" && userApprovalStatus === true
                                                 ? <div className="inputField">
                                                     <i className="fas fa-user-graduate" style={{ fontSize: "1.25rem" }}></i>
                                                     <label>학과로고</label>
-<<<<<<< HEAD
-                                                    <input style={{ width: "200px" }} placeholder="학과로고를 첨부해주세요." value={majorLogo["name"].replace(/^.*\//, '')} readOnly></input>
-                                                    <label className='fileButton' htmlFor="file" style={{ width: "60px" }}>찾기</label>
-=======
-                                                    <input  placeholder="학과로고를 첨부해주세요." value={majorLogo["name"].replace(/^.*\//, '')} readOnly></input>
+                                                    <input  placeholder="학과로고를 첨부해주세요." 
+                                                        value={majorLogo["name"].replace(/^.*\//, '')} readOnly></input>
                                                     <label className='fileButton' htmlFor="file">찾기</label>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                     <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
                                                         onChange={(e) => {
                                                             setMajorLogo(e.target.files[0]);
@@ -825,28 +556,18 @@ function EditProfile(props) {
                                                         }}></input>
                                                 </div>
                                                 : null
-                                            }
-                                        </>
-                                        : null
-
-
                                 }
 
                                 {
                                     props.loginPosition === "student"
                                         ?
                                         <>
-<<<<<<< HEAD
-                                            <div className="inputField">
-                                                <i className="fas fa-user-graduate"></i>
-                                                <label>학생증</label>
-                                                <input style={{ width: "200px" }} placeholder="학생증을 첨부해주세요." value={certFile["name"].replace(/^.*\//, '')} readOnly></input>
-=======
                                             <div className="inputField" style={{justifyContent: "space-between"}}>
                                                 <i className="fas fa-user-graduate"></i>
                                                 <label>학생증</label>
-                                                <input  placeholder="학생증을 첨부해주세요." value={certFile["name"].replace(/^.*\//, '')} readOnly></input>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
+                                                <input  placeholder="학생증을 첨부해주세요." 
+                                                    value={certFile["name"].replace(/^.*\//, '')} 
+                                                readOnly></input>
                                                 <label className='fileButton' htmlFor="file">찾기</label>
                                                 <input type="file" id="file" name="file" style={{ display: "none" }} accept='image/*'
                                                     onChange={(e) => {
@@ -863,60 +584,36 @@ function EditProfile(props) {
                                         : null
 
                                 }
-<<<<<<< HEAD
-                            </div>
-
-                            <div className="errorBtns">
-=======
                                 </>
                                 }
                             </div>
 
                             <div className="editProfileBtns">
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                 {
                                     editButtonState
                                         ?
                                         <>
-<<<<<<< HEAD
-                                            <button className="errorBtn" type="button" onClick={() => {
-=======
                                             <button className="editProfileBtn" type="button" onClick={() => {
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                 props.loginPosition === "student"
                                                     ? (<>{window.confirm('프로필 편집을 하실 경우 학생회장의 학과 장부 열람 승인을 다시 받아야 합니다. 프로필을 편집하시겠습니까?')
                                                         ? putProfile()
                                                         : alert("정보수정이 취소되었습니다. ")}</>)
                                                     : (<>{
                                                         props.loginPosition === "president"
-<<<<<<< HEAD
-                                                            ? (<>{window.confirm('프로필을 편집하시겠습니까?')
-                                                                ? putProfile()
-                                                                : alert("정보수정이 취소되었습니다.")}</>)
-=======
                                                             ? putProfile()
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                             : null
                                                     }</>)
                                             }}>저장하기</button>
                                         </>
                                         :
                                         <>
-<<<<<<< HEAD
-                                            <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }}
-=======
                                             <button className="editProfileBtn" type="button" style={{ backgroundColor: "white", color: "black" }}
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                 onClick={() => { alert('정보를 모두 입력해주세요.'); }}>저장하기</button>
                                         </>
                                 }
 
                                 {/* 
-<<<<<<< HEAD
-                                <button className="errorBtn" type="button" onClick={() => {
-=======
                                 <button className="editProfileBtn" type="button" onClick={() => {
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                     editButtonState ? putProfile() : alert('정보를 모두 입력해주세요.');
                                     props.loginPosition === "student"
                                         ? (<>{window.confirm('프로필 편집을 하실 경우 학생회장의 학과 장부 열람 승인을 다시 받아야 합니다. 프로필을 편집하시겠습니까?')
@@ -931,22 +628,14 @@ function EditProfile(props) {
                                         }</>)
                                 }}>저장하기</button> */}
 
-<<<<<<< HEAD
-                                <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { props.setEditProfileState(false); reset(); }}>취소</button>
-=======
                                 <button className="editProfileBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { props.setEditProfileState(false); reset(); }}>취소</button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
                             </div>
                         </>
                         : boxState === "withdrawal"
                             ? <>
                                 <div className='boxTitle' style={{ justifyContent: "center" }}  >
-<<<<<<< HEAD
-                                    <h2 ><i className="fas fa-users" style={{ color: "#dc3545" }} />회원 탈퇴</h2>
-=======
                                     <h2 ><i className="fas fa-user" style={{ color: "#dc3545" }} />회원탈퇴</h2>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                 </div>
 
                                 <div className='editField' style={{ borderColor: "#dc3545" }}>
@@ -967,10 +656,6 @@ function EditProfile(props) {
                                     <div className="inputField">
                                         <i className="fas fa-key"></i>
                                         <label>비밀번호</label>
-<<<<<<< HEAD
-                                        {/* <empty style={{ width: "200px" }}></empty> */}
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                         <input type="password" onChange={(e) => {
                                             setInputPassword(e.target.value)
                                             if (e.target.value === "") {
@@ -983,31 +668,14 @@ function EditProfile(props) {
                                     </div>
                                 </div>
 
-<<<<<<< HEAD
-                                <div className="errorBtns">
-                                    <button className="errorBtn" type="button" style={{ backgroundColor: "#dc3545" }} onClick={() => { withdrawal(); }}>탈퇴</button>
-                                    <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { setBoxState("profile") }}>취소</button>
-=======
                                 <div className="editProfileBtns">
                                     <button className="editProfileBtn" type="button" style={{ backgroundColor: "#dc3545" }} onClick={() => { withdrawal(); }}>탈퇴</button>
                                     <button className="editProfileBtn" type="button" style={{ backgroundColor: "white", color: "black" }} onClick={() => { setBoxState("profile") }}>취소</button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
                                 </div>
                             </>
                             : boxState === "newPassword"
                                 ? <>
-<<<<<<< HEAD
-                                    <div className='boxTitle' style={{ justifyContent: "center" }} >
-                                        <h2 ><i className="fas fa-users" />비밀번호 변경</h2>
-                                    </div>
-
-                                    <div className='editField' >
-                                        <div className="inputField">
-                                            <i className="fas fa-key"></i>
-                                            <label style={{ width: "160px" }}>비밀번호</label>
-                                            {/* <empty style={{ width: "200px" }}></empty> */}
-=======
                                     <div className='boxTitle'  >
                                         <h2 ><i className="fas fa-user" />비밀번호 변경</h2>
                                     </div>
@@ -1017,7 +685,6 @@ function EditProfile(props) {
                                             
                                             <i className="fas fa-key" style={isCorrect["inputPassword"] === true ? { color: "var(--color-quarter)" } : null}></i>
                                             <label >비밀번호</label>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                             <input type="password" onChange={(e) => {
                                                 setInputPassword(e.target.value)
                                                 if (e.target.value === "") {
@@ -1029,43 +696,6 @@ function EditProfile(props) {
                                         </div>
 
                                         <div className="inputField">
-<<<<<<< HEAD
-                                            <i className="fas fa-key"></i>
-                                            <label style={{ width: "160px" }}>새 비밀번호</label>
-                                            {/* <empty style={{ width: "200px" }}></empty> */}
-                                            <input type="password" onChange={(e) => {
-                                                setInputNewPassword(e.target.value)
-                                                if (e.target.value === "") {
-                                                    changeIsCorrect("inputNewPassword", false);
-                                                } else {
-                                                    changeIsCorrect("inputNewPassword", true);
-                                                }
-                                            }} value={inputNewPassword} placeholder='새 비밀번호를 입력하세요.' />
-                                        </div>
-
-                                        <div className="inputField">
-                                            <i className="fas fa-key"></i>
-                                            <label style={{ width: "160px" }} >새 비밀번호 확인</label>
-                                            {/* <empty style={{ width: "200px" }}></empty> */}
-                                            <input type="password" onChange={(e) => {
-                                                setInputCheckNewPassword(e.target.value)
-                                                if (e.target.value === "") {
-                                                    changeIsCorrect("inputCheckNewPassword", false);
-                                                } else {
-                                                    changeIsCorrect("inputCheckNewPassword", true);
-                                                }
-                                            }} value={inputCheckNewPassword} placeholder='비밀번호를 다시 입력하세요.' />
-                                        </div>
-                                    </div>
-
-                                    <div className="errorBtns">
-                                        {
-                                            newPasswordButton
-                                                ?
-                                                <button className="errorBtn" type="button" onClick={() => { newPassword(); }}>변경</button>
-                                                :
-                                                <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }}
-=======
                                             <i className="fas fa-key" style={isCorrect["inputNewPassword"] === true ? { color: "var(--color-quarter)" } : null}></i>
                                             <label >새 비밀번호</label>
                                             <div style={{width:"70%"}}>
@@ -1114,7 +744,6 @@ function EditProfile(props) {
                                                 <button className="editProfileBtn" type="button" onClick={() => { newPassword(); }}>변경</button>
                                                 :
                                                 <button className="editProfileBtn" type="button" style={{ backgroundColor: "white", color: "black" }}
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                     onClick={() => {
                                                         if (inputNewPassword !== inputPassword) {
                                                             alert("새 비밀번호 값이 일치하지 않습니다.")
@@ -1126,10 +755,6 @@ function EditProfile(props) {
 
                                         }
 
-<<<<<<< HEAD
-                                        <button className="errorBtn" type="button" style={{ backgroundColor: "white", color: "black" }}
-                                            onClick={() => { setBoxState("profile"); reset(); }}>취소</button>
-=======
                                         <button className="editProfileBtn" type="button" style={{ backgroundColor: "white", color: "black" }}
                                             onClick={() => { 
                                                 if(props.loginPosition === "admin"){
@@ -1138,7 +763,6 @@ function EditProfile(props) {
                                                     setBoxState("profile");
                                                 }
                                                  reset(); }}>취소</button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
                                     </div>
                                 </>

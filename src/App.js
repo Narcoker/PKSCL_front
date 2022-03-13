@@ -43,7 +43,7 @@ function defineColor(quarter) {
     setColorProperty("#c18356", "#f9eee5", "#e9d8cd", "#fff5ed", "#fbf7f4");
   } else if (quarter === "quarter4") {
     setColorProperty("#6b8396", "#e0eaf3", "#d0dbe5", "#e6f1fb", "#f8fcff");
-  }
+  } 
 }
 
 function App() {

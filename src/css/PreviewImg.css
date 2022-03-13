@@ -2,10 +2,7 @@
     display: flex;
     height: 100%;
     width: 100%;
-<<<<<<< HEAD
-=======
     top: 0;
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     z-index: 19;
     position: fixed;
     flex-direction: row;

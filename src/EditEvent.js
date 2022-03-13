@@ -4,11 +4,6 @@ import './css/EditEvent.css'
 import PreviewImg from './PreviewImg';
 
 function EditEvent(props) {
-<<<<<<< HEAD
-    let debugAPIURL = "";
-    // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
     const [eventData, setEventData] = useState();
     const [deleteReceiptList, SetDeleteReceiptList] = useState([]);
@@ -37,31 +32,8 @@ function EditEvent(props) {
         item[key] = value;
         item["totalAmount"] = item["price"] * item["amount"];
         setEventData(tempEditEventData);
-<<<<<<< HEAD
-        // var tempShowAllReceiptButton = [...showAllReceiptButton];
-        // tempShowAllReceiptButton[i] = true;
-        // console.log(tempShowAllReceiptButton);
-        // setShowAllReceiptButton(tempShowAllReceiptButton);
     }
 
-    // function eventDeleteButton() {
-    //     axios.delete(debugAPIURL + '/event?event-number=' + eventData["eventNumber"])
-    //         .then((payload) => {
-    //             switch (payload.status) {
-    //                 case 200:
-    //                     alert("행사 장부가 삭제되었습니다.");
-    //                     break;
-    //                 default: break;
-    //             }
-    //         }).catch((error) => {
-    //             alert("장부를 삭제하는데 실패했습니다.");
-    //         })
-    // }
-
-=======
-    }
-
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     function processImage(file) {
         if (file != null) {
             const imageFile = file;
@@ -139,12 +111,6 @@ function EditEvent(props) {
     function uploadImg(img, j) {
         let tempEditEventData = { ...eventData };
         tempEditEventData["receiptList"][j]["receiptImg"] = img;
-<<<<<<< HEAD
-        // console.log(tempEditEventData["receiptList"][j]["receiptImg"]);
-        // console.log(tempEditEventData["receiptList"][j]["receiptImg"]["name"]);
-
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
         setEventData(tempEditEventData);
     }
@@ -243,18 +209,10 @@ function EditEvent(props) {
 
     }
 
-<<<<<<< HEAD
-    function postReceipt(j) {
-
-        let payload = new FormData();
-
-        let receiptData = eventData["receiptList"][j];
-=======
     async function postReceipt(receiptData) {
 
         let payload = new FormData();
 
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
         if (!receiptData["receiptImg"]["name"].includes("./static/receiptImg/")) {
             payload.append("receiptImgFile", receiptData["receiptImg"])
@@ -271,42 +229,11 @@ function EditEvent(props) {
             payload.append(`amount[${i}]`, receiptData["receiptDetailList"][i]["amount"]);
         }
 
-<<<<<<< HEAD
-        let promise = new Promise((resolve, reject) => {
-            axios.post(debugAPIURL + "/receipt", payload,
-=======
            const Axios = await axios.post( "/receipt", payload,
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }
             )
-<<<<<<< HEAD
-                .then((payload) => {
-                    resolve("영수증 추가 완료")
-                })
-                .catch((error) => {
-                    reject(`영수증 추가를 실패하였습니다. error: ${error.response.status}`)
-                })
-        })
-
-        promise
-            .then(value => {
-            })
-            .catch((value => {
-                alert(value)
-                setEditState(false)
-            }))
-
-    }
-
-    function putReceipt(j) {
-
-        let payload = new FormData();
-        let receiptData = eventData["receiptList"][j];
-
-
-=======
 
      return Axios;
 
@@ -315,17 +242,11 @@ function EditEvent(props) {
     async function putReceipt(receiptData) {
 
         let payload = new FormData();
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
         if (!receiptData["receiptImg"]["name"].includes("./static/receiptImg/")) {
             payload.append("receiptImgFile", receiptData["receiptImg"])
         }
 
-<<<<<<< HEAD
-        // payload.append("receiptImgPath", "./static/receiptImg/" + receiptData["receiptImg"]["name"])
-
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
         payload.append("receiptNumber", receiptData["receiptNumber"]);
         payload.append("receiptTitle", receiptData["receiptTitle"]);
         payload.append("receiptContext", receiptData["receiptContext"]);
@@ -336,63 +257,12 @@ function EditEvent(props) {
             payload.append(`amount[${i}]`, receiptData["receiptDetailList"][i]["amount"]);
         }
 
-<<<<<<< HEAD
-        let promise = new Promise((resolve, reject) => {
-            axios.put(debugAPIURL + "/receipt", payload,
-=======
 
         const Axios = await axios.put( "/receipt", payload,
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }
             )
-<<<<<<< HEAD
-                .then((payload) => {
-                    resolve("영수증 수정 완료")
-                })
-                .catch((error) => {
-                    reject(`영수증 수정을 실패하였습니다. error: ${error.response.status}`)
-                })
-        })
-
-        promise
-            .then(value => {
-            })
-            .catch((value => {
-                alert(value)
-                setEditState(false)
-            }))
-    }
-
-    function sendReciept() {
-
-        let promise = new Promise((resolve, reject) => {
-            eventData["receiptList"].map((receipt, j) => {
-                if (receipt["receiptNumber"] === undefined) {
-                    postReceipt(j);
-                } else {
-                    putReceipt(j);
-                }
-            })
-            resolve()
-        })
-
-        promise
-            .then(value => {
-                if (editState === true) {
-                    // alert("행사 수정 끗.")
-                    props.setEditEventState(false);
-                }
-                else if (editState === false) alert("행사 수정을 실패했습니다.")
-            })
-            .catch((value => {
-                if (editState === true) props.setEditEventState(false);
-                else if (editState === false) alert("행사 수정을 실패했습니다.")
-            }))
-    }
-
-=======
 
          return Axios;
     }
@@ -425,7 +295,6 @@ function EditEvent(props) {
 
 
 
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     function CalculateCurrentQuarterReceiptSumList(eventList) {
         let amountReceipt = 0;
         if (eventData !== undefined) {
@@ -466,10 +335,6 @@ function EditEvent(props) {
                                         <div style={{ width: "230px" }}>
                                             <div className="eventTitle">
                                                 <h4>
-<<<<<<< HEAD
-
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                     <input type="text" style={{ border: "transparent", textAlign: "left", width: "400px" }} maxLength="25"
                                                         placeholder={"행사 제목을 입력하세요"}
                                                         value={eventData["eventTitle"]}
@@ -608,11 +473,7 @@ function EditEvent(props) {
                                                                                                             <td style={{ width: "90px" }}>
 
                                                                                                                 <input type="text" style={{ border: "transparent", textAlign: "center", width: "90px" }}
-<<<<<<< HEAD
-                                                                                                                    placeholder={"가격"}
-=======
                                                                                                                     placeholder={"단가"}
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                                                                     value={item["price"]}
                                                                                                                     onInput={
                                                                                                                         (e) => {
@@ -623,11 +484,7 @@ function EditEvent(props) {
 
                                                                                                             <td style={{ width: "90px" }}>
                                                                                                                 <input type="text" style={{ border: "transparent", textAlign: "center", width: "90px" }}
-<<<<<<< HEAD
-                                                                                                                    placeholder={"단가"}
-=======
                                                                                                                     placeholder={"수량"}
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                                                                     value={item["amount"]}
                                                                                                                     onInput={
                                                                                                                         (e) => {
@@ -637,13 +494,9 @@ function EditEvent(props) {
                                                                                                             </td>
 
                                                                                                             <td style={{ width: "90px", textAlign: "center" }}>
-<<<<<<< HEAD
-                                                                                                                {item["totalAmount"]}
-=======
                                                                                                                 <input  type="text" style={{ border: "transparent", textAlign: "center", width: "90px" }}
                                                                                                                 placeholder={"가격"}
                                                                                                                 value={item["totalAmount"]} readOnly></input>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                                                             </td>
                                                                                                         </tr>)
                                                                                                 })

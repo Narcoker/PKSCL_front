@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-QuarterDate({ ...answerDate });
-                 let quarter = ["quarter1","quarter2","quarter3","quarter4"]
-                    quarter.map((quarterName)=>{
-                        answerDate[quarterName].map((date,i)=>{
-                        if(date.substr(0,4)=== "1111"){
-                        let tempAnswerDate = { ...answerDate };
-                        tempAnswerDate[quarterName][i] = "";
-                        setQuarterDate({ ...tempAnswerDate });
-                    }
-                })
-                 })
-=======
 ("president")
                 setStudentPresident({ ...answer["studentPresident"] });
                 setQuarter({ ...answer["quarter"] });
@@ -36,4 +23,3 @@ QuarterDate({ ...answerDate });
                 })
                 setWrongApproach(false)
                 setEditProfileB
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43

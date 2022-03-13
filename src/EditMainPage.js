@@ -4,10 +4,6 @@ import quarter1 from './img/quarter1.png';
 import quarter2 from './img/quarter2.png';
 import quarter3 from './img/quarter3.png';
 import quarter4 from './img/quarter4.png';
-<<<<<<< HEAD
-import receiptImg from './img/receipt.png';
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 import EditProfile from './EditProfile';
 import './css/EditMainPage.css';
 import { useEffect, useState } from 'react';
@@ -25,27 +21,9 @@ import PreviewImg from './PreviewImg';
 function EditMainPage(props) {
     const [list, setList] = useState([]);
 
-<<<<<<< HEAD
-    let debugAPIURL = "";
-    // debugAPIURL = "https://cors-jhs.herokuapp.com/https://pkscl.kro.kr";
-
     const history = useHistory();
     const el = useRef();
 
-    let answer = { "studentPresident": { "major": "기린학과", "name": "이가은", "phoneNumber": "010-5792-5915", "email": "cherisher20@pukyong.ac.kr", "majorLogo": "./static/majorLogo/testlogo.jpg" }, "quarter": { "quarter1": { "status": "true", "eventList": [{ "eventNumber": "164", "eventTitle": "기린학과 임시 장부임~~~~", "eventContext": "우헤헤 기린학과엔 기린이 몇마리일기린?", "receiptList": [{ "receiptNumber": "177", "receiptTitle": "기린기린기린", "receiptImg": { "name": "./static/receiptImg/defaultReceiptImg.jpg" }, "receiptContext": "기린 퀴즈", "receiptDetailList": [{ "context": "다리", "price": "4", "amount": "3", "totalAmount": "12" }, { "context": "심장", "price": "1", "amount": "3", "totalAmount": "3" }, { "context": "꼬리", "price": "1", "amount": "3", "totalAmount": "3" }] }] }] }, "quarter2": { "status": "true" }, "quarter3": { "status": "true", "eventList": [{ "eventNumber": "170", "eventTitle": "기린의 목덜미", "eventContext": "", "receiptList": [{ "receiptNumber": "180", "receiptTitle": "", "receiptImg": { "name": "./static/receiptImg/defaultReceiptImg.jpg" }, "receiptContext": "", "receiptDetailList": [{ "context": "", "price": "", "amount": "", "totalAmount": "" }] }] }] }, "quarter4": { "status": "true" } } }
-
-    let answerDate = {
-        "quarter1": ["1111-01-01", "1111-01-02"],
-        "quarter2": ["1111-01-03", "1111-01-04"],
-        "quarter3": ["1111-01-05", "1111-01-06"],
-        "quarter4": ["1111-01-07", "1111-01-08"]
-    }
-
-=======
-    const history = useHistory();
-    const el = useRef();
-
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     const [studentPresident, setStudentPresident] = useState();
 
     const [quarter, setQuarter] = useState();
@@ -74,18 +52,11 @@ function EditMainPage(props) {
 
     const [tempQuarter, setTempQuarter] = useState(false);
     const [showCurrentQuerter, setShowCurrentQuerter] = useState();
-<<<<<<< HEAD
-
-    function getLedger() {
-        let resetArray = [];
-        axios.get(debugAPIURL + '/major-info')
-=======
     const [userStatus,setUserStatus] = useState();
 
     function getLedger() {
         let resetArray = [];
         axios.get( '/major-info')
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             .then((payload) => {
                 setStudentPresident({ ...payload.data["studentPresident"] });
                 setQuarter({ ...payload.data["quarter"] });
@@ -100,11 +71,7 @@ function EditMainPage(props) {
                 setEditProfileButton(false)
                 setLogoImgPath(`./img/${currentQuarter}.png`);
                 CalculateCurrentQuarterReceiptSumList([...payload.data["quarter"][currentQuarter]["eventList"]]);
-<<<<<<< HEAD
-                setList([...payload.data["quarter"][quarterData]["eventList"]]);
-=======
                 setList([...payload.data["quarter"][currentQuarter]["eventList"]]);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 resetShowAllReceiptButton();
                 defineColor(currentQuarter);
             })
@@ -114,33 +81,6 @@ function EditMainPage(props) {
                         setWrongApproachContext("장부를 열람할 권한이 없습니다.");
                         setWrongApproach(true)
                         setEditProfileButton(false)
-<<<<<<< HEAD
-                        defineColor(props.todayQuarter);
-                        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-                        break;
-                    default:
-                        setWrongApproachContext("서버 오류가 발생했습니다.");
-                        setWrongApproach(true)
-                        defineColor(props.todayQuarter);
-                        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-                        setEditProfileButton(false)
-                        break;
-                }
-                //지우기
-                // setStudentPresident({ ...answer["studentPresident"] });
-                // setQuarter({ ...answer["quarter"] });
-                // for (let i = 0; i < answer["quarter"][currentQuarter]["eventList"].length; i++) {
-                //     resetArray.push(false)
-                // }
-                // GetDate();
-                // setShowAllReceiptButton(resetArray);
-                // setList([...answer["quarter"][currentQuarter]["eventList"]]);
-                // defineColor(currentQuarter);
-                // setLogoImgPath(`./img/${currentQuarter}.png`);
-                // setWrongApproach(false)
-                // setEditProfileButton(false)
-                //
-=======
                         setLogoImgPath(`./img/${props.todayQuarter}.png`);
                         defineColor(props.todayQuarter);
                         break;
@@ -152,7 +92,6 @@ function EditMainPage(props) {
                         defineColor(props.todayQuarter);
                         break;
                 }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             })
     }
 
@@ -174,33 +113,12 @@ function EditMainPage(props) {
                 resetShowAllReceiptButton();
             }
         }
-<<<<<<< HEAD
-        else {
-            console.log("quarter === undefined");
-        }
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
     }
 
     function showQuarter(selectedQuarter) {
         if (userLoginPosition === "student" || userLoginPosition === "president") {
             if (quarter[selectedQuarter]["status"] === "true") {
                 setQuarterAmount(0)
-<<<<<<< HEAD
-                setCurrentQuarter(selectedQuarter);
-                defineColor(selectedQuarter);
-                setLogoImgPath(`./img/${selectedQuarter}.png`);
-
-            } else {
-                setQuarterAmount(0)
-                setCurrentQuarter(selectedQuarter);
-                defineColor(selectedQuarter);
-                setLogoImgPath(`./img/${selectedQuarter}.png`);
-
-            }
-        } else {
-            setQuarterAmount(0)
-=======
                 reset(selectedQuarter);
                 setCurrentQuarter(selectedQuarter);
                 defineColor(selectedQuarter);
@@ -215,7 +133,6 @@ function EditMainPage(props) {
         } else {
             setQuarterAmount(0)
             reset(selectedQuarter);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             setCurrentQuarter(selectedQuarter);
             setLogoImgPath(`./img/${selectedQuarter}.png`);
             defineColor(selectedQuarter);
@@ -270,13 +187,6 @@ function EditMainPage(props) {
         document.documentElement.style.setProperty("--color-leftPanel", colorLeftPanel);
         document.documentElement.style.setProperty("--color-card", colorCard);
         document.documentElement.style.setProperty("--color-background", colorBackground);
-<<<<<<< HEAD
-    }
-
-    function defineColor(quarter) {
-        if (quarter === "quarter1") {
-            setColorProperty("#db8f8e", "#fdeded", "#f5dede", "#fff5ed", "#fbf6f6");
-=======
          document.documentElement.style.setProperty("--color-clickedButton", colorQuarter);
     }
 
@@ -284,7 +194,6 @@ function EditMainPage(props) {
         // alert("quarter : "+quarter)
         if (quarter === "quarter1") {
             setColorProperty("#db8f8e", "#fdeded", "#f5dede", "#FDEDF0", "#fbf6f6");
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
         } else if (quarter === "quarter2") {
             setColorProperty("#649d67", "#e9ede9", "#cedbcf", "#dee7df", "#f6f7f6");
         } else if (quarter === "quarter3") {
@@ -299,16 +208,10 @@ function EditMainPage(props) {
             .then((payload) => {
                 history.push('/');
             }).catch((error) => {
-<<<<<<< HEAD
-                alert("로그아웃에 실패하였습니다.");
-                getLedger();
-                GetDate();
-=======
                     switch (error.response.status) {
                     case 400:  alert("로그아웃에 실패하였습니다."); break;
                     default: alert("로그아웃 실패/ error: " + error.response.status);  break;
                 }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             })
     }
 
@@ -332,26 +235,6 @@ function EditMainPage(props) {
                 setEditProfileButton(false)
             })
             .catch((error) => {
-<<<<<<< HEAD
-                setWrongApproachContext("분기별 장부 open, close 날짜를 불러올 수 없습니다.");
-                setWrongApproach(true)
-                setEditProfileButton(false)
-                //지우기
-                // setQuarterDate({ ...answerDate });
-                // let quarter = ["quarter1", "quarter2", "quarter3", "quarter4"]
-                // quarter.map((quarterName) => {
-                //     answerDate[quarterName].map((date, i) => {
-                //         if (date.substr(0, 4) === "9999") {
-                //             let tempAnswerDate = { ...answerDate };
-                //             tempAnswerDate[quarterName][i] = "";
-                //             setQuarterDate({ ...tempAnswerDate });
-                //         }
-                //     })
-                // })
-                // setWrongApproach(false)
-                // setEditProfileButton(false)
-                //
-=======
                 switch (error.response.status) {
                     case 400: 
                         setWrongApproachContext("분기별 장부 open, close 날짜를 불러올 수 없습니다.");  
@@ -367,7 +250,6 @@ function EditMainPage(props) {
                         defineColor(props.todayQuarter); 
                     break;
                 }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             })
     }
 
@@ -377,28 +259,13 @@ function EditMainPage(props) {
             tempQuarter[currentQuarter]["eventList"].splice(index, 1);
 
             const payload = { "eventNumber": eventNumber };
-<<<<<<< HEAD
-            axios.delete(debugAPIURL + '/event?event-number=' + eventNumber)
-                .then((payload) => {
-                    switch (payload.status) {
-                        case 200:
-                            // alert("행사 장부가 삭제되었습니다.");
-                            break;
-                    }
-=======
             axios.delete( '/event?event-number=' + eventNumber)
                 .then((payload) => {
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                     getLedger();
                     GetDate();
                     setWrongApproach(false);
                     setEditProfileButton(false);
                 }).catch((error) => {
-<<<<<<< HEAD
-                    setWrongApproachContext("장부를 삭제하는데 실패했습니다.");
-                    setWrongApproach(true)
-                    setEditProfileButton(false);
-=======
                     switch (error.response.status) {
                     case 400: 
                         setWrongApproachContext("장부를 삭제하는데 실패했습니다.");  
@@ -413,7 +280,6 @@ function EditMainPage(props) {
                         defineColor(props.todayQuarter); 
                     break;
                 }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 })
         } else {
             alert("삭제가 취소되었습니다.")
@@ -424,32 +290,11 @@ function EditMainPage(props) {
         let payload = { "quarter": currentQuarter }
 
         let promise = new Promise((resolve, reject) => {
-<<<<<<< HEAD
-            axios.post(debugAPIURL + "/event", payload)
-=======
             axios.post( "/event", payload)
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 .then((payload) => {
                     resolve("장부를 추가하였습니다.");
                 })
                 .catch((error) => {
-<<<<<<< HEAD
-                    reject("장부 추가에 실패했습니다. code: " + error.response.status)
-                });
-        })
-
-        promise
-            .then(value => {
-                getLedger();
-
-                GetDate();
-            })
-            .catch((value => {
-                alert(value)
-                getLedger();
-
-                GetDate();
-=======
                     reject("장부 추가에 실패했습니다. " + error.response.status)
                 });
         })
@@ -465,7 +310,6 @@ function EditMainPage(props) {
                 setWrongApproach(true)
                 setEditProfileButton(false);
                 defineColor(props.todayQuarter);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             }))
     }
 
@@ -490,20 +334,12 @@ function EditMainPage(props) {
         }
 
         let promise = new Promise((resolve, reject) => {
-<<<<<<< HEAD
-            axios.put(debugAPIURL + '/ledger-date', payload)
-=======
             axios.put( '/ledger-date', payload)
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 .then((payload) => {
                     resolve("장부 공개일이 변경되었습니다.");
 
                 }).catch((error) => {
-<<<<<<< HEAD
-                    reject("장부 공개일 변경 실패");
-=======
                     reject("장부 공개일 변경에 실패하였습니다." + error.response.status)
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 })
         })
 
@@ -512,15 +348,10 @@ function EditMainPage(props) {
                 GetDate();
             })
             .catch((value => {
-<<<<<<< HEAD
-                alert(value)
-                GetDate();
-=======
                 setWrongApproachContext(value);
                 setWrongApproach(true)
                 setEditProfileButton(false);
                 defineColor(props.todayQuarter);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             }))
     }
 
@@ -545,19 +376,11 @@ function EditMainPage(props) {
         let payload = { "eventNumberList": [...eventNumberList] };
 
         let promise = new Promise((resolve, reject) => {
-<<<<<<< HEAD
-            axios.patch(debugAPIURL + '/event-sequence', payload)
-                .then((payload) => {
-                    resolve("행사 순서가 수정되었습니다.");
-                }).catch((error) => {
-                    reject(error.response.data["errorMessage"]);
-=======
             axios.patch( '/event-sequence', payload)
                 .then((payload) => {
                     resolve("행사 순서가 수정되었습니다.");
                 }).catch((error) => {
                     reject("행사 순서가 수정에 실패했습니다. "+error.response.data["errorMessage"]);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 })
         })
 
@@ -567,15 +390,10 @@ function EditMainPage(props) {
                 GetDate();
             })
             .catch((value => {
-<<<<<<< HEAD
-                getLedger();
-                GetDate();
-=======
                 setWrongApproachContext(value);
                 setWrongApproach(true)
                 setEditProfileButton(false);
                 defineColor(props.todayQuarter);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             }))
 
     }
@@ -588,47 +406,28 @@ function EditMainPage(props) {
                     setWrongApproachContext("잘못된 접근입니다.");
                     setWrongApproach(true)
                     setEditProfileButton(false);
-<<<<<<< HEAD
-=======
                     defineColor(props.todayQuarter);
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 }
                 else if (payload.data["position"] === "president") {
                     axios.get('/status')
                         .then((payload) => {
+                            setUserStatus(payload.data["status"])
                             if (payload.data["status"] === "refusal") {
                                 setWrongApproachContext("사용자(학생회장)은 현재 거절 상태입니다. PKSCL 챗봇을 통해 회장 신청을 다시 진행해 주십시오.")
                                 setWrongApproach(true)
                                 setEditProfileButton(true);
-<<<<<<< HEAD
-=======
                                 defineColor(props.todayQuarter);
-                                setUserStatus(payload.data["status"])
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                             }
                             else if (payload.data["status"] === "waiting") {
                                 setWrongApproachContext("사용자(학생회장)은 현재 대기 상태입니다. PKSCL 챗봇을 통해 회장 인증을 해주세요 :)");
                                 setWrongApproach(true)
                                 setEditProfileButton(true);
-<<<<<<< HEAD
-=======
                                 defineColor(props.todayQuarter);
-                                setUserStatus(payload.data["status"])
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                             } else if (payload.data["status"] === "approval") {
                                 getLedger();
                                 GetDate();
                                 setWrongApproach(false)
                                 setEditProfileButton(false);
-<<<<<<< HEAD
-                            }
-                        })
-                        .catch((error) => {
-                            setWrongApproachContext("잘못된 접근입니다.");
-                            setWrongApproach(true)
-                            setEditProfileButton(false);
-=======
-                                setUserStatus(payload.data["status"])
                             }
                         })
                         .catch((error) => {
@@ -647,16 +446,10 @@ function EditMainPage(props) {
                                     defineColor(props.todayQuarter); 
                                 break;
                             }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                         })
                 }
             })
             .catch((error) => {
-<<<<<<< HEAD
-                setWrongApproachContext(`사용자의 승인 상태를 알 수 없습니다.`);
-                setWrongApproach(true)
-                setEditProfileButton(false);
-=======
                 switch (error.response.status) {
                     case 400: 
                         setWrongApproachContext(`잘못된 접근입니다.`);
@@ -672,16 +465,11 @@ function EditMainPage(props) {
                         defineColor(props.todayQuarter); 
                     break;
                 }
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             })
 
     }
     function getExPKSCL() {
-<<<<<<< HEAD
-        axios.get(debugAPIURL + '/temp-major-info')
-=======
         axios.get( '/temp-major-info')
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
             .then((payload) => {
                 setWrongApproach(false)
                 setEditProfileButton(false);
@@ -691,30 +479,6 @@ function EditMainPage(props) {
                 defineColor(props.todayQuarter);
             })
             .catch((error) => {
-<<<<<<< HEAD
-                setWrongApproachContext(`임시 장부를 불러올 수 없습니다.`);
-                // setWrongApproach(true)
-                // setEditProfileButton(false);
-            })
-
-    }
-
-    useEffect(() => {
-        // push 시 주석 삭제
-        getUserStatus();
-        reset(props.todayQuarter);
-        defineColor(props.todayQuarter);
-        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-
-        //push 시 주석
-        // getLedger(); GetDate();
-
-
-    }, []);
-
-    useEffect(() => {
-        // push 시 주석 삭제
-=======
                 switch (error.response.status) {
                 case 400: alert(`임시 장부를 불러올 수 없습니다.`); break;
                 default: alert("임시 장부 로드 실패/ error: " + error.response.status); break;
@@ -762,7 +526,6 @@ function EditMainPage(props) {
 
     useEffect(() => {
         // push 할때 주석 삭제
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
         if (editEventState === false) {
             getUserStatus();
             reset(currentQuarter);
@@ -794,30 +557,6 @@ function EditMainPage(props) {
 
     return (
         <>
-<<<<<<< HEAD
-            {wrongApproach === true
-                ? (<>
-                    {
-                        editProfileState
-                            ?
-                            <EditProfile loginPosition={userLoginPosition} setEditProfileState={setEditProfileState}></EditProfile>
-                            : null
-                    }
-                    <div className="nav" style={{ justifyContent: "space-between" }}>
-                        <div className="logoNav">
-                            <img src={logoImgPath} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
-                            <div style={{ marginLeft: "5px", fontSize: "25px" }}>PKSCL</div>
-                        </div>
-                        {
-                            editProfileButton === true
-                                ? (<div style={{ display: "flex", alignItems: "center" }}>
-                                    <i class="fas fa-user" onClick={() => { setEditProfileState(true); }} style={{ fontSize: "20px", marginRight: "10px" }}></i>
-                                    <i class="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_hxnlXb") }}></i>
-                                    <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
-                                </div>)
-                                : (<div style={{ display: "flex" }}>
-                                    <button className='submitButton' type='button' onClick={() => { history.push('/'); }}>로그인</button>
-=======
         {
             defineColor(currentQuarter)
         }
@@ -826,7 +565,7 @@ function EditMainPage(props) {
                     {
                         editProfileState
                             ?
-                            <EditProfile userStatus={userStatus} loginPosition={userLoginPosition} setEditProfileState={setEditProfileState}></EditProfile>
+                            <EditProfile loginPosition={userLoginPosition} setEditProfileState={setEditProfileState}></EditProfile>
                             : null
                     }
                     <div className="nav" >
@@ -843,7 +582,6 @@ function EditMainPage(props) {
                                 </div>)
                                 : (<div className="buttonNav">
                                     <button className='navButton' type='button' onClick={() => { history.push('/'); }}>로그인</button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                 </div>)
                         }
                     </div>
@@ -854,13 +592,8 @@ function EditMainPage(props) {
                             장부의 예시를 보고싶다면 기린을 눌러주세요 :)
                             <img onClick={() => { getExPKSCL() }} src={giraffe} className="giraffe" alt="기린"
                                 style={{ width: "70px", height: "70px", marginLeft: "20px" }} />
-<<<<<<< HEAD
-                            <a href="http://pf.kakao.com/_hxnlXb" target="_blank" rel="noreferrer" title="챗봇으로 연결됩니다." style={{ color: "black" }}>PKSCL 문의하기</a>
-                        </div></div></>)
-=======
                             <a href="http://pf.kakao.com/_tRxcJb " target="_blank" rel="noreferrer" title="챗봇으로 연결됩니다." style={{ color: "black" }}>PKSCL 문의하기</a>
                         </div></div></div>)
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                 : (
                     <div className="EditMainPageContainer">
                         {
@@ -871,11 +604,7 @@ function EditMainPage(props) {
                         {
                             editProfileState
                                 ?
-<<<<<<< HEAD
                                 <EditProfile loginPosition={userLoginPosition} setEditProfileState={setEditProfileState}></EditProfile>
-=======
-                                <EditProfile userStatus={userStatus} loginPosition={userLoginPosition} setEditProfileState={setEditProfileState}></EditProfile>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                 : null
                         }
                         {
@@ -893,34 +622,17 @@ function EditMainPage(props) {
                                 : (<>
                                     <div className="leftPanel" id='leftPanel'>
                                         <div className="quarter">
-<<<<<<< HEAD
-                                            <div className="quarterButton" style={{ marginTop: "50px" }} onClick={() => { setList(quarter["quarter1"]["eventList"]); showQuarter("quarter1"); window.scrollTo(0, 0); }}><div>1분기</div><img src={quarter1} alt="quarter1" ></img></div>
-                                            <div className="quarterButton" onClick={() => { setList(quarter["quarter2"]["eventList"]); showQuarter("quarter2"); window.scrollTo(0, 0); }}><div>2분기</div><img src={quarter2} alt="quarter2" ></img></div>
-                                            <div className="quarterButton" onClick={() => { setList(quarter["quarter3"]["eventList"]); showQuarter("quarter3"); window.scrollTo(0, 0); }}><div>3분기</div><img src={quarter3} alt="quarter3" ></img></div>
-                                            <div className="quarterButton" onClick={() => { setList(quarter["quarter4"]["eventList"]); showQuarter("quarter4"); window.scrollTo(0, 0); }}><div>4분기</div><img src={quarter4} alt="quarter4" ></img></div>
-=======
                                             <div className="quarterButton" onClick={() => { showQuarter("quarter1") }}><div>1분기</div><img src={quarter1} alt="quarter1" ></img></div>
                                             <div className="quarterButton" onClick={() => { showQuarter("quarter2") }}><div>2분기</div><img src={quarter2} alt="quarter2" ></img></div>
                                             <div className="quarterButton" onClick={() => { showQuarter("quarter3") }}><div>3분기</div><img src={quarter3} alt="quarter3" ></img></div>
                                             <div className="quarterButton" onClick={() => { showQuarter("quarter4") }}><div>4분기</div><img src={quarter4} alt="quarter4" ></img></div>
                                       
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                         </div>
 
                                     </div>
                                     <div className="rightPanel">
                                         <div className="nav">
 
-<<<<<<< HEAD
-                                            <div className="buttons">
-                                                <div className="logoNav">
-                                                    <img src={logoImgPath} alt="logo" style={{ marginLeft: "30px" }} width={"40px"} height={"40px"} />
-                                                    <div style={{ marginLeft: "5px", fontSize: "25px" }}>PKSCL</div>
-                                                </div>
-                                                <div className="PCVersion" style={{ display: "flex" }}>
-                                                    <button className='submitButton' type='button' onClick={() => { defineColor(props.todayQuarter); history.push('/manage') }}>학생 관리</button>
-                                                    <button className='submitButton' type='button' onClick={() => { history.push('/main') }}>학생 공개용 장부</button>
-=======
                                                 <div className="logoNav" onClick={()=>{history.push('/main')}}>
                                                     <img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />
                                                     <div className="PksclNav">PKSCL</div>
@@ -929,7 +641,6 @@ function EditMainPage(props) {
                                                     <button className='navButton' type='button' onClick={() => { defineColor(props.todayQuarter); history.push('/manage') }}>학생 관리</button>
                                                     <button className='navButton' type='button' 
                                                     onClick={() => { history.push('/main') }}>학생 공개용 장부</button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                 </div>
 
                                                 {
@@ -950,10 +661,6 @@ function EditMainPage(props) {
                                                                     onChange={(e) => {
                                                                         let tempDateArray = { ...quarterDate }
                                                                         tempDateArray[currentQuarter][1] = e.target.value;
-<<<<<<< HEAD
-
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                         putLedgerDate();
 
                                                                     }}
@@ -962,17 +669,6 @@ function EditMainPage(props) {
                                                         : null
                                                 }
                                                 <div style={{ display: "flex", alignItems: "center" }}>
-<<<<<<< HEAD
-                                                    <i class="fas fa-user" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { setEditProfileState(true); }}></i>
-                                                    <i class="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_hxnlXb") }}></i>
-                                                    <button className='submitButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="mobileVersion"> PKSCL 장부 수정은 PC로만 가능합니다.
-                                            <div style={{ display: "flex" }}>
-                                                <button className='submitButton' style={{ width: "25vw" }} type='button' onClick={() => { history.push('/main') }}>학생 공개용 장부</button>
-=======
                                                     <i className="fas fa-user" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { setEditProfileState(true); }}></i>
                                                     <i className="fas fa-headset" style={{ fontSize: "20px", marginRight: "10px" }} onClick={() => { window.open("http://pf.kakao.com/_tRxcJb ") }}></i>
                                                     <button className='navButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
@@ -982,7 +678,6 @@ function EditMainPage(props) {
                                             <div style={{ display: "flex" }}>
                                                 <button className='submitButton' style={{ width: "25vw" }} type='button' 
                                                 onClick={() => { history.push('/main') }}>학생 공개용 장부</button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                             </div>
                                         </div>
 
@@ -1014,20 +709,12 @@ function EditMainPage(props) {
                                                                                     <button onClick={() => {
                                                                                         eventDeleteButton(event["eventNumber"], i);
                                                                                     }} style={{ marginRight: "15px" }}>
-<<<<<<< HEAD
-                                                                                        <i class="far fa-trash-alt"></i></button>
-=======
                                                                                         <i className="far fa-trash-alt"></i></button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                                     <button onClick={() => {
                                                                                         setEditEventState(true)
                                                                                         setEditEventData(quarter[currentQuarter]["eventList"][i]);
                                                                                         setEditEventAmount(eventAmount[i]);
-<<<<<<< HEAD
-                                                                                    }} style={{ marginRight: "15px" }}><i class="fas fa-wrench"></i></button>
-=======
                                                                                     }} style={{ marginRight: "15px" }}><i className="fas fa-wrench"></i></button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
                                                                                     {
                                                                                         event.receiptList.length <= 1
@@ -1039,22 +726,14 @@ function EditMainPage(props) {
                                                                                                             let array = [...showAllReceiptButton];
                                                                                                             array[i] = !showAllReceiptButton[i];
                                                                                                             setShowAllReceiptButton(array);
-<<<<<<< HEAD
-                                                                                                        }}><i class="fas fa-angle-double-up"></i></button>
-=======
                                                                                                         }}><i className="fas fa-angle-double-up"></i></button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                                                     )
                                                                                                     : (
                                                                                                         <button onClick={() => {
                                                                                                             let array = [...showAllReceiptButton];
                                                                                                             array[i] = !showAllReceiptButton[i];
                                                                                                             setShowAllReceiptButton(array);
-<<<<<<< HEAD
-                                                                                                        }}><i class="fas fa-angle-double-down"></i></button>
-=======
                                                                                                         }}><i className="fas fa-angle-double-down"></i></button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                                                     )
                                                                                             )
 
@@ -1107,35 +786,19 @@ function EditMainPage(props) {
                                                                                                                                     <tr key={k}>
                                                                                                                                         <td>
                                                                                                                                             <span type="text" style={{ border: "transparent", textAlign: "center" }} >{item["context"]}</span>
-<<<<<<< HEAD
-
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                                                                                         </td>
 
                                                                                                                                         <td>
                                                                                                                                             <span type="text" style={{ border: "transparent", textAlign: "center" }} >{item["price"]}</span>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                                                                                         </td>
 
                                                                                                                                         <td>
                                                                                                                                             <span type="text" style={{ border: "transparent", textAlign: "center" }} >{item["amount"]}</span>
-<<<<<<< HEAD
-
-
-                                                                                                                                        </td>
-                                                                                                                                        <td>{item["totalAmount"]}</td>
-=======
                                                                                                                                         </td>
 
                                                                                                                                         <td>
                                                                                                                                             <span type="text" style={{ border: "transparent", textAlign: "center" }} >{item["totalAmount"]}</span>
                                                                                                                                         </td>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                                                                                     </tr>
                                                                                                                                 )
                                                                                                                             }
@@ -1186,15 +849,8 @@ function EditMainPage(props) {
                                                                                                                                         {j + 1}번째 영수증 금액 : {sumReceipt(receipt["receiptDetailList"])}원
                                                                                                                                     </div>)
                                                                                                                             }
-<<<<<<< HEAD
-
-
-                                                                                                                        </div>
-                                                                                                                        <div style={{ width: "400px", textAlign: "right" }}>{event["receiptList"][0]["receiptContext"]}</div>
-=======
                                                                                                                         </div>
                                                                                                                         <div style={{ width: "400px", textAlign: "right" }}>{event["receiptList"][j]["receiptContext"]}</div>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
 
                                                                                                                         {
                                                                                                                             receipt["receiptDetailList"].length === 0
@@ -1248,18 +904,10 @@ function EditMainPage(props) {
                                                                                                                     </>)}
                                                                                                         </div>
 
-<<<<<<< HEAD
-                                                                                                        <img src={processImage(event["receiptList"][j]["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
-                                                                                                            alt={processImage(event["receiptList"][j]["receiptImg"])} height={"150"} width={"100"}
-                                                                                                            className="receiptImg"
-                                                                                                            onClick={() => { setShowImg(true); setPreviewImg(processImage(event["receiptList"][0]["receiptImg"])); }} />
-
-=======
                                                                                                         <img src={processImage(receipt["receiptImg"])} style={{ backgroundColor: "var(--color-leftPanel)" }}
                                                                                                             alt={processImage(receipt["receiptImg"])} height={"150"} width={"100"}
                                                                                                             className="receiptImg"
                                                                                                             onClick={() => { setShowImg(true); setPreviewImg(processImage(receipt["receiptImg"])); }} />
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                                                                     </div>
 
                                                                                                 )
@@ -1279,11 +927,7 @@ function EditMainPage(props) {
                                                     <div style={{ marginBottom: "40px", display: "flex", justifyContent: "center" }}>
                                                         <button className="editButton" onClick={() => {
                                                             eventAddButton(currentQuarter);
-<<<<<<< HEAD
-                                                        }} > <i class="fas fa-plus"></i> </button>
-=======
                                                         }} > <i className="fas fa-plus"></i> </button>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                     </div>
 
 
@@ -1312,11 +956,7 @@ function EditMainPage(props) {
                                                                             </div>
                                                                         }
                                                                     </>
-<<<<<<< HEAD
-                                                                    : <span>등록된 행사가 없습니다.</span>
-=======
                                                                     : <span style={{ marginBottom: "5px"}}>등록된 행사가 없습니다.</span>
->>>>>>> 3e1a58410fc1ebb0a9aeda3f832837a964be3d43
                                                             }
 
                                                             <div style={{ color: "#d32c2c" }}>
