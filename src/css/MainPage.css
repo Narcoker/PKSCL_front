@@ -1,7 +1,7 @@
 .MainPageContainer {
     /* font-family: "OTWelcomeRA"; */
     /* font-family: "Work Sans"; */
-    font-family: "Malgun Gothic";
+    font-family: "Malgun Gothic", "sans-serif";
     font-weight: bold;
     display: flex;
     flex-direction: row;
