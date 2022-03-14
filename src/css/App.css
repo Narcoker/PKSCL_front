@@ -62,7 +62,7 @@ input {
     /* font-family: 'Malgun gothic', sans-serif !important; */
     /* font-family: "Work Sans"; */
     font-weight: bold;
-    font-family: auto;
+   
 }
 
 .receiptImg:hover {
@@ -88,7 +88,7 @@ i:hover {
     flex-direction: column;
     height: 80vh;
     justify-content: center;
-    font-family: auto;
+    
 }
 
 .tempAlert {
@@ -100,7 +100,7 @@ i:hover {
     font-size: 20px;
     /* font-family: "Work Sans"; */
     font-weight: bold;
-    font-family: auto;
+    
 }
 
 .mobileVersion {
