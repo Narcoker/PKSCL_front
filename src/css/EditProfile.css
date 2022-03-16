@@ -4,6 +4,7 @@ h2 {
 
 .editProfileContainer {
     /* position: absolute; */
+    font-family: 'Work Sans';
     display: flex;
     height: 100%;
     width: 100%;
@@ -83,7 +84,7 @@ h2 {
 
 .inputField [type=password] {
     /* font-family: 'Malgun gothic', dotum, sans-serif; */
-    font-family: "Work Sans", "sans-serif";
+    font-family: "Work Sans";
 
 }
 

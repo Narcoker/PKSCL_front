@@ -91,7 +91,7 @@ function AccessPage(props) {
               changeIsCorrect(6, false);
               break;
             case 502:
-              alert("학생증 첨부 파일의 용량이 초과되었습니다. 원활한 PKSCL 사용을 위해 이미지 용량을 10MB 이하로 변경해주세요."); break;
+                alert("학생증 첨부 파일의 용량이 초과되었습니다. 원활한 PKSCL 사용을 위해 이미지 용량을 10MB 이하로 변경해주세요."); break;
             default: alert("회원가입 실패/ error: " + error.response.status); break;
           }
         })
@@ -275,7 +275,7 @@ function AccessPage(props) {
 
 
         <div className="content">
-          <button type="button" style={{ boxShadow: "0 0 0 0 white", fontFamily: 'YUniverse-B' }} onClick={() => { setPosition("student"); reset(); history.push('/') }}>
+          <button type="button" style={{ boxShadow: "0 0 0 0 white" }} onClick={() => { setPosition("student"); reset(); history.push('/') }}>
             <div>
               <div className="PKSCLMainLogo" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <img src={logoImgPath} alt="logo" />

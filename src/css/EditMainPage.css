@@ -1,7 +1,6 @@
 .EditMainPageContainer {
     /* font-family: "OTWelcomeRA"; */
-    /* font-family: "Work Sans"; */
-    font-family: "Malgun Gothic", "sans-serif";
+    font-family: "Work Sans";
     font-weight: bold;
     display: flex;
     flex-direction: row;
