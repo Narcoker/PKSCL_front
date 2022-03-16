@@ -167,7 +167,7 @@ function AccessPage(props) {
       let payload = { "email": email };
       axios.post('/email/' + position, payload)
         .then((payload) => {
-          //   alert("입력하신 이메일로 메일을 발송했습니다.");
+            alert("입력하신 이메일로 메일을 발송했습니다.");
         })
         .catch((error) => {
           switch (error.response.status) {
@@ -287,8 +287,7 @@ function AccessPage(props) {
 
         </div>
         <img src={logo} className="image" alt="PKSCL logo" />
-        <button className="adminbutton PCVersion" type="button" onClick={() => { setPosition("admin"); reset(); history.push('/giraffe-admin') }}
-          style={{ height: "10px", width: "20px", backgroundColor: "ffffff00", boxShadow: "0px 0px 0px 0px grey" }}>
+        <button className="adminbutton PCVersion" type="button" onClick={() => { setPosition("admin"); reset(); history.push('/giraffe-admin') }}>
         </button>
       </div>
       <Switch>
