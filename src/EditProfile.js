@@ -717,7 +717,7 @@ function EditProfile(props) {
 
                                         <div className="inputField">
                                             <i className="fas fa-key" style={isCorrect["inputCheckNewPassword"] === true && inputNewPassword === inputCheckNewPassword ? { color: "var(--color-quarter)" } : null}></i>
-                                            <label  >새 비밀번호 확인</label>
+                                            <label>비밀번호 확인</label>
                                             <div style={{ width: "70%" }}>
                                                 <input type="password" style={{ width: "100%" }} onChange={(e) => {
                                                     setInputCheckNewPassword(e.target.value)

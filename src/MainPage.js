@@ -46,8 +46,8 @@ function MainPage(props) {
     const [editProfileButton, setEditProfileButton] = useState(true);
 
     const [userLoginPosition, setUserLoginPosition] = useState();
-    const [alertContainer, setAlertContainer] = useState(false);
-    const [userStatus, setUserStatus] = useState();
+    const [alertContainer,setAlertContainer] = useState(false);
+    const [userStatus,setUserStatus] = useState();
 
     function resetShowAllReceiptButton() {
         let resetArray = [];
@@ -63,7 +63,7 @@ function MainPage(props) {
         if (quarter !== undefined && quarter[quarterData]["eventList"] !== undefined) {
             CalculateCurrentQuarterReceiptSumList(quarter[quarterData]["eventList"]);
             resetShowAllReceiptButton();
-        } else {
+        }else{
             setQuarterAmount(0);
         }
         window.scrollTo(0, 0);
@@ -154,19 +154,19 @@ function MainPage(props) {
     }
 
     function logout() {
-        axios.post('/logout')
+        axios.post(  '/logout')
             .then((payload) => {
                 history.push('/');
             }).catch((error) => {
                 switch (error.response.status) {
-                    case 400:
-                        alert("로그아웃에 실패했습니다.");
+                    case 400:  
+                        alert("로그아웃에 실패했습니다."); 
                         reload();
-                        break;
-                    default:
-                        alert("로그아웃 실패/ error: " + error.response.status);
+                    break;
+                    default: 
+                        alert("로그아웃 실패/ error: " + error.response.status); 
                         reload();
-                        break;
+                    break;
                 }
             })
     }
@@ -236,7 +236,7 @@ function MainPage(props) {
     }
 
     function getAdminLedger(findMajorIndex) {
-        axios.get(`/major-info/admin?major-number=${findMajorIndex}`)
+        axios.get(  `/major-info/admin?major-number=${findMajorIndex}`)
             .then((payload) => {
                 setStudentPresident({ ...payload.data["studentPresident"] });
                 setQuarter({ ...payload.data["quarter"] });
@@ -281,7 +281,7 @@ function MainPage(props) {
                     defineColor(props.todayQuarter);
                     setLogoImgPath(`./img/${props.todayQuarter}.png`);
                 } else {
-                    setWrongApproachContext(`${major}의 장부 open, close 날짜를 불러올 수 없습니다. error: ` + error.response.status)
+                    setWrongApproachContext(`${major}의 장부 open, close 날짜를 불러올 수 없습니다. error: `  + error.response.status)
                     setWrongApproach(true)
                     setEditProfileButton(false);
                     defineColor(props.todayQuarter);
@@ -291,7 +291,7 @@ function MainPage(props) {
     }
 
     function getExPKSCL() {
-        axios.get('/temp-major-info')
+        axios.get( '/temp-major-info')
             .then((payload) => {
                 setWrongApproach(false)
                 setEditProfileButton(false);
@@ -331,7 +331,7 @@ function MainPage(props) {
             .catch((error) => {
                 setWrongApproachContext("학과 리스트를 불러올 수 없습니다. error: " + error.response.status);
                 setWrongApproach(false)
-                setEditProfileButton(false);
+                setEditProfileButton(false); 
             })
     }
 
@@ -373,21 +373,21 @@ function MainPage(props) {
             })
             .catch((error) => {
                 switch (error.response.status) {
-                    case 400:
-                        setWrongApproachContext("학생회장의 승인 상태를 알 수 없습니다.");
-                        setEditProfileButton(false)
-                        setWrongApproach(true)
-                        defineColor(props.todayQuarter);
-                        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-                        break;
-                    default:
-                        setWrongApproachContext("학생회장의 상태 확인 실패/ error: " + error.response.status);
-                        setEditProfileButton(false)
-                        setWrongApproach(true)
-                        defineColor(props.todayQuarter);
-                        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-                        break;
-                }
+                case 400: 
+                    setWrongApproachContext("학생회장의 승인 상태를 알 수 없습니다.");  
+                    setEditProfileButton(false)
+                    setWrongApproach(true)
+                    defineColor(props.todayQuarter);
+                    setLogoImgPath(`./img/${props.todayQuarter}.png`); 
+                break;
+                default: 
+                    setWrongApproachContext("학생회장의 상태 확인 실패/ error: " + error.response.status); 
+                    setEditProfileButton(false)
+                    setWrongApproach(true)
+                    defineColor(props.todayQuarter);
+                    setLogoImgPath(`./img/${props.todayQuarter}.png`);
+                break;
+            }  
             })
 
 
@@ -410,7 +410,7 @@ function MainPage(props) {
                     setEditProfileButton(true);
                     defineColor(props.todayQuarter);
                 } else if (payload.data["status"] === "approval") {
-                    axios.get('/major-info')
+                    axios.get(  '/major-info')
                         .then((payload) => {
                             setStudentPresident({ ...payload.data["studentPresident"] });
                             setQuarter({ ...payload.data["quarter"] });
@@ -430,21 +430,21 @@ function MainPage(props) {
             })
             .catch((error) => {
                 switch (error.response.status) {
-                    case 400:
-                        setWrongApproachContext("학생의 승인 상태를 알 수 없습니다.");
-                        setEditProfileButton(false)
-                        setWrongApproach(true)
-                        defineColor(props.todayQuarter);
-                        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-                        break;
-                    default:
-                        setWrongApproachContext("학생의 상태 확인 실패/ error: " + error.response.status);
-                        setEditProfileButton(false)
-                        setWrongApproach(true)
-                        defineColor(props.todayQuarter);
-                        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-                        break;
-                }
+                case 400: 
+                    setWrongApproachContext("학생의 승인 상태를 알 수 없습니다.");  
+                    setEditProfileButton(false)
+                    setWrongApproach(true)
+                    defineColor(props.todayQuarter);
+                    setLogoImgPath(`./img/${props.todayQuarter}.png`); 
+                break;
+                default: 
+                    setWrongApproachContext("학생의 상태 확인 실패/ error: " + error.response.status); 
+                    setEditProfileButton(false)
+                    setWrongApproach(true)
+                    defineColor(props.todayQuarter);
+                    setLogoImgPath(`./img/${props.todayQuarter}.png`);
+                break;
+                }  
             })
         reset(props.todayQuarter);
         defineColor(props.todayQuarter);
@@ -474,15 +474,15 @@ function MainPage(props) {
             })
             .catch((error) => {
                 switch (error.response.status) {
-                    case 400:
-                        alert(`잘못된 접근입니다.`);
-                        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-                        break;
-                    default:
-                        alert("회원 position 로드 실패/ error: " + error.response.status);
-                        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-                        break;
-                }
+                case 400: 
+                    alert(`잘못된 접근입니다.`);
+                    setLogoImgPath(`./img/${props.todayQuarter}.png`); 
+                break;
+                default: 
+                    alert("회원 position 로드 실패/ error: " + error.response.status); 
+                    setLogoImgPath(`./img/${props.todayQuarter}.png`);
+                break;
+            }  
             })
     }
 
@@ -498,44 +498,44 @@ function MainPage(props) {
             })
             .catch((error) => {
                 switch (error.response.status) {
-                    case 400:
-                        setWrongApproachContext(`사용자의 Position을 알 수 없습니다.`);
-                        setWrongApproach(true)
-                        setEditProfileButton(false);
-                        defineColor(props.todayQuarter);
-                        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-                        break;
-                    default:
-                        setWrongApproachContext("회원 position 로드 실패/ error: " + error.response.status);
-                        setWrongApproach(true)
-                        setEditProfileButton(false);
-                        defineColor(props.todayQuarter);
-                        setLogoImgPath(`./img/${props.todayQuarter}.png`);
-                        break;
-                }
+                case 400: 
+                    setWrongApproachContext(`사용자의 Position을 알 수 없습니다.`);
+                    setWrongApproach(true)
+                    setEditProfileButton(false);
+                    defineColor(props.todayQuarter);
+                    setLogoImgPath(`./img/${props.todayQuarter}.png`);
+                break;
+                default:  
+                    setWrongApproachContext("회원 position 로드 실패/ error: " + error.response.status); 
+                    setWrongApproach(true)
+                    setEditProfileButton(false);
+                    defineColor(props.todayQuarter);
+                    setLogoImgPath(`./img/${props.todayQuarter}.png`);
+                break;
+            }  
             })
 
         // push 할때 주석 넣기
-        // let answer = {"studentPresident":{"major":"기린학과","name":"\b김기린","phoneNumber":"010-1234-5678","email":"cherisher20@pukyong.ac.kr","majorLogo":"./static/majorLogo/tempLogo.jpg"},"quarter":{"quarter1":{"status":"true","eventList":[{"eventNumber":"171","eventTitle":"빛축제 (일시 : 10/27~10/29)","eventContext":"[공과대]의 청춘을 비추다","receiptList":[{"receiptNumber":"181","receiptTitle":"추억의 뽑기판","receiptImg":{"name":"./static/receiptImg/20220228092500209.png"},"receiptContext":"공과대생 선착순 300명","receiptDetailList":[{"context":"LED 풍선","price":"500","amount":"100","totalAmount":"50000"},{"context":"LED 삔","price":"300","amount":"100","totalAmount":"30000"},{"context":"LED 반지","price":"450","amount":"100","totalAmount":"45000"}]}]},{"eventNumber":"164","eventTitle":"기린학과 임시 장부임~~~~","eventContext":"우헤헤 기린학과엔 기린이 몇마리일기린?","receiptList":[{"receiptNumber":"177","receiptTitle":"기린기린기린","receiptImg":{"name":"./static/receiptImg/20220216122414973.png"},"receiptContext":"기린 퀴즈","receiptDetailList":[{"context":"다리","price":"4","amount":"3","totalAmount":"12"},{"context":"심장","price":"1","amount":"3","totalAmount":"3"},{"context":"꼬리","price":"1","amount":"3","totalAmount":"3"}]}]}]},"quarter2":{"status":"true"},"quarter3":{"status":"true","eventList":[{"eventNumber":"170","eventTitle":"기린의 목덜미","eventContext":"","receiptList":[{"receiptNumber":"180","receiptTitle":"","receiptImg":{"name":"./static/receiptImg/defaultReceiptImg.jpg"},"receiptContext":"","receiptDetailList":[{"context":"ww","price":"11","amount":"22","totalAmount":"242"}]}]}]},"quarter4":{"status":"true"}}}
-        // let answerDate = {
-        //     "quarter1": ["2022-01-01", "2022-01-02"],
-        //     "quarter2": ["2022-01-03", "2022-01-04"],
-        //     "quarter3": ["2022-01-05", "2022-01-06"],
-        //     "quarter4": ["2022-01-07", "2022-01-08"]
-        // }
-        // let answerMajorList = ["기린학과", "국어국문학과", "영어영문학부", "일어일문학부", "사학과", "경제학부", "법학과", "행정학과", "국제지역학부", "중국학과", "신문방송학과", "정치외교학과", "유아교육과", "시각디자인학과", "공업디자인학과", "패션디자인학과", "경영학부", "국제통상학부", "응용수학과", "통계학과", "물리학과", "화학과", "미생물학과", "해양스포츠학과", "간호학과", "과학시스템시뮬레이션학과", "건축공학과", "건축학과", "소방공학과", "시스템경영공학부", "IT융합응용공학과", "안전공학과", "융합디스플레이공학과", "의공학과", "전기공학과", "전자공학과", "정보통신공학과", "제어계측공학과", "조선해양시스템공학과", "컴퓨터공학과", "토목공학과", "고분자공학과", "공업화학과", "금속공학과", "기계공학과", "기계설계공학과", "기계시스템공학과", "냉동공조공학과", "신소재시스템공학과", "인쇄정보공학과", "재료공학과", "화학공학과", "지속가능공학부", "식품공학과", "해양바이오신소재학과", "해양생산시스템관리학부", "해양수산경영학과", "수해양산업교육과", "자원생물학과", "식품영양학과", "생물공학과", "수산생명의학과", "환경공학과", "해양공학과", "해양학과", "지구환경과학과", "환경대기과학과", "에너지자원공학과", "공간정보시스템공학과", "생태공학과", "데이터정보과학부(빅데이터융합전공)", "데이터정보과학부(통계·데이터사이언스전공)", "미디어커뮤니케이션학부(언론정보전공)", "미디어커뮤니케이션학부(휴먼ICT융합전공)", "스마트헬스케어학부(의공학전공)", "스마트헬스케어학부(해양스포츠전공)", "스마트헬스케어학부(휴먼바이오융합전공)", "전자정보통신공학부(전자공학전공)", "전자정보통신공학부(정보통신공학전공)", "조형학부(건축학전공)", "조형학부(공업디자인전공)", "조형학부(시각디자인전공)", "컴퓨터공학부(소프트웨어·인공지능전공)", "컴퓨터공학부(컴퓨터공학전공)", "평생교육·상담학과", "기계조선융합공학과", "전기전자소프트웨어공학과", "공공안전경찰학과"] 
+    // let answer = {"studentPresident":{"major":"기린학과","name":"\b김기린","phoneNumber":"010-1234-5678","email":"cherisher20@pukyong.ac.kr","majorLogo":"./static/majorLogo/tempLogo.jpg"},"quarter":{"quarter1":{"status":"true","eventList":[{"eventNumber":"171","eventTitle":"빛축제 (일시 : 10/27~10/29)","eventContext":"[공과대]의 청춘을 비추다","receiptList":[{"receiptNumber":"181","receiptTitle":"추억의 뽑기판","receiptImg":{"name":"./static/receiptImg/20220228092500209.png"},"receiptContext":"공과대생 선착순 300명","receiptDetailList":[{"context":"LED 풍선","price":"500","amount":"100","totalAmount":"50000"},{"context":"LED 삔","price":"300","amount":"100","totalAmount":"30000"},{"context":"LED 반지","price":"450","amount":"100","totalAmount":"45000"}]}]},{"eventNumber":"164","eventTitle":"기린학과 임시 장부임~~~~","eventContext":"우헤헤 기린학과엔 기린이 몇마리일기린?","receiptList":[{"receiptNumber":"177","receiptTitle":"기린기린기린","receiptImg":{"name":"./static/receiptImg/20220216122414973.png"},"receiptContext":"기린 퀴즈","receiptDetailList":[{"context":"다리","price":"4","amount":"3","totalAmount":"12"},{"context":"심장","price":"1","amount":"3","totalAmount":"3"},{"context":"꼬리","price":"1","amount":"3","totalAmount":"3"}]}]}]},"quarter2":{"status":"true"},"quarter3":{"status":"true","eventList":[{"eventNumber":"170","eventTitle":"기린의 목덜미","eventContext":"","receiptList":[{"receiptNumber":"180","receiptTitle":"","receiptImg":{"name":"./static/receiptImg/defaultReceiptImg.jpg"},"receiptContext":"","receiptDetailList":[{"context":"ww","price":"11","amount":"22","totalAmount":"242"}]}]}]},"quarter4":{"status":"true"}}}
+    // let answerDate = {
+    //     "quarter1": ["2022-01-01", "2022-01-02"],
+    //     "quarter2": ["2022-01-03", "2022-01-04"],
+    //     "quarter3": ["2022-01-05", "2022-01-06"],
+    //     "quarter4": ["2022-01-07", "2022-01-08"]
+    // }
+    // let answerMajorList = ["기린학과", "국어국문학과", "영어영문학부", "일어일문학부", "사학과", "경제학부", "법학과", "행정학과", "국제지역학부", "중국학과", "신문방송학과", "정치외교학과", "유아교육과", "시각디자인학과", "공업디자인학과", "패션디자인학과", "경영학부", "국제통상학부", "응용수학과", "통계학과", "물리학과", "화학과", "미생물학과", "해양스포츠학과", "간호학과", "과학시스템시뮬레이션학과", "건축공학과", "건축학과", "소방공학과", "시스템경영공학부", "IT융합응용공학과", "안전공학과", "융합디스플레이공학과", "의공학과", "전기공학과", "전자공학과", "정보통신공학과", "제어계측공학과", "조선해양시스템공학과", "컴퓨터공학과", "토목공학과", "고분자공학과", "공업화학과", "금속공학과", "기계공학과", "기계설계공학과", "기계시스템공학과", "냉동공조공학과", "신소재시스템공학과", "인쇄정보공학과", "재료공학과", "화학공학과", "지속가능공학부", "식품공학과", "해양바이오신소재학과", "해양생산시스템관리학부", "해양수산경영학과", "수해양산업교육과", "자원생물학과", "식품영양학과", "생물공학과", "수산생명의학과", "환경공학과", "해양공학과", "해양학과", "지구환경과학과", "환경대기과학과", "에너지자원공학과", "공간정보시스템공학과", "생태공학과", "데이터정보과학부(빅데이터융합전공)", "데이터정보과학부(통계·데이터사이언스전공)", "미디어커뮤니케이션학부(언론정보전공)", "미디어커뮤니케이션학부(휴먼ICT융합전공)", "스마트헬스케어학부(의공학전공)", "스마트헬스케어학부(해양스포츠전공)", "스마트헬스케어학부(휴먼바이오융합전공)", "전자정보통신공학부(전자공학전공)", "전자정보통신공학부(정보통신공학전공)", "조형학부(건축학전공)", "조형학부(공업디자인전공)", "조형학부(시각디자인전공)", "컴퓨터공학부(소프트웨어·인공지능전공)", "컴퓨터공학부(컴퓨터공학전공)", "평생교육·상담학과", "기계조선융합공학과", "전기전자소프트웨어공학과", "공공안전경찰학과"] 
 
-        //         setStudentPresident({ ...answer["studentPresident"] });
-        //         setQuarter({ ...answer["quarter"] });
-        //         reset(props.todayQuarter);
-        //         showQuarter(props.todayQuarter);
-        //         setLogoImgPath(`./img/${props.todayQuarter}.png`);
-        //         setShowCurrentQuerter(answer["quarter"][props.todayQuarter]["status"])
-        //         setStudentPresident({ ...answer["studentPresident"] });
-        //         setQuarterDate({ ...answerDate });
-        //         setUserLoginPosition("admin")
-        //         setMajorList([...answerMajorList]);
-        //         defineColor(props.todayQuarter);
+    //         setStudentPresident({ ...answer["studentPresident"] });
+    //         setQuarter({ ...answer["quarter"] });
+    //         reset(props.todayQuarter);
+    //         showQuarter(props.todayQuarter);
+    //         setLogoImgPath(`./img/${props.todayQuarter}.png`);
+    //         setShowCurrentQuerter(answer["quarter"][props.todayQuarter]["status"])
+    //         setStudentPresident({ ...answer["studentPresident"] });
+    //         setQuarterDate({ ...answerDate });
+    //         setUserLoginPosition("admin")
+    //         setMajorList([...answerMajorList]);
+    //         defineColor(props.todayQuarter);
     }, []);
 
     useEffect(() => {
@@ -550,407 +550,409 @@ function MainPage(props) {
 
     }, [quarter])
 
-    useEffect(() => {
-        if (userLoginPosition === "president" || userLoginPosition === "admin")
-            setAlertContainer(true)
-    }, [userLoginPosition])
+    useEffect(()=>{
+        if (userLoginPosition === "president" ||userLoginPosition === "admin")
+        setAlertContainer(true)
+    },[userLoginPosition])
 
     return (
         <>
-            {
-                defineColor(currentQuarter)
-            }
-            {wrongApproach === true
-                ? (<>
+        {
+            defineColor(currentQuarter)
+        }
+        {wrongApproach === true
+            ? (<>
+                {
+                    editProfileState
+                        ?
+                        <EditProfile loginPosition={userLoginPosition} setEditProfileState={setEditProfileState}></EditProfile>
+                        : null
+                }
+               
+                <div className="MainPageContainer"
+                    style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                         <div className="nav" >
+                    <div className="logoNav">
+                        <img src={logoImgPath} alt="logo"  width={"40px"} height={"40px"} />
+                        <div className="PksclNav PCVersion" >PKSCL</div>
+                    </div>
                     {
-                        editProfileState
-                            ?
-                            <EditProfile loginPosition={userLoginPosition} setEditProfileState={setEditProfileState}></EditProfile>
-                            : null
-                    }
-
-                    <div className="MainPageContainer"
-                        style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                        <div className="nav" >
-                            <div className="logoNav">
-                                <img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />
-                                <div className="PksclNav PCVersion" >PKSCL</div>
-                            </div>
-                            {
-                                editProfileButton === true
-                                    ? (<>{
-                                        userLoginPosition === "admin"
-                                            ? (<div className="buttonNav">
-                                                <i class="fas fa-headset" onClick={() => { window.open("http://pf.kakao.com/_tRxcJb ") }}></i>
-                                                <button className='navButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
-                                            </div>)
-                                            : (
-                                                <div className="buttonNav">
-                                                    <i class="fas fa-user" onClick={() => { setEditProfileState(true); }}></i>
-                                                    <i class="fas fa-headset" onClick={() => { window.open("http://pf.kakao.com/_tRxcJb ") }}></i>
-                                                    <button className='navButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
-                                                </div>)
-                                    }</>
-                                    )
-                                    : (<div className="buttonNav">
-                                        <button className='navButton' type='button' onClick={() => { history.push('/'); }}>로그인</button>
+                        editProfileButton === true
+                            ? (<>{
+                                userLoginPosition === "admin"
+                                    ? (<div className="buttonNav">
+                                        <i class="fas fa-headset" onClick={() => { window.open("http://pf.kakao.com/_tRxcJb ") }}></i>
+                                        <button className='navButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
                                     </div>)
-                            }
+                                    : (
+                                        <div className="buttonNav">
+                                            <i class="fas fa-user"  onClick={() => { setEditProfileState(true); }}></i>
+                                            <i class="fas fa-headset"  onClick={() => { window.open("http://pf.kakao.com/_tRxcJb ") }}></i>
+                                            <button className='navButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
+                                        </div>)
+                            }</>
+                            )
+                            : (<div className="buttonNav">
+                                <button className='navButton' type='button' onClick={() => { history.push('/'); }}>로그인</button>
+                            </div>)
+                    }
 
 
+                </div>
+                    <div className="errorGiraffe">
+                        {wrongApproachContext}<br />
+                        장부의 예시를 보고싶다면 기린을 눌러주세요 :)
+
+                        <img onClick={() => { getExPKSCL() }} src={giraffe} className="giraffe" alt="기린"
+                            style={{ width: "70px", height: "70px", marginLeft: "20px" }} />
+                        <a href="http://pf.kakao.com/_tRxcJb " target="_blank" rel="noreferrer" title="챗봇으로 연결됩니다." style={{ color: "black" }}>PKSCL 문의하기</a>
+                    </div></div></>)
+            : (<div className="MainPageContainer">
+                {
+                    showImg
+                        ? <PreviewImg setShowImg={setShowImg} previewImg={previewImg}></PreviewImg>
+                        : null
+                }
+                {
+                    editProfileState
+                        ?
+                        <EditProfile loginPosition={userLoginPosition} setEditProfileState={setEditProfileState}></EditProfile>
+                        : null
+                }
+                {
+                    alertContainer === true
+                    ?<div className="alertContainer alertContainermobileVersion">
+                        <div className="alertBox">
+                            <div style={{display : "flex", justifyContent: "flex-end", width: "100%"}}>
+                                <button className="alertButton" onClick={()=>{setAlertContainer(false)}}>
+                                    <i className="fas fa-times"></i></button>
+                            </div>
+                            <div className="alertContext">
+                                {
+                                    userLoginPosition === "president"
+                                    ?<div>mobile로는 학생 입장으로 장부 열람만 하실 수 있습니다.<br/>
+                                        장부 수정, 학생 관리 등 더 많은 서비스를 이용하시려면 PC로 접속해주세요.</div>
+                                    :<div>mobile로는 컴퓨터공학과 장부 열람만 하실 수 있습니다.<br/>
+                                        컴퓨터공학과 외 타과 장부 열람 및 학과 관리를 하시려면 PC로 접속해주세요.</div>
+                                }
+                            </div>
                         </div>
-                        <div className="errorGiraffe">
-                            {wrongApproachContext}<br />
-                            장부의 예시를 보고싶다면 기린을 눌러주세요 :)
+                    </div>
+                    
 
-                            <img onClick={() => { getExPKSCL() }} src={giraffe} className="giraffe" alt="기린"
-                                style={{ width: "70px", height: "70px", marginLeft: "20px" }} />
-                            <a href="http://pf.kakao.com/_tRxcJb " target="_blank" rel="noreferrer" title="챗봇으로 연결됩니다." style={{ color: "black" }}>PKSCL 문의하기</a>
-                        </div></div></>)
-                : (<div className="MainPageContainer">
-                    {
-                        showImg
-                            ? <PreviewImg setShowImg={setShowImg} previewImg={previewImg}></PreviewImg>
-                            : null
-                    }
-                    {
-                        editProfileState
-                            ?
-                            <EditProfile loginPosition={userLoginPosition} setEditProfileState={setEditProfileState}></EditProfile>
-                            : null
-                    }
-                    {
-                        alertContainer === true
-                            ? <div className="alertContainer alertContainermobileVersion">
-                                <div className="alertBox">
-                                    <div style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}>
-                                        <button className="alertButton" onClick={() => { setAlertContainer(false) }}>
-                                            <i className="fas fa-times"></i></button>
-                                    </div>
-                                    <div className="alertContext">
+                    : null
+                }
+                {
+                    quarter === undefined
+                        ? null
+                        : (<>
+                            <div className="leftPanel" >
+                                <div className="majorCard">
+                                    <div className="presidentCard">
+                                        <h2>{studentPresident["major"]}</h2>
+                                        <img src={studentPresident["majorLogo"]} alt="majorLogo" height={"150"} width={"10"} />
                                         {
-                                            userLoginPosition === "president"
-                                                ? <div>mobile로는 학생 입장으로 장부 열람만 하실 수 있습니다.<br />
-                                                    장부 수정, 학생 관리 등 더 많은 서비스를 이용하시려면 PC로 접속해주세요.</div>
-                                                : <div>mobile로는 컴퓨터공학과 장부 열람만 하실 수 있습니다.<br />
-                                                    컴퓨터공학과 외 타과 장부 열람 및 학과 관리를 하시려면 PC로 접속해주세요.</div>
+                                            console.log("studentPresident[majorLogo]: "+studentPresident["majorLogo"])
                                         }
+                                        {
+                                            userLoginPosition === "president" && studentPresident["majorLogo"] === "./static/majorLogo/templogo.jpg"
+                                            ? <p style={{color:"#d32c2c"}}>로고 사진은 프로필 편집에서 변경 가능합니다 :)</p>
+                                            : null
+                                        }
+                                        <h3>{studentPresident["name"]}</h3>
+                                        <p>{studentPresident["email"]}</p>
                                     </div>
+                                    <div className="cogExplanation">
+                                        안녕하세요 {studentPresident["major"]} 회장 {studentPresident["name"]}입니다.
+                                        PKSCL 온라인 장부를 통해 학과 장부를 분기별로 확인하세요 :)
+                                        장부 확인 중 문의 사항이 있으시다면 이메일로 연락주십시오.
+                                        <div style={{ color: "#d32c2c" }}>※ 학과의 장부를 외부로 유출 시 발생하는 문제의 책임은 학생 본인에게 있습니다.</div>
+                                    </div>
+                                </div>
+                                <div className="quarter">
+                                    <div className="quarterButton" onClick={() => { showQuarter("quarter1") }}><div>1분기</div><img src={quarter1} alt="quarter1" ></img></div>
+                                    <div className="quarterButton" onClick={() => { showQuarter("quarter2") }}><div>2분기</div><img src={quarter2} alt="quarter2" ></img></div>
+                                    <div className="quarterButton" onClick={() => { showQuarter("quarter3") }}><div>3분기</div><img src={quarter3} alt="quarter3" ></img></div>
+                                    <div className="quarterButton" onClick={() => { showQuarter("quarter4") }}><div>4분기</div><img src={quarter4} alt="quarter4" ></img></div>
                                 </div>
                             </div>
 
+                            <div className="rightPanel">
 
-                            : null
-                    }
-                    {
-                        quarter === undefined
-                            ? null
-                            : (<>
-                                <div className="leftPanel" >
-                                    <div className="majorCard">
-                                        <div className="presidentCard">
-                                            <h2>{studentPresident["major"]}</h2>
-                                            <img src={studentPresident["majorLogo"]} alt="majorLogo" height={"150"} width={"10"} />
-                                            {
-                                                userLoginPosition === "president" && studentPresident["majorLogo"] === "./static/majorLogo/tempLogo.jpg"
-
-                                                    ? <p style={{ color: "#d32c2c" }}>로고 사진은 프로필 편집에서 변경 가능합니다 :)</p>
-                                                    : null
-                                            }
-                                            <h3>{studentPresident["name"]}</h3>
-                                            <p>{studentPresident["email"]}</p>
-                                        </div>
-                                        <div className="cogExplanation">
-                                            안녕하세요 {studentPresident["major"]} 회장 {studentPresident["name"]}입니다.
-                                            PKSCL 온라인 장부를 통해 학과 장부를 분기별로 확인하세요 :)
-                                            장부 확인 중 문의 사항이 있으시다면 이메일로 연락주십시오.
-                                            <div style={{ color: "#d32c2c" }}>※ 학과의 장부를 외부로 유출 시 발생하는 문제의 책임은 학생 본인에게 있습니다.</div>
+                                <div className="nav">
+                                    <div className="logoNav" onClick={()=>{history.push('/main')}}>
+                                         <img src={logoImgPath} alt="logo"  width={"40px"} height={"40px"} />
+                                        <div className="PksclNav PCVersion" >PKSCL</div>
+                                        <div className="quarterSelecter">
+                                            <div className="quarterButton" onClick={() => { showQuarter("quarter1") }}><div>1</div><img src={quarter1} alt="quarter1" ></img></div>
+                                            <div className="quarterButton" onClick={() => { showQuarter("quarter2") }}><div>2</div><img src={quarter2} alt="quarter2" ></img></div>
+                                            <div className="quarterButton" onClick={() => { showQuarter("quarter3") }}><div>3</div><img src={quarter3} alt="quarter3" ></img></div>
+                                            <div className="quarterButton" onClick={() => { showQuarter("quarter4") }}><div>4</div><img src={quarter4} alt="quarter4" ></img></div>
                                         </div>
                                     </div>
-                                    <div className="quarter">
-                                        <div className="quarterButton" onClick={() => { showQuarter("quarter1") }}><div>1분기</div><img src={quarter1} alt="quarter1" ></img></div>
-                                        <div className="quarterButton" onClick={() => { showQuarter("quarter2") }}><div>2분기</div><img src={quarter2} alt="quarter2" ></img></div>
-                                        <div className="quarterButton" onClick={() => { showQuarter("quarter3") }}><div>3분기</div><img src={quarter3} alt="quarter3" ></img></div>
-                                        <div className="quarterButton" onClick={() => { showQuarter("quarter4") }}><div>4분기</div><img src={quarter4} alt="quarter4" ></img></div>
-                                    </div>
-                                </div>
-
-                                <div className="rightPanel">
-
-                                    <div className="nav">
-                                        <div className="logoNav" onClick={() => { history.push('/main') }}>
-                                            <img src={logoImgPath} alt="logo" width={"40px"} height={"40px"} />
-                                            <div className="PksclNav PCVersion" >PKSCL</div>
-                                            <div className="quarterSelecter">
-                                                <div className="quarterButton" onClick={() => { showQuarter("quarter1") }}><div>1</div><img src={quarter1} alt="quarter1" ></img></div>
-                                                <div className="quarterButton" onClick={() => { showQuarter("quarter2") }}><div>2</div><img src={quarter2} alt="quarter2" ></img></div>
-                                                <div className="quarterButton" onClick={() => { showQuarter("quarter3") }}><div>3</div><img src={quarter3} alt="quarter3" ></img></div>
-                                                <div className="quarterButton" onClick={() => { showQuarter("quarter4") }}><div>4</div><img src={quarter4} alt="quarter4" ></img></div>
-                                            </div>
-                                        </div>
                                         {
                                             userLoginPosition === "president"
                                                 ? (<>
                                                     {
                                                         tempQuarter === true
-                                                            ? <>
-                                                                <div className='buttonNav' >
+                                                            ?<>
+                                                            <div className='buttonNav' >
                                                                     <div className="tempAlert PCVersion" >회원님은 장부 열람 권한이 없어 임시 장부를 확인 중입니다.</div>
                                                                     <i class="fas fa-user" onClick={() => { setEditProfileState(true); }}></i>
                                                                     <i class="fas fa-headset navButtonProfile" onClick={() => { window.open("http://pf.kakao.com/_tRxcJb ") }}></i>
                                                                     <button className='navButton' type='button' onClick={() => { logout(); }}>로그아웃</button >
-
-                                                                </div>
-                                                                {/* <div className="tempAlert mobileVersion" >회원님은 장부 열람 권한이 없어 임시 장부를 확인 중입니다.</div> */}
+                                                                    
+                                                            </div>
+                                                            {/* <div className="tempAlert mobileVersion" >회원님은 장부 열람 권한이 없어 임시 장부를 확인 중입니다.</div> */}
                                                             </>
-                                                            : <>
-                                                                <div className='buttonNav' >
-                                                                    <div className="tempAlert PCVersion" >
-                                                                        현재 {studentPresident["major"]} 학생들에게 공개된 장부 입니다. </div>
-                                                                    {/* <button className='navButton' type='button' onClick={() => {history.push('/manage') }}>학생 관리</button>*/}
-                                                                    <i class="fas fa-user navButtonProfile" onClick={() => { setEditProfileState(true); }}></i>
-                                                                    <i class="fas fa-headset navButtonProfile" onClick={() => { window.open("http://pf.kakao.com/_tRxcJb ") }}></i>
-                                                                    <button className='navButton edit navButtonEdit' type='button' onClick={() => { history.push('/edit-main') }}>장부 수정 페이지</button>
-                                                                    <button className='navButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
-                                                                </div>
-                                                                {/* <div className="tempAlert mobileVersion" >현재 {studentPresident["major"]} 학생들에게 공개된 장부 입니다. </div> */}
+                                                            :<>
+                                                            <div className='buttonNav' >
+                                                                <div className="tempAlert PCVersion" >
+                                                                    현재 {studentPresident["major"]} 학생들에게 공개된 장부 입니다. </div>
+                                                                {/* <button className='navButton' type='button' onClick={() => {history.push('/manage') }}>학생 관리</button>*/}
+                                                                <i class="fas fa-user navButtonProfile"  onClick={() => { setEditProfileState(true); }}></i>
+                                                                <i class="fas fa-headset navButtonProfile" onClick={() => { window.open("http://pf.kakao.com/_tRxcJb ") }}></i>
+                                                                <button className='navButton edit navButtonEdit'  type='button' onClick={() => { history.push('/edit-main') }}>장부 수정 페이지</button> 
+                                                                <button className='navButton' type='button' onClick={() => { logout(); }}>로그아웃</button>
+                                                            </div>
+                                                            {/* <div className="tempAlert mobileVersion" >현재 {studentPresident["major"]} 학생들에게 공개된 장부 입니다. </div> */}
                                                             </>
                                                     }
                                                 </>)
                                                 : (<>
-                                                    {
+{
                                                         userLoginPosition === "admin"
                                                             ? (
-                                                                <div className='buttonNav PCVersion' >
-                                                                    <button className='navButton' type='button' onClick={() => { history.push('/manage') }}>학과 관리</button>
-                                                                </div>)
+                                                                <div  className='buttonNav PCVersion' >
+                                                                <button className='navButton' type='button' onClick={() => {history.push('/manage') }}>학과 관리</button>
+                                                            </div>)
                                                             : null
                                                     }
-                                                    {
+                                        {
                                                         quarterDate !== undefined && userLoginPosition === "admin"
                                                             ? (<div className='adminNav PCVersion' >
-                                                                <div className="dateInput">{quarterDate[currentQuarter][0]}~{quarterDate[currentQuarter][1]}</div>
-                                                                {adminButton()}</div>)
-                                                            : null
+                                                                    <div className="dateInput">{quarterDate[currentQuarter][0]}~{quarterDate[currentQuarter][1]}</div>
+                                                                    {adminButton()}</div>)
+                                                                : null
                                                     }
-                                                    <div className='buttonNav' >
-                                                        <i class="fas fa-user" onClick={() => { setEditProfileState(true); }}></i>
-                                                        <i class="fas fa-headset" onClick={() => { window.open("http://pf.kakao.com/_tRxcJb ") }}></i>
-
-                                                        <button className='navButton' type='button' onClick={() => { logout(); }}>로그아웃</button></div>
-
+                                                    <div  className='buttonNav' >
+                                                    <i class="fas fa-user"  onClick={() => { setEditProfileState(true); }}></i>
+                                                    <i class="fas fa-headset" onClick={() => { window.open("http://pf.kakao.com/_tRxcJb ") }}></i>
+                                                    
+                                                    <button className='navButton' type='button' onClick={() => { logout(); }}>로그아웃</button></div>
+                                                    
                                                 </>)
                                         }
 
-                                    </div>
-                                    {
-                                        showCurrentQuerter === "true"
-                                            ? (<>
-                                                <div className="quarterData">
+                                </div>
+                                {
+                                    showCurrentQuerter === "true"
+                                        ? (<>
+                                            <div className="quarterData">
+                                              
+                                                <h2 className="quarterTotalAmount" style={{ fontWeight: "bold" }}>
+                                                    {currentQuarter[currentQuarter.length - 1]}분기 총 금액 : {quarterAmount}원
+                                                </h2>
+                                                {
+                                                    quarter[currentQuarter]["eventList"] === undefined
+                                                        ? <div>입력된 행사가 없습니다.</div>
+                                                        : (quarter[currentQuarter]["eventList"].map((event, i) => {
+                                                            return (
+                                                                <div className="eventCardBox" >
+                                                                    <div className="eventCard" >
+                                                                        <div className="cardContent">
+                                                                            <div className="eventSource">
+                                                                                <div className="eventSourceBox">
+                                                                                    <h4 className="titleLimitation">{event["eventTitle"]}</h4>
+                                                                                    <div style={{ color: "var(--color-quarter)" }}>행사 총 금액 : {eventAmount[i]}원</div>
 
-                                                    <h2 className="quarterTotalAmount" style={{ fontWeight: "bold" }}>
-                                                        {currentQuarter[currentQuarter.length - 1]}분기 총 금액 : {quarterAmount}원
-                                                    </h2>
-                                                    {
-                                                        quarter[currentQuarter]["eventList"] === undefined
-                                                            ? <div>입력된 행사가 없습니다.</div>
-                                                            : (quarter[currentQuarter]["eventList"].map((event, i) => {
-                                                                return (
-                                                                    <div className="eventCardBox" >
-                                                                        <div className="eventCard" >
-                                                                            <div className="cardContent">
-                                                                                <div className="eventSource">
-                                                                                    <div className="eventSourceBox">
-                                                                                        <h4 className="titleLimitation">{event["eventTitle"]}</h4>
-                                                                                        <div style={{ color: "var(--color-quarter)" }}>행사 총 금액 : {eventAmount[i]}원</div>
-
-                                                                                        <div className="contextLimitation">{event["eventContext"]}  </div>
-                                                                                    </div>
-                                                                                    <div className="eventButtons">
-                                                                                        {
-                                                                                            event.receiptList.length <= 1
-                                                                                                ? null
-                                                                                                : (
-                                                                                                    showAllReceiptButton[i] === false
-                                                                                                        ? (
-                                                                                                            <button style={{ width: "50px" }} onClick={() => {
-                                                                                                                let array = [...showAllReceiptButton];
-                                                                                                                array[i] = !showAllReceiptButton[i];
-                                                                                                                setShowAllReceiptButton(array)
-                                                                                                            }}><i class="fas fa-angle-double-up"></i></button>
-                                                                                                        )
-                                                                                                        : (
-                                                                                                            <button style={{ width: "50px" }} onClick={() => {
-                                                                                                                let array = [...showAllReceiptButton];
-                                                                                                                array[i] = !showAllReceiptButton[i];
-                                                                                                                setShowAllReceiptButton(array)
-                                                                                                            }}><i class="fas fa-angle-double-down"></i></button>
-                                                                                                        )
-                                                                                                )
-
-                                                                                        }
-                                                                                    </div>
+                                                                                    <div className="contextLimitation">{event["eventContext"]}  </div>
                                                                                 </div>
-
-                                                                                {
-                                                                                    showAllReceiptButton[i] === true
-                                                                                        ? (<div id="receiptContent" style={{ height: "440px", overflowY: "hidden" }}>
-
-                                                                                            <div className="receiptCard">
-                                                                                                <div className="receiptResource">
-                                                                                                    {
-                                                                                                        event["receiptList"].length === 0
-                                                                                                            ? <div>입력된 영수증이 없습니다.</div>
-                                                                                                            : (<>
-                                                                                                                <h5 className="titleLimitation">{event["receiptList"][0]["receiptTitle"]}</h5>
-                                                                                                                {
-                                                                                                                    event["receiptList"][0]["receiptDetailList"].length === 0
-                                                                                                                        ? null
-                                                                                                                        : (<div style={{ color: "var(--color-quarter)" }}>1번째 영수증 금액 : {sumReceipt(event["receiptList"][0]["receiptDetailList"])}원</div>)
-                                                                                                                }
-
-
-                                                                                                                <div className="contextLimitation">{event["receiptList"][0]["receiptContext"]}</div>
-
-
-
-                                                                                                                {
-                                                                                                                    event["receiptList"][0]["receiptDetailList"].length === 0
-                                                                                                                        ? <div className="noneContext"> 입력된 영수증 내역이 없습니다.</div>
-                                                                                                                        : (<><table className="receiptTable"><thead>
-                                                                                                                            <tr>
-                                                                                                                                <th>품명</th>
-                                                                                                                                <th>단가</th>
-                                                                                                                                <th>수량</th>
-                                                                                                                                <th>가격</th>
-                                                                                                                            </tr>
-                                                                                                                        </thead>
-                                                                                                                            <tbody>{event["receiptList"][0]["receiptDetailList"].map((item, k) => {
-                                                                                                                                return (<tr>
-                                                                                                                                    <td>{item["context"]}</td>
-                                                                                                                                    <td>{item["price"]}</td>
-                                                                                                                                    <td>{item["amount"]}</td>
-                                                                                                                                    <td>{sumItems(item["price"], item["amount"])}</td>
-                                                                                                                                </tr>)
-                                                                                                                            })}
-                                                                                                                            </tbody> </table></>)
-                                                                                                                }
-                                                                                                            </>
-                                                                                                            )
-                                                                                                    }
-
-                                                                                                </div>
-                                                                                                {
-                                                                                                    event["receiptList"].length === 0
-                                                                                                        ? null
-                                                                                                        :
-                                                                                                        <img className="receiptImg" src={event["receiptList"][0]["receiptImg"]["name"]}
-                                                                                                            style={{ backgroundColor: "var(--color-leftPanel)" }} width="400px"
-                                                                                                            alt={event["receiptList"][0]["receiptImg"]["name"]}
-                                                                                                            onClick={() => { setShowImg(true); setPreviewImg(event["receiptList"][0]["receiptImg"]["name"]); }} />
-                                                                                                }
-                                                                                            </div>
-                                                                                        </div>)
-                                                                                        : (<div id="receiptContent" >
-                                                                                            {
-                                                                                                event["receiptList"].map((receipt, j) => {
-                                                                                                    return (
-                                                                                                        <div className="receiptCard">
-                                                                                                            <div className="receiptResource">
-                                                                                                                {
-                                                                                                                    event["receiptList"].length === 0
-                                                                                                                        ? <div>입력된 영수증이 없습니다.</div>
-                                                                                                                        : (<>
-                                                                                                                            <h5 className="titleLimitation">{receipt["receiptTitle"]}</h5>
-                                                                                                                            {
-                                                                                                                                receipt["receiptDetailList"].length === 0
-                                                                                                                                    ? null
-                                                                                                                                    : <div style={{ color: "var(--color-quarter)" }}>{j + 1}번째 영수증 금액 : {sumReceipt(receipt["receiptDetailList"])}원</div>
-                                                                                                                            }
-                                                                                                                            <div className="contextLimitation">{receipt["receiptContext"]}</div>
-                                                                                                                            {
-                                                                                                                                receipt["receiptDetailList"].length === 0
-                                                                                                                                    ? <div>입력된 영수증 내역이 없습니다.</div>
-                                                                                                                                    : (<>
-                                                                                                                                        <table className="receiptTable">
-                                                                                                                                            <thead>
-                                                                                                                                                <tr>
-                                                                                                                                                    <th>품명</th>
-                                                                                                                                                    <th>단가</th>
-                                                                                                                                                    <th>수량</th>
-                                                                                                                                                    <th>가격</th>
-                                                                                                                                                </tr>
-                                                                                                                                            </thead>
-                                                                                                                                            <tbody>
-                                                                                                                                                {receipt["receiptDetailList"].map((item, k) => {
-                                                                                                                                                    return (<tr>
-                                                                                                                                                        <td>{item["context"]}</td>
-                                                                                                                                                        <td>{item["price"]}</td>
-                                                                                                                                                        <td>{item["amount"]}</td>
-                                                                                                                                                        <td>{sumItems(item["price"], item["amount"])}</td>
-                                                                                                                                                    </tr>)
-                                                                                                                                                })
-                                                                                                                                                }
-                                                                                                                                            </tbody> </table>
-                                                                                                                                    </>
-                                                                                                                                    )
-                                                                                                                            }
-
-                                                                                                                        </>)}
-                                                                                                            </div>
-                                                                                                            {
-                                                                                                                event["receiptList"].length === 0
-                                                                                                                    ? null
-                                                                                                                    : <img src={receipt["receiptImg"]["name"]} alt={receipt["receiptImg"]["name"]}
-                                                                                                                        style={{ backgroundColor: "var(--color-leftPanel)" }} width="400px"
-                                                                                                                        className="receiptImg"
-                                                                                                                        onClick={() => { setShowImg(true); setPreviewImg(receipt["receiptImg"]["name"]); }} />
-                                                                                                            }
-                                                                                                        </div>
-
+                                                                                <div className="eventButtons">
+                                                                                    {
+                                                                                        event.receiptList.length <= 1
+                                                                                            ? null
+                                                                                            : (
+                                                                                                showAllReceiptButton[i] === false
+                                                                                                    ? (
+                                                                                                        <button style={{ width: "50px" }} onClick={() => {
+                                                                                                            let array = [...showAllReceiptButton];
+                                                                                                            array[i] = !showAllReceiptButton[i];
+                                                                                                            setShowAllReceiptButton(array)
+                                                                                                        }}><i class="fas fa-angle-double-up"></i></button>
                                                                                                     )
-                                                                                                })
-                                                                                            }
-                                                                                        </div>)
+                                                                                                    : (
+                                                                                                        <button style={{ width: "50px" }} onClick={() => {
+                                                                                                            let array = [...showAllReceiptButton];
+                                                                                                            array[i] = !showAllReceiptButton[i];
+                                                                                                            setShowAllReceiptButton(array)
+                                                                                                        }}><i class="fas fa-angle-double-down"></i></button>
+                                                                                                    )
+                                                                                            )
 
-                                                                                }
-
-
+                                                                                    }
+                                                                                </div>
                                                                             </div>
 
+                                                                            {
+                                                                                showAllReceiptButton[i] === true
+                                                                                    ? (<div id="receiptContent" style={{ height: "440px", overflowY: "hidden" }}>
+
+                                                                                        <div className="receiptCard">
+                                                                                            <div className="receiptResource">
+                                                                                                {
+                                                                                                    event["receiptList"].length === 0
+                                                                                                        ? <div>입력된 영수증이 없습니다.</div>
+                                                                                                        : (<>
+                                                                                                            <h5 className="titleLimitation">{event["receiptList"][0]["receiptTitle"]}</h5>
+                                                                                                            {
+                                                                                                                event["receiptList"][0]["receiptDetailList"].length === 0
+                                                                                                                    ? null
+                                                                                                                    : (<div style={{ color: "var(--color-quarter)" }}>1번째 영수증 금액 : {sumReceipt(event["receiptList"][0]["receiptDetailList"])}원</div>)
+                                                                                                            }
+
+
+                                                                                                            <div className="contextLimitation">{event["receiptList"][0]["receiptContext"]}</div>
+
+
+
+                                                                                                            {
+                                                                                                                event["receiptList"][0]["receiptDetailList"].length === 0
+                                                                                                                    ? <div className="noneContext"> 입력된 영수증 내역이 없습니다.</div>
+                                                                                                                    : (<><table className="receiptTable"><thead>
+                                                                                                                        <tr>
+                                                                                                                            <th>품명</th>
+                                                                                                                            <th>단가</th>
+                                                                                                                            <th>수량</th>
+                                                                                                                            <th>가격</th>
+                                                                                                                        </tr>
+                                                                                                                    </thead>
+                                                                                                                        <tbody>{event["receiptList"][0]["receiptDetailList"].map((item, k) => {
+                                                                                                                            return (<tr>
+                                                                                                                                <td>{item["context"]}</td>
+                                                                                                                                <td>{item["price"]}</td>
+                                                                                                                                <td>{item["amount"]}</td>
+                                                                                                                                <td>{sumItems(item["price"], item["amount"])}</td>
+                                                                                                                            </tr>)
+                                                                                                                        })}
+                                                                                                                        </tbody> </table></>)
+                                                                                                            }
+                                                                                                        </>
+                                                                                                        )
+                                                                                                }
+
+                                                                                            </div>
+                                                                                            {
+                                                                                                event["receiptList"].length === 0
+                                                                                                    ? null
+                                                                                                    :
+                                                                                                    <img className="receiptImg" src={event["receiptList"][0]["receiptImg"]["name"]}
+                                                                                                        style={{ backgroundColor: "var(--color-leftPanel)" }} width="400px"
+                                                                                                        alt={event["receiptList"][0]["receiptImg"]["name"]}
+                                                                                                        onClick={() => { setShowImg(true); setPreviewImg(event["receiptList"][0]["receiptImg"]["name"]); }} />
+                                                                                            }
+                                                                                        </div>
+                                                                                    </div>)
+                                                                                    : (<div id="receiptContent" >
+                                                                                        {
+                                                                                            event["receiptList"].map((receipt, j) => {
+                                                                                                return (
+                                                                                                    <div className="receiptCard">
+                                                                                                        <div className="receiptResource">
+                                                                                                            {
+                                                                                                                event["receiptList"].length === 0
+                                                                                                                    ? <div>입력된 영수증이 없습니다.</div>
+                                                                                                                    : (<>
+                                                                                                                        <h5 className="titleLimitation">{receipt["receiptTitle"]}</h5>
+                                                                                                                        {
+                                                                                                                            receipt["receiptDetailList"].length === 0
+                                                                                                                                ? null
+                                                                                                                                : <div style={{ color: "var(--color-quarter)" }}>{j + 1}번째 영수증 금액 : {sumReceipt(receipt["receiptDetailList"])}원</div>
+                                                                                                                        }
+                                                                                                                        <div className="contextLimitation">{receipt["receiptContext"]}</div>
+                                                                                                                        {
+                                                                                                                            receipt["receiptDetailList"].length === 0
+                                                                                                                                ? <div>입력된 영수증 내역이 없습니다.</div>
+                                                                                                                                : (<>
+                                                                                                                                    <table className="receiptTable">
+                                                                                                                                        <thead>
+                                                                                                                                            <tr>
+                                                                                                                                                <th>품명</th>
+                                                                                                                                                <th>단가</th>
+                                                                                                                                                <th>수량</th>
+                                                                                                                                                <th>가격</th>
+                                                                                                                                            </tr>
+                                                                                                                                        </thead>
+                                                                                                                                        <tbody>
+                                                                                                                                            {receipt["receiptDetailList"].map((item, k) => {
+                                                                                                                                                return (<tr>
+                                                                                                                                                    <td>{item["context"]}</td>
+                                                                                                                                                    <td>{item["price"]}</td>
+                                                                                                                                                    <td>{item["amount"]}</td>
+                                                                                                                                                    <td>{sumItems(item["price"], item["amount"])}</td>
+                                                                                                                                                </tr>)
+                                                                                                                                            })
+                                                                                                                                            }
+                                                                                                                                        </tbody> </table>
+                                                                                                                                </>
+                                                                                                                                )
+                                                                                                                        }
+
+                                                                                                                    </>)}
+                                                                                                        </div>
+                                                                                                        {
+                                                                                                            event["receiptList"].length === 0
+                                                                                                                ? null
+                                                                                                                : <img src={receipt["receiptImg"]["name"]} alt={receipt["receiptImg"]["name"]}
+                                                                                                                    style={{ backgroundColor: "var(--color-leftPanel)" }} width="400px"
+                                                                                                                    className="receiptImg"
+                                                                                                                    onClick={() => { setShowImg(true); setPreviewImg(receipt["receiptImg"]["name"]); }} />
+                                                                                                        }
+                                                                                                    </div>
+
+                                                                                                )
+                                                                                            })
+                                                                                        }
+                                                                                    </div>)
+
+                                                                            }
+
+
                                                                         </div>
-                                                                        {
-                                                                            event.receiptList.length > 1 && showAllReceiptButton[i] === false
-                                                                                ? <div className="giraffeDiv"><img src={giraffe} className="giraffe" alt="" style={{ width: "70px", height: "70px" }} /><div style={{ marginBottom: "50px", textAlign: "center" }}></div></div>
-                                                                                : null
-                                                                        }
+
                                                                     </div>
-                                                                )
-                                                            })
+                                                                    {
+                                                                        event.receiptList.length > 1 && showAllReceiptButton[i] === false
+                                                                            ? <div className="giraffeDiv"><img src={giraffe} className="giraffe" alt="" style={{ width: "70px", height: "70px" }} /><div style={{ marginBottom: "50px", textAlign: "center" }}></div></div>
+                                                                            : null
+                                                                    }
+                                                                </div>
                                                             )
-                                                    }
+                                                        })
+                                                        )
+                                                }
 
+                                            </div>
+                                        </>)
+                                        : 
+                                        (
+                                            <div className="quarterData" style={{ display: "flex", color: "red" }}>
+                                                <div className="errorGiraffe">
+                                                    {currentQuarter[currentQuarter.length - 1]}분기 장부는 학생회장이 아직 공개하지 않았습니다.
+                                                    <br />장부의 예시를 보고싶다면 기린을 눌러주세요 :)
+                                                    <img onClick={() => { getExPKSCL() }} src={giraffe} className="giraffe" alt="" style={{ width: "70px", height: "70px", marginLeft: "20px" }} />
                                                 </div>
-                                            </>)
-                                            :
-                                            (
-                                                <div className="quarterData" style={{ display: "flex", color: "red" }}>
-                                                    <div className="errorGiraffe">
-                                                        {currentQuarter[currentQuarter.length - 1]}분기 장부는 학생회장이 아직 공개하지 않았습니다.
-                                                        <br />장부의 예시를 보고싶다면 기린을 눌러주세요 :)
-                                                        <img onClick={() => { getExPKSCL() }} src={giraffe} className="giraffe" alt="" style={{ width: "70px", height: "70px", marginLeft: "20px" }} />
-                                                    </div>
-                                                </div>
-                                            )
-                                    }
-                                </div>
-                            </>
-                            )
-                    }
+                                            </div>
+                                        )
+                                }
+                            </div>
+                        </>
+                        )
+                }
 
-                </div>)
+            </div>)
 
-            }</>
+        }</>
 
     )
 }
